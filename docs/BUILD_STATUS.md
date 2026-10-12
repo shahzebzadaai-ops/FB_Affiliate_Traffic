@@ -14,7 +14,7 @@
 - `npm test` — 11 tests passed.
 - `npm run lint` and `npm run typecheck` passed.
 - `npm run build` passed.
-- Browser walkthrough of the preview identities, Masho's task, checklist gating, Shahzeb's company view, calendar and mobile width. See the latest PR notes if a walkthrough was recorded after this file.
+- Browser walkthrough on 12 October 2026: preview identities, Masho's day-1 tasks including UK-SGIUK-001, checklist toggle, 12 October calendar times, Shahzeb's five Pages, empty approvals, finance showing not connected, and a 390px Masho layout.
 
 ## Incomplete
 
