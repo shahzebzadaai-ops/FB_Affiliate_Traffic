@@ -5,24 +5,36 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { usePreview, ownerArea } from "@/preview/preview-context";
 
-const STAFF_LINKS = [
+const STAFF_DAILY = [
   { href: "/staff", label: "Today" },
-  { href: "/staff/calendar", label: "Calendar" },
-  { href: "/staff/training", label: "Training" },
-  { href: "/staff/pages", label: "Pages" },
+  { href: "/staff/ready", label: "Ready" },
+  { href: "/staff/scheduled", label: "Scheduled" },
+  { href: "/staff/published", label: "Published" },
+  { href: "/staff/issues", label: "Issues" },
 ];
 
-const OWNER_LINKS = [
-  { href: "/owner", label: "Company" },
-  { href: "/owner/mandala", label: "Mandala" },
-  { href: "/owner/calendar", label: "Calendar" },
+const STAFF_MORE = [
+  { href: "/staff/calendar", label: "Calendar" },
+  { href: "/staff/pages", label: "Pages" },
+  { href: "/staff/training", label: "Training" },
+];
+
+const OWNER_PRIMARY = [
+  { href: "/owner", label: "Overview" },
   { href: "/owner/approvals", label: "Approvals" },
+  { href: "/owner/affiliate", label: "Affiliate" },
+  { href: "/owner/studio", label: "Content Studio" },
+  { href: "/owner/growth", label: "Growth Director" },
   { href: "/owner/pages", label: "Pages" },
+];
+
+const OWNER_MORE = [
+  { href: "/owner/calendar", label: "Calendar" },
+  { href: "/owner/mandala", label: "Mandala" },
+  { href: "/owner/staff", label: "Staff" },
+  { href: "/owner/integrations", label: "Systems" },
   { href: "/owner/import", label: "Import" },
   { href: "/owner/training", label: "Training" },
-  { href: "/owner/integrations", label: "Systems" },
-  { href: "/owner/staff", label: "Staff" },
-  { href: "/owner/affiliate", label: "Finance" },
 ];
 
 export function AppShell({
@@ -45,52 +57,110 @@ export function AppShell({
 
   if (!preview.ready || !preview.user || !allowed) return <Wordmark />;
 
-  const links = area === "owner" ? OWNER_LINKS : STAFF_LINKS;
+  const primary = area === "owner" ? OWNER_PRIMARY : STAFF_DAILY;
+  const more = area === "owner" ? OWNER_MORE : STAFF_MORE;
 
   return (
-    <div className="min-h-screen">
-      <div className="border-b border-amber-700/20 bg-amber-50 px-4 py-2 text-center text-xs text-amber-950 sm:text-sm">
-        Signed in as {preview.user.name}. AI production, Facebook, Drive and affiliate networks are not connected. Scheduling is manual in Meta Business Suite. No revenue is invented.
-      </div>
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6">
-          <div className="flex items-center justify-between gap-4">
-            <Link href={area === "owner" ? "/owner" : "/staff"} className="font-heading text-2xl tracking-tight">
-              Affiliate Traffic OS
-            </Link>
-            <button
-              type="button"
+    <div className="min-h-screen lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
+      <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-[oklch(0.965_0.006_95)] lg:flex">
+        <div className="px-5 pt-6">
+          <Link href={area === "owner" ? "/owner" : "/staff"} className="font-heading text-2xl tracking-tight">
+            Affiliate Traffic OS
+          </Link>
+          <p className="mt-1 text-xs text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
+        </div>
+        <nav className="mt-8 flex flex-1 flex-col gap-6 overflow-y-auto px-3">
+          <NavGroup links={primary} pathname={pathname} />
+          <NavGroup links={more} pathname={pathname} />
+        </nav>
+        <div className="border-t border-border px-5 py-4">
+          <p className="text-xs leading-relaxed text-muted-foreground">Signed in as {preview.user.name}. AI, Meta, Drive and networks are not connected.</p>
+          <Logout onClick={() => {
+            void preview.logout().then(() => {
+              router.push("/");
+              router.refresh();
+            });
+          }} />
+        </div>
+      </aside>
+      <div className="flex min-w-0 flex-col">
+        <header className="border-b border-border lg:hidden">
+          <div className="flex items-center justify-between px-4 py-3">
+            <Link href={area === "owner" ? "/owner" : "/staff"} className="font-heading text-xl tracking-tight">Affiliate Traffic OS</Link>
+            <Logout
+              className="mt-0"
               onClick={() => {
                 void preview.logout().then(() => {
                   router.push("/");
                   router.refresh();
                 });
               }}
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              Log out
-            </button>
+            />
           </div>
-          <nav className="flex gap-2 overflow-x-auto pb-1">
-            {links.map((link) => {
-              const active = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-full px-3 py-1.5 text-sm whitespace-nowrap ${
-                    active ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+          <div className="flex gap-1 overflow-x-auto px-3 pb-3">
+            {(area === "owner" ? primary : more).map((link) => (
+              <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} compact />
+            ))}
+          </div>
+        </header>
+        <p className="border-b border-border px-4 py-2 text-xs text-muted-foreground sm:px-8">
+          AI production, Facebook, Drive and affiliate networks are not connected. Scheduling is manual in Meta Business Suite.
+        </p>
+        <main className={`mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-8 ${area === "staff" ? "pb-28 lg:pb-10" : ""}`}>{children}</main>
+        {area === "staff" ? (
+          <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-border bg-card lg:hidden">
+            {STAFF_DAILY.map((link) => (
+              <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} compact />
+            ))}
           </nav>
-        </div>
-      </header>
-      <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">{children}</div>
+        ) : null}
+      </div>
     </div>
+  );
+}
+
+function NavGroup({ links, pathname }: { links: { href: string; label: string }[]; pathname: string }) {
+  return (
+    <div className="flex flex-col">
+      {links.map((link) => (
+        <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} />
+      ))}
+    </div>
+  );
+}
+
+function NavLink({
+  href,
+  label,
+  pathname,
+  compact = false,
+}: {
+  href: string;
+  label: string;
+  pathname: string;
+  compact?: boolean;
+}) {
+  const active = href === "/owner" || href === "/staff" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "page" : undefined}
+      className={
+        compact
+          ? `px-2 py-3 text-center text-[11px] tracking-wide ${active ? "text-primary" : "text-muted-foreground"}`
+          : `border-l-2 px-3 py-2 text-sm ${active ? "border-primary text-foreground" : "border-transparent text-muted-foreground"}`
+      }
+    >
+      {label}
+    </Link>
+  );
+}
+
+function Logout({ onClick, className = "mt-3" }: { onClick: () => void; className?: string }) {
+  return (
+    <button type="button" onClick={onClick} className={`${className} text-sm text-muted-foreground hover:text-foreground`}>
+      Log out
+    </button>
   );
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { StaffHome } from "@/components/home-screens";
+import { StaffQueue } from "@/components/staff-queue";
 
 export default function StaffPage() {
-  return <StaffHome />;
+  return <StaffQueue queue="today" />;
 }

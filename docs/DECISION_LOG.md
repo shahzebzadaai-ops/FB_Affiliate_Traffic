@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-13 — Visual references
+
+The owner shell takes its hierarchy from Althoy: attention first, then a table of the business. Masho's shell takes its workflow from Current Pro: preview, caption, UK time, status, one action. Flow Content, Fintech X and awesome-design-md stay as references for queue rhythm, ledger restraint and written design rules. None of those templates are copied, and Framer is not a dependency. The screens are the private operating system, not a public landing page. Reach, clicks, PPS, commission and generation cost stay "Not connected" rather than labelled sample money.
+
 ## 2026-10-13 — AI-first operating model
 
 PERMANENT. Masho is the Facebook Page operations employee, not the creative producer. The AI pipeline prepares research, hooks, stories, captions, images, scripts, voiceover, subtitles and finished files on a rolling seven-day queue. Shahzeb alone approves strategy, offers, tracking, postbacks, revenue, roles, AI spend, and new Pages or countries. Fictional stories are not testimonials. No model is connected yet, and no screen may pretend that it is. Facebook scheduling stays manual in Meta Business Suite until an approved API works. Do not revert Masho to writing prompts.

@@ -1,6 +1,6 @@
 # Roadmap
 
-Milestone A is the current tested foundation. Later milestones are not built. Complexity describes the subsystems involved, not a calendar estimate.
+Milestone A is the current tested foundation. The preview shell follows `DESIGN.md`. Later milestones are not built. Complexity describes the subsystems involved, not a calendar estimate.
 
 ## A — Secure foundation
 

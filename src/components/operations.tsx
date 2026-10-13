@@ -105,17 +105,45 @@ export function IntegrationsView() {
 
 export function FinanceView() {
   return (
-    <div className="space-y-4">
-      <h1 className="font-heading text-5xl tracking-tight">Finance</h1>
-      <p className="max-w-2xl text-muted-foreground">
-        Owner only. Affiliate networks, offers, click IDs, postbacks, approved PPS, refunds and payouts will live here. No commission is displayed because no postback has been received.
-      </p>
-      <dl className="grid gap-3 sm:grid-cols-3">
-        <Metric label="Approved commission" value="Not connected" />
-        <Metric label="Tracked sales" value="Not connected" />
-        <Metric label="Payouts" value="Not connected" />
-      </dl>
+    <div className="space-y-10">
+      <header>
+        <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Owner only</p>
+        <h1 className="mt-2 font-heading text-5xl tracking-tight">Affiliate intelligence</h1>
+        <p className="mt-3 max-w-xl text-muted-foreground">
+          Outbound clicks, PPS conversions, pending and approved commission, and revenue by Page, post, offer and country appear here after a network is connected. Nothing below is a ledger figure.
+        </p>
+      </header>
+      <Ledger title="By Page and country" columns={["Page", "Country", "Clicks", "PPS", "Pending", "Approved"]} />
+      <Ledger title="By post" columns={["Content ID", "Page", "Offer", "Clicks", "PPS", "Approved"]} />
+      <Ledger title="By offer" columns={["Offer", "Network", "GEO", "Pending", "Approved", "Paid"]} />
+      <p className="text-sm text-muted-foreground">AI generation cost is not recorded. No model has been called.</p>
     </div>
+  );
+}
+
+function Ledger({ title, columns }: { title: string; columns: string[] }) {
+  return (
+    <section>
+      <h2 className="font-heading text-3xl tracking-tight">{title}</h2>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[36rem] text-left text-sm">
+          <thead className="text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+            <tr className="border-b">
+              {columns.map((column) => (
+                <th key={column} className="py-3 pr-4 font-medium">{column}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              {columns.map((column) => (
+                <td key={column} className="py-4 pr-4 text-muted-foreground">Not connected</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }
 

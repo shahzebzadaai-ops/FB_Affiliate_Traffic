@@ -13,6 +13,7 @@ import { WORKFLOWS } from "@/domain/workflows";
 import { recordById } from "@/content/catalog";
 import { type MetricEntry } from "@/preview/task-state";
 import { statusLabel, usePreview } from "@/preview/preview-context";
+import { AssetFrame } from "@/components/asset-frame";
 import { formatLabel } from "@/components/task-card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,7 +64,6 @@ export function TaskWorkspace({
       <PublishDesk
         pageName={page.name}
         accent={page.accent}
-        wash={page.wash}
         contentId={record.contentId}
         formatLabelText={formatLabel(record.format)}
         hook={hook}
@@ -367,7 +367,6 @@ function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (va
 function PublishDesk({
   pageName,
   accent,
-  wash,
   contentId,
   formatLabelText,
   hook,
@@ -383,7 +382,6 @@ function PublishDesk({
 }: {
   pageName: string;
   accent: string;
-  wash: string;
   contentId: string;
   formatLabelText: string;
   hook: string;
@@ -400,66 +398,58 @@ function PublishDesk({
   const [note, setNote] = useState("");
   const [url, setUrl] = useState(facebookUrl);
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <Link href="/staff" className="text-sm text-muted-foreground hover:text-foreground">Back</Link>
-      <header className="overflow-hidden rounded-2xl ring-1 ring-foreground/10" style={{ backgroundColor: wash }}>
-        <div className="h-1.5" style={{ backgroundColor: accent }} />
-        <div className="space-y-2 p-5">
-          <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: accent }}>{pageName}</p>
-          <h1 className="font-heading text-4xl">{formatLabelText}</h1>
-          <p className="text-sm text-muted-foreground">{contentId} · {status}</p>
-          <p className="font-heading text-2xl">“{hook}”</p>
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)]">
+        <AssetFrame label={formatLabelText} accent={accent} />
+        <div>
+          <p className="text-[11px] tracking-[0.16em] uppercase" style={{ color: accent }}>{pageName}</p>
+          <h1 className="mt-2 font-heading text-4xl tracking-tight">{hook}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{contentId} · {status} · {publishPhrase}</p>
+          <ul className="mt-8 divide-y border-y text-sm">
+            <li className="flex items-center justify-between gap-4 py-3">
+              <span>Download asset</span>
+              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
+            </li>
+            <li className="flex items-center justify-between gap-4 py-3">
+              <span>Copy final caption</span>
+              <button type="button" disabled className="h-10 px-3 text-muted-foreground">No finished caption</button>
+            </li>
+            <li className="flex items-center justify-between gap-4 py-3">
+              <span>Download thumbnail</span>
+              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
+            </li>
+            <li className="flex items-center justify-between gap-4 py-3">
+              <span>Open Meta Business Suite</span>
+              <a href="https://business.facebook.com/" target="_blank" rel="noreferrer" className="inline-flex h-10 items-center px-3 text-primary">Open</a>
+            </li>
+          </ul>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{caption}</p>
+          <p className="mt-1 text-xs text-muted-foreground">Plan instruction. Not a finished caption. Schedule the real file yourself. This screen does not post to Facebook.</p>
+          <label className="mt-6 block text-sm">
+            Facebook post URL
+            <input className="mt-1 h-11 w-full border border-border bg-card px-3" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
+          </label>
+          <button type="button" className="mt-3 h-11 bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={() => onPublish(url)}>
+            Confirm publication
+          </button>
+          <div className="mt-8">
+            <h2 className="font-heading text-2xl">Report an issue</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Ask for regeneration. That does not start an AI job.</p>
+            {flagged ? <p className="mt-3 text-sm">Flagged: {flagged}</p> : null}
+            <textarea className="mt-3 min-h-24 w-full border border-border bg-card p-3 text-sm" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What should be regenerated?" />
+            <button type="button" className="mt-3 h-11 bg-muted px-4 text-sm" onClick={() => onFlag(note)}>
+              Request regeneration
+            </button>
+            {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
+          </div>
+          <div className="mt-8 border-t pt-6">
+            <h2 className="font-heading text-2xl">Performance</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Record Page numbers you can see. Affiliate commission is not on this screen.</p>
+            <MetricsForm contentId={contentId} onNotice={onNotice} />
+          </div>
         </div>
-      </header>
-      <dl className="grid gap-3 sm:grid-cols-2">
-        <Field label="Scheduled UK time" value={publishPhrase} />
-        <Field label="Finished image or MP4" value="No file. AI production is not connected." />
-        <Field label="Thumbnail" value="No thumbnail. One will appear here only after a real file exists." />
-        <Field label="Download" value="Unavailable. There is nothing to download." />
-      </dl>
-      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-        <h2 className="font-heading text-2xl">Final caption</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">No finished caption has been generated. The plan only has this instruction:</p>
-        <p className="mt-3 text-sm leading-relaxed">{caption}</p>
-      </section>
-      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-        <h2 className="font-heading text-2xl">Publishing instructions</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          When a finished file exists, download it and schedule it manually in Meta Business Suite at the UK time above. This screen does not publish to Facebook.
-        </p>
-        <label className="mt-4 block text-sm">
-          Published Facebook URL
-          <input className="mt-1 h-11 w-full rounded-lg border border-border px-3" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
-        </label>
-        <button type="button" className="mt-3 h-11 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={() => onPublish(url)}>
-          Save the live URL
-        </button>
-      </section>
-      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-        <h2 className="font-heading text-2xl">Quality check</h2>
-        <p className="mt-2 text-sm text-muted-foreground">If the finished asset is unsuitable, flag it. That does not start a new AI render.</p>
-        {flagged ? <p className="mt-3 text-sm">Flagged: {flagged}</p> : null}
-        <textarea className="mt-3 min-h-24 w-full rounded-lg border border-border p-3 text-sm" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What should be regenerated?" />
-        <button type="button" className="mt-3 h-11 rounded-lg bg-muted px-4 text-sm" onClick={() => onFlag(note)}>
-          Flag for regeneration
-        </button>
-        {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
-      </section>
-      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-        <h2 className="font-heading text-2xl">Performance</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Record Page numbers you can see. Affiliate commission is not on this screen.</p>
-        <MetricsForm contentId={contentId} onNotice={onNotice} />
-        {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
-      </section>
-    </div>
-  );
-}
-
-function Field({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl bg-card p-4 ring-1 ring-foreground/10">
-      <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className="mt-1 text-sm">{value}</dd>
+      </div>
     </div>
   );
 }

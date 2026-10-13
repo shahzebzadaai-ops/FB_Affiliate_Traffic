@@ -1,6 +1,6 @@
 # AI creative engine
 
-IMPLEMENTED now: copyable prompts in the task workspace. No model is called. No generation cost is recorded because nothing is generated here.
+IMPLEMENTED now: the owner Content Studio lists the next seven plan days, and the owner brief still holds copyable prompts. No model is called. Generation cost stays "Not connected" because nothing is generated here. The studio screen is specified in `docs/UI_ARCHITECTURE.md`.
 
 NOT YET: pluggable providers, attempt counts, or automatic tasks from a suggestion.
 

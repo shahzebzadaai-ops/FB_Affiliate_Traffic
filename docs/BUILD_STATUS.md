@@ -6,7 +6,8 @@
 - Five Page brand bibles and permission matrix.
 - PDF import of 180 posts: 0 duplicates, 0 missing required fields, 76 posts with unresolved notes.
 - Shahzeb company preview, Masho daily tasks, production workspace, checklists, calendar, approvals, training and empty finance / integration screens.
-- Masho's screen is a publishing queue. Ready-to-publish count stays at zero because no AI file exists. Scheduling copy points to Meta Business Suite. Flagging an asset stores a note and does not call a model.
+- Masho's screen is a publishing queue with Today, Ready, Scheduled, Published and Issues. Ready stays empty until a real file URL is stored. The task screen can open Meta Business Suite and can save a live URL. It does not post to Facebook. Flagging stores a note and does not call a model.
+- Shahzeb's overview lists attention items and a five-Page table. Affiliate intelligence, Content Studio and Growth Director are owner screens. Unconnected money, reach and AI cost stay blank. See `DESIGN.md` and `docs/UI_ARCHITECTURE.md`.
 - Copyable prompts remain on the owner brief only. No AI API calls.
 - Tests for import, UK clock change, permissions, submission evidence, self-approval and winner-sample refusal.
 - Milestone A: local PostgreSQL, Drizzle schema, one-time owner setup, staff invite, server sessions, persisted tasks, training, approvals, audit events and the Mandala tables. The 180 posts and 76 unresolved notes are seeded. Mandala actions start as NOT_STARTED.
@@ -22,6 +23,7 @@
 - The owner dashboard starts in build mode. "UK launch · Day N of 30" is no longer derived from today's date. The 30-day clock starts only after an explicit owner confirmation. The UTC timestamp is stored in the `campaigns` table.
 - `npm run lint`, `npm run typecheck` and `npm run build` passed after Milestone A.
 - 13 October 2026: `npm test` (20 passed), `npm run lint` and `npm run typecheck` after the publishing-desk correction. Masho's local session showed ready-to-publish at 0, an empty file slot, a Meta Business Suite instruction, a persisted regeneration flag, and a blocked finance route. The campaign stayed in build mode. The temporary page-operator login used for that check was removed.
+- 13 October 2026: `npm test` (25 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the role shells. Browser check covered the owner overview, affiliate intelligence, Content Studio, Growth Director, Masho's today queue, the empty ready list, and UK-SGIUK-001. A 390px capture showed Masho's bottom bar. The campaign stayed in build mode. Temporary review logins were removed.
 
 ## Incomplete
 

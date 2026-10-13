@@ -1,7 +1,7 @@
 "use client";
 
-import { OwnerHome } from "@/components/home-screens";
+import { OwnerOverview } from "@/components/owner-overview";
 
 export default function OwnerPage() {
-  return <OwnerHome />;
+  return <OwnerOverview />;
 }

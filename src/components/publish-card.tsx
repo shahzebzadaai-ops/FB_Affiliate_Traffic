@@ -1,0 +1,52 @@
+"use client";
+
+import Link from "next/link";
+import { pageByCode } from "@/domain/pages";
+import type { ContentRecord } from "@/domain/types";
+import { AssetFrame } from "@/components/asset-frame";
+import { formatLabel } from "@/components/task-card";
+
+export function PublishCard({
+  record,
+  href,
+  publishPhrase,
+  hook,
+  status,
+  ready,
+  action,
+}: {
+  record: ContentRecord;
+  href: string;
+  publishPhrase: string;
+  hook: string;
+  status: string;
+  ready: boolean;
+  action: string;
+}) {
+  const page = pageByCode(record.pageCode);
+  return (
+    <article className="grid gap-6 bg-card p-4 ring-1 ring-foreground/10 sm:grid-cols-[minmax(9rem,14rem)_minmax(0,1fr)] sm:p-5">
+      <AssetFrame label={formatLabel(record.format)} accent={page.accent} />
+      <div className="flex min-w-0 flex-col">
+        <p className="text-[11px] tracking-[0.16em] uppercase" style={{ color: page.accent }}>{page.name}</p>
+        <h2 className="mt-2 font-heading text-3xl leading-tight tracking-tight">{record.pillar}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">“{hook}”</p>
+        <p className="mt-4 text-sm leading-relaxed">{record.captionInstructions}</p>
+        <p className="mt-1 text-xs text-muted-foreground">Plan instruction. Not a finished caption.</p>
+        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-muted-foreground">UK time</dt>
+            <dd>{publishPhrase}</dd>
+          </div>
+          <div>
+            <dt className="text-muted-foreground">Readiness</dt>
+            <dd>{ready ? status : `${status} · waiting for a file`}</dd>
+          </div>
+        </dl>
+        <Link href={href} className="mt-5 inline-flex h-11 items-center justify-center self-start bg-primary px-4 text-sm font-medium text-primary-foreground">
+          {action}
+        </Link>
+      </div>
+    </article>
+  );
+}
