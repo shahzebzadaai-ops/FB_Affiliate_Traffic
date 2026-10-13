@@ -37,6 +37,7 @@ export type TaskState = {
   publishAtOverride?: string;
   hookOverride?: string;
   cancelReason?: string;
+  regenerationRequest?: { at: string; note: string };
   metrics: MetricEntry[];
 };
 

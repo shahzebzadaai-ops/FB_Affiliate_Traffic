@@ -84,6 +84,18 @@ describe("milestone A foundation", () => {
     expect(financeResponse(owner.user).body.approvedRevenue).toBeNull();
     const denied = decideTaskCommand(masho.user, "masho", initialTaskState(), { action: "approve", comment: "Looks good", assigneeId: "masho" }, new Date().toISOString());
     expect(denied.ok).toBe(false);
+    const flagged = decideTaskCommand(
+      masho.user,
+      "masho",
+      initialTaskState(),
+      { action: "flagRegeneration", note: "The voice is American and the hands are wrong." },
+      "2026-10-13T12:00:00.000Z",
+    );
+    expect(flagged.ok).toBe(true);
+    if (flagged.ok) {
+      expect(flagged.state.status).toBe("ASSIGNED");
+      expect(flagged.state.regenerationRequest?.note).toContain("American");
+    }
 
     const ownerSession = await authenticate(owner.user.email, ownerPassword, "test");
     const staffSession = await authenticate(masho.user.email, staffPassword, "test");

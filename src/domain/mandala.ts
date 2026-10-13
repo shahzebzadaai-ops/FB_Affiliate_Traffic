@@ -8,7 +8,7 @@ export const MANDALA_GOAL = {
     "Repeatable approved affiliate revenue. Unapproved conversions, gross sales, reversed commissions and unverified screenshots do not count. The December 2026 first-sale target is aspirational.",
 } as const;
 
-const PILLARS: { id: string; title: string; actions: { title: string; owner: "Shahzeb" | "Masho" }[] }[] = [
+const PILLARS: { id: string; title: string; actions: { title: string; owner: "Shahzeb" | "Masho" | "AI pipeline" }[] }[] = [
   {
     id: "p1",
     title: "Audience and Page portfolio",
@@ -28,11 +28,11 @@ const PILLARS: { id: string; title: string; actions: { title: string; owner: "Sh
     title: "Storytelling and creative quality",
     actions: [
       { title: "Develop five distinct brand bibles", owner: "Shahzeb" },
-      { title: "Research relevant emotional insights", owner: "Masho" },
-      { title: "Create original story hooks", owner: "Masho" },
-      { title: "Develop repeatable Reel formats", owner: "Masho" },
-      { title: "Maintain consistent AI characters and visuals", owner: "Masho" },
-      { title: "Produce natural British voiceovers and captions", owner: "Masho" },
+      { title: "Research relevant emotional insights", owner: "AI pipeline" },
+      { title: "Create original story hooks", owner: "AI pipeline" },
+      { title: "Develop repeatable Reel formats", owner: "AI pipeline" },
+      { title: "Maintain consistent AI characters and visuals", owner: "AI pipeline" },
+      { title: "Produce natural British voiceovers and captions", owner: "AI pipeline" },
       { title: "Review every creative for quality and originality", owner: "Shahzeb" },
       { title: "Build a library of measured creative learnings", owner: "Shahzeb" },
     ],
@@ -44,9 +44,9 @@ const PILLARS: { id: string; title: string; actions: { title: string; owner: "Sh
       { title: "Preserve the first 180-post plan", owner: "Shahzeb" },
       { title: "Resolve incomplete creative briefs", owner: "Shahzeb" },
       { title: "Generate daily assignments", owner: "Shahzeb" },
-      { title: "Produce scripts, images and Reels", owner: "Masho" },
-      { title: "Store assets with permanent content IDs", owner: "Masho" },
-      { title: "Submit work for approval", owner: "Masho" },
+      { title: "Produce scripts, images and Reels", owner: "AI pipeline" },
+      { title: "Store assets with permanent content IDs", owner: "AI pipeline" },
+      { title: "Submit work for approval", owner: "AI pipeline" },
       { title: "Publish approved content on schedule", owner: "Masho" },
       { title: "Collect and review actual results", owner: "Shahzeb" },
     ],
@@ -100,7 +100,7 @@ const PILLARS: { id: string; title: string; actions: { title: string; owner: "Sh
       { title: "Implement secure owner login", owner: "Shahzeb" },
       { title: "Implement secure staff accounts", owner: "Shahzeb" },
       { title: "Assign appropriate Page permissions", owner: "Shahzeb" },
-      { title: "Establish Masho's daily production workflow", owner: "Masho" },
+      { title: "Run Masho's daily publishing queue", owner: "Masho" },
       { title: "Connect secure asset management", owner: "Shahzeb" },
       { title: "Create training and quality procedures", owner: "Shahzeb" },
       { title: "Maintain backups and system monitoring", owner: "Shahzeb" },
@@ -114,7 +114,7 @@ const PILLARS: { id: string; title: string; actions: { title: string; owner: "Sh
       { title: "Review Mandala progress weekly", owner: "Shahzeb" },
       { title: "Identify the current biggest bottleneck", owner: "Shahzeb" },
       { title: "Generate three prioritized next experiments", owner: "Shahzeb" },
-      { title: "Test new hooks, content and publishing times", owner: "Masho" },
+      { title: "Test new hooks, content and publishing times", owner: "AI pipeline" },
       { title: "Record hypotheses and measured outcomes", owner: "Shahzeb" },
       { title: "Evaluate new Pages, GEOs and offers", owner: "Shahzeb" },
       { title: "Approve selective paid amplification", owner: "Shahzeb" },

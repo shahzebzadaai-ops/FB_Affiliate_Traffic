@@ -32,6 +32,7 @@ type TaskCommand =
   | { action: "postpone"; dueAt: string; publishAt: string; comment: string }
   | { action: "cancel"; reason: string }
   | { action: "publish"; facebookUrl: string }
+  | { action: "flagRegeneration"; note: string }
   | { action: "saveMetrics"; entry: MetricEntry };
 
 type Snapshot = {
@@ -141,6 +142,7 @@ type PreviewContextValue = {
   postpone: (contentId: string, dueAt: string, publishAt: string, comment: string) => Promise<boolean>;
   cancel: (contentId: string, reason: string) => Promise<boolean>;
   publish: (contentId: string, facebookUrl: string) => Promise<boolean>;
+  flagRegeneration: (contentId: string, note: string) => Promise<boolean>;
   saveMetrics: (contentId: string, entry: MetricEntry) => Promise<boolean>;
   training: Record<string, boolean>;
   setTraining: (key: string, value: boolean) => Promise<void>;
@@ -187,6 +189,7 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
       postpone: async (contentId, dueAt, publishAt, comment) => (await sendTask(contentId, { action: "postpone", dueAt, publishAt, comment })).ok,
       cancel: async (contentId, reason) => (await sendTask(contentId, { action: "cancel", reason })).ok,
       publish: async (contentId, facebookUrl) => (await sendTask(contentId, { action: "publish", facebookUrl })).ok,
+      flagRegeneration: async (contentId, note) => (await sendTask(contentId, { action: "flagRegeneration", note })).ok,
       saveMetrics: async (contentId, entry) => (await sendTask(contentId, { action: "saveMetrics", entry })).ok,
       training: current.training,
       setTraining: async (key, completed) => {

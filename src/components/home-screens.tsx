@@ -30,7 +30,7 @@ function useWork() {
 }
 
 export function StaffHome() {
-  const { today, now, decorated, live, clock, campaign } = useWork();
+  const { today, decorated, live, clock, campaign } = useWork();
   const todays = decorated
     .filter((item) => item.state.status !== "CANCELLED")
     .filter((item) =>
@@ -39,10 +39,6 @@ export function StaffHome() {
         : item.planDay === 1 && !item.state.dueAtOverride && !item.state.publishAtOverride,
     )
     .sort((a, b) => a.dueAt.localeCompare(b.dueAt) || a.record.contentId.localeCompare(b.record.contentId));
-  const remaining = decorated.filter((item) => OPEN.has(item.state.status));
-  const waiting = decorated.filter((item) => item.state.status === "READY_FOR_REVIEW");
-  const overdue = !live || now === null ? [] : remaining.filter((item) => Date.parse(item.dueAt) < now);
-  const completed = decorated.filter((item) => !OPEN.has(item.state.status) && item.state.status !== "CANCELLED" && item.state.status !== "PLANNED");
   const upcoming = decorated
     .filter((item) => item.state.status !== "CANCELLED" && (live ? londonDateKey(item.publishAt) > today : item.planDay > 1))
     .sort((a, b) => a.planDay - b.planDay || a.publishAt.localeCompare(b.publishAt))
@@ -54,20 +50,21 @@ export function StaffHome() {
         <CampaignStatus clock={clock} />
         <h1 className="mt-2 font-heading text-5xl tracking-tight">{greetingForLondonHour()}, Masho</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          {live
-            ? "Your work for today is already on the calendar. You do not need to choose a topic."
-            : "The 30-day clock has not started. Day 1 posts below are preparation work, not a live publishing day."}
+          You publish finished Facebook assets. You do not write prompts, scripts or Reels. The seven-day AI pipeline is not connected, so nothing below is a finished file.
         </p>
       </header>
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label={live ? "Due today" : "Day 1 to prepare"} value={todays.length} />
-        <Stat label="Still to produce" value={remaining.length} />
-        <Stat label="Waiting for approval" value={waiting.length} />
-        <Stat label="Overdue" value={overdue.length} />
+        <Stat label="Ready to publish" value={0} />
+        <Stat label={live ? "Today's planned slots" : "Day 1 planned slots"} value={todays.length} />
+        <Stat label="Flagged for regeneration" value={decorated.filter((item) => item.state.regenerationRequest).length} />
+        <Stat label="Published" value={decorated.filter((item) => ["PUBLISHED", "METRICS_DUE", "PERFORMANCE_RECORDED"].includes(item.state.status)).length} />
       </section>
-      <p className="text-sm text-muted-foreground">{completed.length} tasks have moved past production. Cancelled work is not counted as done.</p>
+      <p className="text-sm text-muted-foreground">
+        Ready to publish stays at zero until a real image or MP4 exists. Scheduling is manual in Meta Business Suite. This app does not post to Facebook.
+        {live ? "" : " The campaign clock has not started."}
+      </p>
       <section className="space-y-4">
-        <h2 className="font-heading text-3xl">{live ? "Today's tasks" : "Day 1 preparation"}</h2>
+        <h2 className="font-heading text-3xl">{live ? "Today's publishing queue" : "Day 1 publishing queue"}</h2>
         {todays.length === 0 ? (
           <p className="rounded-xl bg-card p-5 text-sm ring-1 ring-foreground/10">
             {live ? "Nothing is due today. Check the calendar for the next publishing window." : "Day 1 posts are not in the plan."}
@@ -79,7 +76,7 @@ export function StaffHome() {
                 key={item.record.contentId}
                 record={item.record}
                 href={`/staff/tasks/${item.record.contentId}`}
-                action={item.state.status === "ASSIGNED" ? "Start task" : "Open task"}
+                action="Open publishing task"
               />
             ))}
           </div>
@@ -87,7 +84,7 @@ export function StaffHome() {
       </section>
       <section className="grid gap-6 lg:grid-cols-2">
         <div>
-          <h2 className="font-heading text-3xl">Upcoming deadlines</h2>
+          <h2 className="font-heading text-3xl">Upcoming publishing windows</h2>
           <ul className="mt-3 divide-y divide-border rounded-xl bg-card ring-1 ring-foreground/10">
             {upcoming.map((item) => (
               <li key={item.record.contentId} className="px-4 py-3 text-sm">
@@ -154,7 +151,7 @@ export function OwnerHome() {
       </section>
       <section>
         <div className="flex items-end justify-between gap-3">
-          <h2 className="font-heading text-3xl">Masho&apos;s queue</h2>
+          <h2 className="font-heading text-3xl">Review queue</h2>
           <Link href="/owner/approvals" className="text-sm text-primary">Open approvals</Link>
         </div>
         <div className="mt-4 grid gap-4">

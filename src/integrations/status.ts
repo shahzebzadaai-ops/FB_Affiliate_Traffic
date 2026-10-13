@@ -19,7 +19,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Meta publishing and insights",
       status: "not_connected",
       detail:
-        "There is no Page token and no publishing permission. Posts are published manually. Performance is entered by hand at 24 hours, 72 hours and 7 days. Organic and paid reach stay separate.",
+        "There is no Page token and no publishing permission. Schedule posts manually in Meta Business Suite. This app does not claim automated Facebook scheduling. Performance is entered by hand at 24 hours, 72 hours and 7 days. Organic and paid reach stay separate.",
     },
     {
       id: "affiliate-networks",

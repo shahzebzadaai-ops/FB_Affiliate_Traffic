@@ -16,7 +16,7 @@ export function TrainingBoard({ mode }: { mode: "staff" | "owner" }) {
         <p className="mt-2 max-w-2xl text-muted-foreground">
           {mode === "owner"
             ? `Masho has marked ${done} of ${TRAINING_LESSONS.length} lessons complete. This is stored with his account.`
-            : "Work through one lesson a day. The same lessons can be assigned to the next content operator."}
+            : "These lessons are for publishing finished assets. You do not write prompts, generate images or edit Reels."}
         </p>
       </header>
       <ol className="space-y-4">

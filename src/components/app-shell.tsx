@@ -50,7 +50,7 @@ export function AppShell({
   return (
     <div className="min-h-screen">
       <div className="border-b border-amber-700/20 bg-amber-50 px-4 py-2 text-center text-xs text-amber-950 sm:text-sm">
-        Signed in as {preview.user.name}. Facebook, Drive and affiliate networks are not connected. No revenue is invented.
+        Signed in as {preview.user.name}. AI production, Facebook, Drive and affiliate networks are not connected. Scheduling is manual in Meta Business Suite. No revenue is invented.
       </div>
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6">

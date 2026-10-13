@@ -34,7 +34,7 @@ export function StaffAdmin({ initialUsers }: { initialUsers: Account[] }) {
       <header>
         <h1 className="font-heading text-5xl tracking-tight">Staff</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Invite Masho with his own password. There is no public registration and no shared owner password.
+          Invite Masho as the page operator. He publishes finished assets. He does not get finance, offers or AI spend. There is no public registration.
         </p>
       </header>
       <form
@@ -70,7 +70,7 @@ export function StaffAdmin({ initialUsers }: { initialUsers: Account[] }) {
         <label className="text-sm">Person key<input required name="personKey" defaultValue="masho" className="mt-1 h-11 w-full rounded-lg border border-border px-3" /></label>
         <label className="text-sm">Initial password<input required name="password" type="password" minLength={12} className="mt-1 h-11 w-full rounded-lg border border-border px-3" /></label>
         <button type="submit" className="h-11 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground sm:col-span-2">
-          Create content operator
+          Create page operator
         </button>
       </form>
       {error ? <p className="text-sm text-destructive">{error}</p> : null}

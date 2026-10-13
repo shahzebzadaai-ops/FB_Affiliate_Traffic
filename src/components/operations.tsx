@@ -17,10 +17,10 @@ export function ApprovalQueue() {
     <div className="space-y-6">
       <header>
         <h1 className="font-heading text-5xl tracking-tight">Approvals</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">Masho cannot approve his own work. A finished file stays here until you approve it, and it is still not a published post.</p>
+        <p className="mt-2 max-w-2xl text-muted-foreground">Significant creative changes wait here for your approval. Masho does not write the asset, and he cannot approve his own work. Approval is not a published post.</p>
       </header>
       {queue.length === 0 ? (
-        <p className="rounded-xl bg-card p-5 text-sm ring-1 ring-foreground/10">Nothing is waiting. When Masho submits evidence, the task appears here.</p>
+        <p className="rounded-xl bg-card p-5 text-sm ring-1 ring-foreground/10">Nothing is waiting. The AI pipeline is not connected, so no finished file has been submitted.</p>
       ) : (
         <ul className="divide-y divide-border rounded-xl bg-card ring-1 ring-foreground/10">
           {queue.map((record) => {

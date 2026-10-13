@@ -24,23 +24,23 @@ Can be done without paid integrations: yes.
 
 Acceptance: an action cannot become successful from a checkbox alone. Pause does not change the original start timestamp. Finance still shows no invented revenue.
 
-## C — Content production
+## C — Seven-day AI production and Drive
 
-Scope: Drive connection, asset versions, brief resolution queue, copyable prompts kept, approval evidence stored as files.
+Scope: a rolling seven-day pipeline that writes finished files into Drive. Masho only receives tasks that have a real file, caption and thumbnail. Shahzeb approves the pipeline, the spend limit and any new angle or Page. No mock generator may be labelled as working AI.
 
-Dependencies: Google OAuth for `affiliateshahzeb@gmail.com`. Do not share that password. Confirm storage before claiming 5 TB.
+Dependencies: an approved model provider, a spend limit set by Shahzeb, and Google OAuth for `affiliateshahzeb@gmail.com`. Do not share that password. Confirm storage before claiming 5 TB.
 
-Complexity: OAuth, folder IDs, staff-scoped access, and the 76 unresolved briefs.
+Complexity: provider adapters, file versions, a seven-day queue, regeneration requests, and staff-scoped Drive access. The 76 unresolved briefs still need Shahzeb.
 
-Owner action: authorize Drive and resolve brief conflicts.
+Owner action: choose the provider, set the spend limit, authorize Drive, and approve the first week of assets.
 
-Without paid integrations: the brief queue and prompts can be finished before Drive OAuth.
+Without paid integrations: the publishing desk and the empty states. Not the files.
 
-Acceptance: a disconnected Drive screen stays labelled disconnected. Unresolved PDF notes stay visible until approved.
+Acceptance: a task without a stored file cannot show a download. A regeneration flag does not call a model by itself. Masho still cannot see finance.
 
 ## D — Meta connector
 
-Scope: one Page first, then five. Official Graph API only. Metric registry for 2026 metric changes. Manual export fallback. No scraping.
+Scope: one Page first, then five. Official Graph API only. Metric registry for 2026 metric changes. Manual export fallback. No scraping. Do not claim scheduling is automated until this access works. Until then, Masho uses Meta Business Suite.
 
 Dependencies: a Meta app, Page tokens, current permission review. Not granted today.
 
@@ -52,9 +52,9 @@ Without paid integrations: the registry and manual import can be designed first.
 
 Acceptance: missing permissions and deprecated metrics stay null. No token in the browser or logs.
 
-## E — AI learning
+## E — AI Growth Director
 
-Scope: rules-based classification first, then three creative hypotheses from sanitized evidence, owner approval, and a task for Masho. No automatic publish.
+Scope: rules-based classification first, then proposals for new angles, personas and Pages from sanitized Facebook and affiliate evidence. Shahzeb approves before a significant change. Approved creative work returns to the seven-day pipeline, not to Masho as an author. No automatic publish and no automatic spend.
 
 Dependencies: real metrics from D, or an explicit insufficient-data state. A model key is optional.
 

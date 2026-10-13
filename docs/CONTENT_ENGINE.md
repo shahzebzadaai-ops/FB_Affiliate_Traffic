@@ -6,9 +6,13 @@ Each task carries the Page persona, pillar, angle, hook, source brief, script re
 
 Statuses: planned, assigned, in progress, ready for review, changes requested, approved, scheduled, published, metrics due, performance recorded, cancelled.
 
-A finished asset is not a published post. Submission requires the format checklist, the quality checklist, a submission note and an asset reference. Masho cannot approve his own work.
+A finished asset is not a published post. Masho cannot approve his own work, and he does not produce the asset.
 
-AI help is copyable prompts for an external ChatGPT or image tool. The prompts include the Page bible, hook, tone and originality rules. Phase 1 does not call a paid AI API. Humans edit and review every result.
+AI-FIRST PRODUCTION. The pipeline, once connected, owns research, Page-specific hooks and stories, captions, image generation, Reel scripts, voiceover, subtitles and a downloadable master file. It prepares a rolling seven days, not all 180 finals at once. Shahzeb approves significant creative and strategy changes. Masho receives a ready-to-publish task: Page, UK time, file, caption, thumbnail, Business Suite instructions, a quality flag, and a place to save the live Facebook URL.
+
+NOT CONNECTED. No model is called. No screen may show a generated MP4, caption or thumbnail and call it finished. Copyable prompts remain on the owner brief for later pipeline design. They are not Masho's job.
+
+SCHEDULING. Until an approved Meta API connection works, Masho schedules in Meta Business Suite by hand. Saving a URL in this app does not post to Facebook.
 
 Quality checks cover UK English, one idea, originality, false testimonials, private material, age-appropriate content, anatomy and type, the opening, captions and format, and disclosure. Weeks 1 and 2 do not carry affiliate links. A later guide bridge must be identifiable as advertising.
 

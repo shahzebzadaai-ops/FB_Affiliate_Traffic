@@ -14,6 +14,8 @@ Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/DECISION_LOG.md`, `d
 
 This is an internal operating system for an organic-first UK dating affiliate publisher. It is not a dating app, not a generic post generator, and not a public Facebook scheduler.
 
+Masho publishes finished assets. He does not write prompts, scripts, images or Reels. Do not put creative production back on his queue. Do not label a mock file as AI output.
+
 Milestone A adds local PostgreSQL, owner setup, staff login and server-side permissions. Google Drive, Meta and affiliate networks are still not connected. Do not invent commissions, followers or engagement. The database on this machine is development-only. Do not treat it as production hosting.
 
 Update `docs/BUILD_STATUS.md` when a milestone changes what is done, tested, incomplete, risky, or next.

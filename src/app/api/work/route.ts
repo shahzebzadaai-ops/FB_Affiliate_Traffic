@@ -45,6 +45,7 @@ function isCommand(command: TaskCommand): command is TaskCommand {
     "postpone",
     "cancel",
     "publish",
+    "flagRegeneration",
   ].includes(command.action);
 }
 

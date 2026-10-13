@@ -31,6 +31,7 @@ export type TaskCommand =
   | { action: "postpone"; dueAt: string; publishAt: string; comment: string }
   | { action: "cancel"; reason: string }
   | { action: "publish"; facebookUrl: string }
+  | { action: "flagRegeneration"; note: string }
   | { action: "saveMetrics"; entry: MetricEntry };
 
 export function canAccessTask(actor: Actor, assigneeId: string): boolean {
@@ -115,8 +116,28 @@ export function decideTaskCommand(
     return { ok: true, state: next };
   }
 
+  if (command.action === "flagRegeneration") {
+    if (!can(actor.role, "submit_work")) return { ok: false, error: "You cannot flag this asset." };
+    if (typeof command.note !== "string" || command.note.trim().length < 8) return { ok: false, error: "Say what is wrong with the asset, in at least 8 characters." };
+    return {
+      ok: true,
+      state: {
+        ...current,
+        regenerationRequest: { at: now, note: command.note.trim() },
+        revisions: [
+          ...current.revisions,
+          { at: now, actorId: actor.personKey, action: "FLAG_REGENERATION", comment: command.note.trim() },
+        ],
+      },
+    };
+  }
+
+  if (!can(actor.role, "submit_work") && !can(actor.role, "manage_plan")) return { ok: false, error: "You cannot record performance." };
+  if (!["PUBLISHED", "METRICS_DUE", "PERFORMANCE_RECORDED"].includes(current.status)) {
+    return { ok: false, error: "Performance can be saved only after the Facebook URL is recorded." };
+  }
   const next = recordMetrics(current, actor.personKey, command.entry, now);
-  if (!next) return { ok: false, error: "Enter organic or paid reach before saving." };
+  if (!next) return { ok: false, error: "Enter organic or paid reach before saving. Do not guess." };
   return { ok: true, state: next };
 }
 

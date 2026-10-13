@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-13 — AI-first operating model
+
+PERMANENT. Masho is the Facebook Page operations employee, not the creative producer. The AI pipeline prepares research, hooks, stories, captions, images, scripts, voiceover, subtitles and finished files on a rolling seven-day queue. Shahzeb alone approves strategy, offers, tracking, postbacks, revenue, roles, AI spend, and new Pages or countries. Fictional stories are not testimonials. No model is connected yet, and no screen may pretend that it is. Facebook scheduling stays manual in Meta Business Suite until an approved API works. Do not revert Masho to writing prompts.
+
 ## 2026-10-12 — Phase 1 scope
 
 Build the preview operating system. Do not build live Drive, Meta, affiliate postbacks, production login or the public website. Stop after Phase 1 for Shahzeb's review.

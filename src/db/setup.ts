@@ -89,7 +89,12 @@ export async function seedDatabase(databaseUrl: string) {
             ${action.successCriterion}, ${action.ownerLabel}, ${action.priority}, ${action.status},
             ${sql.json([])}, ${sql.json([])}
           )
-          on conflict (id) do nothing
+          on conflict (id) do update set
+            title = excluded.title,
+            owner_label = excluded.owner_label,
+            description = excluded.description,
+            success_criterion = excluded.success_criterion
+          where mandala_actions.status = 'NOT_STARTED'
         `;
       }
     }

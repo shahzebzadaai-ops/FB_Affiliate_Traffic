@@ -10,9 +10,8 @@ import { useCampaign } from "@/campaign/campaign-context";
 import { placedInstant, placedPhrase } from "@/domain/campaign";
 import { formatLondon, londonDateTimeToUtc } from "@/domain/schedule";
 import { WORKFLOWS } from "@/domain/workflows";
-import { PLANNED_DRIVE_FOLDERS } from "@/integrations/status";
 import { recordById } from "@/content/catalog";
-import { submissionBlockers, type MetricEntry } from "@/preview/task-state";
+import { type MetricEntry } from "@/preview/task-state";
 import { statusLabel, usePreview } from "@/preview/preview-context";
 import { formatLabel } from "@/components/task-card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -57,8 +56,37 @@ export function TaskWorkspace({
     if (step.n === 18) return { ...step, body: `Only after Shahzeb approves it. Planned time: ${publishPhrase}.` };
     return step;
   });
-  const blockers = submissionBlockers(record.format, state);
   const back = mode === "owner" ? "/owner" : "/staff";
+
+  if (mode === "staff") {
+    return (
+      <PublishDesk
+        pageName={page.name}
+        accent={page.accent}
+        wash={page.wash}
+        contentId={record.contentId}
+        formatLabelText={formatLabel(record.format)}
+        hook={hook}
+        publishPhrase={publishPhrase}
+        caption={record.captionInstructions}
+        status={statusLabel(state.status)}
+        flagged={state.regenerationRequest?.note ?? null}
+        facebookUrl={state.facebookUrl}
+        onFlag={(note) => {
+          void preview.flagRegeneration(record.contentId, note).then((ok) => {
+            setNotice(ok ? "Flagged for regeneration. No AI job was started." : "Describe the problem in at least 8 characters.");
+          });
+        }}
+        onPublish={(url) => {
+          void preview.publish(record.contentId, url).then((ok) => {
+            setNotice(ok ? "The Facebook URL was saved. This app did not post it." : "A URL can be saved only after the asset is approved. There is no finished file yet.");
+          });
+        }}
+        onNotice={setNotice}
+        notice={notice}
+      />
+    );
+  }
 
   async function copyPrompt(id: string, text: string) {
     await navigator.clipboard.writeText(text);
@@ -70,6 +98,9 @@ export function TaskWorkspace({
       <Link href={back} className="text-sm text-muted-foreground hover:text-foreground">
         Back
       </Link>
+      <p className="rounded-xl bg-card p-4 text-sm leading-relaxed text-muted-foreground ring-1 ring-foreground/10">
+        This brief is for the AI production pipeline and your approval. Masho does not write the prompt, script or video. No model is connected, so nothing here is a finished asset.
+      </p>
       <header className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10" style={{ backgroundColor: page.wash }}>
         <div className="h-1.5" style={{ backgroundColor: page.accent }} />
         <div className="space-y-3 p-5 sm:p-6">
@@ -173,89 +204,20 @@ export function TaskWorkspace({
               ))}
             </ul>
           </section>
-          {mode === "staff" ? (
-            <section className="rounded-xl bg-card p-4 ring-1 ring-foreground/10">
-              <h2 className="font-heading text-2xl">Evidence</h2>
-              <label className="mt-3 block text-sm" htmlFor="note">What did you make?</label>
-              <Textarea
-                id="note"
-                className="mt-1 min-h-24"
-                value={state.submissionNote}
-                onChange={(event) => preview.updateDraft(record.contentId, { submissionNote: event.target.value })}
-              />
-              <label className="mt-3 block text-sm" htmlFor="asset">Asset reference</label>
-              <Textarea
-                id="asset"
-                className="mt-1 min-h-20"
-                value={state.assetReference}
-                placeholder={record.driveFolderPath}
-                onChange={(event) => preview.updateDraft(record.contentId, { assetReference: event.target.value })}
-              />
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Planned folders: {PLANNED_DRIVE_FOLDERS.join(", ")}. Drive is not connected, so this reference is a path, not an upload.
-              </p>
-              {state.status === "ASSIGNED" || state.status === "PLANNED" || state.status === "CHANGES_REQUESTED" ? (
-                <button type="button" className="mt-4 h-11 w-full rounded-lg bg-primary text-sm font-medium text-primary-foreground" onClick={() => void preview.start(record.contentId)}>
-                  Start task
-                </button>
-              ) : null}
-              <button
-                type="button"
-                className="mt-3 h-11 w-full rounded-lg bg-foreground text-sm font-medium text-background disabled:opacity-40"
-                disabled={blockers.length > 0 || !["IN_PROGRESS", "CHANGES_REQUESTED"].includes(state.status)}
-                onClick={() => {
-                  void preview.submit(record.contentId).then((errors) => {
-                    setNotice(errors ? errors[0] : "Submitted for Shahzeb to review.");
-                  });
-                }}
-              >
-                Submit for approval
-              </button>
-              {blockers.length > 0 ? <p className="mt-2 text-xs text-muted-foreground">{blockers[0]}</p> : null}
-              {notice ? <p className="mt-2 text-sm">{notice}</p> : null}
-              {["PUBLISHED", "METRICS_DUE", "PERFORMANCE_RECORDED"].includes(state.status) ? (
-                <MetricsForm contentId={record.contentId} onNotice={setNotice} />
-              ) : null}
-              {state.status === "APPROVED" || state.status === "SCHEDULED" ? (
-                <div className="mt-4 space-y-2">
-                  <label className="text-sm" htmlFor="fb">Published Facebook URL</label>
-                  <input
-                    id="fb"
-                    className="h-10 w-full rounded-lg border border-input bg-background px-3 text-sm"
-                    value={state.facebookUrl}
-                    placeholder="https://www.facebook.com/..."
-                    onChange={(event) => preview.updateDraft(record.contentId, { facebookUrl: event.target.value })}
-                  />
-                  <button
-                    type="button"
-                    className="h-11 w-full rounded-lg bg-primary text-sm font-medium text-primary-foreground"
-                    onClick={() => {
-                      void preview.publish(record.contentId, state.facebookUrl).then((ok) => {
-                        setNotice(ok ? "Publication recorded." : "Paste a real URL after Shahzeb approves the work.");
-                      });
-                    }}
-                  >
-                    Record publication
-                  </button>
-                </div>
-              ) : null}
-            </section>
-          ) : (
-            <OwnerControls
-              contentId={record.contentId}
-              status={state.status}
-              reviewNote={reviewNote}
-              setReviewNote={setReviewNote}
-              cancelReason={cancelReason}
-              setCancelReason={setCancelReason}
-              publishDate={publishDate}
-              setPublishDate={setPublishDate}
-              publishTime={publishTime}
-              setPublishTime={setPublishTime}
-              onNotice={setNotice}
-              notice={notice}
-            />
-          )}
+          <OwnerControls
+            contentId={record.contentId}
+            status={state.status}
+            reviewNote={reviewNote}
+            setReviewNote={setReviewNote}
+            cancelReason={cancelReason}
+            setCancelReason={setCancelReason}
+            publishDate={publishDate}
+            setPublishDate={setPublishDate}
+            publishTime={publishTime}
+            setPublishTime={setPublishTime}
+            onNotice={setNotice}
+            notice={notice}
+          />
         </aside>
       </div>
     </div>
@@ -393,11 +355,111 @@ function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (va
             websiteVisits: optionalNumber(visits),
             affiliateClicks: null,
           };
-          void preview.saveMetrics(contentId, entry).then((ok) => onNotice(ok ? "Performance saved." : "Enter organic or paid reach before saving."));
+          void preview.saveMetrics(contentId, entry).then((ok) => onNotice(ok ? "Performance saved. Commission is not on this screen." : "Enter a reach number you can see. This stays empty until the Facebook URL is recorded."));
         }}
       >
         Save checkpoint
       </button>
+    </div>
+  );
+}
+
+function PublishDesk({
+  pageName,
+  accent,
+  wash,
+  contentId,
+  formatLabelText,
+  hook,
+  publishPhrase,
+  caption,
+  status,
+  flagged,
+  facebookUrl,
+  onFlag,
+  onPublish,
+  onNotice,
+  notice,
+}: {
+  pageName: string;
+  accent: string;
+  wash: string;
+  contentId: string;
+  formatLabelText: string;
+  hook: string;
+  publishPhrase: string;
+  caption: string;
+  status: string;
+  flagged: string | null;
+  facebookUrl: string;
+  onFlag: (note: string) => void;
+  onPublish: (url: string) => void;
+  onNotice: (message: string) => void;
+  notice: string | null;
+}) {
+  const [note, setNote] = useState("");
+  const [url, setUrl] = useState(facebookUrl);
+  return (
+    <div className="space-y-6">
+      <Link href="/staff" className="text-sm text-muted-foreground hover:text-foreground">Back</Link>
+      <header className="overflow-hidden rounded-2xl ring-1 ring-foreground/10" style={{ backgroundColor: wash }}>
+        <div className="h-1.5" style={{ backgroundColor: accent }} />
+        <div className="space-y-2 p-5">
+          <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: accent }}>{pageName}</p>
+          <h1 className="font-heading text-4xl">{formatLabelText}</h1>
+          <p className="text-sm text-muted-foreground">{contentId} · {status}</p>
+          <p className="font-heading text-2xl">“{hook}”</p>
+        </div>
+      </header>
+      <dl className="grid gap-3 sm:grid-cols-2">
+        <Field label="Scheduled UK time" value={publishPhrase} />
+        <Field label="Finished image or MP4" value="No file. AI production is not connected." />
+        <Field label="Thumbnail" value="No thumbnail. One will appear here only after a real file exists." />
+        <Field label="Download" value="Unavailable. There is nothing to download." />
+      </dl>
+      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+        <h2 className="font-heading text-2xl">Final caption</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">No finished caption has been generated. The plan only has this instruction:</p>
+        <p className="mt-3 text-sm leading-relaxed">{caption}</p>
+      </section>
+      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+        <h2 className="font-heading text-2xl">Publishing instructions</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          When a finished file exists, download it and schedule it manually in Meta Business Suite at the UK time above. This screen does not publish to Facebook.
+        </p>
+        <label className="mt-4 block text-sm">
+          Published Facebook URL
+          <input className="mt-1 h-11 w-full rounded-lg border border-border px-3" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
+        </label>
+        <button type="button" className="mt-3 h-11 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={() => onPublish(url)}>
+          Save the live URL
+        </button>
+      </section>
+      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+        <h2 className="font-heading text-2xl">Quality check</h2>
+        <p className="mt-2 text-sm text-muted-foreground">If the finished asset is unsuitable, flag it. That does not start a new AI render.</p>
+        {flagged ? <p className="mt-3 text-sm">Flagged: {flagged}</p> : null}
+        <textarea className="mt-3 min-h-24 w-full rounded-lg border border-border p-3 text-sm" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What should be regenerated?" />
+        <button type="button" className="mt-3 h-11 rounded-lg bg-muted px-4 text-sm" onClick={() => onFlag(note)}>
+          Flag for regeneration
+        </button>
+        {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
+      </section>
+      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+        <h2 className="font-heading text-2xl">Performance</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Record Page numbers you can see. Affiliate commission is not on this screen.</p>
+        <MetricsForm contentId={contentId} onNotice={onNotice} />
+        {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
+      </section>
+    </div>
+  );
+}
+
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-card p-4 ring-1 ring-foreground/10">
+      <dt className="text-sm text-muted-foreground">{label}</dt>
+      <dd className="mt-1 text-sm">{value}</dd>
     </div>
   );
 }
