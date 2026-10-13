@@ -30,12 +30,18 @@ Where a row's format column and its specific brief sentence disagree, the format
 
 ## Authentication
 
-Development preview identities only. Real Shahzeb and Masho logins are the next milestone, with server-side permissions.
+APPROVED: Shahzeb is Super Admin. Masho is Content Operator. Nobody approves their own work. There is no public registration.
+
+IMPLEMENTED: one-time owner setup, scrypt password hashes, HTTP-only session cookies, server checks on owner routes and APIs, staff invite, and disabling an account revokes its sessions. A third-party auth product was not added. Next 16 and a two-person company did not need one yet.
+
+OPEN: email invitations, password recovery mail, and production HTTPS cookie settings.
 
 ## Persistence
 
-Validated JSON catalog in git for Phase 1. Browser-local preview state for checklists and approvals. Postgres is next, not now.
+IMPLEMENTED: PostgreSQL is the development system of record for users, sessions, the 180 content rows, task state, training, the UK campaign clock, audit events and the Mandala. The imported JSON catalog remains the source that `npm run db:setup` seeds from. Drizzle ORM maps the tables. Media binaries stay out of the database.
+
+The database in Cursor Cloud is local and development-only. It is not production hosting.
 
 ## Campaign clock
 
-The 180-post rhythm stays anchored to Monday 12 October 2026 as a plan template. That date is not a live launch. The campaign stays in build mode until Shahzeb confirms Start 30-day launch. The UTC start timestamp is stored in `data/local/campaign-launch.json`, which is not committed. UK calendar days use Europe/London. A planned time never marks a post published.
+The 180-post rhythm stays anchored to Monday 12 October 2026 as a plan template. That date is not a live launch. The campaign stays in build mode until Shahzeb confirms Start 30-day launch. The UTC timestamp is the `campaigns` row `uk-month-one`. UK calendar days use Europe/London. A planned time never marks a post published. Pause, resume and the longer readiness checklist are not implemented yet.

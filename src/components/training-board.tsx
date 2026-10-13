@@ -6,7 +6,7 @@ import { usePreview } from "@/preview/preview-context";
 
 export function TrainingBoard({ mode }: { mode: "staff" | "owner" }) {
   const preview = usePreview();
-  const personId = "masho";
+  const personId = mode === "owner" ? "masho" : preview.user?.personKey ?? "masho";
   const done = TRAINING_LESSONS.filter((lesson) => preview.training[`${personId}:${lesson.id}`]).length;
 
   return (
@@ -15,7 +15,7 @@ export function TrainingBoard({ mode }: { mode: "staff" | "owner" }) {
         <h1 className="font-heading text-5xl tracking-tight">Seven-day training</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
           {mode === "owner"
-            ? `Masho has marked ${done} of ${TRAINING_LESSONS.length} lessons complete in this browser preview. This is not a staff account.`
+            ? `Masho has marked ${done} of ${TRAINING_LESSONS.length} lessons complete. This is stored with his account.`
             : "Work through one lesson a day. The same lessons can be assigned to the next content operator."}
         </p>
       </header>

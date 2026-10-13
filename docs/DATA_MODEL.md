@@ -1,6 +1,6 @@
 # Data model
 
-Phase 1 source of truth is the validated content catalog, not a database. PostgreSQL and a maintained TypeScript ORM are the next milestone. Do not pretend a database is connected.
+PostgreSQL and Drizzle are the development system of record. `drizzle/0001_foundation.sql` creates users, sessions, login attempts, content items, task states, training, the campaign clock, audit events and Mandala goals, pillars and actions. `npm run db:setup` applies it and seeds the catalog. Do not put media binaries or secrets in these tables.
 
 A market has a code, timezone, launch date, sprint length and vertical. The UK record uses Europe/London and 12 October 2026.
 

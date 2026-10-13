@@ -38,6 +38,9 @@ export function TaskWorkspace({
   if (!record) {
     return <p>This content ID is not in the imported plan.</p>;
   }
+  if (preview.ready && !preview.canAccess(record.contentId)) {
+    return <p>This task is not assigned to you.</p>;
+  }
 
   const page = pageByCode(record.pageCode);
   const state = preview.stateFor(record.contentId);
@@ -192,7 +195,7 @@ export function TaskWorkspace({
                 Planned folders: {PLANNED_DRIVE_FOLDERS.join(", ")}. Drive is not connected, so this reference is a path, not an upload.
               </p>
               {state.status === "ASSIGNED" || state.status === "PLANNED" || state.status === "CHANGES_REQUESTED" ? (
-                <button type="button" className="mt-4 h-11 w-full rounded-lg bg-primary text-sm font-medium text-primary-foreground" onClick={() => preview.start(record.contentId)}>
+                <button type="button" className="mt-4 h-11 w-full rounded-lg bg-primary text-sm font-medium text-primary-foreground" onClick={() => void preview.start(record.contentId)}>
                   Start task
                 </button>
               ) : null}
@@ -201,8 +204,9 @@ export function TaskWorkspace({
                 className="mt-3 h-11 w-full rounded-lg bg-foreground text-sm font-medium text-background disabled:opacity-40"
                 disabled={blockers.length > 0 || !["IN_PROGRESS", "CHANGES_REQUESTED"].includes(state.status)}
                 onClick={() => {
-                  const errors = preview.submit(record.contentId);
-                  setNotice(errors ? errors[0] : "Submitted for Shahzeb to review.");
+                  void preview.submit(record.contentId).then((errors) => {
+                    setNotice(errors ? errors[0] : "Submitted for Shahzeb to review.");
+                  });
                 }}
               >
                 Submit for approval
@@ -225,7 +229,11 @@ export function TaskWorkspace({
                   <button
                     type="button"
                     className="h-11 w-full rounded-lg bg-primary text-sm font-medium text-primary-foreground"
-                    onClick={() => setNotice(preview.publish(record.contentId, state.facebookUrl) ? "Publication recorded." : "Paste a real URL after Shahzeb approves the work.")}
+                    onClick={() => {
+                      void preview.publish(record.contentId, state.facebookUrl).then((ok) => {
+                        setNotice(ok ? "Publication recorded." : "Paste a real URL after Shahzeb approves the work.");
+                      });
+                    }}
                   >
                     Record publication
                   </button>
@@ -291,14 +299,18 @@ function OwnerControls({
         <button
           type="button"
           className="h-11 rounded-lg bg-primary text-sm font-medium text-primary-foreground"
-          onClick={() => onNotice(preview.approve(contentId, reviewNote) ? "Approved." : "Only a submitted task can be approved, and not by its assignee.")}
+          onClick={() => {
+            void preview.approve(contentId, reviewNote).then((ok) => onNotice(ok ? "Approved." : "Only a submitted task can be approved, and not by its assignee."));
+          }}
         >
           Approve
         </button>
         <button
           type="button"
           className="h-11 rounded-lg bg-muted text-sm font-medium"
-          onClick={() => onNotice(preview.requestRevision(contentId, reviewNote) ? "Changes requested." : "Add a revision note of at least 8 characters.")}
+          onClick={() => {
+            void preview.requestRevision(contentId, reviewNote).then((ok) => onNotice(ok ? "Changes requested." : "Add a revision note of at least 8 characters."));
+          }}
         >
           Request changes
         </button>
@@ -313,7 +325,7 @@ function OwnerControls({
         onClick={() => {
           const publishAt = londonDateTimeToUtc(publishDate, publishTime).toISOString();
           const dueAt = new Date(Date.parse(publishAt) - 3 * 60 * 60 * 1000).toISOString();
-          onNotice(preview.postpone(contentId, dueAt, publishAt, reviewNote || "Publishing time moved.") ? "Deadline updated." : "This task can no longer be moved.");
+          void preview.postpone(contentId, dueAt, publishAt, reviewNote || "Publishing time moved.").then((ok) => onNotice(ok ? "Deadline updated." : "This task can no longer be moved."));
         }}
       >
         Move deadline
@@ -322,7 +334,9 @@ function OwnerControls({
       <button
         type="button"
         className="mt-2 h-10 w-full rounded-lg text-sm text-destructive"
-        onClick={() => onNotice(preview.cancel(contentId, cancelReason) ? "Cancelled." : "Add a reason before cancelling.")}
+        onClick={() => {
+          void preview.cancel(contentId, cancelReason).then((ok) => onNotice(ok ? "Cancelled." : "Add a reason before cancelling."));
+        }}
       >
         Cancel this post
       </button>
@@ -379,7 +393,7 @@ function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (va
             websiteVisits: optionalNumber(visits),
             affiliateClicks: null,
           };
-          onNotice(preview.saveMetrics(contentId, entry) ? "Performance saved." : "Enter organic or paid reach before saving.");
+          void preview.saveMetrics(contentId, entry).then((ok) => onNotice(ok ? "Performance saved." : "Enter organic or paid reach before saving."));
         }}
       >
         Save checkpoint

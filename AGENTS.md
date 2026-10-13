@@ -10,17 +10,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Affiliate Traffic OS
 
-Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/DECISION_LOG.md` and `docs/BUILD_STATUS.md`.
+Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md` and `docs/ROADMAP.md`.
 
 This is an internal operating system for an organic-first UK dating affiliate publisher. It is not a dating app, not a generic post generator, and not a public Facebook scheduler.
 
-Phase 1 is a development preview. It has no production authentication, no live Google Drive, no live Meta connection and no affiliate revenue. Do not invent commissions, followers or engagement.
+Milestone A adds local PostgreSQL, owner setup, staff login and server-side permissions. Google Drive, Meta and affiliate networks are still not connected. Do not invent commissions, followers or engagement. The database on this machine is development-only. Do not treat it as production hosting.
 
 Update `docs/BUILD_STATUS.md` when a milestone changes what is done, tested, incomplete, risky, or next.
 
 Commands:
 
-- `npm run dev` starts the preview
+- `npm run dev` starts the app
+- `npm run db:setup` migrates and seeds the local development database
 - `npm run import:plan` rebuilds `src/content/plan.generated.json` from the PDF text extract
 - `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`
 

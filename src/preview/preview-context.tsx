@@ -2,70 +2,63 @@
 
 import { createContext, useContext, useMemo, useSyncExternalStore, type ReactNode } from "react";
 import { contentRecords } from "@/content/catalog";
-import { staffById } from "@/domain/people";
 import type { ContentRecord, TaskStatus } from "@/domain/types";
+import { can } from "@/domain/permissions";
 import {
-  approveTask,
-  cancelTask,
   initialTaskState,
-  postponeTask,
-  recordMetrics,
-  recordPublication,
-  requestChanges,
-  startTask,
-  submitTask,
   type MetricEntry,
   type TaskState,
 } from "@/preview/task-state";
+import type { CampaignRecord } from "@/domain/campaign";
+import { BUILD_CAMPAIGN } from "@/domain/campaign";
+import type { Role } from "@/domain/types";
 
-const IDENTITY_KEY = "atos.preview.identity";
-const STATE_KEY = "atos.preview.state.v1";
-const TRAINING_KEY = "atos.preview.training.v1";
+export type SessionUser = {
+  id: string;
+  personKey: string;
+  email: string;
+  name: string;
+  role: Role;
+  disabled: boolean;
+};
 
-export type PreviewIdentityId = "shahzeb" | "masho";
+type TaskCommand =
+  | { action: "start" }
+  | { action: "toggle"; kind: "checklist" | "qualityChecks"; id: string; value: boolean }
+  | { action: "draft"; patch: Partial<Pick<TaskState, "submissionNote" | "assetReference" | "facebookUrl" | "hookOverride">> }
+  | { action: "submit"; format: ContentRecord["format"] }
+  | { action: "approve"; comment: string; assigneeId: string }
+  | { action: "requestRevision"; comment: string }
+  | { action: "postpone"; dueAt: string; publishAt: string; comment: string }
+  | { action: "cancel"; reason: string }
+  | { action: "publish"; facebookUrl: string }
+  | { action: "saveMetrics"; entry: MetricEntry };
 
 type Snapshot = {
   ready: boolean;
-  identityId: PreviewIdentityId | null;
+  user: SessionUser | null;
   states: Record<string, TaskState>;
   training: Record<string, boolean>;
+  visibleContentIds: string[];
+  campaign: CampaignRecord;
 };
 
 const SERVER_SNAPSHOT: Snapshot = {
   ready: false,
-  identityId: null,
+  user: null,
   states: {},
   training: {},
+  visibleContentIds: [],
+  campaign: BUILD_CAMPAIGN,
 };
 
 let snapshot: Snapshot = SERVER_SNAPSHOT;
 const listeners = new Set<() => void>();
-
-function readJson<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function loadSnapshot(): Snapshot {
-  const stored = localStorage.getItem(IDENTITY_KEY);
-  return {
-    ready: true,
-    identityId: stored === "shahzeb" || stored === "masho" ? stored : null,
-    states: readJson(STATE_KEY, {}),
-    training: readJson(TRAINING_KEY, {}),
-  };
-}
+let loading = false;
+let chain: Promise<void> = Promise.resolve();
 
 function emit(next: Snapshot) {
   snapshot = next;
-  if (next.identityId) localStorage.setItem(IDENTITY_KEY, next.identityId);
-  else localStorage.removeItem(IDENTITY_KEY);
-  localStorage.setItem(STATE_KEY, JSON.stringify(next.states));
-  localStorage.setItem(TRAINING_KEY, JSON.stringify(next.training));
   listeners.forEach((listener) => listener());
 }
 
@@ -74,122 +67,143 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
+async function refresh() {
+  const response = await fetch("/api/work", { cache: "no-store" });
+  if (response.status === 401) {
+    emit({ ...SERVER_SNAPSHOT, ready: true });
+    return;
+  }
+  if (!response.ok) throw new Error("Work could not be loaded.");
+  const body = (await response.json()) as {
+    tasks?: Record<string, TaskState>;
+    states?: Record<string, TaskState>;
+    training: Record<string, boolean>;
+    visibleContentIds: string[];
+    campaign: CampaignRecord;
+  };
+  const me = await fetch("/api/auth/me", { cache: "no-store" });
+  const user = me.ok ? ((await me.json()) as { user: SessionUser }).user : null;
+  emit({
+    ready: true,
+    user,
+    states: body.states ?? body.tasks ?? {},
+    training: body.training ?? {},
+    visibleContentIds: body.visibleContentIds ?? [],
+    campaign: body.campaign ?? BUILD_CAMPAIGN,
+  });
+}
+
 function getClientSnapshot(): Snapshot {
-  if (!snapshot.ready && typeof window !== "undefined") {
-    snapshot = loadSnapshot();
+  if (!loading && typeof window !== "undefined") {
+    loading = true;
+    void refresh().catch(() => emit({ ...SERVER_SNAPSHOT, ready: true }));
   }
   return snapshot;
 }
 
+function enqueue<T>(work: () => Promise<T>): Promise<T> {
+  const run = chain.then(work, work);
+  chain = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
+}
+
+async function sendTask(contentId: string, command: TaskCommand): Promise<{ ok: true; state: TaskState } | { ok: false; error: string; blockers?: string[] }> {
+  return enqueue(async () => {
+    const response = await fetch("/api/work", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ type: "task", contentId, command }),
+    });
+    const body = (await response.json()) as { state?: TaskState; error?: string; blockers?: string[] };
+    if (!response.ok || !body.state) return { ok: false, error: body.error ?? "The task was not saved.", blockers: body.blockers };
+    emit({ ...snapshot, states: { ...snapshot.states, [contentId]: body.state } });
+    return { ok: true, state: body.state };
+  });
+}
+
 type PreviewContextValue = {
   ready: boolean;
-  identityId: PreviewIdentityId | null;
-  enter: (id: PreviewIdentityId) => void;
-  leave: () => void;
-  resetWork: () => void;
+  user: SessionUser | null;
+  canAccess: (contentId: string) => boolean;
   stateFor: (contentId: string) => TaskState;
   effectiveDue: (record: ContentRecord) => string;
   effectivePublish: (record: ContentRecord) => string;
   effectiveHook: (record: ContentRecord) => string;
-  start: (contentId: string) => void;
-  toggleCheck: (contentId: string, kind: "checklist" | "qualityChecks", id: string, value: boolean) => void;
-  updateDraft: (contentId: string, patch: Partial<Pick<TaskState, "submissionNote" | "assetReference" | "facebookUrl" | "hookOverride">>) => void;
-  submit: (contentId: string) => string[] | null;
-  approve: (contentId: string, comment: string) => boolean;
-  requestRevision: (contentId: string, comment: string) => boolean;
-  postpone: (contentId: string, dueAt: string, publishAt: string, comment: string) => boolean;
-  cancel: (contentId: string, reason: string) => boolean;
-  publish: (contentId: string, facebookUrl: string) => boolean;
-  saveMetrics: (contentId: string, entry: MetricEntry) => boolean;
+  start: (contentId: string) => Promise<void>;
+  toggleCheck: (contentId: string, kind: "checklist" | "qualityChecks", id: string, value: boolean) => Promise<void>;
+  updateDraft: (contentId: string, patch: Partial<Pick<TaskState, "submissionNote" | "assetReference" | "facebookUrl" | "hookOverride">>) => Promise<void>;
+  submit: (contentId: string) => Promise<string[] | null>;
+  approve: (contentId: string, comment: string) => Promise<boolean>;
+  requestRevision: (contentId: string, comment: string) => Promise<boolean>;
+  postpone: (contentId: string, dueAt: string, publishAt: string, comment: string) => Promise<boolean>;
+  cancel: (contentId: string, reason: string) => Promise<boolean>;
+  publish: (contentId: string, facebookUrl: string) => Promise<boolean>;
+  saveMetrics: (contentId: string, entry: MetricEntry) => Promise<boolean>;
   training: Record<string, boolean>;
-  setTraining: (key: string, value: boolean) => void;
+  setTraining: (key: string, value: boolean) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const PreviewContext = createContext<PreviewContextValue | null>(null);
 
 export function PreviewProvider({ children }: { children: ReactNode }) {
   const current = useSyncExternalStore(subscribe, getClientSnapshot, () => SERVER_SNAPSHOT);
-
   const value = useMemo<PreviewContextValue>(() => {
-    const actor = current.identityId ? staffById(current.identityId) : undefined;
-    const now = () => new Date().toISOString();
     const stateFor = (contentId: string) => current.states[contentId] ?? initialTaskState();
-    const replaceState = (contentId: string, next: TaskState | null) => {
-      if (!next) return false;
-      emit({ ...current, states: { ...current.states, [contentId]: next } });
-      return true;
-    };
-
+    const recordFor = (contentId: string) => contentRecords.find((item) => item.contentId === contentId);
     return {
       ready: current.ready,
-      identityId: current.identityId,
-      enter: (id) => emit({ ...getClientSnapshot(), identityId: id }),
-      leave: () => emit({ ...getClientSnapshot(), identityId: null }),
-      resetWork: () => emit({ ...getClientSnapshot(), states: {}, training: {} }),
+      user: current.user,
+      canAccess: (contentId) => current.visibleContentIds.includes(contentId),
       stateFor,
       effectiveDue: (record) => stateFor(record.contentId).dueAtOverride ?? record.dueAt,
       effectivePublish: (record) => stateFor(record.contentId).publishAtOverride ?? record.publishAt,
       effectiveHook: (record) => stateFor(record.contentId).hookOverride ?? record.hook,
-      start: (contentId) => {
-        if (!actor) return;
-        replaceState(contentId, startTask(stateFor(contentId), actor.id, now()));
+      start: async (contentId) => {
+        await sendTask(contentId, { action: "start" });
       },
-      toggleCheck: (contentId, kind, id, checked) => {
-        const task = stateFor(contentId);
-        replaceState(contentId, { ...task, [kind]: { ...task[kind], [id]: checked } });
+      toggleCheck: async (contentId, kind, id, value) => {
+        await sendTask(contentId, { action: "toggle", kind, id, value });
       },
-      updateDraft: (contentId, patch) => {
-        replaceState(contentId, { ...stateFor(contentId), ...patch });
+      updateDraft: async (contentId, patch) => {
+        await sendTask(contentId, { action: "draft", patch });
       },
-      submit: (contentId) => {
-        if (!actor) return ["Choose a preview identity first."];
-        const record = contentRecords.find((item) => item.contentId === contentId);
+      submit: async (contentId) => {
+        const record = recordFor(contentId);
         if (!record) return ["Unknown task."];
-        const result = submitTask(stateFor(contentId), record.format, actor.id, now());
-        if (!result.ok) return result.blockers;
-        replaceState(contentId, result.state);
-        return null;
+        const result = await sendTask(contentId, { action: "submit", format: record.format });
+        return result.ok ? null : result.blockers ?? [result.error];
       },
-      approve: (contentId, comment) => {
-        if (!actor) return false;
-        const record = contentRecords.find((item) => item.contentId === contentId);
+      approve: async (contentId, comment) => {
+        const record = recordFor(contentId);
         if (!record) return false;
-        return replaceState(
-          contentId,
-          approveTask(stateFor(contentId), actor.id, actor.role, record.assigneeId, comment, now()),
-        );
+        const result = await sendTask(contentId, { action: "approve", comment, assigneeId: record.assigneeId });
+        return result.ok;
       },
-      requestRevision: (contentId, comment) => {
-        if (!actor) return false;
-        return replaceState(contentId, requestChanges(stateFor(contentId), actor.id, actor.role, comment, now()));
-      },
-      postpone: (contentId, dueAt, publishAt, comment) => {
-        if (!actor) return false;
-        return replaceState(
-          contentId,
-          postponeTask(stateFor(contentId), actor.id, actor.role, dueAt, publishAt, comment, now()),
-        );
-      },
-      cancel: (contentId, reason) => {
-        if (!actor) return false;
-        return replaceState(contentId, cancelTask(stateFor(contentId), actor.id, actor.role, reason, now()));
-      },
-      publish: (contentId, facebookUrl) => {
-        if (!actor) return false;
-        return replaceState(contentId, recordPublication(stateFor(contentId), actor.id, facebookUrl, now()));
-      },
-      saveMetrics: (contentId, entry) => {
-        if (!actor) return false;
-        return replaceState(contentId, recordMetrics(stateFor(contentId), actor.id, entry, now()));
-      },
+      requestRevision: async (contentId, comment) => (await sendTask(contentId, { action: "requestRevision", comment })).ok,
+      postpone: async (contentId, dueAt, publishAt, comment) => (await sendTask(contentId, { action: "postpone", dueAt, publishAt, comment })).ok,
+      cancel: async (contentId, reason) => (await sendTask(contentId, { action: "cancel", reason })).ok,
+      publish: async (contentId, facebookUrl) => (await sendTask(contentId, { action: "publish", facebookUrl })).ok,
+      saveMetrics: async (contentId, entry) => (await sendTask(contentId, { action: "saveMetrics", entry })).ok,
       training: current.training,
-      setTraining: (key, checked) => {
-        const latest = getClientSnapshot();
-        emit({ ...latest, training: { ...latest.training, [key]: checked } });
+      setTraining: async (key, completed) => {
+        const response = await fetch("/api/work", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ type: "training", lessonKey: key, completed }),
+        });
+        if (!response.ok) return;
+        emit({ ...snapshot, training: { ...snapshot.training, [key]: completed } });
+      },
+      logout: async () => {
+        await fetch("/api/auth/logout", { method: "POST" });
+        emit({ ...SERVER_SNAPSHOT, ready: true });
       },
     };
   }, [current]);
-
   return <PreviewContext.Provider value={value}>{children}</PreviewContext.Provider>;
 }
 
@@ -197,6 +211,10 @@ export function usePreview(): PreviewContextValue {
   const value = useContext(PreviewContext);
   if (!value) throw new Error("PreviewProvider is missing");
   return value;
+}
+
+export function ownerArea(role: Role | undefined): boolean {
+  return role ? can(role, "approve_content") || can(role, "view_finance") || can(role, "manage_users") : false;
 }
 
 let clockSnapshot: number | null = null;

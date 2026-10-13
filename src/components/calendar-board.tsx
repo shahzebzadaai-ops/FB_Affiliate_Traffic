@@ -16,7 +16,7 @@ export function CalendarBoard({ mode }: { mode: "staff" | "owner" }) {
   const live = campaign.ready && isLiveDate(campaign.record);
   const [pageCode, setPageCode] = useState<string>("ALL");
   const groups = useMemo(() => {
-    const filtered = contentRecords.filter((record) => pageCode === "ALL" || record.pageCode === pageCode);
+    const filtered = contentRecords.filter((record) => preview.canAccess(record.contentId) && (pageCode === "ALL" || record.pageCode === pageCode));
     const map = new Map<string, typeof filtered>();
     for (const record of filtered) {
       const override = preview.stateFor(record.contentId).publishAtOverride;

@@ -27,6 +27,10 @@ function subscribe(listener: () => void) {
 async function refresh() {
   try {
     const response = await fetch("/api/campaign", { cache: "no-store" });
+    if (response.status === 401) {
+      emit({ ready: true, record: BUILD_CAMPAIGN, error: null });
+      return;
+    }
     if (!response.ok) throw new Error("Campaign status could not be read.");
     const record = (await response.json()) as CampaignRecord;
     emit({ ready: true, record, error: null });
