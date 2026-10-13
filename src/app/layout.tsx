@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Newsreader, Source_Sans_3 } from "next/font/google";
+import { CampaignProvider } from "@/campaign/campaign-context";
 import { PreviewProvider } from "@/preview/preview-context";
 import "./globals.css";
 
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en-GB" className={`${sourceSans.variable} ${newsreader.variable} h-full antialiased`}>
       <body className="min-h-full bg-background text-foreground">
-        <PreviewProvider>{children}</PreviewProvider>
+        <CampaignProvider>
+          <PreviewProvider>{children}</PreviewProvider>
+        </CampaignProvider>
       </body>
     </html>
   );

@@ -35,3 +35,7 @@ Development preview identities only. Real Shahzeb and Masho logins are the next 
 ## Persistence
 
 Validated JSON catalog in git for Phase 1. Browser-local preview state for checklists and approvals. Postgres is next, not now.
+
+## Campaign clock
+
+The 180-post rhythm stays anchored to Monday 12 October 2026 as a plan template. That date is not a live launch. The campaign stays in build mode until Shahzeb confirms Start 30-day launch. The UTC start timestamp is stored in `data/local/campaign-launch.json`, which is not committed. UK calendar days use Europe/London. A planned time never marks a post published.

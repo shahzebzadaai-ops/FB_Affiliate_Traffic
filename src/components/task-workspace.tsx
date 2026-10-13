@@ -6,6 +6,8 @@ import { pageByCode } from "@/domain/pages";
 import { productionGuide } from "@/domain/guide";
 import { PROMPT_PACKS } from "@/domain/prompts";
 import { QUALITY_CHECKS } from "@/domain/quality";
+import { useCampaign } from "@/campaign/campaign-context";
+import { placedInstant, placedPhrase } from "@/domain/campaign";
 import { formatLondon, londonDateTimeToUtc } from "@/domain/schedule";
 import { WORKFLOWS } from "@/domain/workflows";
 import { PLANNED_DRIVE_FOLDERS } from "@/integrations/status";
@@ -25,6 +27,7 @@ export function TaskWorkspace({
 }) {
   const record = recordById(contentId);
   const preview = usePreview();
+  const campaign = useCampaign();
   const [notice, setNotice] = useState<string | null>(null);
   const [reviewNote, setReviewNote] = useState("");
   const [cancelReason, setCancelReason] = useState("");
@@ -39,7 +42,18 @@ export function TaskWorkspace({
   const page = pageByCode(record.pageCode);
   const state = preview.stateFor(record.contentId);
   const hook = preview.effectiveHook(record);
-  const guide = productionGuide(page, { ...record, hook, dueAt: preview.effectiveDue(record), publishAt: preview.effectivePublish(record) });
+  const duePhrase = placedPhrase(record.dueAt, state.dueAtOverride, campaign.record);
+  const publishPhrase = placedPhrase(record.publishAt, state.publishAtOverride, campaign.record);
+  const guide = productionGuide(page, {
+    ...record,
+    hook,
+    dueAt: placedInstant(record.dueAt, state.dueAtOverride, campaign.record),
+    publishAt: placedInstant(record.publishAt, state.publishAtOverride, campaign.record),
+  }).map((step) => {
+    if (step.n === 17) return { ...step, body: `Submit before ${duePhrase}. That is three hours before the publishing window.` };
+    if (step.n === 18) return { ...step, body: `Only after Shahzeb approves it. Planned time: ${publishPhrase}.` };
+    return step;
+  });
   const blockers = submissionBlockers(record.format, state);
   const back = mode === "owner" ? "/owner" : "/staff";
 
@@ -62,7 +76,7 @@ export function TaskWorkspace({
           <h1 className="font-heading text-4xl leading-tight">{formatLabel(record.format)}</h1>
           <p className="max-w-3xl font-heading text-2xl leading-snug">“{hook}”</p>
           <p className="text-sm text-muted-foreground">
-            {statusLabel(state.status)} · Publish {formatLondon(preview.effectivePublish(record))} · Due {formatLondon(preview.effectiveDue(record))}
+            {statusLabel(state.status)} · Publish {placedPhrase(record.publishAt, state.publishAtOverride, campaign.record)} · Due {placedPhrase(record.dueAt, state.dueAtOverride, campaign.record)}
           </p>
         </div>
       </header>

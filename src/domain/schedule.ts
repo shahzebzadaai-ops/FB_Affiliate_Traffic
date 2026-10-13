@@ -49,7 +49,7 @@ export function londonToday(now = new Date()): string {
   return `${year}-${month}-${day}`;
 }
 
-export function launchDayNumber(today = londonToday(), launchDate = UK_MARKET.launchDate): number {
+export function launchDayNumber(today = londonToday(), launchDate: string = UK_MARKET.launchDate): number {
   const start = Date.parse(`${launchDate}T00:00:00Z`);
   const current = Date.parse(`${today}T00:00:00Z`);
   return Math.round((current - start) / 86_400_000) + 1;

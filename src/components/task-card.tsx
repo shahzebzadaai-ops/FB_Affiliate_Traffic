@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useCampaign } from "@/campaign/campaign-context";
+import { placedPhrase } from "@/domain/campaign";
 import { pageByCode } from "@/domain/pages";
 import { staffById } from "@/domain/people";
-import { formatLondon } from "@/domain/schedule";
 import type { ContentRecord } from "@/domain/types";
 import { statusLabel, usePreview } from "@/preview/preview-context";
 
@@ -29,6 +30,7 @@ export function TaskCard({
   action: string;
 }) {
   const preview = usePreview();
+  const campaign = useCampaign();
   const page = pageByCode(record.pageCode);
   const state = preview.stateFor(record.contentId);
   const hook = preview.effectiveHook(record);
@@ -58,7 +60,7 @@ export function TaskCard({
           </div>
           <div>
             <dt className="text-muted-foreground">Deadline</dt>
-            <dd>{formatLondon(preview.effectiveDue(record))}</dd>
+            <dd>{placedPhrase(record.dueAt, preview.stateFor(record.contentId).dueAtOverride, campaign.record)}</dd>
           </div>
           <div>
             <dt className="text-muted-foreground">Status</dt>

@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local campaign launch record — not the 180-post plan
+/data/local/
+
 # vercel
 .vercel
 
