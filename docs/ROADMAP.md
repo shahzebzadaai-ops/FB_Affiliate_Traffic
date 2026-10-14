@@ -1,109 +1,81 @@
 # Roadmap
 
-Milestone A is the current tested foundation. The preview shell follows `DESIGN.md`. Later milestones are not built. Complexity describes the subsystems involved, not a calendar estimate.
+The current tested delivery is the secure multi-operator foundation. Later phases are not built. Complexity describes the subsystems involved, not a calendar estimate.
 
-## A — Secure foundation
+An earlier lettering put Mandala editing, a public site, and affiliate ingestion in a different order. This list replaces it. Mandala tables already exist from the first database migration. They are not the next build.
 
-IMPLEMENTED. Local PostgreSQL, owner bootstrap, Masho login, server permissions, persisted tasks, checklists, approvals, training and audit rows. Mandala tables are seeded as not started.
+## A — Secure operating foundation
 
-Dependencies: a development Postgres. No Meta, Drive or AI credential.
+IMPLEMENTED. Persistent accounts, one-time Super Admin setup, `PUBLISHING_OPERATOR`, invitation links, Page assignments, five Page records, 180 content identities, task confirmation, and operator isolation tests.
 
-Acceptance: the tests in `tests/foundation.test.ts`.
+Dependencies: a development Postgres. No Meta, Drive, Novita, affiliate, or domain credential.
 
-## B — Mandala command centre
+Acceptance: `tests/foundation.test.ts` and `tests/isolation.test.ts`.
 
-Scope: edit action status only with evidence, dependencies, weekly review, founder ideas inbox, expense and budget entry, and the fuller START OPERATIONS control with readiness, pause and resume.
+## B — AI content factory
 
-Dependencies: Milestone A. No paid API.
+Scope: a provider interface, the first verified Novita models if Shahzeb approves the spend, FFmpeg assembly, quality checks, Drive file ids, cost caps, and a rolling seven-day queue that can mark a task ready only when a real file URL exists.
 
-Complexity: the owner command centre, Mandala editing and finance entry screens, plus campaign pause rules that must not move already published posts.
+Dependencies: an approved provider, a spend limit, and Google OAuth for the business Drive account. Do not share that password.
 
-Owner action: enter real expenses and confirm any launch. No budget is pre-approved.
+Complexity: job retries, asset versions, and staff-scoped file delivery.
 
-Can be done without paid integrations: yes.
+Owner action: choose the provider, set the limit, and approve the first week of assets.
 
-Acceptance: an action cannot become successful from a checkbox alone. Pause does not change the original start timestamp. Finance still shows no invented revenue.
+Acceptance: a task without a stored file cannot be downloaded. A regeneration flag does not call a model by itself. Operators still cannot see finance or each other.
 
-## C — Seven-day AI production and Drive
+## C — Trend discovery
 
-Scope: a rolling seven-day pipeline that writes finished files into Drive. Masho only receives tasks that have a real file, caption and thumbnail. Shahzeb approves the pipeline, the spend limit and any new angle or Page. No mock generator may be labelled as working AI.
+Scope: one authorized research adapter, stored observations, and a Trend Radar that separates evidence from a model guess.
 
-Dependencies: an approved model provider, a spend limit set by Shahzeb, and Google OAuth for `affiliateshahzeb@gmail.com`. Do not share that password. Confirm storage before claiming 5 TB.
+Dependencies: current access terms for that source. No private scraping.
 
-Complexity: provider adapters, file versions, a seven-day queue, regeneration requests, and staff-scoped Drive access. The 76 unresolved briefs still need Shahzeb.
+Complexity: rate limits, cache, and failed-job recovery.
 
-Owner action: choose the provider, set the spend limit, authorize Drive, and approve the first week of assets.
+Owner action: approve the source and the query budget.
 
-Without paid integrations: the publishing desk and the empty states. Not the files.
+Acceptance: a trend without a source row cannot show a score.
 
-Acceptance: a task without a stored file cannot show a download. A regeneration flag does not call a model by itself. Masho still cannot see finance.
+## D — Real performance
 
-## D — Meta connector
+Scope: manual or official Meta insights, website events, and 24-hour, 72-hour, and seven-day snapshots. Organic and paid stay separate.
 
-Scope: one Page first, then five. Official Graph API only. Metric registry for 2026 metric changes. Manual export fallback. No scraping. Do not claim scheduling is automated until this access works. Until then, Masho uses Meta Business Suite.
+Dependencies: a Meta app or an export Shahzeb provides. Not granted today.
 
-Dependencies: a Meta app, Page tokens, current permission review. Not granted today.
+Complexity: nullable metrics and delayed numbers.
 
-Complexity: token storage, sync jobs, nullable metrics, organic versus paid.
+Owner action: create the Meta app or supply the export.
 
-Owner action: create the Meta app and approve permissions.
+Acceptance: missing metrics stay null. No token in the browser.
 
-Without paid integrations: the registry and manual import can be designed first. Live Insights need the app.
+## E — Affiliate monetization
 
-Acceptance: missing permissions and deprecated metrics stay null. No token in the browser or logs.
+Scope: one comparison platform, a landing experience per Page, offer records, outbound clicks, signed postbacks, and owner-only approved PPS.
 
-## E — AI Growth Director
+Dependencies: a domain decision and a real network contract. CrakRevenue is a candidate, not an approval.
 
-Scope: rules-based classification first, then proposals for new angles, personas and Pages from sanitized Facebook and affiliate evidence. Shahzeb approves before a significant change. Approved creative work returns to the seven-day pipeline, not to Masho as an author. No automatic publish and no automatic spend.
+Complexity: idempotent postbacks and a public site that cannot open the private OS.
 
-Dependencies: real metrics from D, or an explicit insufficient-data state. A model key is optional.
+Owner action: choose the domain and confirm the network.
 
-Complexity: evidence packets, model version logging, and the approval-to-task handoff.
+Acceptance: no invented price, ranking, testimonial, or commission.
 
-Owner action: approve or reject each idea.
+## F — Growth intelligence
 
-Without paid integrations: the rules fallback and the insufficient-sample behaviour.
+Scope: experiments, trend plus audience plus commercial evidence, and a Page launch package. Shahzeb creates the Facebook Page and assigns the operator.
 
-Acceptance: the model cannot invent a Meta metric. Small samples stay insufficient.
+Dependencies: performance and affiliate facts from D and E, or an explicit insufficient-data state.
 
-## F — Publisher MVP
+Complexity: sample size, pause rules, and capacity as measured workload rather than a fixed five-Page cap.
 
-Scope: one public site, five editorial sections, disclosure and privacy, stable page IDs. Not 100 sites.
+Owner action: approve or reject each proposal.
 
-Dependencies: a domain and hosting decision. None is authorized now. Do not use the PlayerPulser VPS.
+Acceptance: one Reel cannot create a Page. Failed tests stay on record.
 
-Complexity: a publisher module isolated from the private OS.
+## G — Official automation and expansion
 
-Owner action: choose the domain and approve the first pages.
+Scope: Meta publishing when the Page permissions are approved, owner-managed inbox replies, more operators and Pages, and other markets. TikTok is an exploration target from January 2027, not a current build.
 
-Without paid integrations: drafts can be built locally. Publishing needs the hosting decision.
+Dependencies: A through F, plus a separate approval for every new platform, country, and paid boost.
 
-Acceptance: private admin routes are not public. Affiliate links are disclosed. No thin duplicated sites.
-
-## G — Affiliate commercial engine
-
-Scope: offers, click IDs, subIDs, signed postbacks, pending versus approved versus reversed versus paid.
-
-Dependencies: a real network contract and postback documentation.
-
-Complexity: idempotent ingestion and owner-only reporting.
-
-Owner action: confirm the network, GEO and payout terms.
-
-Without paid integrations: the data model and a rejected unsigned postback test.
-
-Acceptance: categories are never merged. No invented commission.
-
-## H — Multi-property expansion
-
-Scope: more domains, Pages, staff, GEOs and paid amplification after evidence.
-
-Dependencies: A through G, plus owner approval for every new country, Page and site.
-
-Complexity: shared templates without copying a new app per site.
-
-Owner action: approve each expansion.
-
-Without paid integrations: no. Paid media and extra properties wait for evidence.
-
-Acceptance: a new property cannot launch from an unapproved idea.
+Acceptance: no unsolicited messages, no automatic spend, and no new property from an unapproved idea.

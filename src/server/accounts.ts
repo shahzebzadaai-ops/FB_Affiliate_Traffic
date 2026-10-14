@@ -108,6 +108,20 @@ export async function userFromToken(token: string | undefined): Promise<PublicUs
   return toPublic(row);
 }
 
+export async function openSession(user: PublicUser): Promise<string> {
+  const token = randomBytes(32).toString("base64url");
+  await getDb().insert(sessions).values({
+    id: randomUUID(),
+    userId: user.id,
+    tokenHash: hashToken(token),
+    expiresAt: new Date(Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000),
+    revokedAt: null,
+    createdAt: new Date(),
+  });
+  await writeAudit(user.id, "LOGIN", "session", user.id, {});
+  return token;
+}
+
 export async function revokeToken(token: string | undefined) {
   if (!token) return;
   await getDb().update(sessions).set({ revokedAt: new Date() }).where(eq(sessions.tokenHash, hashToken(token)));

@@ -30,7 +30,7 @@ export function LoginForm() {
               setError(body.error ?? "Sign-in failed.");
               return;
             }
-            router.push(body.user?.role === "CONTENT_OPERATOR" || body.user?.role === "DESIGNER" || body.user?.role === "VIDEO_EDITOR" ? "/staff" : "/owner");
+            router.push(body.user?.role === "PUBLISHING_OPERATOR" || body.user?.role === "CONTENT_OPERATOR" || body.user?.role === "DESIGNER" || body.user?.role === "VIDEO_EDITOR" ? "/staff" : "/owner");
             router.refresh();
           });
         }}

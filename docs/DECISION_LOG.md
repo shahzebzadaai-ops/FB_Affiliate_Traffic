@@ -1,5 +1,19 @@
 # Decision log
 
+## 2026-10-13 — Secure multi-operator foundation
+
+PERMANENT. Publishing operators share the role `PUBLISHING_OPERATOR`. Masho, and any later operator, has the same permissions. There is no staff-manager role. Authorization uses the signed-in account and `page_assignments`. It does not use the names in `src/domain/people.ts`.
+
+The catalog assignee `masho` remains on the seeded content row so the original plan import stays reproducible. It is not live access. Operator API responses replace it. The owner assigns and unassigns Pages. An invitation link is the onboarding path. No mailer exists.
+
+Confirming a schedule and recording a public Facebook URL are different events. A missing permalink is left blank. A task cannot be marked published from APPROVED.
+
+The PDF mix stays 16 Reels, 12 image posts, 4 polls, and 4 carousels per Page. The 14/14/4/4 figure was not substituted.
+
+Five Pages per trained operator is a planning assumption, not a hard limit. Whether a training period can be unpaid is an employment question for Shahzeb, not a rule this software decides.
+
+Meta Business Suite has its own access rules. This OS cannot hide what Meta shows to a delegated Page user.
+
 ## 2026-10-13 — Visual references
 
 The owner shell takes its hierarchy from Althoy: attention first, then a table of the business. Masho's shell takes its workflow from Current Pro: preview, caption, UK time, status, one action. Flow Content, Fintech X and awesome-design-md stay as references for queue rhythm, ledger restraint and written design rules. None of those templates are copied, and Framer is not a dependency. The screens are the private operating system, not a public landing page. Reach, clicks, PPS, commission and generation cost stay "Not connected" rather than labelled sample money.
@@ -38,11 +52,11 @@ Where a row's format column and its specific brief sentence disagree, the format
 
 ## Authentication
 
-APPROVED: Shahzeb is Super Admin. Masho is Content Operator. Nobody approves their own work. There is no public registration.
+APPROVED: Shahzeb is Super Admin. Publishing operators use `PUBLISHING_OPERATOR`. The older Content Operator role remains only so an existing account does not break, and it has the same publishing permissions. Nobody approves their own work. There is no public registration.
 
-IMPLEMENTED: one-time owner setup, scrypt password hashes, HTTP-only session cookies, server checks on owner routes and APIs, staff invite, and disabling an account revokes its sessions. A third-party auth product was not added. Next 16 and a two-person company did not need one yet.
+IMPLEMENTED: one-time owner setup, scrypt password hashes, HTTP-only session cookies, server checks on owner routes and APIs, invitation links, Page assignments, and disabling an account revokes its sessions. A third-party auth product was not added.
 
-OPEN: email invitations, password recovery mail, and production HTTPS cookie settings.
+OPEN: email delivery for invitations, password recovery mail, and production HTTPS cookie settings.
 
 ## Persistence
 

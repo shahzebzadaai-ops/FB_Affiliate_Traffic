@@ -1,6 +1,5 @@
 "use client";
 
-import { contentRecords } from "@/content/catalog";
 import { useCampaign } from "@/campaign/campaign-context";
 import { campaignClock, isLiveDate, placedInstant, planDayIndex } from "@/domain/campaign";
 import { londonToday } from "@/domain/schedule";
@@ -24,7 +23,7 @@ export function useWork() {
   const today = londonToday();
   const now = usePreviewClock();
   const clock = campaignClock(record, now === null ? new Date() : new Date(now));
-  const decorated = contentRecords.filter((item) => preview.ready && preview.canAccess(item.contentId)).map((item) => {
+  const decorated = preview.records.filter((item) => preview.ready && preview.canAccess(item.contentId)).map((item) => {
     const state = preview.stateFor(item.contentId);
     const dueAt = placedInstant(item.dueAt, state.dueAtOverride, record);
     const publishAt = placedInstant(item.publishAt, state.publishAtOverride, record);

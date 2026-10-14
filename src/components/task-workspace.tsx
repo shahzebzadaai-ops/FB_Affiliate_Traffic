@@ -11,20 +11,12 @@ import { placedInstant, placedPhrase } from "@/domain/campaign";
 import { formatLondon, londonDateTimeToUtc } from "@/domain/schedule";
 import { WORKFLOWS } from "@/domain/workflows";
 import { recordById } from "@/content/catalog";
-import { type MetricEntry } from "@/preview/task-state";
 import { statusLabel, usePreview } from "@/preview/preview-context";
-import { AssetFrame } from "@/components/asset-frame";
-import { formatLabel } from "@/components/task-card";
+import { formatLabel } from "@/components/format-label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 
-export function TaskWorkspace({
-  contentId,
-  mode,
-}: {
-  contentId: string;
-  mode: "staff" | "owner";
-}) {
+export function TaskWorkspace({ contentId }: { contentId: string }) {
   const record = recordById(contentId);
   const preview = usePreview();
   const campaign = useCampaign();
@@ -57,36 +49,7 @@ export function TaskWorkspace({
     if (step.n === 18) return { ...step, body: `Only after Shahzeb approves it. Planned time: ${publishPhrase}.` };
     return step;
   });
-  const back = mode === "owner" ? "/owner" : "/staff";
-
-  if (mode === "staff") {
-    return (
-      <PublishDesk
-        pageName={page.name}
-        accent={page.accent}
-        contentId={record.contentId}
-        formatLabelText={formatLabel(record.format)}
-        hook={hook}
-        publishPhrase={publishPhrase}
-        caption={record.captionInstructions}
-        status={statusLabel(state.status)}
-        flagged={state.regenerationRequest?.note ?? null}
-        facebookUrl={state.facebookUrl}
-        onFlag={(note) => {
-          void preview.flagRegeneration(record.contentId, note).then((ok) => {
-            setNotice(ok ? "Flagged for regeneration. No AI job was started." : "Describe the problem in at least 8 characters.");
-          });
-        }}
-        onPublish={(url) => {
-          void preview.publish(record.contentId, url).then((ok) => {
-            setNotice(ok ? "The Facebook URL was saved. This app did not post it." : "A URL can be saved only after the asset is approved. There is no finished file yet.");
-          });
-        }}
-        onNotice={setNotice}
-        notice={notice}
-      />
-    );
-  }
+  const back = "/owner";
 
   async function copyPrompt(id: string, text: string) {
     await navigator.clipboard.writeText(text);
@@ -99,7 +62,7 @@ export function TaskWorkspace({
         Back
       </Link>
       <p className="rounded-xl bg-card p-4 text-sm leading-relaxed text-muted-foreground ring-1 ring-foreground/10">
-        This brief is for the AI production pipeline and your approval. Masho does not write the prompt, script or video. No model is connected, so nothing here is a finished asset.
+        This brief is for the AI production pipeline and your approval. Publishing operators do not write the prompt, script or video. No model is connected, so nothing here is a finished asset.
       </p>
       <header className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10" style={{ backgroundColor: page.wash }}>
         <div className="h-1.5" style={{ backgroundColor: page.accent }} />
@@ -177,7 +140,7 @@ export function TaskWorkspace({
                   <Checkbox
                     checked={Boolean(state.checklist[item.id])}
                     onCheckedChange={(checked) => preview.toggleCheck(record.contentId, "checklist", item.id, checked === true)}
-                    disabled={mode === "owner"}
+                    disabled
                     id={`${record.contentId}-${item.id}`}
                   />
                   <label htmlFor={`${record.contentId}-${item.id}`}>{item.label}</label>
@@ -193,7 +156,7 @@ export function TaskWorkspace({
                   <Checkbox
                     checked={Boolean(state.qualityChecks[item.id])}
                     onCheckedChange={(checked) => preview.toggleCheck(record.contentId, "qualityChecks", item.id, checked === true)}
-                    disabled={mode === "owner"}
+                    disabled
                     id={`${record.contentId}-q-${item.id}`}
                   />
                   <label htmlFor={`${record.contentId}-q-${item.id}`}>
@@ -255,7 +218,7 @@ function OwnerControls({
   return (
     <section className="rounded-xl bg-card p-4 ring-1 ring-foreground/10">
       <h2 className="font-heading text-2xl">Review</h2>
-      <p className="mt-1 text-sm text-muted-foreground">Current status: {status}. Masho cannot approve his own work.</p>
+      <p className="mt-1 text-sm text-muted-foreground">Current status: {status}. Nobody can approve their own work.</p>
       <Textarea className="mt-3 min-h-24" value={reviewNote} onChange={(event) => setReviewNote(event.target.value)} placeholder="Revision or approval note" />
       <div className="mt-3 grid gap-2">
         <button
@@ -304,161 +267,5 @@ function OwnerControls({
       </button>
       {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
     </section>
-  );
-}
-
-function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (value: string) => void }) {
-  const preview = usePreview();
-  const [checkpoint, setCheckpoint] = useState<MetricEntry["checkpoint"]>("24h");
-  const [organicReach, setOrganicReach] = useState("");
-  const [paidReach, setPaidReach] = useState("");
-  const [comments, setComments] = useState("");
-  const [shares, setShares] = useState("");
-  const [followers, setFollowers] = useState("");
-  const [visits, setVisits] = useState("");
-
-  function optionalNumber(value: string): number | null {
-    if (value.trim() === "") return null;
-    const parsed = Number(value);
-    return Number.isFinite(parsed) ? parsed : null;
-  }
-
-  return (
-    <div className="mt-4 space-y-2 border-t border-border pt-4">
-      <p className="text-sm font-medium">Record performance</p>
-      <p className="text-xs text-muted-foreground">Organic and paid reach are separate. Leave a box empty if you do not have the number.</p>
-      <select className="h-10 w-full rounded-lg border border-input px-2 text-sm" value={checkpoint} onChange={(event) => setCheckpoint(event.target.value as MetricEntry["checkpoint"])}>
-        <option value="24h">24 hours</option>
-        <option value="72h">72 hours</option>
-        <option value="7d">7 days</option>
-      </select>
-      <NumberField label="Organic reach" value={organicReach} onChange={setOrganicReach} />
-      <NumberField label="Paid reach" value={paidReach} onChange={setPaidReach} />
-      <NumberField label="Comments" value={comments} onChange={setComments} />
-      <NumberField label="Shares" value={shares} onChange={setShares} />
-      <NumberField label="New followers" value={followers} onChange={setFollowers} />
-      <NumberField label="Website visits" value={visits} onChange={setVisits} />
-      <button
-        type="button"
-        className="h-10 w-full rounded-lg bg-muted text-sm"
-        onClick={() => {
-          const entry: MetricEntry = {
-            checkpoint,
-            organicReach: optionalNumber(organicReach),
-            paidReach: optionalNumber(paidReach),
-            comments: optionalNumber(comments),
-            shares: optionalNumber(shares),
-            reactions: null,
-            newFollowers: optionalNumber(followers),
-            reelViews: null,
-            watchTimeSeconds: null,
-            websiteVisits: optionalNumber(visits),
-            affiliateClicks: null,
-          };
-          void preview.saveMetrics(contentId, entry).then((ok) => onNotice(ok ? "Performance saved. Commission is not on this screen." : "Enter a reach number you can see. This stays empty until the Facebook URL is recorded."));
-        }}
-      >
-        Save checkpoint
-      </button>
-    </div>
-  );
-}
-
-function PublishDesk({
-  pageName,
-  accent,
-  contentId,
-  formatLabelText,
-  hook,
-  publishPhrase,
-  caption,
-  status,
-  flagged,
-  facebookUrl,
-  onFlag,
-  onPublish,
-  onNotice,
-  notice,
-}: {
-  pageName: string;
-  accent: string;
-  contentId: string;
-  formatLabelText: string;
-  hook: string;
-  publishPhrase: string;
-  caption: string;
-  status: string;
-  flagged: string | null;
-  facebookUrl: string;
-  onFlag: (note: string) => void;
-  onPublish: (url: string) => void;
-  onNotice: (message: string) => void;
-  notice: string | null;
-}) {
-  const [note, setNote] = useState("");
-  const [url, setUrl] = useState(facebookUrl);
-  return (
-    <div className="space-y-8">
-      <Link href="/staff" className="text-sm text-muted-foreground hover:text-foreground">Back</Link>
-      <div className="grid items-start gap-10 lg:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)]">
-        <AssetFrame label={formatLabelText} accent={accent} />
-        <div>
-          <p className="text-[11px] tracking-[0.16em] uppercase" style={{ color: accent }}>{pageName}</p>
-          <h1 className="mt-2 font-heading text-4xl tracking-tight">{hook}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{contentId} · {status} · {publishPhrase}</p>
-          <ul className="mt-8 divide-y border-y text-sm">
-            <li className="flex items-center justify-between gap-4 py-3">
-              <span>Download asset</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
-            </li>
-            <li className="flex items-center justify-between gap-4 py-3">
-              <span>Copy final caption</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">No finished caption</button>
-            </li>
-            <li className="flex items-center justify-between gap-4 py-3">
-              <span>Download thumbnail</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
-            </li>
-            <li className="flex items-center justify-between gap-4 py-3">
-              <span>Open Meta Business Suite</span>
-              <a href="https://business.facebook.com/" target="_blank" rel="noreferrer" className="inline-flex h-10 items-center px-3 text-primary">Open</a>
-            </li>
-          </ul>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{caption}</p>
-          <p className="mt-1 text-xs text-muted-foreground">Plan instruction. Not a finished caption. Schedule the real file yourself. This screen does not post to Facebook.</p>
-          <label className="mt-6 block text-sm">
-            Facebook post URL
-            <input className="mt-1 h-11 w-full border border-border bg-card px-3" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
-          </label>
-          <button type="button" className="mt-3 h-11 bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={() => onPublish(url)}>
-            Confirm publication
-          </button>
-          <div className="mt-8">
-            <h2 className="font-heading text-2xl">Report an issue</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Ask for regeneration. That does not start an AI job.</p>
-            {flagged ? <p className="mt-3 text-sm">Flagged: {flagged}</p> : null}
-            <textarea className="mt-3 min-h-24 w-full border border-border bg-card p-3 text-sm" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What should be regenerated?" />
-            <button type="button" className="mt-3 h-11 bg-muted px-4 text-sm" onClick={() => onFlag(note)}>
-              Request regeneration
-            </button>
-            {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
-          </div>
-          <div className="mt-8 border-t pt-6">
-            <h2 className="font-heading text-2xl">Performance</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Record Page numbers you can see. Affiliate commission is not on this screen.</p>
-            <MetricsForm contentId={contentId} onNotice={onNotice} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function NumberField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
-  return (
-    <label className="block text-xs text-muted-foreground">
-      {label}
-      <input className="mt-1 h-9 w-full rounded-lg border border-input px-2 text-sm text-foreground" inputMode="numeric" value={value} onChange={(event) => onChange(event.target.value)} />
-    </label>
   );
 }

@@ -38,6 +38,7 @@ const ROLE_CAPABILITIES: Record<Role, readonly Capability[]> = {
     "view_training_completion",
   ],
   CONTENT_OPERATOR: ["view_assigned_work", "submit_work"],
+  PUBLISHING_OPERATOR: ["view_assigned_work", "submit_work"],
   DESIGNER: ["view_assigned_work", "submit_work"],
   VIDEO_EDITOR: ["view_assigned_work", "submit_work"],
   AFFILIATE_MANAGER: ["view_finance", "manage_postbacks", "view_page_analytics"],
@@ -54,4 +55,8 @@ export function can(role: Role, capability: Capability): boolean {
 
 export function canApproveOwnWork(): boolean {
   return false;
+}
+
+export function isPublishingOperator(role: Role): boolean {
+  return role === "PUBLISHING_OPERATOR" || role === "CONTENT_OPERATOR";
 }

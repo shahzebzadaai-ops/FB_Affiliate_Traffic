@@ -4,19 +4,18 @@ import { TRAINING_LESSONS } from "@/domain/training";
 import { Checkbox } from "@/components/ui/checkbox";
 import { usePreview } from "@/preview/preview-context";
 
-export function TrainingBoard({ mode }: { mode: "staff" | "owner" }) {
+export function TrainingBoard() {
   const preview = usePreview();
-  const personId = mode === "owner" ? "masho" : preview.user?.personKey ?? "masho";
+  const personId = preview.user?.personKey;
+  if (!preview.ready || !personId) return <p className="text-sm text-muted-foreground">Loading your training.</p>;
   const done = TRAINING_LESSONS.filter((lesson) => preview.training[`${personId}:${lesson.id}`]).length;
 
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-heading text-5xl tracking-tight">Seven-day training</h1>
+        <h1 className="font-heading text-5xl tracking-tight">My training</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          {mode === "owner"
-            ? `Masho has marked ${done} of ${TRAINING_LESSONS.length} lessons complete. This is stored with his account.`
-            : "These lessons are for publishing finished assets. You do not write prompts, generate images or edit Reels."}
+          {done} of {TRAINING_LESSONS.length} lessons marked complete. These lessons are for publishing finished assets. You do not write prompts, generate images or edit Reels.
         </p>
       </header>
       <ol className="space-y-4">
@@ -28,7 +27,6 @@ export function TrainingBoard({ mode }: { mode: "staff" | "owner" }) {
                 <Checkbox
                   checked={Boolean(preview.training[key])}
                   onCheckedChange={(checked) => preview.setTraining(key, checked === true)}
-                  disabled={mode === "owner"}
                   id={key}
                 />
                 <div>

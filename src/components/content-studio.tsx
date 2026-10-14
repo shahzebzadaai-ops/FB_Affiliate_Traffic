@@ -5,7 +5,7 @@ import { pageByCode } from "@/domain/pages";
 import { londonDateKey } from "@/domain/schedule";
 import { inSevenDayWindow } from "@/preview/queues";
 import { AssetFrame } from "@/components/asset-frame";
-import { formatLabel } from "@/components/task-card";
+import { formatLabel } from "@/components/format-label";
 import { useWork } from "@/components/use-work";
 
 export function ContentStudio() {

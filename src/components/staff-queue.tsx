@@ -37,6 +37,7 @@ const COPY: Record<StaffQueueName, { title: string; empty: string; action: strin
 
 export function StaffQueue({ queue }: { queue: StaffQueueName }) {
   const { decorated, live, today, campaign, preview } = useWork();
+  const assigned = preview.assignedPageCodes;
   const copy = COPY[queue];
   const readyCount = decorated.filter((item) => hasMasterFile(item.state.assetReference)).length;
   const items = decorated
@@ -62,12 +63,14 @@ export function StaffQueue({ queue }: { queue: StaffQueueName }) {
     <div className="space-y-8">
       <header>
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">{live ? "Campaign live" : "Campaign not started"}</p>
-        <h1 className="mt-2 font-heading text-5xl tracking-tight">{queue === "today" ? `${greetingForLondonHour()}, Masho` : copy.title}</h1>
+        <h1 className="mt-2 font-heading text-5xl tracking-tight">{queue === "today" ? "Your publishing tasks for today" : copy.title}</h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          You publish finished assets. You do not write prompts, scripts or Reels. Ready to publish is {readyCount}.
+          {greetingForLondonHour()}. You publish finished assets on your assigned Pages. You do not write prompts, scripts or Reels. Ready to publish is {readyCount}.
         </p>
       </header>
-      {items.length === 0 ? (
+      {assigned.length === 0 ? (
+        <p className="border-y py-8 text-sm leading-relaxed text-muted-foreground">No Facebook Pages are assigned to you yet.</p>
+      ) : items.length === 0 ? (
         <p className="border-y py-8 text-sm leading-relaxed text-muted-foreground">{copy.empty}</p>
       ) : (
         <div className="space-y-6">

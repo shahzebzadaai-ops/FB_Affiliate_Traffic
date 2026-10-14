@@ -17,7 +17,7 @@ export function GrowthDirector() {
         <Row term="This week" detail="No recommendation." />
         <Row term="New Pages or GEOs" detail="None proposed. A new Page needs your approval." />
         <Row term="Spend" detail="No AI spend is authorised from this screen." />
-        <Row term="Creative handoff" detail="Approved work returns to the seven-day pipeline. Masho does not write it." />
+        <Row term="Creative handoff" detail="Approved work returns to the seven-day pipeline. Publishing operators do not write it." />
       </dl>
       <p className="text-sm">
         <Link href="/owner/approvals" className="text-primary">Open approvals</Link>

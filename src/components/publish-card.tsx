@@ -4,7 +4,7 @@ import Link from "next/link";
 import { pageByCode } from "@/domain/pages";
 import type { ContentRecord } from "@/domain/types";
 import { AssetFrame } from "@/components/asset-frame";
-import { formatLabel } from "@/components/task-card";
+import { formatLabel } from "@/components/format-label";
 
 export function PublishCard({
   record,

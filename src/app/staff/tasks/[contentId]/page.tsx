@@ -1,9 +1,9 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { TaskWorkspace } from "@/components/task-workspace";
+import { PublishDesk } from "@/components/publish-desk";
 
 export default function StaffTaskPage() {
   const params = useParams<{ contentId: string }>();
-  return <TaskWorkspace contentId={params.contentId} mode="staff" />;
+  return <PublishDesk contentId={params.contentId} />;
 }

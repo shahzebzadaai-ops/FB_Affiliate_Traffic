@@ -72,6 +72,36 @@ export const auditEvents = pgTable("audit_events", {
   detail: jsonb("detail").$type<Record<string, unknown>>().notNull(),
 });
 
+export const socialPages = pgTable("social_pages", {
+  code: text("code").primaryKey(),
+  name: text("name").notNull(),
+  countryCode: text("country_code").notNull(),
+  slug: text("slug").notNull(),
+  status: text("status").notNull(),
+  persona: text("persona").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+});
+
+export const pageAssignments = pgTable("page_assignments", {
+  id: uuid("id").primaryKey(),
+  userId: uuid("user_id").notNull(),
+  pageCode: text("page_code").notNull(),
+  assignedBy: uuid("assigned_by"),
+  assignedAt: timestamp("assigned_at", { withTimezone: true }).notNull(),
+});
+
+export const invitations = pgTable("invitations", {
+  id: uuid("id").primaryKey(),
+  email: text("email").notNull(),
+  name: text("name").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  pageCodes: jsonb("page_codes").$type<string[]>().notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  acceptedAt: timestamp("accepted_at", { withTimezone: true }),
+  createdBy: uuid("created_by").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+});
+
 export const mandalaGoals = pgTable("mandala_goals", {
   id: text("id").primaryKey(),
   title: text("title").notNull(),

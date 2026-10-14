@@ -4,21 +4,9 @@ import Link from "next/link";
 import { useCampaign } from "@/campaign/campaign-context";
 import { placedPhrase } from "@/domain/campaign";
 import { pageByCode } from "@/domain/pages";
-import { staffById } from "@/domain/people";
 import type { ContentRecord } from "@/domain/types";
 import { statusLabel, usePreview } from "@/preview/preview-context";
-
-const FORMAT_LABEL = {
-  REEL: "Reel",
-  IMAGE_POST: "Image post",
-  TEXT_POST: "Text post",
-  POLL: "Poll",
-  CAROUSEL: "Carousel",
-} as const;
-
-export function formatLabel(format: ContentRecord["format"]): string {
-  return FORMAT_LABEL[format];
-}
+import { formatLabel } from "@/components/format-label";
 
 export function TaskCard({
   record,
@@ -55,8 +43,8 @@ export function TaskCard({
             <dd>{record.pillar}</dd>
           </div>
           <div>
-            <dt className="text-muted-foreground">Assigned to</dt>
-            <dd>{staffById(record.assigneeId)?.name ?? record.assigneeId}</dd>
+            <dt className="text-muted-foreground">Page</dt>
+            <dd>{page.name}</dd>
           </div>
           <div>
             <dt className="text-muted-foreground">Deadline</dt>

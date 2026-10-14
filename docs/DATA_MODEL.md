@@ -1,17 +1,25 @@
 # Data model
 
-PostgreSQL and Drizzle are the development system of record. `drizzle/0001_foundation.sql` creates users, sessions, login attempts, content items, task states, training, the campaign clock, audit events and Mandala goals, pillars and actions. `npm run db:setup` applies it and seeds the catalog. Do not put media binaries or secrets in these tables.
+PostgreSQL and Drizzle are the development system of record. `npm run db:setup` applies `drizzle/0001_foundation.sql` and `drizzle/0002_operators.sql`, then seeds the catalog. It does not delete users. Do not put media binaries or secrets in these tables.
 
-A market has a code, timezone, launch date, sprint length and vertical. The UK record uses Europe/London and 12 October 2026.
+Identity: `users`, `sessions`, `login_attempts`, `invitations`, `page_assignments`.
 
-A Page has a stable code, persona, tone, visual system and pillars.
+`social_pages` holds the five UK Pages. The code is the primary key. The slug is the future landing path segment, such as `back-in-the-game-uk`. The full brand bible remains in `src/domain/pages.ts` and `docs/PAGE_BRAND_BIBLES.md`. The table stores the short persona used for assignment.
 
-A person has an id, role, markets, Page assignments and an active flag.
+`page_assignments` links a user to a Page. The pair is unique. Deleting a user removes the assignment. This is the live access list.
 
-A content record has permanent ID, source ID, country, Page, persona, pillar, angle, hook, priority, format, briefs, production instructions, assignee, reviewer, due time, publish time, approval status, asset requirements, publication status, checkpoints, CTA, week, monetisation flag, planned Drive path and unresolved notes.
+`invitations` stores the email, name, Page codes, expiry, and a SHA-256 token hash. The raw token is not stored.
 
-Preview task state, stored only in the browser, adds checklist progress, quality checks, submission note, asset reference, Facebook URL, revision log, deadline overrides, cancellation reason and manual metrics. Organic and paid reach are separate nullable numbers.
+`content_items` stores the 180 plan rows, including the historical assignee. `task_states` stores checklist, approval, schedule confirmation, publication URL, issue notes, regeneration flags, and metrics. Those fields are in Postgres, not only in the browser.
 
-Future tables should keep the same IDs so a Facebook post, a site session, an affiliate subID and a postback can point at `UK-BGUK-001`.
+`training_progress` is one row per user and lesson key. Operators can write only a key that starts with their own person key.
 
-Backup plan for the next database milestone: daily logical backups, a tested restore, and no media binaries in Postgres. Drive file IDs are references. Phase 1 has nothing to back up beyond the git repository.
+`campaigns` row `uk-month-one` is the launch clock. It stays BUILD until an explicit start. `audit_events` records account, assignment, and task actions by user id.
+
+Mandala tables are seeded as not started. They are owner planning data.
+
+The UK market uses Europe/London. A time before the last Sunday in October is British Summer Time. After the clock change it is GMT. The plan anchor 12 October 2026 is a template, not a live launch.
+
+Later visits, clicks, and postbacks should point at the same content id, for example `UK-BGUK-001`. Those tables are not created yet.
+
+The local development database is not backed up off this machine.

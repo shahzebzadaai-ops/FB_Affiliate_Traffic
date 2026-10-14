@@ -38,13 +38,15 @@ function isCommand(command: TaskCommand): command is TaskCommand {
   if (command.action === "draft") return typeof command.patch === "object";
   if (command.action === "submit") return typeof (command as { format?: ContentFormat }).format === "string";
   if (command.action === "saveMetrics") return typeof (command as { entry?: MetricEntry }).entry === "object";
-  if (command.action === "approve") return typeof (command as { assigneeId?: string }).assigneeId === "string";
+  if (command.action === "approve") return typeof (command as { comment?: string }).comment === "string";
+  if (command.action === "reportIssue" || command.action === "flagRegeneration") return typeof (command as { note?: string }).note === "string";
   return [
     "start",
     "requestRevision",
     "postpone",
     "cancel",
     "publish",
+    "confirmScheduled",
     "flagRegeneration",
   ].includes(command.action);
 }

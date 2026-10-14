@@ -1,16 +1,17 @@
 # Roles and permissions
 
-Roles live in `src/domain/permissions.ts` and are enforced on the server for routes and APIs. Hiding a link is not the control.
+Roles live in `src/domain/permissions.ts` and are enforced on the server. Hiding a navigation item is not the control.
 
-Seeded people:
+Shahzeb is Super Admin. Only that role can invite an operator, assign Pages, open finance, change the plan, and approve content.
 
-- Shahzeb, Super Admin, UK, all five Pages
-- Masho, Content Operator, UK, all five Pages
+`PUBLISHING_OPERATOR` is the role for every publishing operator. The permissions are view assigned work and submit work. The older `CONTENT_OPERATOR` value has the same two capabilities so an existing row does not gain or lose access. New invitations create `PUBLISHING_OPERATOR` only.
 
-Future roles already named in the matrix: Admin, Content Manager, Designer, Video Editor, Affiliate Manager, Analyst.
+There is no staff-manager role. Operators do not see each other's name, email, assignments, tasks, or training. The owner does.
 
-A content operator can see assigned work and submit it. A content operator cannot see finance, postback secrets, user admin, other private staff records or Super Admin settings. Opening an owner URL as Masho is redirected, and the finance, staff and Mandala APIs return 403.
+A publishing operator who opens an owner URL is redirected. Finance, staff, Mandala, assignments of other people, and campaign start return 403.
 
-Nobody can approve their own work, including a Super Admin who is also the assignee.
+Nobody can approve their own work. The assignee compared at approval time is the content row in the database, not a value sent by the browser.
 
-Shahzeb's account can open company progress, the Mandala, the calendar, approvals, brand bibles, the import report, training completion, staff admin, integration status and the empty finance area.
+Page access for an operator is the current `page_assignments` rows. The catalog field `assignee_id` is historical and is not an authorization check.
+
+Named future roles remain in the matrix and are not assigned by the invitation screen: Admin, Content Manager, Designer, Video Editor, Affiliate Manager, Analyst.

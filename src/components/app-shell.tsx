@@ -15,7 +15,7 @@ const STAFF_DAILY = [
 
 const STAFF_MORE = [
   { href: "/staff/calendar", label: "Calendar" },
-  { href: "/staff/pages", label: "Pages" },
+  { href: "/staff/pages", label: "My Pages" },
   { href: "/staff/training", label: "Training" },
 ];
 
@@ -31,7 +31,7 @@ const OWNER_PRIMARY = [
 const OWNER_MORE = [
   { href: "/owner/calendar", label: "Calendar" },
   { href: "/owner/mandala", label: "Mandala" },
-  { href: "/owner/staff", label: "Staff" },
+  { href: "/owner/staff", label: "Operators" },
   { href: "/owner/integrations", label: "Systems" },
   { href: "/owner/import", label: "Import" },
   { href: "/owner/training", label: "Training" },

@@ -3,6 +3,14 @@ import path from "node:path";
 import postgres from "postgres";
 import { MANDALA_GOAL, MANDALA_PILLARS } from "../domain/mandala.ts";
 
+const UK_PAGES = [
+  ["BGUK", "Back in the Game UK", "back-in-the-game-uk", "Divorced or separated adults who are dating again after a long relationship."],
+  ["AHSUK", "After Hours Singles UK", "after-hours-singles-uk", "Busy professionals who have careers, independence and disposable income, but limited time for dating."],
+  ["SPSUK", "Single Parent Stories UK", "single-parent-stories-uk", "Single or divorced mums and dads balancing children, co-parenting, work and dating."],
+  ["SGIUK", "Still Got It UK", "still-got-it-uk", "Mature singles, including divorced, widowed and long-term single adults, who value companionship and independence."],
+  ["CBCUK", "Casual By Choice UK", "casual-by-choice-uk", "Men over 30 who value independence and may prefer casual or low-pressure dating rather than immediate commitment."],
+] as const;
+
 const INITIAL_TASK = {
   status: "ASSIGNED",
   checklist: {},
@@ -17,9 +25,11 @@ const INITIAL_TASK = {
 export async function migrateDatabase(databaseUrl: string) {
   const sql = postgres(databaseUrl, { max: 1 });
   try {
-    const migration = readFileSync(path.join(process.cwd(), "drizzle", "0001_foundation.sql"), "utf8");
-    await sql.unsafe(migration);
-    await sql`insert into schema_migrations (id) values ('0001_foundation') on conflict do nothing`;
+    for (const id of ["0001_foundation", "0002_operators"]) {
+      const migration = readFileSync(path.join(process.cwd(), "drizzle", `${id}.sql`), "utf8");
+      await sql.unsafe(migration);
+      await sql`insert into schema_migrations (id) values (${id}) on conflict do nothing`;
+    }
   } finally {
     await sql.end();
   }
@@ -69,6 +79,16 @@ export async function seedDatabase(databaseUrl: string) {
       values ('uk-month-one', 'BUILD', null, 'Europe/London', 'month-one-pdf-v1')
       on conflict (id) do nothing
     `;
+    for (const [code, name, slug, persona] of UK_PAGES) {
+      await sql`
+        insert into social_pages (code, name, country_code, slug, status, persona)
+        values (${code}, ${name}, 'UK', ${slug}, 'ACTIVE', ${persona})
+        on conflict (code) do update set
+          name = excluded.name,
+          slug = excluded.slug,
+          persona = excluded.persona
+      `;
+    }
     await sql`
       insert into mandala_goals (id, title, target_amount_cents, currency, deadline, notes)
       values (${MANDALA_GOAL.id}, ${MANDALA_GOAL.title}, ${MANDALA_GOAL.targetAmountCents}, ${MANDALA_GOAL.currency}, ${MANDALA_GOAL.deadline}, ${MANDALA_GOAL.notes})
@@ -108,6 +128,9 @@ export async function resetDatabase(databaseUrl: string) {
   try {
     await sql`
       truncate table
+        invitations,
+        page_assignments,
+        social_pages,
         audit_events,
         login_attempts,
         training_progress,

@@ -1,4 +1,5 @@
 import type { Role, TaskStatus } from "@/domain/types";
+import { hasMasterFile } from "@/preview/queues";
 import { can, canApproveOwnWork } from "@/domain/permissions";
 import { requiredChecklistIds } from "@/domain/workflows";
 import { QUALITY_CHECKS } from "@/domain/quality";
@@ -38,6 +39,8 @@ export type TaskState = {
   hookOverride?: string;
   cancelReason?: string;
   regenerationRequest?: { at: string; note: string };
+  scheduledConfirmedAt?: string;
+  publicationIssue?: { at: string; note: string };
   metrics: MetricEntry[];
 };
 
@@ -185,13 +188,32 @@ export function cancelTask(
   );
 }
 
+export function confirmScheduled(state: TaskState, actorId: string, at: string): TaskState | null {
+  if (state.status !== "APPROVED") return null;
+  if (!hasMasterFile(state.assetReference)) return null;
+  return withRevision(
+    state,
+    { at, actorId, action: "CONFIRM_SCHEDULED", comment: "Scheduled in Meta Business Suite. No public link yet." },
+    { status: "SCHEDULED", scheduledConfirmedAt: at },
+  );
+}
+
+export function reportPublicationIssue(state: TaskState, actorId: string, note: string, at: string): TaskState | null {
+  if (note.trim().length < 8) return null;
+  return withRevision(
+    state,
+    { at, actorId, action: "REPORT_ISSUE", comment: note.trim() },
+    { publicationIssue: { at, note: note.trim() } },
+  );
+}
+
 export function recordPublication(
   state: TaskState,
   actorId: string,
   facebookUrl: string,
   at: string,
 ): TaskState | null {
-  if (!["APPROVED", "SCHEDULED"].includes(state.status)) return null;
+  if (state.status !== "SCHEDULED") return null;
   if (!/^https?:\/\//.test(facebookUrl.trim())) return null;
   return withRevision(
     state,

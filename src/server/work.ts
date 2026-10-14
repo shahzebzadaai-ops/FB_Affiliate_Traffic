@@ -1,22 +1,45 @@
 import { and, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { campaigns, contentItems, taskStates, trainingProgress } from "@/db/schema";
+import { campaigns, contentItems, taskStates, trainingProgress, users } from "@/db/schema";
 import { confirmLaunch, type CampaignRecord } from "@/domain/campaign";
-import { can } from "@/domain/permissions";
+import { can, isPublishingOperator } from "@/domain/permissions";
+import type { ContentRecord } from "@/domain/types";
+import { TRAINING_LESSONS } from "@/domain/training";
 import { initialTaskState, type TaskState } from "@/preview/task-state";
 import { writeAudit, type PublicUser } from "@/server/accounts";
-import { canAccessTask, decideTaskCommand, type TaskCommand } from "@/server/task-commands";
+import { pageCodesFor } from "@/server/access";
+import { decideTaskCommand, type TaskCommand } from "@/server/task-commands";
 
 const CAMPAIGN_ID = "uk-month-one";
+
+function redactForOperator(state: TaskState, personKey: string): TaskState {
+  return {
+    ...state,
+    revisions: state.revisions.map((revision) => ({
+      ...revision,
+      actorId: revision.actorId === personKey ? personKey : "operator",
+    })),
+  };
+}
+
+function visibleRecord(record: ContentRecord, operator: boolean): ContentRecord {
+  if (!operator) return record;
+  return { ...record, assigneeId: "assigned", reviewerId: "owner" };
+}
 
 export async function loadWork(user: PublicUser) {
   const db = getDb();
   const items = await db.select().from(contentItems);
   const stored = await db.select().from(taskStates);
+  const assignedPageCodes = await pageCodesFor(user);
   const byId = new Map(stored.map((row) => [row.contentId, row.state]));
-  const visible = items.filter((item) => canAccessTask({ ...user, disabled: user.disabled }, item.assigneeId));
+  const visible = items.filter((item) => assignedPageCodes.includes(item.pageCode));
+  const operator = isPublishingOperator(user.role);
   const states: Record<string, TaskState> = {};
-  for (const item of visible) states[item.contentId] = byId.get(item.contentId) ?? initialTaskState();
+  for (const item of visible) {
+    const state = byId.get(item.contentId) ?? initialTaskState();
+    states[item.contentId] = operator ? redactForOperator(state, user.personKey) : state;
+  }
   const trainingRows = can(user.role, "view_training_completion")
     ? await db.select().from(trainingProgress)
     : await db.select().from(trainingProgress).where(eq(trainingProgress.userId, user.id));
@@ -26,6 +49,8 @@ export async function loadWork(user: PublicUser) {
     states,
     training,
     visibleContentIds: visible.map((item) => item.contentId),
+    records: visible.map((item) => visibleRecord(item.record, operator)),
+    assignedPageCodes,
     campaign: await readCampaign(),
   };
 }
@@ -35,8 +60,11 @@ export async function saveTask(user: PublicUser, contentId: string, command: Tas
   const [item] = await db.select().from(contentItems).where(eq(contentItems.contentId, contentId));
   if (!item) return { ok: false as const, status: 404, error: "That content ID is not in the plan." };
   const [existing] = await db.select().from(taskStates).where(eq(taskStates.contentId, contentId));
+  const assignedPageCodes = await pageCodesFor(user);
   const decision = decideTaskCommand(
     { ...user, disabled: user.disabled },
+    item.pageCode,
+    assignedPageCodes,
     item.assigneeId,
     existing?.state ?? initialTaskState(),
     command,
@@ -51,7 +79,22 @@ export async function saveTask(user: PublicUser, contentId: string, command: Tas
   await writeAudit(user.id, `TASK_${command.action.toUpperCase()}`, "content", contentId, {
     status: decision.state.status,
   });
-  return { ok: true as const, state: decision.state };
+  const state = isPublishingOperator(user.role) ? redactForOperator(decision.state, user.personKey) : decision.state;
+  return { ok: true as const, state };
+}
+
+export async function listTraineeProgress() {
+  const db = getDb();
+  const accounts = await db.select().from(users);
+  const progress = await db.select().from(trainingProgress);
+  return accounts
+    .filter((account) => isPublishingOperator(account.role as PublicUser["role"]))
+    .map((account) => ({
+      id: account.id,
+      name: account.name,
+      completed: progress.filter((row) => row.userId === account.id && row.completed).length,
+      total: TRAINING_LESSONS.length,
+    }));
 }
 
 export async function saveTraining(user: PublicUser, lessonKey: string, completed: boolean) {

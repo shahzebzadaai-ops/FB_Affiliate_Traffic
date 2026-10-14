@@ -5,5 +5,5 @@ import { TaskWorkspace } from "@/components/task-workspace";
 
 export default function OwnerTaskPage() {
   const params = useParams<{ contentId: string }>();
-  return <TaskWorkspace contentId={params.contentId} mode="owner" />;
+  return <TaskWorkspace contentId={params.contentId} />;
 }

@@ -10,15 +10,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Affiliate Traffic OS
 
-Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md`, `docs/ROADMAP.md` and `DESIGN.md`.
+Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/ARCHITECTURE.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md`, `docs/ROADMAP.md` and `DESIGN.md`.
 
-The product is a private operating system. Do not turn it into a marketing landing page, and do not copy Framer templates or add Framer as a dependency. Shahzeb's shell is the owner control centre. Masho's shell is the publishing desk. Unconnected reach, clicks, commission and AI cost stay blank. Do not draw a fake Reel and call it finished.
+The product is a private operating system. Do not turn it into a marketing landing page, and do not copy Framer templates or add Framer as a dependency. Shahzeb's shell is the owner control centre. The operator shell is the publishing desk. Unconnected reach, clicks, commission and AI cost stay blank. Do not draw a fake Reel and call it finished.
 
 This is an internal operating system for an organic-first UK dating affiliate publisher. It is not a dating app, not a generic post generator, and not a public Facebook scheduler.
 
-Masho publishes finished assets. He does not write prompts, scripts, images or Reels. Do not put creative production back on his queue. Do not label a mock file as AI output.
+Publishing operators publish finished assets. They do not write prompts, scripts, images or Reels. They cannot see each other. Do not hardcode a person's name into an authorization check. Do not label a mock file as AI output.
 
-Milestone A adds local PostgreSQL, owner setup, staff login and server-side permissions. Google Drive, Meta and affiliate networks are still not connected. Do not invent commissions, followers or engagement. The database on this machine is development-only. Do not treat it as production hosting.
+The secure multi-operator foundation is in place: local PostgreSQL, owner setup, invitation links, Page assignments, and server-side isolation. Google Drive, Meta, Novita, and affiliate networks are not connected. Do not invent commissions, followers, or engagement. The database on this machine is development-only. Do not treat it as production hosting.
 
 Update `docs/BUILD_STATUS.md` when a milestone changes what is done, tested, incomplete, risky, or next.
 

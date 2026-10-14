@@ -3,17 +3,20 @@
 import Link from "next/link";
 import { PAGE_IDENTITIES, pageByCode } from "@/domain/pages";
 import type { PageCode } from "@/domain/types";
-import { contentRecords } from "@/content/catalog";
+import { usePreview } from "@/preview/preview-context";
 
 export function PageList({ mode }: { mode: "staff" | "owner" }) {
+  const preview = usePreview();
+  const pages = PAGE_IDENTITIES.filter((page) => mode === "owner" || preview.assignedPageCodes.includes(page.code));
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-heading text-5xl tracking-tight">Five UK Pages</h1>
+        <h1 className="font-heading text-5xl tracking-tight">{mode === "staff" ? "My Pages" : "Pages"}</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">Separate audiences, tones and visual systems. Do not publish the same creative on more than one Page.</p>
       </header>
+      {pages.length === 0 ? <p className="border-y py-8 text-sm text-muted-foreground">No Facebook Pages are assigned to you.</p> : null}
       <div className="grid gap-4">
-        {PAGE_IDENTITIES.map((page) => (
+        {pages.map((page) => (
           <Link key={page.code} href={`/${mode}/pages/${page.code}`} className="rounded-2xl p-5 ring-1 ring-foreground/10" style={{ backgroundColor: page.wash }}>
             <p className="text-xs font-medium tracking-wide uppercase" style={{ color: page.accent }}>{page.ageRange}</p>
             <h2 className="mt-1 font-heading text-3xl">{page.name}</h2>
@@ -26,10 +29,14 @@ export function PageList({ mode }: { mode: "staff" | "owner" }) {
 }
 
 export function BrandBible({ code, mode }: { code: string; mode: "staff" | "owner" }) {
+  const preview = usePreview();
   const page = PAGE_IDENTITIES.find((item) => item.code === code);
-  if (!page) return <p>That Page is not in the UK launch.</p>;
+  if (!page) return <p>That Page is not in the catalogue.</p>;
+  if (mode === "staff" && preview.ready && !preview.assignedPageCodes.includes(page.code)) {
+    return <p>This Page is not assigned to you.</p>;
+  }
   const identity = pageByCode(page.code as PageCode);
-  const posts = contentRecords.filter((record) => record.pageCode === identity.code);
+  const posts = preview.records.filter((record) => record.pageCode === identity.code);
 
   return (
     <article className="space-y-6">

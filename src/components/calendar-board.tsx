@@ -3,12 +3,11 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useCampaign } from "@/campaign/campaign-context";
-import { contentRecords } from "@/content/catalog";
 import { isLiveDate, placedInstant, placedPhrase, planDayIndex } from "@/domain/campaign";
 import { PAGE_IDENTITIES, pageByCode } from "@/domain/pages";
 import { londonDateKey } from "@/domain/schedule";
 import { statusLabel, usePreview } from "@/preview/preview-context";
-import { formatLabel } from "@/components/task-card";
+import { formatLabel } from "@/components/format-label";
 
 export function CalendarBoard({ mode }: { mode: "staff" | "owner" }) {
   const preview = usePreview();
@@ -16,7 +15,7 @@ export function CalendarBoard({ mode }: { mode: "staff" | "owner" }) {
   const live = campaign.ready && isLiveDate(campaign.record);
   const [pageCode, setPageCode] = useState<string>("ALL");
   const groups = useMemo(() => {
-    const filtered = contentRecords.filter((record) => preview.canAccess(record.contentId) && (pageCode === "ALL" || record.pageCode === pageCode));
+    const filtered = preview.records.filter((record) => preview.canAccess(record.contentId) && (pageCode === "ALL" || record.pageCode === pageCode));
     const map = new Map<string, typeof filtered>();
     for (const record of filtered) {
       const override = preview.stateFor(record.contentId).publishAtOverride;

@@ -10,7 +10,7 @@
 - Shahzeb's overview lists attention items and a five-Page table. Affiliate intelligence, Content Studio and Growth Director are owner screens. Unconnected money, reach and AI cost stay blank. See `DESIGN.md` and `docs/UI_ARCHITECTURE.md`.
 - Copyable prompts remain on the owner brief only. No AI API calls.
 - Tests for import, UK clock change, permissions, submission evidence, self-approval and winner-sample refusal.
-- Milestone A: local PostgreSQL, Drizzle schema, one-time owner setup, staff invite, server sessions, persisted tasks, training, approvals, audit events and the Mandala tables. The 180 posts and 76 unresolved notes are seeded. Mandala actions start as NOT_STARTED.
+- Secure multi-operator foundation: `PUBLISHING_OPERATOR`, invitation links, `social_pages`, `page_assignments`, schedule confirmation separate from publication, and server-side isolation. Operator payloads omit other operators and the historical catalog assignee. See `docs/ARCHITECTURE.md`.
 
 ## Tested
 
@@ -24,30 +24,34 @@
 - `npm run lint`, `npm run typecheck` and `npm run build` passed after Milestone A.
 - 13 October 2026: `npm test` (20 passed), `npm run lint` and `npm run typecheck` after the publishing-desk correction. Masho's local session showed ready-to-publish at 0, an empty file slot, a Meta Business Suite instruction, a persisted regeneration flag, and a blocked finance route. The campaign stayed in build mode. The temporary page-operator login used for that check was removed.
 - 13 October 2026: `npm test` (25 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the role shells. Browser check covered the owner overview, affiliate intelligence, Content Studio, Growth Director, Masho's today queue, the empty ready list, and UK-SGIUK-001. A 390px capture showed Masho's bottom bar. The campaign stayed in build mode. Temporary review logins were removed.
+- 13 October 2026: `npm test` (26 passed), `npm run lint`, `npm run typecheck` and `npm run build` after operator isolation. Three operator identities are covered in `tests/isolation.test.ts`.
 
 ## Incomplete
 
-- Google Drive, Meta and affiliate networks are not connected.
+- Google Drive, Novita, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked.
 - No public website, no live publishing, no performance history, no revenue.
 - 76 content notes still need Shahzeb's decision.
-- Pause and resume, the fuller START OPERATIONS checklist, and the rest of Mandala workflow editing are Milestone B.
-- Password recovery email, invitations by email, and production hosting are not built.
-- The content catalog is still compiled into the browser bundle. The server refuses unassigned task changes, but the briefs are not yet a secret from the client.
+- Invitation email delivery and password recovery mail are not built. The owner copies the join link.
+- Owner-only JavaScript still contains the historical assignee id because the import screen reads the plan file. Operator routes do not.
+- Pause, resume, and Mandala editing are not the next milestone. The tables exist and stay not started.
+- Production hosting, backups, and monitoring are not set up.
 
 ## Risks
 
 - This Postgres instance is local to the development machine. It is not a hosted production database and it is not backed up off the machine.
 - The PDF brief text sometimes names a different asset from the format column. The AI pipeline must not paper over those 76 notes.
-- An older build treated Masho as the person who writes scripts and makes Reels. That is withdrawn. Do not put creative production back on his daily queue.
+- An older build treated operators as the people who write scripts and make Reels. That is withdrawn.
 - Clock and "today" depend on the viewer's current London date. Before or after the sprint, the daily list changes.
+- Meta Business Suite can show Page members that this application hides.
 
 ## Pending decisions
 
-- Approve or replace the PDF mix versus the 14/14/4/4 suggestion.
+- The PDF mix is in the product. The 14/14/4/4 suggestion was not applied. Shahzeb can still change it later.
 - Resolve the 76 content notes, especially format clashes, poll choices and carousel points.
-- Confirm the public site name DateRoute UK.
-- Choose the auth library and Postgres host for the next milestone.
+- Choose a public domain. Do not assume a previous name.
+- Confirm employment rules before any unpaid training period.
+- Approve a provider and a spend limit before any AI call.
 
 ## Next step
 
-Do not connect a model, Drive or Meta in the next pass unless Shahzeb asks. The next product slice is Milestone B: Mandala evidence, the ideas inbox, and owner expenses, while keeping Masho on the publishing desk only.
+Do not connect a model, Drive or Meta unless Shahzeb asks. The next product slice is the AI content factory: one approved provider, a cost cap, and a real file on a ready-to-publish task.

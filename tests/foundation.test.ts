@@ -5,6 +5,7 @@ import { getSql } from "@/db/client";
 import { financeResponse } from "@/server/finance";
 import { authenticate, countUsers, createAccount, disableAccount, userFromToken } from "@/server/accounts";
 import { loadWork, readCampaign, saveTask, saveTraining, startCampaign } from "@/server/work";
+import { setPageAssignment } from "@/server/access";
 import { decideTaskCommand } from "@/server/task-commands";
 import { initialTaskState } from "@/preview/task-state";
 import { hashPassword, verifyPassword } from "@/server/passwords";
@@ -82,10 +83,13 @@ describe("milestone A foundation", () => {
 
     expect(financeResponse(masho.user).status).toBe(403);
     expect(financeResponse(owner.user).body.approvedRevenue).toBeNull();
-    const denied = decideTaskCommand(masho.user, "masho", initialTaskState(), { action: "approve", comment: "Looks good", assigneeId: "masho" }, new Date().toISOString());
+    const pages = ["BGUK", "AHSUK", "SPSUK", "SGIUK", "CBCUK"];
+    const denied = decideTaskCommand(masho.user, "SGIUK", pages, "masho", initialTaskState(), { action: "approve", comment: "Looks good" }, new Date().toISOString());
     expect(denied.ok).toBe(false);
     const flagged = decideTaskCommand(
       masho.user,
+      "SGIUK",
+      pages,
       "masho",
       initialTaskState(),
       { action: "flagRegeneration", note: "The voice is American and the hands are wrong." },
@@ -102,14 +106,16 @@ describe("milestone A foundation", () => {
     expect(ownerSession.ok && staffSession.ok).toBe(true);
     if (!ownerSession.ok || !staffSession.ok) return;
 
+    for (const code of pages) {
+      expect((await setPageAssignment(owner.user, masho.user.id, code, true)).ok).toBe(true);
+    }
     const saved = await saveTask(masho.user, "UK-SGIUK-001", { action: "toggle", kind: "checklist", id: "read-brief", value: true });
     expect(saved.ok).toBe(true);
     const loaded = await loadWork(masho.user);
     expect(loaded.states["UK-SGIUK-001"]?.checklist["read-brief"]).toBe(true);
     expect(loaded.visibleContentIds).toHaveLength(180);
 
-    const sql = getSql();
-    await sql`update content_items set assignee_id = 'shahzeb' where content_id = 'UK-CBCUK-036'`;
+    expect((await setPageAssignment(owner.user, masho.user.id, "CBCUK", false)).ok).toBe(true);
     const hidden = await saveTask(masho.user, "UK-CBCUK-036", { action: "start" });
     expect(hidden.ok).toBe(false);
     const after = await loadWork(masho.user);

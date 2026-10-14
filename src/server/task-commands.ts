@@ -5,8 +5,10 @@ import {
   cancelTask,
   initialTaskState,
   postponeTask,
+  confirmScheduled,
   recordMetrics,
   recordPublication,
+  reportPublicationIssue,
   requestChanges,
   startTask,
   submitTask,
@@ -26,18 +28,20 @@ export type TaskCommand =
   | { action: "toggle"; kind: "checklist" | "qualityChecks"; id: string; value: boolean }
   | { action: "draft"; patch: Partial<Pick<TaskState, "submissionNote" | "assetReference" | "facebookUrl" | "hookOverride">> }
   | { action: "submit"; format: ContentFormat }
-  | { action: "approve"; comment: string; assigneeId: string }
+  | { action: "approve"; comment: string }
   | { action: "requestRevision"; comment: string }
   | { action: "postpone"; dueAt: string; publishAt: string; comment: string }
   | { action: "cancel"; reason: string }
   | { action: "publish"; facebookUrl: string }
+  | { action: "confirmScheduled" }
+  | { action: "reportIssue"; note: string }
   | { action: "flagRegeneration"; note: string }
   | { action: "saveMetrics"; entry: MetricEntry };
 
-export function canAccessTask(actor: Actor, assigneeId: string): boolean {
+export function canAccessPage(actor: Actor, pageCode: string, assignedPageCodes: readonly string[]): boolean {
   if (actor.disabled) return false;
   if (can(actor.role, "manage_plan") || can(actor.role, "approve_content") || can(actor.role, "view_all_pages")) return true;
-  return assigneeId === actor.personKey;
+  return assignedPageCodes.includes(pageCode);
 }
 
 export function canEnterOwner(role: Role): boolean {
@@ -46,12 +50,14 @@ export function canEnterOwner(role: Role): boolean {
 
 export function decideTaskCommand(
   actor: Actor,
-  assigneeId: string,
+  pageCode: string,
+  assignedPageCodes: readonly string[],
+  recordAssigneeId: string,
   state: TaskState,
   command: TaskCommand,
   now: string,
 ): { ok: true; state: TaskState } | { ok: false; error: string; blockers?: string[] } {
-  if (!canAccessTask(actor, assigneeId)) return { ok: false, error: "This task is not assigned to you." };
+  if (!canAccessPage(actor, pageCode, assignedPageCodes)) return { ok: false, error: "This Page is not assigned to you." };
   const current = state ?? initialTaskState();
 
   if (command.action === "start") {
@@ -86,7 +92,7 @@ export function decideTaskCommand(
   }
 
   if (command.action === "approve") {
-    const next = approveTask(current, actor.personKey, actor.role, command.assigneeId, command.comment, now);
+    const next = approveTask(current, actor.personKey, actor.role, recordAssigneeId, command.comment, now);
     if (!next) return { ok: false, error: "Only a submitted task can be approved, and not by its assignee." };
     return { ok: true, state: next };
   }
@@ -109,10 +115,24 @@ export function decideTaskCommand(
     return { ok: true, state: next };
   }
 
+  if (command.action === "confirmScheduled") {
+    if (!can(actor.role, "submit_work") && !can(actor.role, "manage_plan")) return { ok: false, error: "You cannot confirm scheduling." };
+    const next = confirmScheduled(current, actor.personKey, now);
+    if (!next) return { ok: false, error: "Scheduling can be confirmed only after the asset is approved and a real file is stored." };
+    return { ok: true, state: next };
+  }
+
   if (command.action === "publish") {
     if (!can(actor.role, "submit_work") && !can(actor.role, "manage_plan")) return { ok: false, error: "You cannot record publication." };
     const next = recordPublication(current, actor.personKey, command.facebookUrl, now);
-    if (!next) return { ok: false, error: "Paste a real URL after the work is approved." };
+    if (!next) return { ok: false, error: "Confirm scheduling first, then paste the public Facebook URL." };
+    return { ok: true, state: next };
+  }
+
+  if (command.action === "reportIssue") {
+    if (!can(actor.role, "submit_work")) return { ok: false, error: "You cannot report an issue on this task." };
+    const next = reportPublicationIssue(current, actor.personKey, command.note, now);
+    if (!next) return { ok: false, error: "Describe the publishing problem in at least 8 characters." };
     return { ok: true, state: next };
   }
 

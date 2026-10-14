@@ -9,6 +9,7 @@ import { londonDateTimeToUtc, slotForPost } from "@/domain/schedule";
 import { recommendFromSample, perThousand } from "@/domain/metrics";
 import {
   approveTask,
+  confirmScheduled,
   initialTaskState,
   recordPublication,
   startTask,
@@ -127,8 +128,15 @@ describe("permissions and workflow", () => {
     expect(approveTask(submitted.state, "masho", "CONTENT_OPERATOR", "masho", "Looks good", "2026-10-12T17:00:00.000Z")).toBeNull();
     const approved = approveTask(submitted.state, "shahzeb", "SUPER_ADMIN", "masho", "Approved.", "2026-10-12T17:00:00.000Z");
     expect(approved?.status).toBe("APPROVED");
-    expect(recordPublication(approved!, "masho", "not-a-url", "2026-10-12T18:00:00.000Z")).toBeNull();
-    expect(recordPublication(approved!, "masho", "https://www.facebook.com/example/posts/1", "2026-10-12T19:00:00.000Z")?.status).toBe("PUBLISHED");
+    expect(confirmScheduled(approved!, "masho", "2026-10-12T17:30:00.000Z")).toBeNull();
+    expect(recordPublication(approved!, "masho", "https://www.facebook.com/example/posts/1", "2026-10-12T19:00:00.000Z")).toBeNull();
+    const withFile = { ...approved!, assetReference: "https://files.example/UK-SGIUK-001.mp4" };
+    const scheduled = confirmScheduled(withFile, "masho", "2026-10-12T17:30:00.000Z");
+    expect(scheduled?.status).toBe("SCHEDULED");
+    expect(scheduled?.facebookUrl).toBe("");
+    expect(scheduled?.scheduledConfirmedAt).toBe("2026-10-12T17:30:00.000Z");
+    expect(recordPublication(scheduled!, "masho", "not-a-url", "2026-10-12T18:00:00.000Z")).toBeNull();
+    expect(recordPublication(scheduled!, "masho", "https://www.facebook.com/example/posts/1", "2026-10-12T19:00:00.000Z")?.status).toBe("PUBLISHED");
   });
 });
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useMemo, useSyncExternalStore, type ReactNode } from "react";
-import { contentRecords } from "@/content/catalog";
 import type { ContentRecord, TaskStatus } from "@/domain/types";
 import { can } from "@/domain/permissions";
 import {
@@ -27,11 +26,13 @@ type TaskCommand =
   | { action: "toggle"; kind: "checklist" | "qualityChecks"; id: string; value: boolean }
   | { action: "draft"; patch: Partial<Pick<TaskState, "submissionNote" | "assetReference" | "facebookUrl" | "hookOverride">> }
   | { action: "submit"; format: ContentRecord["format"] }
-  | { action: "approve"; comment: string; assigneeId: string }
+  | { action: "approve"; comment: string }
   | { action: "requestRevision"; comment: string }
   | { action: "postpone"; dueAt: string; publishAt: string; comment: string }
   | { action: "cancel"; reason: string }
   | { action: "publish"; facebookUrl: string }
+  | { action: "confirmScheduled" }
+  | { action: "reportIssue"; note: string }
   | { action: "flagRegeneration"; note: string }
   | { action: "saveMetrics"; entry: MetricEntry };
 
@@ -41,6 +42,8 @@ type Snapshot = {
   states: Record<string, TaskState>;
   training: Record<string, boolean>;
   visibleContentIds: string[];
+  records: ContentRecord[];
+  assignedPageCodes: string[];
   campaign: CampaignRecord;
 };
 
@@ -50,6 +53,8 @@ const SERVER_SNAPSHOT: Snapshot = {
   states: {},
   training: {},
   visibleContentIds: [],
+  records: [],
+  assignedPageCodes: [],
   campaign: BUILD_CAMPAIGN,
 };
 
@@ -80,6 +85,8 @@ async function refresh() {
     states?: Record<string, TaskState>;
     training: Record<string, boolean>;
     visibleContentIds: string[];
+    records?: ContentRecord[];
+    assignedPageCodes?: string[];
     campaign: CampaignRecord;
   };
   const me = await fetch("/api/auth/me", { cache: "no-store" });
@@ -90,6 +97,8 @@ async function refresh() {
     states: body.states ?? body.tasks ?? {},
     training: body.training ?? {},
     visibleContentIds: body.visibleContentIds ?? [],
+    records: body.records ?? [],
+    assignedPageCodes: body.assignedPageCodes ?? [],
     campaign: body.campaign ?? BUILD_CAMPAIGN,
   });
 }
@@ -129,6 +138,8 @@ type PreviewContextValue = {
   ready: boolean;
   user: SessionUser | null;
   canAccess: (contentId: string) => boolean;
+  assignedPageCodes: string[];
+  records: ContentRecord[];
   stateFor: (contentId: string) => TaskState;
   effectiveDue: (record: ContentRecord) => string;
   effectivePublish: (record: ContentRecord) => string;
@@ -142,6 +153,8 @@ type PreviewContextValue = {
   postpone: (contentId: string, dueAt: string, publishAt: string, comment: string) => Promise<boolean>;
   cancel: (contentId: string, reason: string) => Promise<boolean>;
   publish: (contentId: string, facebookUrl: string) => Promise<boolean>;
+  confirmScheduled: (contentId: string) => Promise<boolean>;
+  reportIssue: (contentId: string, note: string) => Promise<boolean>;
   flagRegeneration: (contentId: string, note: string) => Promise<boolean>;
   saveMetrics: (contentId: string, entry: MetricEntry) => Promise<boolean>;
   training: Record<string, boolean>;
@@ -155,11 +168,13 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
   const current = useSyncExternalStore(subscribe, getClientSnapshot, () => SERVER_SNAPSHOT);
   const value = useMemo<PreviewContextValue>(() => {
     const stateFor = (contentId: string) => current.states[contentId] ?? initialTaskState();
-    const recordFor = (contentId: string) => contentRecords.find((item) => item.contentId === contentId);
+    const recordFor = (contentId: string) => current.records.find((item) => item.contentId === contentId);
     return {
       ready: current.ready,
       user: current.user,
       canAccess: (contentId) => current.visibleContentIds.includes(contentId),
+      assignedPageCodes: current.assignedPageCodes,
+      records: current.records,
       stateFor,
       effectiveDue: (record) => stateFor(record.contentId).dueAtOverride ?? record.dueAt,
       effectivePublish: (record) => stateFor(record.contentId).publishAtOverride ?? record.publishAt,
@@ -182,13 +197,15 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
       approve: async (contentId, comment) => {
         const record = recordFor(contentId);
         if (!record) return false;
-        const result = await sendTask(contentId, { action: "approve", comment, assigneeId: record.assigneeId });
+        const result = await sendTask(contentId, { action: "approve", comment });
         return result.ok;
       },
       requestRevision: async (contentId, comment) => (await sendTask(contentId, { action: "requestRevision", comment })).ok,
       postpone: async (contentId, dueAt, publishAt, comment) => (await sendTask(contentId, { action: "postpone", dueAt, publishAt, comment })).ok,
       cancel: async (contentId, reason) => (await sendTask(contentId, { action: "cancel", reason })).ok,
       publish: async (contentId, facebookUrl) => (await sendTask(contentId, { action: "publish", facebookUrl })).ok,
+      confirmScheduled: async (contentId) => (await sendTask(contentId, { action: "confirmScheduled" })).ok,
+      reportIssue: async (contentId, note) => (await sendTask(contentId, { action: "reportIssue", note })).ok,
       flagRegeneration: async (contentId, note) => (await sendTask(contentId, { action: "flagRegeneration", note })).ok,
       saveMetrics: async (contentId, entry) => (await sendTask(contentId, { action: "saveMetrics", entry })).ok,
       training: current.training,

@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { contentRecords, importReport } from "@/content/catalog";
+import { importReport } from "@/content/catalog";
 import { integrationStatus, PLANNED_DRIVE_FOLDERS } from "@/integrations/status";
 import { statusLabel, usePreview } from "@/preview/preview-context";
 import { pageByCode } from "@/domain/pages";
 
 export function ApprovalQueue() {
   const preview = usePreview();
-  const queue = contentRecords.filter((record) => {
+  const queue = preview.records.filter((record) => {
     const status = preview.stateFor(record.contentId).status;
     return status === "READY_FOR_REVIEW" || status === "CHANGES_REQUESTED";
   });
@@ -17,7 +17,7 @@ export function ApprovalQueue() {
     <div className="space-y-6">
       <header>
         <h1 className="font-heading text-5xl tracking-tight">Approvals</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">Significant creative changes wait here for your approval. Masho does not write the asset, and he cannot approve his own work. Approval is not a published post.</p>
+        <p className="mt-2 max-w-2xl text-muted-foreground">Significant creative changes wait here for your approval. Publishing operators do not write the asset, and nobody approves their own work. Approval is not a published post.</p>
       </header>
       {queue.length === 0 ? (
         <p className="rounded-xl bg-card p-5 text-sm ring-1 ring-foreground/10">Nothing is waiting. The AI pipeline is not connected, so no finished file has been submitted.</p>
