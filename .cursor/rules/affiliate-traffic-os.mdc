@@ -1,0 +1,13 @@
+---
+description: Affiliate Traffic OS durable founder decisions and implementation discipline
+alwaysApply: true
+---
+# Affiliate Traffic OS project rule
+- Always read `AFFILIATE_TRAFFIC_OS_MASTER_SPEC.md` before proposing architecture or editing Affiliate Traffic OS features.
+- Distinguish founder-confirmed strategy from repository-verified shipped functionality. Do not claim unverified features are implemented.
+- Follow only the **one** founder-selected affiliate-network reference design. If missing, request it before redesigning.
+- Keep the owner master START/PAUSE switch default OFF and enforce server-side before any publishing or ad execution.
+- Operator OS must expose current-week tasks only; advance only after prior week calendar period ends AND required tasks are evidence-verified, with auditable owner/supervisor overrides.
+- New Page assignments require owner-approved research and genuine verified business data; never generate deceptive Page locations, fake accounts or artificial engagement.
+- Organic-first, owner-approved Meta Ads reinvestment is capped by eligible actual collected revenue (default policy up to 30%), not projected impressions or pending commissions.
+- Use small reversible changes, tests, security reviews, and honest deploy/integration status reports.

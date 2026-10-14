@@ -1,0 +1,1269 @@
+UK AUDIENCE NETWORK
+Master Business Plan, Content Engine & Month-1
+Validation Architecture
+Five UK Facebook media brands for adults 30+ -> original organic content -> owned comparison funnel -> PPS/CPA affiliate revenue.
+
+Prepared as a durable handoff document for the owner, staff, Cursor/ChatGPT, and future AudienceOS development.
+
+
+
+
+Version 1.0 | 30-day validation sprint | October 2026
+0. AI / Staff Handoff - Read This First
+This section is intentionally explicit so another ChatGPT, developer or staff member can understand the project without the original conversation.
+
+         Project in one                           Build five distinct UK Facebook audience assets for adults 30+, use original AI-assisted content to earn organic reach, learn which
+         sentence                                 audience/content combinations attract commercially valuable users, and later route appropriate traffic through one owned comparison
+                                                  website to approved dating affiliate PPS/CPA offers.
+
+Non-negotiable strategy: Organic reach is the engine. Paid Meta is support only after a post proves itself. Month 1 is a validation sprint, not a scale sprint. We do not
+mass-produce 5,000 generic posts before data tells us what works.
+
+Five launch pages: Back in the Game UK; After Hours Singles UK; Single Parent Stories UK; Still Got It UK; Casual By Choice UK.
+
+Month-1 output: 36 posts per page = 180 posts total. Exact mix per page: 16 original Reels, 12 image/story posts, 4 native polls, 4 carousels.
+
+Month-1 business goal: establish clean performance baselines, identify the top 2-3 pillars and hook patterns for each page, prove the operating workflow, and if possible
+generate the first organically attributed approved PPS sale. Do not optimise for follower vanity metrics.
+
+Future operating system: AudienceOS. Staff log in individually, see assigned content tasks and exact asset briefs, work from Google Drive-linked folders, upload/mark assets
+ready, and the owner sees page/post performance plus affiliate click and sale attribution. The OS is specified later in this document but is intentionally not being built in this PDF.
+
+         Critical safety /                        AI is the production department, not the source of fake reality. Do not invent real customer testimonials, steal creator videos, publish
+         quality rule                             identifiable private dating screenshots, use fake statistics, or copy another page with minor edits. Fictional scenarios must read as
+                                                  editorial scenarios, not fabricated customer proof.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                 Page 2
+1. Executive Summary
+The company is a small performance-publishing operation. It does not own a dating product. It owns audiences, original content, a public comparison/editorial website, first-party
+attribution, affiliate relationships, and the decision logic that determines which approved offer receives traffic.
+
+The first geographic market is the United Kingdom because Facebook still has very broad adult reach there, English lets the team quality-control AI-assisted storytelling directly,
+and the UK has meaningful online-dating usage across adult age groups. The launch deliberately focuses on 30+ audiences rather than young mass-market traffic.
+
+Core flywheel: original content -> organic reach -> followers -> repeat reach -> owned website -> partner click -> approved PPS sale -> revenue -> selective reinvestment into
+proven content -> more audience.
+
+
+         1. Audience                                2. Content                                  3. Owned Site                             4. Partner                                      5. Money
+
+
+         Five UK 30+ personas                       Original Reels, stories, polls, carousels   Guide / comparison page with disclosure   Approved affiliate link with click ID / subID   Approved PPS / CPA commission
+
+
+
+
+PPS definition: Pay Per Sale. The publisher is paid when a referred user completes the qualifying paid action defined by the affiliate agreement and the conversion is approved.
+Month 1 should track tracked sales separately from approved sales because refunds, duplicates or validation rules can change the final payable amount.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                              Page 3
+2. Why This Model Is Worth Testing in the UK
+Research supports the channel and audience choice, but no source can guarantee that an individual content idea will go viral.
+
+• Facebook remains a major UK adult platform: Meta advertising data reported by DataReportal indicated about 38.8M Facebook users in the UK in late 2025 and reach
+equivalent to about 69.9% of UK adults 18+.
+
+• Facebook is still a daily habit: Ofcom's 2025 online report described Facebook among the UK's most commonly used apps.
+
+• Older dating usage matters: Ofcom's 2024 dating analysis found Plenty of Fish and Match skewed strongly to ages 35-54, and users aged 55-64 who did use dating services
+spent the most time on them among the reported age groups.
+
+• Originality matters: Meta said views and watch time for original Facebook Reels approximately doubled in the second half of 2025 compared with the same period in 2024,
+while duplicated or low-value edited content is deprioritised.
+
+• Affiliate disclosure matters: UK ASA/CAP guidance treats affiliate marketing as advertising and requires commercial content to be obviously identifiable as advertising.
+
+         Interpretation                           These signals justify testing a UK 30+ Facebook publishing network. They do not justify assuming a specific persona will monetise.
+                                                  Month 1 is designed to create our own evidence.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                           Page 4
+3. Business Model and Economics
+Revenue model: initially PPS/CPA only. The business should prefer clear first-sale economics before testing revenue-share. Every offer is evaluated by actual EPC and
+approved revenue, not by headline payout alone.
+
+Core commercial math:
+
+       Affiliate EPC = approved affiliate revenue / partner clicks
+
+       Paid-customer CPA = paid amplification spend / approved paying customers
+
+       Organic revenue efficiency = approved affiliate revenue / organic reach x 1,000
+A lower-payout offer can be more profitable if it converts better. Example: an offer paying GBP70 at 6% sale rate produces GBP4.20 expected revenue per partner click; a
+GBP120 offer converting at 2% produces GBP2.40. The business routes more traffic to the stronger economics, not the bigger headline payout.
+
+Monetisation rule for month 1: Do not turn every post into an affiliate post. Weeks 1-2 contain no direct monetisation. Weeks 3-4 may use a small number of editorial guide /
+comparison bridges after the audience has received substantial native value.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                               Page 5
+4. Five-Page Portfolio Architecture
+ Page                                      Persona                                                                  Public promise                                                            Commercial hypothesis
+
+ Back in the Game UK                       35-50 - Divorced or separated adults who are dating again after a long   Dating again after a long relationship? Stories, laughs, awkward first    Serious, general and casual dating comparison
+                                           relationship.                                                            dates and second chances for UK singles 35+.                              routes for people starting again.
+
+ After Hours Singles UK                    30-45 - Busy professionals who have careers, independence and            Work is busy. Dating is complicated. Stories, humour and real             General and quality-focused dating services; later
+                                           disposable income but limited time for dating.                           conversations for UK professionals who are still single.                  test convenience and serious-intent offers.
+
+ Single Parent Stories UK                  30-50 - Single or divorced mums and dads balancing children,             Dating, parenting and starting again. UK stories and conversations for    Serious/general dating routes and services suitable
+                                           co-parenting, work and dating.                                           single mums and dads.                                                     for adults with children.
+
+ Still Got It UK                           50-65+ - Mature singles, divorced/widowed/long-term single adults who    You are older, wiser and definitely not finished. Dating, independence,   Mature, serious and companionship-focused dating
+                                           value companionship and independence.                                    companionship and new beginnings after 50.                                offers; test casual only where appropriate.
+
+ Casual By Choice UK                       30-50 men - Men over 30 who value independence and may prefer            Modern single life for UK men 30+. Dating, confidence, first dates,       Casual/general dating PPS routes, subject to
+                                           casual or low-pressure dating rather than immediate commitment.          attraction and honest no-pressure connections.                            partner and platform traffic rules.
+
+
+
+
+         Naming note                               These are the recommended launch names. Before creation, check Facebook Page name, Instagram handle and relevant domain
+                                                   availability. If a name is unavailable, preserve the persona and positioning rather than forcing an awkward spelling.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                 Page 6
+5. Month-1 Content Engine
+Exact monthly production per page: 16 original Reels + 12 image/story-card posts + 4 native polls + 4 carousels = 36. Across five pages: 80 Reels, 60 image/story posts, 20
+polls and 20 carousels = 180 total assets.
+
+    Format                                 Per page            Network total   Purpose                                   Production standard
+
+    Original Reel                          16                  80              Reach + comments                          20-35s; hook in first 2s; 4-6 original/AI-created scenes; natural UK voice; captions; end with one
+                                                                                                                         question.
+
+    Image / story card                     12                  60              Relatability + discussion                 4:5 editorial visual; strong headline; caption carries the story; no generic quote spam.
+
+    Native poll                            4                   20              Low-friction comments / preference data   Simple question and 2-4 choices. No outbound link.
+
+    Carousel                               4                   20              Saves + educational value                 5 slides: hook -> 3 useful points -> discussion question.
+
+
+
+Weekly rhythm per page (9 posts): Monday Reel; Tuesday image/story; Wednesday Reel + poll; Thursday image/story; Friday Reel; Saturday image/story + Reel; Sunday
+carousel. This gives 36 posts over four weeks without flooding the Page.
+
+Initial posting windows: test lunch (roughly 12:00-14:00 UK) and evening (roughly 18:30-21:00 UK). After two weeks, use the Page's own Insights rather than generic best-time
+advice.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                            Page 7
+6. Content Quality Rules - What Staff Must Follow
+         Original first                           Every Reel and image must be created for our page. No downloaded TikToks, copied memes, minor edits of other creators, or stolen
+                                                  dating screenshots.
+
+
+         UK-natural language                      Use British wording and situations: mum, holiday, pub, train, city, weekend, childcare. Avoid robotic AI phrasing and unnecessary
+                                                  Americanisms.
+
+
+         One post = one idea                      The hook should be understandable in two seconds. Do not cram five themes into one post.
+
+
+         Conversation ending                      Most posts end with one honest question. Comments are part of the content product.
+
+
+         No fake reality                          Fictional scenarios are allowed, but never present an AI character as a real customer testimonial or claim a made-up story came from a
+                                                  follower.
+
+
+         No humiliation                           Do not post identifiable dating profiles or private messages without clear permission.
+
+
+         No sexualised bait                       Especially on Casual By Choice UK: no explicit imagery, "hot singles near you" style posts, or objectifying women. We are building a
+                                                  durable audience asset.
+
+
+         No hard sell in weeks                    Build audience trust and learn distribution before affiliate promotion.
+         1-2
+
+
+         No blind volume                          If a pillar is consistently weak, stop feeding it. If one insight wins, create new executions around the insight rather than duplicating the
+                                                  exact post.
+
+
+         Human approval                           AI may draft scripts, images and reels. Staff must review every item before publication.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                     Page 8
+7. Staff Workflow and Google Drive Asset Architecture
+The staff member should not start each day wondering what to create. The future AudienceOS will convert every content idea into an assigned task. Until AudienceOS is built,
+the same structure can be operated from a spreadsheet + Google Drive.
+
+    Step                          Staff action                                                              Required output                                         Owner / system check
+
+    1. Open Today                 See assigned post IDs, due times and briefs.                              No manual topic choosing unless assigned as research.   Owner has approved the queue.
+
+    2. Draft                      Generate/rewrite script, caption and creative prompt using approved AI    script.txt, caption.txt, prompt.txt                     UK tone, no fake claims.
+                                  workflow.
+
+    3. Create asset               Create Reel, image, poll or carousel exactly to format spec.              final.mp4 / final.jpg / slide set                       Original, legible, no third-party watermark.
+
+    4. QA                         Check spelling, hook, safe margins, subtitles, page branding, duplicate   Task marked READY FOR REVIEW                            Owner/reviewer can approve or request change.
+                                  risk.
+
+    5. Publish                    Publish at assigned window; save native URL/post ID.                      Facebook post ID + public URL                           OS records publication time.
+
+    6. Learn                      Do not manually interpret winners unless asked.                           24h/72h metrics collected.                              Owner/system classifies winner and next tests.
+
+
+
+Google Drive root: /AudienceOS/01_UK/Pages/[PAGE]/YYYY-MM/[POST-ID]/
+
+Recommended files inside every post folder: brief.md, script.txt, caption.txt, creative-prompt.txt, source-notes.txt, final.mp4 or final.jpg, thumbnail.jpg. AudienceOS later
+stores the Drive folder ID instead of duplicating media in its own database.
+
+Naming convention: use the same immutable ID everywhere, for example UK-BGUK-001. That ID later appears in the content task, Facebook mapping, website UTM, affiliate
+subID and analytics table.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                         Page 9
+8. Tracking Architecture From Day One
+The entire point of this company is to learn which audience attention becomes money. Therefore every published piece must have a permanent post ID even before the affiliate
+website is live.
+
+    Layer                                          Example                                                   What it answers
+
+    Geo                                            UK                                                        Which market?
+
+    Page code                                      BGUK                                                      Which persona/page?
+
+    Post ID                                        BGUK-001                                                  Which exact content item?
+
+    Site session                                   first-party click/session ID                              Which website visit came from that post?
+
+    Affiliate subID                                UK-BGUK-001                                               Which partner click/sale maps back to which post?
+
+    Conversion status                              tracked / approved / rejected                             How much revenue is actually payable?
+
+
+
+
+          Do not optimise to                      A page with fewer followers can be a stronger business if it produces more website visits, partner clicks and approved PPS revenue per
+          followers alone                         1,000 organic reach.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                               Page 10
+9. KPI System and Winner Logic
+      Metric                                         Formula / meaning                              Why it matters
+
+      Organic reach                                  Native reach reported by Page/post             Distribution.
+
+      Shares / 1K reach                              shares / reach x 1,000                         How strongly people pass the idea to others.
+
+      Comments / 1K reach                            comments / reach x 1,000                       Conversation strength.
+
+      Follows / 1K reach                             new follows attributed / reach x 1,000         Audience-building efficiency.
+
+      Website visits / 1K reach                      site sessions from page/post / reach x 1,000   Commercial intent.
+
+      Partner CTR                                    partner clicks / comparison visitors           How persuasive/relevant the comparison is.
+
+      PPS conversion                                 approved sales / partner clicks                Offer fit.
+
+      EPC                                            approved affiliate revenue / partner clicks    Offer economics.
+
+      Revenue / 1K organic reach                     approved revenue / organic reach x 1,000       Ultimate organic media value.
+
+
+
+Initial organic winner rule: flag a post if reach is at least 2.0x the Page's rolling median OR shares per 1,000 reach are at least 1.5x the Page median OR Reel watch
+performance materially exceeds that Page's baseline. AudienceOS should make thresholds configurable after the first 50-100 posts.
+
+What happens after a winner: extract the underlying insight (for example, independence after divorce), then create 3-5 new executions using a different situation, hook and
+visual. Never duplicate the winner word-for-word.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                             Page 11
+10.1 Page Playbook - Back in the Game UK
+Code: BGUK | Target: 35-50
+
+    Persona                                                           Bio                                                                 Tone                                                      Visual system
+
+    Divorced or separated adults who are dating again after a long    Dating again after a long relationship? Stories, laughs, awkward    Warm, hopeful, emotionally intelligent, lightly funny.    Cream + dark navy, warm editorial photography,
+    relationship.                                                     first dates and second chances for UK singles 35+.                  Never pitying.                                            natural homes/cafes/walks, mature but modern.
+
+
+
+Core pillars: Starting again; confidence; exes; children; first dates; modern apps; independence; second chances.
+
+Commercial hypothesis: Serious, general and casual dating comparison routes for people starting again.
+
+Priority launch ideas: The first 10 rows in the month calendar are marked PRIORITY. They are the strongest initial hypotheses, not guaranteed viral posts.
+
+Week 1 - 9 posts
+     ID              Format         Pillar                  Hook / content idea                                                Staff asset brief                                                                              CTA
+
+     BGUK-001        Reel           First date              PRIORITY - Your last first date was in 2008. Tonight you are       20-35s original AI-assisted reel. Cinematic UK cafe prep: coat, mirror, train, table for       Comments only
+                                                            doing it again.                                                    two. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                               question.
+
+     BGUK-002        Image          Confidence              PRIORITY - Would dating again at 42 excite you or terrify you?     4:5 editorial image/story card. Editorial portrait of confident 40s adult with bold question   Comments only
+                                                                                                                               card. Headline max 12 words; page branding subtle; caption carries the story.
+
+     BGUK-003        Reel           Modern dating           PRIORITY - 3 things that changed while you were married.           20-35s original AI-assisted reel. Fast scenes: phone app, texting, coffee date; three          Comments only
+                                                                                                                               simple overlays. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end
+                                                                                                                               with one question.
+
+     BGUK-004        Poll           Exes                    PRIORITY - Would you date someone who speaks to their ex           Native Facebook poll/question. Native poll with neutral background and four answer             Comments only
+                                                            every day?                                                         options. Keep options simple; no outbound link; reply to early comments.
+
+     BGUK-005        Image          Divorce                 PRIORITY - The strange part was not becoming single. It was        4:5 editorial image/story card. Warm portrait + short story-card headline. Headline max        Comments only
+                                                            realising she had forgotten how to flirt.                          12 words; page branding subtle; caption carries the story.
+
+     BGUK-006        Reel           Second chance           PRIORITY - She cancelled her first date three times. The fourth    20-35s original AI-assisted reel. 4-scene story reel: cancellation texts -> getting ready      Comments only
+                                                            time she finally went.                                             -> arriving -> smile. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end
+                                                                                                                               with one question.
+
+     BGUK-007        Image          Independence            PRIORITY - After years alone, what is harder: finding love or      4:5 editorial image/story card. Minimal editorial card, empty second chair / cosy home.        Comments only
+                                                            making room for it?                                                Headline max 12 words; page branding subtle; caption carries the story.
+
+     BGUK-008        Reel           Children                PRIORITY - When do you tell your children you are dating again?    20-35s original AI-assisted reel. Family-life scenes, no visible children faces; end with      Comments only
+                                                                                                                               discussion question. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions;
+                                                                                                                               end with one question.
+
+     BGUK-009        Carousel       Modern dating           PRIORITY - 5 modern dating terms you never needed in 2005.         5-slide 4:5 carousel. 5-slide educational carousel with plain-English definitions. Slide 1     Comments only
+                                                                                                                               hook, slides 2-4 value, slide 5 discussion question.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                     Page 12
+Week 2 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                 Staff asset brief                                                                              CTA
+
+     BGUK-010       Reel          Confidence            PRIORITY - He thought 47 was too old to start again. Then he        20-35s original AI-assisted reel. Story reel with man preparing, cafe, walk; no fake           Comments only
+                                                        accepted one coffee.                                                testimonial language. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions;
+                                                                                                                            end with one question.
+
+     BGUK-011       Image         Exes                  New partner wants the old wedding photos removed. Fair or           4:5 editorial image/story card. Split visual: photo box vs new relationship; discussion        Comments only
+                                                        unfair?                                                             card. Headline max 12 words; page branding subtle; caption carries the story.
+
+     BGUK-012       Reel          Apps                  Opening a dating app for the first time after 15 years.             20-35s original AI-assisted reel. POV reel: hesitant phone tap, profile setup, first           Comments only
+                                                                                                                            message. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                            question.
+
+     BGUK-013       Poll          Children              Meet the children after 1 month, 3 months, 6 months, or later?      Native Facebook poll/question. Native poll; simple four choices. Keep options simple;          Comments only
+                                                                                                                            no outbound link; reply to early comments.
+
+     BGUK-014       Image         Standards             Are your standards higher now - or are you simply clearer?          4:5 editorial image/story card. Premium portrait + bold headline. Headline max 12              Comments only
+                                                                                                                            words; page branding subtle; caption carries the story.
+
+     BGUK-015       Reel          First date            The date was going well until one question about the ex changed     20-35s original AI-assisted reel. Narrated fictional restaurant scenario. Hook visible in      Comments only
+                                                        the mood.                                                           first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     BGUK-016       Image         Confidence            What NOT to apologise for when dating again.                        4:5 editorial image/story card. 5-slide carousel: age, past, children, boundaries,             Comments only
+                                                                                                                            nervousness. Headline max 12 words; page branding subtle; caption carries the story.
+
+     BGUK-017       Reel          Money                 Who pays on a first date after 40?                                  20-35s original AI-assisted reel. Restaurant bill image with clean text overlay. Hook          Comments only
+                                                                                                                            visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     BGUK-018       Carousel      Texting               A brilliant first date. Then one message: "Had a nice time." What   5-slide 4:5 carousel. Chat-style reel with neutral fictional bubbles and comments              Comments only
+                                                        does it mean?                                                       prompt. Slide 1 hook, slides 2-4 value, slide 5 discussion question.
+
+
+
+
+Week 3 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                 Staff asset brief                                                                              CTA
+
+     BGUK-019       Reel          Relationship goal     Serious relationship, companionship, casual, or not sure yet?       20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural   Soft discussion / profile
+                                                                                                                            UK voice; captions; end with one question.                                                     follow
+
+     BGUK-020       Image         Second chance         She said she would never date again. Six months later she           4:5 editorial image/story card. Short hopeful story reel ending before resolution.             Soft discussion / profile
+                                                        changed one small thing.                                            Headline max 12 words; page branding subtle; caption carries the story.                        follow
+
+     BGUK-021       Reel          Friends               Your closest friends dislike the person you are seeing. Do you      20-35s original AI-assisted reel. Group dinner editorial image + question. Hook visible        Soft discussion / profile
+                                                        listen?                                                             in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.                    follow
+
+     BGUK-022       Poll          Nervousness           Getting ready for a first date after a decade away.                 Native Facebook poll/question. Routine reel: shirt/dress, fragrance, keys, deep breath,        Soft discussion / profile
+                                                                                                                            door. Keep options simple; no outbound link; reply to early comments.                          follow
+
+     BGUK-023       Image         Independence          Separate homes but a serious relationship - would you do it?        4:5 editorial image/story card. Two-home split image. Headline max 12 words; page              Soft discussion / profile
+                                                                                                                            branding subtle; caption carries the story.                                                    follow
+
+     BGUK-024       Reel          Apps                  Four dates, no spark. Keep going or take a break?                   20-35s original AI-assisted reel. Reel with calendar dates and reflective voiceover.           Soft discussion / profile
+                                                                                                                            Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.       follow
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                           Page 13
+     ID             Format        Pillar                Hook / content idea                                                Staff asset brief                                                                              CTA
+
+     BGUK-025       Image         First dates           5 low-pressure first-date ideas after 40.                          4:5 editorial image/story card. Carousel: walk, coffee, gallery, market, early dinner.         Soft discussion / profile
+                                                                                                                           Headline max 12 words; page branding subtle; caption carries the story.                        follow
+
+     BGUK-026       Reel          Boundaries            Would you date someone still financially tied to their ex?         20-35s original AI-assisted reel. Minimal question card, no sensational wording. Hook          Soft discussion / profile
+                                                                                                                           visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.            follow
+
+     BGUK-027       Carousel      Mistakes              The first mistake many newly single people make is rushing to      5-slide 4:5 carousel. Thoughtful narrated reel with calm scenes. Slide 1 hook, slides          Soft discussion / profile
+                                                        prove they are fine.                                               2-4 value, slide 5 discussion question.                                                        follow
+
+
+
+
+Week 4 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                Staff asset brief                                                                              CTA
+
+     BGUK-028       Reel          Hope                  Starting again is not starting from zero.                          20-35s original AI-assisted reel. Editorial image; caption asks what experience taught         Comments / follow
+                                                                                                                           them. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                           question.
+
+     BGUK-029       Image         Children              Your teenager finds out you have a date tonight. What happens      4:5 editorial image/story card. Fictional family dialogue reel, respectful and light.          Comments / follow
+                                                        next?                                                              Headline max 12 words; page branding subtle; caption carries the story.
+
+     BGUK-030       Reel          Living                Would you live with a partner again?                               20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural   Comments / follow
+                                                                                                                           UK voice; captions; end with one question.
+
+     BGUK-031       Poll          Second chance         Two people, both divorced, both nearly cancelled the date.         Native Facebook poll/question. Two-column story card visual. Keep options simple; no           Comments / follow
+                                                                                                                           outbound link; reply to early comments.
+
+     BGUK-032       Image         Independence          How do you love again without giving up the life you rebuilt?      4:5 editorial image/story card. Reflective reel: gym, work, friends, date. Headline max        Comments / follow
+                                                                                                                           12 words; page branding subtle; caption carries the story.
+
+     BGUK-033       Reel          Community             How long were you single before you felt ready to date again?      20-35s original AI-assisted reel. Question card with comments prompt. Hook visible in          Comments / follow
+                                                                                                                           first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     BGUK-034       Image         First dates           Three date ideas that feel easier than a formal dinner.            4:5 editorial image/story card. Quick practical reel. Headline max 12 words; page              Comments / follow
+                                                                                                                           branding subtle; caption carries the story.
+
+     BGUK-035       Reel          Guide bridge          Dating again after years away: what should you actually look for   20-35s original AI-assisted reel. Educational image leading to neutral guide, not hard         Guide bridge only if
+                                                        in a platform?                                                     sell. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one           relevant
+                                                                                                                           question.
+
+     BGUK-036       Carousel      Community             What our community taught us about starting again this month.      5-slide 4:5 carousel. Carousel summarising four anonymous comment themes. Slide 1              Guide bridge only if
+                                                                                                                           hook, slides 2-4 value, slide 5 discussion question.                                           relevant
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                          Page 14
+10.2 Page Playbook - After Hours Singles UK
+Code: AHSUK | Target: 30-45
+
+    Persona                                                       Bio                                                                Tone                                                     Visual system
+
+    Busy professionals who have careers, independence and         Work is busy. Dating is complicated. Stories, humour and real      Smart, dry British humour, modern, competent,            Graphite + off-white, city evenings, trains, cafes,
+    disposable income but limited time for dating.                conversations for UK professionals who are still single.           never corporate.                                         restaurants, laptops put away after work.
+
+
+
+Core pillars: Time; career; standards; texting; app fatigue; commuting; travel; money; independence.
+
+Commercial hypothesis: General and quality-focused dating services; later test convenience and serious-intent offers.
+
+Priority launch ideas: The first 10 rows in the month calendar are marked PRIORITY. They are the strongest initial hypotheses, not guaranteed viral posts.
+
+Week 1 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                            CTA
+
+     AHSUK-001      Reel          Time                  PRIORITY - You finally have a free Friday. Your date cancels at   20-35s original AI-assisted reel. Evening phone notification, coat ready, city window;       Comments only
+                                                        5:42 PM.                                                          dry narration. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with
+                                                                                                                          one question.
+
+     AHSUK-002      Image         Career                PRIORITY - Successful at work. Absolutely useless at dating.      4:5 editorial image/story card. Clean professional portrait + humorous headline.             Comments only
+                                                        Anyone else?                                                      Headline max 12 words; page branding subtle; caption carries the story.
+
+     AHSUK-003      Reel          Texting               PRIORITY - Busy... or just not interested?                        20-35s original AI-assisted reel. Short chat reel with timestamps and three clues. Hook      Comments only
+                                                                                                                          visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-004      Poll          Priorities            PRIORITY - Career, relationship, both, or depends on the week?    Native Facebook poll/question. Native poll. Keep options simple; no outbound link;           Comments only
+                                                                                                                          reply to early comments.
+
+     AHSUK-005      Image         Standards             PRIORITY - Being single is not the same as being available to     4:5 editorial image/story card. Minimal premium text card. Headline max 12 words;            Comments only
+                                                        everyone.                                                         page branding subtle; caption carries the story.
+
+     AHSUK-006      Reel          Work travel           PRIORITY - Manchester Monday. London Wednesday. Date              20-35s original AI-assisted reel. Travel-map reel with train, hotel, calendar and one        Comments only
+                                                        when exactly?                                                     date slot. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                          question.
+
+     AHSUK-007      Image         Dating apps           PRIORITY - When dating apps start feeling like another inbox.     4:5 editorial image/story card. Phone + laptop editorial image. Headline max 12 words;       Comments only
+                                                                                                                          page branding subtle; caption carries the story.
+
+     AHSUK-008      Reel          Independence          PRIORITY - You built the career, home and life. Where does        20-35s original AI-assisted reel. Reflective reel with work, home, dinner-for-one,           Comments only
+                                                        another person fit?                                               message. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                          question.
+
+     AHSUK-009      Carousel      Time                  PRIORITY - 5 dates that do not require giving up your whole       5-slide 4:5 carousel. Carousel: coffee, walk, lunch, gallery, one drink. Slide 1 hook,       Comments only
+                                                        evening.                                                          slides 2-4 value, slide 5 discussion question.
+
+
+
+
+Week 2 - 9 posts
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                    Page 15
+     ID             Format        Pillar                Hook / content idea                                            Staff asset brief                                                                               CTA
+
+     AHSUK-010      Reel          Cancellation          PRIORITY - Three cancelled dates in a row. Still interested?   20-35s original AI-assisted reel. Fast scenario reel, end with yes/no question. Hook            Comments only
+                                                                                                                       visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-011      Image         Lifestyle             Would you date someone who works every weekend?                4:5 editorial image/story card. Question card. Headline max 12 words; page branding             Comments only
+                                                                                                                       subtle; caption carries the story.
+
+     AHSUK-012      Reel          Office                Workplace crush: smart idea or unnecessary risk?               20-35s original AI-assisted reel. Office-to-afterwork story reel, no employer logos. Hook       Comments only
+                                                                                                                       visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-013      Poll          Availability          Best dating night: Thursday, Friday, Saturday, or Sunday?      Native Facebook poll/question. Native poll. Keep options simple; no outbound link;              Comments only
+                                                                                                                       reply to early comments.
+
+     AHSUK-014      Image         Money                 Expensive first dates: impressive or unnecessary?              4:5 editorial image/story card. Restaurant table + bill, premium styling. Headline max          Comments only
+                                                                                                                       12 words; page branding subtle; caption carries the story.
+
+     AHSUK-015      Reel          Commuting             Would you date someone who lives 90 minutes away?              20-35s original AI-assisted reel. Train-route reel with time trade-off. Hook visible in first   Comments only
+                                                                                                                       2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-016      Image         App fatigue           4 signs you need a dating-app break.                           4:5 editorial image/story card. Carousel with healthy, non-clinical advice. Headline max        Comments only
+                                                                                                                       12 words; page branding subtle; caption carries the story.
+
+     AHSUK-017      Reel          Standards             Too picky - or finally know what you want?                     20-35s original AI-assisted reel. Portrait + simple caption. Hook visible in first 2s; 4-6      Comments only
+                                                                                                                       scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-018      Carousel      First date            A 30-minute coffee that accidentally turns into dinner.        5-slide 4:5 carousel. Positive story reel. Slide 1 hook, slides 2-4 value, slide 5              Comments only
+                                                                                                                       discussion question.
+
+
+
+
+Week 3 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                            Staff asset brief                                                                               CTA
+
+     AHSUK-019      Reel          Career                Would you move city for a relationship?                        20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural    Soft discussion / profile
+                                                                                                                       UK voice; captions; end with one question.                                                      follow
+
+     AHSUK-020      Image         Travel                Dating while you travel for work every month.                  4:5 editorial image/story card. Airport/train/hotel reel, focus on scheduling. Headline         Soft discussion / profile
+                                                                                                                       max 12 words; page branding subtle; caption carries the story.                                  follow
+
+     AHSUK-021      Reel          Lifestyle             Would you date someone earning much less than you?             20-35s original AI-assisted reel. Neutral question card, avoid class judgement. Hook            Soft discussion / profile
+                                                                                                                       visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.             follow
+
+     AHSUK-022      Poll          Weekends              Sunday afternoon date vs Friday-night date. Which tells you    Native Facebook poll/question. Two-scene comparison reel. Keep options simple; no               Soft discussion / profile
+                                                        more?                                                          outbound link; reply to early comments.                                                         follow
+
+     AHSUK-023      Image         Boundaries            Work calls during a date: acceptable once or instant no?       4:5 editorial image/story card. Phone-on-table image. Headline max 12 words; page               Soft discussion / profile
+                                                                                                                       branding subtle; caption carries the story.                                                     follow
+
+     AHSUK-024      Reel          Apps                  Why endless swiping starts to feel like another job.           20-35s original AI-assisted reel. Reel comparing inbox tasks to swipes. Hook visible in         Soft discussion / profile
+                                                                                                                       first 2s; 4-6 scenes; natural UK voice; captions; end with one question.                        follow
+
+     AHSUK-025      Image         First dates           Five first dates for people with almost no free time.          4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;          Soft discussion / profile
+                                                                                                                       caption carries the story.                                                                      follow
+
+     AHSUK-026      Reel          Communication         Daily texting, a few times a week, or only to arrange dates?   20-35s original AI-assisted reel. Question card. Hook visible in first 2s; 4-6 scenes;          Soft discussion / profile
+                                                                                                                       natural UK voice; captions; end with one question.                                              follow
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                       Page 16
+     ID             Format        Pillar                Hook / content idea                                                Staff asset brief                                                                           CTA
+
+     AHSUK-027      Carousel      Story                 Two busy people schedule a first date three weeks ahead. Is that   5-slide 4:5 carousel. Calendar-style reel. Slide 1 hook, slides 2-4 value, slide 5          Soft discussion / profile
+                                                        romantic or ridiculous?                                            discussion question.                                                                        follow
+
+
+
+
+Week 4 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                Staff asset brief                                                                           CTA
+
+     AHSUK-028      Reel          Independence          Do you want a relationship - or simply someone to share            20-35s original AI-assisted reel. Editorial card. Hook visible in first 2s; 4-6 scenes;     Comments / follow
+                                                        weekends with?                                                     natural UK voice; captions; end with one question.
+
+     AHSUK-029      Image         Communication         How much texting is enough when both people have full lives?       4:5 editorial image/story card. Native poll. Headline max 12 words; page branding           Comments / follow
+                                                                                                                           subtle; caption carries the story.
+
+     AHSUK-030      Reel          Standards             Chemistry vs lifestyle compatibility - which matters more after    20-35s original AI-assisted reel. Comparison story reel. Hook visible in first 2s; 4-6      Comments / follow
+                                                        35?                                                                scenes; natural UK voice; captions; end with one question.
+
+     AHSUK-031      Poll          Modern dating         He had everything except somebody to call after work.              Native Facebook poll/question. City-evening story card. Keep options simple; no             Comments / follow
+                                                                                                                           outbound link; reply to early comments.
+
+     AHSUK-032      Image         Rejection             How to take a polite no without wasting another week analysing     4:5 editorial image/story card. Practical reel, calm and respectful. Headline max 12        Comments / follow
+                                                        it.                                                                words; page branding subtle; caption carries the story.
+
+     AHSUK-033      Reel          Discussion            Would you date your boss, colleague, or client?                    20-35s original AI-assisted reel. Question image. Hook visible in first 2s; 4-6 scenes;     Comments / follow
+                                                                                                                           natural UK voice; captions; end with one question.
+
+     AHSUK-034      Image         Dating                Four questions busy people should ask early.                       4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;      Comments / follow
+                                                                                                                           caption carries the story.
+
+     AHSUK-035      Reel          Guide bridge          Dating when time is limited: what kind of service actually fits?   20-35s original AI-assisted reel. Educational reel leading to neutral guide. Hook visible   Guide bridge only if
+                                                                                                                           in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.                 relevant
+
+     AHSUK-036      Carousel      Community             The three biggest dating debates from this month.                  5-slide 4:5 carousel. Recap image with three bold prompts. Slide 1 hook, slides 2-4         Guide bridge only if
+                                                                                                                           value, slide 5 discussion question.                                                         relevant
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                       Page 17
+10.3 Page Playbook - Single Parent Stories UK
+Code: SPSUK | Target: 30-50
+
+    Persona                                                          Bio                                                                Tone                                                        Visual system
+
+    Single or divorced mums and dads balancing children,             Dating, parenting and starting again. UK stories and               Supportive, practical, human and non-judgemental.           Natural family-life editorial imagery, soft
+    co-parenting, work and dating.                                   conversations for single mums and dads.                                                                                        blue/cream, privacy-first visuals with no identifiable
+                                                                                                                                                                                                    children.
+
+
+
+Core pillars: Childcare; time; ex boundaries; children; guilt; blended families; privacy; confidence; money.
+
+Commercial hypothesis: Serious/general dating routes and services suitable for adults with children.
+
+Priority launch ideas: The first 10 rows in the month calendar are marked PRIORITY. They are the strongest initial hypotheses, not guaranteed viral posts.
+
+Week 1 - 9 posts
+     ID             Format         Pillar                  Hook / content idea                                               Staff asset brief                                                                               CTA
+
+     SPSUK-001      Reel           Childcare               PRIORITY - First date in seven months. Babysitter cancels 40      20-35s original AI-assisted reel. Narrated reel: calendar, sitter text, outfit, decision.       Comments only
+                                                           minutes before.                                                   Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-002      Image          Children                PRIORITY - How long before someone you are dating should          4:5 editorial image/story card. Question card. Headline max 12 words; page branding             Comments only
+                                                           meet your children?                                               subtle; caption carries the story.
+
+     SPSUK-003      Reel           Time                    PRIORITY - Dating when your free weekend happens once every       20-35s original AI-assisted reel. Schedule reel showing limited windows. Hook visible           Comments only
+                                                           two weeks.                                                        in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-004      Poll           Partner fit             PRIORITY - Would you rather date another parent or someone        Native Facebook poll/question. Native poll. Keep options simple; no outbound link;              Comments only
+                                                           without children?                                                 reply to early comments.
+
+     SPSUK-005      Image          Guilt                   PRIORITY - Why did she feel guilty for enjoying a date?           4:5 editorial image/story card. Reflective editorial image + caption. Headline max 12           Comments only
+                                                                                                                             words; page branding subtle; caption carries the story.
+
+     SPSUK-006      Reel           Reality                 PRIORITY - Dating profile says spontaneous. Single parent says:   20-35s original AI-assisted reel. Funny reel with calendar chaos. Hook visible in first         Comments only
+                                                           define spontaneous.                                               2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-007      Image          Ex boundaries           PRIORITY - Your ex does not like you dating again. Does their     4:5 editorial image/story card. Neutral question card. Headline max 12 words; page              Comments only
+                                                           opinion matter?                                                   branding subtle; caption carries the story.
+
+     SPSUK-008      Reel           Introductions           PRIORITY - The children accidentally meet the new person          20-35s original AI-assisted reel. Fictional story reel, respectful. Hook visible in first 2s;   Comments only
+                                                           earlier than planned.                                             4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-009      Carousel       Boundaries              PRIORITY - 5 boundaries single parents need when dating.          5-slide 4:5 carousel. Carousel. Slide 1 hook, slides 2-4 value, slide 5 discussion              Comments only
+                                                                                                                             question.
+
+
+
+
+Week 2 - 9 posts
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                          Page 18
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                              CTA
+
+     SPSUK-010      Reel          Time                  PRIORITY - Free Saturday: date, friends, or simply sleep?         20-35s original AI-assisted reel. Humorous scenario reel. Hook visible in first 2s; 4-6        Comments only
+                                                                                                                          scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-011      Image         Privacy               Do your children get a vote in who you date?                      4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Comments only
+                                                                                                                          subtle; caption carries the story.
+
+     SPSUK-012      Reel          Non-parent            Dating someone who does not have children - what gets             20-35s original AI-assisted reel. Reel with two perspectives. Hook visible in first 2s; 4-6    Comments only
+                                                        misunderstood?                                                    scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-013      Poll          Introductions         Meet children after 1, 3, 6, or 12 months?                        Native Facebook poll/question. Native poll. Keep options simple; no outbound link;             Comments only
+                                                                                                                          reply to early comments.
+
+     SPSUK-014      Image         Privacy               Would you ever put photos of your children on a dating profile?   4:5 editorial image/story card. Safety-first question image. Headline max 12 words;            Comments only
+                                                                                                                          page branding subtle; caption carries the story.
+
+     SPSUK-015      Reel          Money                 When childcare costs more than the date.                          20-35s original AI-assisted reel. Relatable reel with simple cost comparison. Hook             Comments only
+                                                                                                                          visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-016      Image         First dates           Five easy dates that work around childcare.                       4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;         Comments only
+                                                                                                                          caption carries the story.
+
+     SPSUK-017      Reel          Exes                  How much should a new date know about the co-parenting            20-35s original AI-assisted reel. Question card. Hook visible in first 2s; 4-6 scenes;         Comments only
+                                                        situation?                                                        natural UK voice; captions; end with one question.
+
+     SPSUK-018      Carousel      Scheduling            Two single parents try to find the same free evening.             5-slide 4:5 carousel. Calendar-comedy reel. Slide 1 hook, slides 2-4 value, slide 5            Comments only
+                                                                                                                          discussion question.
+
+
+
+
+Week 3 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                              CTA
+
+     SPSUK-019      Reel          Seriousness           When should children know it is serious?                          20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural   Soft discussion / profile
+                                                                                                                          UK voice; captions; end with one question.                                                     follow
+
+     SPSUK-020      Image         Guilt                 The first overnight away from the children after years alone.     4:5 editorial image/story card. Gentle narrated reel. Headline max 12 words; page              Soft discussion / profile
+                                                                                                                          branding subtle; caption carries the story.                                                    follow
+
+     SPSUK-021      Reel          Blended family        Would you ever move in together if both of you have children?     20-35s original AI-assisted reel. Home/family editorial image. Hook visible in first 2s;       Soft discussion / profile
+                                                                                                                          4-6 scenes; natural UK voice; captions; end with one question.                                 follow
+
+     SPSUK-022      Poll          Teenagers             Your teenager discovers your dating app. What is your first       Native Facebook poll/question. Light fictional reel. Keep options simple; no outbound          Soft discussion / profile
+                                                        sentence?                                                         link; reply to early comments.                                                                 follow
+
+     SPSUK-023      Image         Identity              You are still a person, not only a parent.                        4:5 editorial image/story card. Warm portrait + affirmation, no therapy claims. Headline       Soft discussion / profile
+                                                                                                                          max 12 words; page branding subtle; caption carries the story.                                 follow
+
+     SPSUK-024      Reel          Mistakes              4 things not to rush when dating as a parent.                     20-35s original AI-assisted reel. Carousel. Hook visible in first 2s; 4-6 scenes; natural      Soft discussion / profile
+                                                                                                                          UK voice; captions; end with one question.                                                     follow
+
+     SPSUK-025      Image         Communication         How much do you tell a first date about your ex?                  4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Soft discussion / profile
+                                                                                                                          subtle; caption carries the story.                                                             follow
+
+     SPSUK-026      Reel          Support               A friend finally convinces a single parent to go on one date.     20-35s original AI-assisted reel. Hopeful story reel. Hook visible in first 2s; 4-6 scenes;    Soft discussion / profile
+                                                                                                                          natural UK voice; captions; end with one question.                                             follow
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                         Page 19
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                             CTA
+
+     SPSUK-027      Carousel      Blended family        What makes a blended family feel safe rather than forced?         5-slide 4:5 carousel. Thoughtful image + comments prompt. Slide 1 hook, slides 2-4            Soft discussion / profile
+                                                                                                                          value, slide 5 discussion question.                                                           follow
+
+
+
+
+Week 4 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                             CTA
+
+     SPSUK-028      Reel          Childcare             The same date gets rescheduled three times. Does the other        20-35s original AI-assisted reel. Scenario reel. Hook visible in first 2s; 4-6 scenes;        Comments / follow
+                                                        person stay patient?                                              natural UK voice; captions; end with one question.
+
+     SPSUK-029      Image         Weekend               Family weekend, partner weekend, or everyone together?            4:5 editorial image/story card. Native poll. Headline max 12 words; page branding             Comments / follow
+                                                                                                                          subtle; caption carries the story.
+
+     SPSUK-030      Reel          Confidence            Getting dressed for a first date after years of being in parent   20-35s original AI-assisted reel. Transformation reel, tasteful and realistic. Hook visible   Comments / follow
+                                                        mode.                                                             in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SPSUK-031      Poll          Second chance         Two parents, four children, one impossible calendar.              Native Facebook poll/question. Story card. Keep options simple; no outbound link;             Comments / follow
+                                                                                                                          reply to early comments.
+
+     SPSUK-032      Image         Independence          Keeping your own family routines while making room for            4:5 editorial image/story card. Practical reel. Headline max 12 words; page branding          Comments / follow
+                                                        someone new.                                                      subtle; caption carries the story.
+
+     SPSUK-033      Reel          Community             Single parents: what makes dating hardest for you?                20-35s original AI-assisted reel. Discussion image. Hook visible in first 2s; 4-6 scenes;     Comments / follow
+                                                                                                                          natural UK voice; captions; end with one question.
+
+     SPSUK-034      Image         Questions             Four questions before introducing someone to your children.       4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;        Comments / follow
+                                                                                                                          caption carries the story.
+
+     SPSUK-035      Reel          Guide bridge          Dating again as a parent: what should a useful dating service     20-35s original AI-assisted reel. Educational reel leading to neutral guide. Hook visible     Guide bridge only if
+                                                        help with?                                                        in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.                   relevant
+
+     SPSUK-036      Carousel      Community             Best advice from this month's parent conversations.               5-slide 4:5 carousel. Recap image with anonymous themes. Slide 1 hook, slides 2-4             Guide bridge only if
+                                                                                                                          value, slide 5 discussion question.                                                           relevant
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                        Page 20
+10.4 Page Playbook - Still Got It UK
+Code: SGIUK | Target: 50-65+
+
+    Persona                                                          Bio                                                                   Tone                                                      Visual system
+
+    Mature singles, divorced/widowed/long-term single adults who     You are older, wiser and definitely not finished. Dating,             Warm, premium, confident and grown-up. Never              Navy + cream, mature adults, travel, restaurants,
+    value companionship and independence.                            independence, companionship and new beginnings after 50.              patronising or "elderly".                                 walks, home life; polished readable typography.
+
+
+
+Core pillars: Companionship; independence; technology; travel; widowhood/divorce; adult children; dating confidence; money.
+
+Commercial hypothesis: Mature, serious and companionship-focused dating offers; test casual only where appropriate.
+
+Priority launch ideas: The first 10 rows in the month calendar are marked PRIORITY. They are the strongest initial hypotheses, not guaranteed viral posts.
+
+Week 1 - 9 posts
+     ID             Format         Pillar                  Hook / content idea                                                  Staff asset brief                                                                            CTA
+
+     SGIUK-001      Reel           Starting again          PRIORITY - She had not been on a first date since 1998.              20-35s original AI-assisted reel. Warm story reel: wardrobe, mirror, taxi, cafe. Hook        Comments only
+                                                                                                                                visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-002      Image          Independence            PRIORITY - At 58: love again - or protect your peaceful life?        4:5 editorial image/story card. Premium question card. Headline max 12 words; page           Comments only
+                                                                                                                                branding subtle; caption carries the story.
+
+     SGIUK-003      Reel           Technology              PRIORITY - Dating apps explained to someone whose last first         20-35s original AI-assisted reel. Light humorous reel, no mocking. Hook visible in first     Comments only
+                                                           date started with a landline call.                                   2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-004      Poll           Lifestyle               PRIORITY - Marriage again, relationship with separate homes,         Native Facebook poll/question. Native poll. Keep options simple; no outbound link;           Comments only
+                                                           companionship, or unsure?                                            reply to early comments.
+
+     SGIUK-005      Image          Confidence              PRIORITY - Older does not mean finished.                             4:5 editorial image/story card. Portrait + strong simple headline. Headline max 12           Comments only
+                                                                                                                                words; page branding subtle; caption carries the story.
+
+     SGIUK-006      Reel           Travel                  PRIORITY - Would you take a weekend trip with someone after          20-35s original AI-assisted reel. Travel story reel. Hook visible in first 2s; 4-6 scenes;   Comments only
+                                                           three dates?                                                         natural UK voice; captions; end with one question.
+
+     SGIUK-007      Image          Family                  PRIORITY - Your adult daughter finds out Mum has a date              4:5 editorial image/story card. Editorial image + short caption. Headline max 12 words;      Comments only
+                                                           tonight.                                                             page branding subtle; caption carries the story.
+
+     SGIUK-008      Reel           Companionship           PRIORITY - Sometimes you do not want another marriage. You           20-35s original AI-assisted reel. Narrated reel, warm everyday scenes. Hook visible in       Comments only
+                                                           just want your person.                                               first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-009      Carousel       Dating                  PRIORITY - 5 things that can actually be better about dating after   5-slide 4:5 carousel. Carousel. Slide 1 hook, slides 2-4 value, slide 5 discussion           Comments only
+                                                           50.                                                                  question.
+
+
+
+
+Week 2 - 9 posts
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                        Page 21
+     ID             Format        Pillar                Hook / content idea                                                  Staff asset brief                                                                              CTA
+
+     SGIUK-010      Reel          First date            PRIORITY - Coffee, dinner, or an afternoon walk - what is the        20-35s original AI-assisted reel. Reel with three quick scenes. Hook visible in first 2s;      Comments only
+                                                        ideal first date now?                                                4-6 scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-011      Image         Money                 Would you ever combine finances with a partner again?                4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Comments only
+                                                                                                                             subtle; caption carries the story.
+
+     SGIUK-012      Reel          Starting again        The first date after a very long relationship: what feels hardest?   20-35s original AI-assisted reel. Reflective story reel. Hook visible in first 2s; 4-6         Comments only
+                                                                                                                             scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-013      Poll          Living                Together or separate homes?                                          Native Facebook poll/question. Native poll. Keep options simple; no outbound link;             Comments only
+                                                                                                                             reply to early comments.
+
+     SGIUK-014      Image         Standards             At 55, do looks matter less - or simply differently?                 4:5 editorial image/story card. Tasteful portrait + question. Headline max 12 words;           Comments only
+                                                                                                                             page branding subtle; caption carries the story.
+
+     SGIUK-015      Reel          Confidence            Buying a new outfit for your first date in years.                    20-35s original AI-assisted reel. Feel-good preparation reel. Hook visible in first 2s; 4-6    Comments only
+                                                                                                                             scenes; natural UK voice; captions; end with one question.
+
+     SGIUK-016      Image         Safety                Smart first-date habits after 50.                                    4:5 editorial image/story card. Carousel, practical and calm. Headline max 12 words;           Comments only
+                                                                                                                             page branding subtle; caption carries the story.
+
+     SGIUK-017      Reel          Family                Adult children dislike the new partner. How much weight do you       20-35s original AI-assisted reel. Question image. Hook visible in first 2s; 4-6 scenes;        Comments only
+                                                        give that?                                                           natural UK voice; captions; end with one question.
+
+     SGIUK-018      Carousel      Apps                  Your first dating-app match after 50. What do you say?               5-slide 4:5 carousel. Message-style reel, wholesome. Slide 1 hook, slides 2-4 value,           Comments only
+                                                                                                                             slide 5 discussion question.
+
+
+
+
+Week 3 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                  Staff asset brief                                                                              CTA
+
+     SGIUK-019      Reel          Age gap               Would you date 10 years younger or older?                            20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural   Soft discussion / profile
+                                                                                                                             UK voice; captions; end with one question.                                                     follow
+
+     SGIUK-020      Image         Travel                Would companionship make you travel more?                            4:5 editorial image/story card. Travel reel: coast/train/weekend break. Headline max 12        Soft discussion / profile
+                                                                                                                             words; page branding subtle; caption carries the story.                                        follow
+
+     SGIUK-021      Reel          Marriage              Would you ever marry again?                                          20-35s original AI-assisted reel. Elegant question card. Hook visible in first 2s; 4-6         Soft discussion / profile
+                                                                                                                             scenes; natural UK voice; captions; end with one question.                                     follow
+
+     SGIUK-022      Poll          Independence          Two homes, one relationship. Better than moving in?                  Native Facebook poll/question. Two-home reel. Keep options simple; no outbound link;           Soft discussion / profile
+                                                                                                                             reply to early comments.                                                                       follow
+
+     SGIUK-023      Image         Confidence            Grey hair on a dating profile: hide it or own it?                    4:5 editorial image/story card. Portrait + bold headline. Headline max 12 words; page          Soft discussion / profile
+                                                                                                                             branding subtle; caption carries the story.                                                    follow
+
+     SGIUK-024      Reel          Conversation          5 first-date questions that are not boring.                          20-35s original AI-assisted reel. Carousel. Hook visible in first 2s; 4-6 scenes; natural      Soft discussion / profile
+                                                                                                                             UK voice; captions; end with one question.                                                     follow
+
+     SGIUK-025      Image         Lifestyle             What matters more now: chemistry, kindness, or compatibility?        4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Soft discussion / profile
+                                                                                                                             subtle; caption carries the story.                                                             follow
+
+     SGIUK-026      Reel          Technology            An emoji misunderstanding turns into a funny first date.             20-35s original AI-assisted reel. Light story reel. Hook visible in first 2s; 4-6 scenes;      Soft discussion / profile
+                                                                                                                             natural UK voice; captions; end with one question.                                             follow
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                            Page 22
+     ID             Format        Pillar                Hook / content idea                                             Staff asset brief                                                                             CTA
+
+     SGIUK-027      Carousel      Friendship            When friendship slowly becomes dating after 50.                 5-slide 4:5 carousel. Warm paired-walk image. Slide 1 hook, slides 2-4 value, slide 5         Soft discussion / profile
+                                                                                                                        discussion question.                                                                          follow
+
+
+
+
+Week 4 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                             Staff asset brief                                                                             CTA
+
+     SGIUK-028      Reel          Companionship         Sunday loneliness vs enjoying your independence - both can be   20-35s original AI-assisted reel. Reflective reel. Hook visible in first 2s; 4-6 scenes;      Comments / follow
+                                                        true.                                                           natural UK voice; captions; end with one question.
+
+     SGIUK-029      Image         Dating route          Apps, introductions, events, or chance meeting?                 4:5 editorial image/story card. Native poll. Headline max 12 words; page branding             Comments / follow
+                                                                                                                        subtle; caption carries the story.
+
+     SGIUK-030      Reel          New beginning         A 60th birthday sparks one decision: say yes to meeting new     20-35s original AI-assisted reel. Story reel. Hook visible in first 2s; 4-6 scenes; natural   Comments / follow
+                                                        people.                                                         UK voice; captions; end with one question.
+
+     SGIUK-031      Poll          Community             At what age did you have your best relationship?                Native Facebook poll/question. Conversation card. Keep options simple; no outbound            Comments / follow
+                                                                                                                        link; reply to early comments.
+
+     SGIUK-032      Image         Confidence            The first kiss after years away from dating.                    4:5 editorial image/story card. Tasteful cinematic reel, non-explicit. Headline max 12        Comments / follow
+                                                                                                                        words; page branding subtle; caption carries the story.
+
+     SGIUK-033      Reel          Dating tech           What should a dating service make easier for someone over 50?   20-35s original AI-assisted reel. Question image. Hook visible in first 2s; 4-6 scenes;       Comments / follow
+                                                                                                                        natural UK voice; captions; end with one question.
+
+     SGIUK-034      Image         Apps                  Four things to look for in a dating service after 50.           4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;        Comments / follow
+                                                                                                                        caption carries the story.
+
+     SGIUK-035      Reel          Guide bridge          We compared practical ways to start dating again after 50.      20-35s original AI-assisted reel. Educational reel leading to guide. Hook visible in first    Guide bridge only if
+                                                                                                                        2s; 4-6 scenes; natural UK voice; captions; end with one question.                            relevant
+
+     SGIUK-036      Carousel      Community             The best advice from this month's 50+ conversations.            5-slide 4:5 carousel. Recap image with anonymous themes. Slide 1 hook, slides 2-4             Guide bridge only if
+                                                                                                                        value, slide 5 discussion question.                                                           relevant
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                      Page 23
+10.5 Page Playbook - Casual By Choice UK
+Code: CBCUK | Target: 30-50 men
+
+    Persona                                                        Bio                                                                   Tone                                                      Visual system
+
+    Men over 30 who value independence and may prefer casual or    Modern single life for UK men 30+. Dating, confidence, first          Confident, direct, respectful and practical. Never        Dark navy + white, city nights, grooming,
+    low-pressure dating rather than immediate commitment.          dates, attraction and honest no-pressure connections.                 bitter, misogynistic or sexually explicit.                restaurants, travel, fitness, social life; premium
+                                                                                                                                                                                                   male lifestyle.
+
+
+
+Core pillars: Intentions; confidence; texting; rejection; profiles; first dates; independence; social life; attraction; honesty.
+
+Commercial hypothesis: Casual/general dating PPS routes, subject to partner and platform traffic rules.
+
+Priority launch ideas: The first 10 rows in the month calendar are marked PRIORITY. They are the strongest initial hypotheses, not guaranteed viral posts.
+
+Week 1 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                   Staff asset brief                                                                             CTA
+
+     CBCUK-001      Reel          Intentions            PRIORITY - You are 36 and do not want marriage right now. Is          20-35s original AI-assisted reel. Night-city lifestyle reel with direct voiceover. Hook       Comments only
+                                                        that actually a problem?                                              visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-002      Image         Honesty               PRIORITY - Casual is fine. Misleading someone is not.                 4:5 editorial image/story card. Strong typographic image, clean and non-preachy.              Comments only
+                                                                                                                              Headline max 12 words; page branding subtle; caption carries the story.
+
+     CBCUK-003      Reel          Texting               PRIORITY - She replies once every 12 hours. Interested or not?        20-35s original AI-assisted reel. Fictional chat reel with three interpretations. Hook        Comments only
+                                                                                                                              visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-004      Poll          First date            PRIORITY - Drinks, coffee, dinner, or an activity for a first date?   Native Facebook poll/question. Native poll. Keep options simple; no outbound link;            Comments only
+                                                                                                                              reply to early comments.
+
+     CBCUK-005      Image         Single life           PRIORITY - Would you rather be single than stay in the wrong          4:5 editorial image/story card. Lifestyle portrait + question. Headline max 12 words;         Comments only
+                                                        relationship?                                                         page branding subtle; caption carries the story.
+
+     CBCUK-006      Reel          Confidence            PRIORITY - The difference between confidence and trying too           20-35s original AI-assisted reel. Reel with side-by-side behaviours, respectful. Hook         Comments only
+                                                        hard.                                                                 visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-007      Image         Independence          PRIORITY - After 35, is peace more valuable than a relationship?      4:5 editorial image/story card. Minimal image card. Headline max 12 words; page               Comments only
+                                                                                                                              branding subtle; caption carries the story.
+
+     CBCUK-008      Reel          Intentions            PRIORITY - When should you say you are only looking for               20-35s original AI-assisted reel. Practical reel with direct wording examples. Hook           Comments only
+                                                        something casual?                                                     visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-009      Carousel      Profile               PRIORITY - 5 profile mistakes men over 30 keep making.                5-slide 4:5 carousel. Carousel: blurry photo, empty bio, negativity, old photos, unclear      Comments only
+                                                                                                                              intent. Slide 1 hook, slides 2-4 value, slide 5 discussion question.
+
+
+
+
+Week 2 - 9 posts
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                            Page 24
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                              CTA
+
+     CBCUK-010      Reel          Rejection             PRIORITY - She said no. The right response is simple: accept it   20-35s original AI-assisted reel. Short behaviour reel, calm and respectful. Hook visible      Comments only
+                                                        and move on.                                                      in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-011      Image         Texting               Double text: normal or desperate?                                 4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Comments only
+                                                                                                                          subtle; caption carries the story.
+
+     CBCUK-012      Reel          First date            The date is going well. Extend it or leave on a high?             20-35s original AI-assisted reel. Scenario reel. Hook visible in first 2s; 4-6 scenes;         Comments only
+                                                                                                                          natural UK voice; captions; end with one question.
+
+     CBCUK-013      Poll          Intentions            Casual, relationship, or open to either?                          Native Facebook poll/question. Native poll. Keep options simple; no outbound link;             Comments only
+                                                                                                                          reply to early comments.
+
+     CBCUK-014      Image         Lifestyle             Could you date someone who hates travelling?                      4:5 editorial image/story card. Travel-lifestyle image. Headline max 12 words; page            Comments only
+                                                                                                                          branding subtle; caption carries the story.
+
+     CBCUK-015      Reel          Profile               Better dating-profile photos without pretending to be someone     20-35s original AI-assisted reel. Practical before/after concept reel using fictional          Comments only
+                                                        else.                                                             model. Hook visible in first 2s; 4-6 scenes; natural UK voice; captions; end with one
+                                                                                                                          question.
+
+     CBCUK-016      Image         First dates           Five easy first-date ideas for men 30+.                           4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;         Comments only
+                                                                                                                          caption carries the story.
+
+     CBCUK-017      Reel          Communication         Is daily texting necessary if you are casually dating?            20-35s original AI-assisted reel. Question card. Hook visible in first 2s; 4-6 scenes;         Comments only
+                                                                                                                          natural UK voice; captions; end with one question.
+
+     CBCUK-018      Carousel      Story                 Two adults discover they want completely different things.        5-slide 4:5 carousel. Fictional two-perspective reel. Slide 1 hook, slides 2-4 value, slide    Comments only
+                                                                                                                          5 discussion question.
+
+
+
+
+Week 3 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                               Staff asset brief                                                                              CTA
+
+     CBCUK-019      Reel          Social life           Pub, restaurant, event, or app for meeting someone?               20-35s original AI-assisted reel. Native poll. Hook visible in first 2s; 4-6 scenes; natural   Soft discussion / profile
+                                                                                                                          UK voice; captions; end with one question.                                                     follow
+
+     CBCUK-020      Image         Confidence            Going to an event alone without looking uncomfortable.            4:5 editorial image/story card. Practical lifestyle reel. Headline max 12 words; page          Soft discussion / profile
+                                                                                                                          branding subtle; caption carries the story.                                                    follow
+
+     CBCUK-021      Reel          Boundaries            Casual dating still needs boundaries.                             20-35s original AI-assisted reel. Simple image card. Hook visible in first 2s; 4-6 scenes;     Soft discussion / profile
+                                                                                                                          natural UK voice; captions; end with one question.                                             follow
+
+     CBCUK-022      Poll          Attraction            Chemistry is not the same as compatibility.                       Native Facebook poll/question. Fast explanatory reel. Keep options simple; no                  Soft discussion / profile
+                                                                                                                          outbound link; reply to early comments.                                                        follow
+
+     CBCUK-023      Image         Independence          Your weekend is already good without a date. That is the point.   4:5 editorial image/story card. Lifestyle image: gym, coffee, friends, city. Headline max      Soft discussion / profile
+                                                                                                                          12 words; page branding subtle; caption carries the story.                                     follow
+
+     CBCUK-024      Reel          Messaging             4 messages that kill a conversation.                              20-35s original AI-assisted reel. Carousel with respectful examples. Hook visible in first     Soft discussion / profile
+                                                                                                                          2s; 4-6 scenes; natural UK voice; captions; end with one question.                             follow
+
+     CBCUK-025      Image         Honesty               Would you tell someone you are dating other people?               4:5 editorial image/story card. Question card. Headline max 12 words; page branding            Soft discussion / profile
+                                                                                                                          subtle; caption carries the story.                                                             follow
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                         Page 25
+     ID             Format        Pillar                Hook / content idea                                                 Staff asset brief                                                                            CTA
+
+     CBCUK-026      Reel          Rejection             What to do after being ghosted instead of chasing.                  20-35s original AI-assisted reel. Practical reel. Hook visible in first 2s; 4-6 scenes;      Soft discussion / profile
+                                                                                                                            natural UK voice; captions; end with one question.                                           follow
+
+     CBCUK-027      Carousel      Lifestyle             What does a genuinely good single life look like after 30?          5-slide 4:5 carousel. Editorial image. Slide 1 hook, slides 2-4 value, slide 5 discussion    Soft discussion / profile
+                                                                                                                            question.                                                                                    follow
+
+
+
+
+Week 4 - 9 posts
+     ID             Format        Pillar                Hook / content idea                                                 Staff asset brief                                                                            CTA
+
+     CBCUK-028      Reel          Travel                Dating while travelling around the UK for work or weekends.         20-35s original AI-assisted reel. Travel reel with clear boundaries. Hook visible in first   Comments / follow
+                                                                                                                            2s; 4-6 scenes; natural UK voice; captions; end with one question.
+
+     CBCUK-029      Image         Dating style          One person at a time or casual until exclusive?                     4:5 editorial image/story card. Native poll. Headline max 12 words; page branding            Comments / follow
+                                                                                                                            subtle; caption carries the story.
+
+     CBCUK-030      Reel          First date            The 45-minute first-date rule: smart or too transactional?          20-35s original AI-assisted reel. Debate reel. Hook visible in first 2s; 4-6 scenes;         Comments / follow
+                                                                                                                            natural UK voice; captions; end with one question.
+
+     CBCUK-031      Poll          Story                 A man rebuilds his social life after divorce before dating again.   Native Facebook poll/question. Positive story card. Keep options simple; no outbound         Comments / follow
+                                                                                                                            link; reply to early comments.
+
+     CBCUK-032      Image         Confidence            The difference between chasing and showing interest.                4:5 editorial image/story card. Practical reel with examples. Headline max 12 words;         Comments / follow
+                                                                                                                            page branding subtle; caption carries the story.
+
+     CBCUK-033      Reel          Community             Men 30+: what is harder now than dating in your 20s?                20-35s original AI-assisted reel. Question image. Hook visible in first 2s; 4-6 scenes;      Comments / follow
+                                                                                                                            natural UK voice; captions; end with one question.
+
+     CBCUK-034      Image         Intentions            4 ways to make your intentions clear without making it awkward.     4:5 editorial image/story card. Carousel. Headline max 12 words; page branding subtle;       Comments / follow
+                                                                                                                            caption carries the story.
+
+     CBCUK-035      Reel          Guide bridge          What kind of dating service fits someone who wants low-pressure     20-35s original AI-assisted reel. Educational reel leading to neutral guide. Hook visible    Guide bridge only if
+                                                        dating?                                                             in first 2s; 4-6 scenes; natural UK voice; captions; end with one question.                  relevant
+
+     CBCUK-036      Carousel      Community             The best men's dating debate from this month.                       5-slide 4:5 carousel. Recap image with three anonymous positions. Slide 1 hook, slides       Guide bridge only if
+                                                                                                                            2-4 value, slide 5 discussion question.                                                      relevant
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                                         Page 26
+11. 30-Day Growth and Learning Sprint
+         Week 1 - Establish                       Publish 9 posts/page. No affiliate selling. Confirm branding, tone and format quality. Staff replies to meaningful comments. Start clean
+         identity                                 baselines.
+
+
+         Week 2 - Find                            Publish 9 posts/page. Measure reach, share rate, comments, follows and watch behaviour. Identify early winning hooks/pillars. Still no
+         patterns                                 hard selling.
+
+
+         Week 3 - Double                          Publish 9 posts/page. At least half of new content should be influenced by themes beating the Page median. Introduce one useful
+         down                                     editorial website guide per page if the public site is ready.
+
+
+         Week 4 - First                           Publish final 9 posts/page. Maximum one editorial guide CTA and one comparison-page CTA per page. Keep the rest native. Begin
+         monetisation test                        click-ID attribution and approved PPS measurement if affiliate relationships are ready.
+
+
+Paid support: GBP0 for the first 14 days. Days 15-30: optional network test budget roughly GBP200-300 total, used only to amplify posts that have already clearly beaten their
+Page baseline. Paid support is not used to rescue weak content or to buy vanity followers.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                 Page 27
+12. AudienceOS - Product Specification for the Later Cursor Build
+This is the minimum architecture the future internal web app must support. Do not build it from this PDF until the owner gives the separate Cursor build instruction.
+
+User roles: Owner/Admin; Content Operator; optional Reviewer; optional Analyst. Each staff member gets an individual login. Never share the owner password. Passwords must
+be securely hashed by the authentication system, not stored in plaintext.
+
+    Module                                     What the owner sees                                                             What staff sees / does
+
+    Today                                      Network status, overdue tasks, approvals, winners.                              Exact assigned tasks, due time, format, hook, script, asset brief, Drive folder, status.
+
+    Content engine                             Idea bank by persona/pillar/hook/format; winner-derived ideas.                  AI draft options -> human edit -> submit for review.
+
+    Calendar                                   All pages, regions and staff in one calendar.                                   Only assigned/allowed pages.
+
+    Google Drive                               Linked asset folders and usage status.                                          Open assigned folder, upload final asset, mark ready.
+
+    Analytics                                  Reach, shares, comments, follows, clicks, sales, revenue by page/post/pillar.   Basic feedback on published tasks; no financial controls unless granted.
+
+    Affiliate attribution                      Post -> site session -> partner click -> PPS status -> revenue.                 Normally hidden from content operator except simplified outcome.
+
+    Expansion                                  Add new GEO, pages, language, offers, staff without rebuilding the product.     Assigned only to permitted markets/pages.
+
+
+
+Task object fields: task_id, geo, page_id, post_id, due_at, format, pillar, hook, brief, script, caption, asset_prompt, CTA, status, assignee, Drive_folder_id, reviewer,
+Facebook_post_id, public_url, published_at, 24h_metrics, 72h_metrics, winner_reason.
+
+Expansion principle: UK is a configuration, not hardcoded logic. Future GEOs such as Ireland, Germany or France should have their own pages, language rules, affiliate offers
+and staff assignments while using the same content/analytics engine.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                              Page 28
+13. Public Website / Comparison Architecture
+The internal AudienceOS and the public consumer website are separate products. A working public brand name is DateRoute UK (name availability must be checked before
+launch). The public site should be useful even if the user never clicks an affiliate offer.
+
+Suggested initial information architecture: /starting-again, /professional-singles, /single-parents, /dating-after-50, /casual-dating-men, /stories, /guides, /compare.
+
+Comparison flow: Facebook post -> useful article/guide -> comparison page -> clearly labelled affiliate buttons -> partner site. Each outbound button attaches the immutable
+post/click ID so a later PPS conversion can map back to the originating content.
+
+         Disclosure                               Where content is affiliate advertising, the commercial nature must be clear. UK ASA/CAP guidance says affiliate marketing is
+                                                  advertising and must be obviously identifiable. Build disclosure into the page template from day one.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                     Page 29
+14. Day-30 Decision Gates - Where We Put More Energy
+    Signal                                                     Decision
+
+    High reach + high share rate + low site intent             Keep as traffic/brand content, but do not assume commercial value. Test softer bridges.
+
+    Medium reach + strong site clicks / PPS                    Commercially valuable niche. Produce more content around the same persona and intent.
+
+    High reach + strong PPS                                    Highest-priority scale candidate: more organic volume, adjacent page concepts, selective paid amplification.
+
+    Low reach after 30+ quality posts                          Rework hooks/visual identity. If still weak, reduce output or sunset the page.
+
+    One pillar repeatedly beats Page median                    Create new executions around the insight and consider a dedicated recurring series.
+
+    One format repeatedly weak                                 Reduce it for that Page even if it works elsewhere. Pages do not need identical format mixes after month 1.
+
+
+
+
+Day-30 output: a ranked evidence map of personas, pillars, hooks and formats - not a subjective opinion about which page "looks best". The next 500 content ideas should be
+generated from that evidence.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                  Page 30
+15. Launch Checklist - What to Do Today
+1. Create the five Facebook Pages with the recommended names, bios and category/branding appropriate to each persona.
+
+2. Reserve matching Instagram handles where practical, but Facebook remains the first distribution engine.
+
+3. Create the Google Drive root and five page folders using the structure in Section 7.
+
+4. Create one simple master tracker with Post ID, Page, Pillar, Format, Due, Status, Facebook ID/URL, 24h metrics and 72h metrics.
+
+5. Produce profile image, cover image and three reusable design templates for each Page: story card, question card, carousel.
+
+6. Create the first 9 posts per Page (Week 1) before launching so staff never operates day-to-day from panic.
+
+7. Publish Week 1 without affiliate links. Focus on originality, comments and clean baseline data.
+
+8. Do not build thousands of posts yet. Use the first 45 posts network-wide as the first real learning sample.
+
+9. Do not start paid amplification until at least Day 15 and only on proven posts.
+
+10. When the owner is ready at night, use this document as the product brief for the separate AudienceOS Cursor planning session.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                         Page 31
+16. Copy-Paste Handoff Prompt for a Future ChatGPT / Cursor Session
+         MASTER HANDOFF                           You are working on the UK Audience Network project. Read the attached Master Business + Content Architecture PDF before making
+                                                  decisions. The project is a performance-publishing business: five distinct UK Facebook pages for adults 30+, original organic content
+                                                  first, one owned editorial/comparison website, and later PPS/CPA affiliate monetisation with post-level attribution. Month 1 is a
+                                                  180-post validation sprint, not a mass-content spam operation. The five launch pages are Back in the Game UK, After Hours Singles
+                                                  UK, Single Parent Stories UK, Still Got It UK, and Casual By Choice UK. AudienceOS is the future internal operating system: individual
+                                                  staff logins, assigned content tasks, Google Drive-linked asset folders, approval workflow, Facebook post mapping, analytics, affiliate
+                                                  click/subID attribution, PPS status/revenue, winner detection and multi-country expansion. Preserve the page personas, content rules,
+                                                  post IDs, KPI definitions and month-1 decision gates from the PDF. Do not invent fake testimonials or performance. Do not mass-copy
+                                                  content across pages. When proposing implementation, first audit existing code/infrastructure and reuse what already exists.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                Page 32
+17. Research Sources and Operating References
+    Source                                                                      How it informs this plan
+
+    Meta Newsroom - Rewarding Original Creators on Facebook (March 2026)        Used for originality guidance: original content is prioritised; duplicative/minor edits are deprioritised; original Reel views/watch time approximately
+                                                                                doubled in H2 2025 vs H2 2024.
+
+    DataReportal - Digital 2026: The United Kingdom                             Used for Facebook UK audience context: Meta ad-planning data indicated 38.8M Facebook users in late 2025 and reach equivalent to 69.9% of UK
+                                                                                adults 18+.
+
+    Ofcom - Online Nation 2025                                                  Used for current UK online behaviour context, including Facebook among commonly used apps.
+
+    Ofcom - Online Nation 2024 / 2025 dating summary                            Used for UK dating-service age patterns: Plenty of Fish and Match skewed older; 55-64 users who used dating services had high time spent.
+
+    ASA / CAP - Recognising ads: Social media and influencer marketing (2026)   Used for UK affiliate disclosure requirement: affiliate marketing is advertising and commercial content must be clearly identifiable.
+
+
+
+
+         Final principle                          The first month is not about proving we can produce content. AI can produce content. The first month is about proving which audience,
+                                                  insight, hook and format produces attention that can later become approved affiliate revenue. Every workflow decision should protect
+                                                  that learning loop.
+
+
+
+
+UK Audience Network - Master Business + Content Architecture                                                                                                                                                                              Page 33
+

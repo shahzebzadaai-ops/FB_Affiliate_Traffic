@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.affiliatetraffic.mediaworker</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>-m</string>
+    <string>atos_worker</string>
+    <string>poll</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/REPLACE_WITH_OWNER/affiliate-traffic-os/worker</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>ATOS_BASE_URL</key>
+    <string>https://REPLACE_WITH_OWNER_HOST</string>
+    <key>ATOS_TOKEN_FILE</key>
+    <string>/Users/REPLACE_WITH_OWNER/.config/atos/worker-token</string>
+    <key>ATOS_WORK_DIR</key>
+    <string>/Users/REPLACE_WITH_OWNER/Library/Caches/atos-media</string>
+    <key>ATOS_ASSET_ROOT</key>
+    <string>/Users/REPLACE_WITH_OWNER/Library/Caches/atos-media/originals</string>
+    <key>ATOS_HOST_LABEL</key>
+    <string>Mac M3 Pro</string>
+    <key>PYTHONPATH</key>
+    <string>/Users/REPLACE_WITH_OWNER/affiliate-traffic-os/worker</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>Nice</key>
+  <integer>5</integer>
+</dict>
+</plist>

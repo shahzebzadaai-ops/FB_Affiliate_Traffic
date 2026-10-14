@@ -1,28 +1,29 @@
-
 # Affiliate Traffic OS
 
-An organic-first affiliate publishing and traffic management platform.
+Internal operating system for an organic-first UK dating affiliate publisher.
 
-## Founder
-Shahzeb — Super Admin
+Shahzeb is Super Admin. Masho is the first Content Operator. The first market is the United Kingdom. The first vertical is dating affiliate publishing. Month one is 180 planned Facebook posts across five Pages.
 
-## First Staff Member
-Masho — Content Operator
+This repository is a Phase 1 development preview. It is not production login, and it is not connected to Facebook, Google Drive or an affiliate network.
 
-## Initial Business
-- Market: United Kingdom
-- Vertical: Dating affiliates
-- Facebook Pages: 5
-- Month 1: 180 planned posts
-- Revenue Model: CPA / PPS
+## Preview
 
-## Platform Goals
-- Staff login and role management
-- Daily content tasks
-- AI-assisted Reels and image creation
-- Google Drive asset management
-- Content approvals
-- Facebook performance analytics
-- Affiliate click tracking
-- Secure postback and commission reporting
-- Future expansion to more regions, staff and verticals
+```bash
+npm install
+npm test
+npm run dev
+```
+
+Open the app and choose a development preview identity. There is no password.
+
+## Documents
+
+Future work should start with `docs/PRODUCT_MASTER.md`, `docs/DECISION_LOG.md` and `docs/BUILD_STATUS.md`. `AGENTS.md` points to the same files.
+
+## Plan import
+
+The month-one calendar is parsed from `data/source/uk-audience-network-plan.txt`.
+
+```bash
+npm run import:plan
+```
