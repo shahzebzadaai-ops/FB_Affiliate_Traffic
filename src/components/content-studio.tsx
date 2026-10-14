@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { pageByCode } from "@/domain/pages";
+import { pageByCode, pageInk } from "@/domain/pages";
 import { londonDateKey } from "@/domain/schedule";
 import { inSevenDayWindow } from "@/preview/queues";
 import { AssetFrame } from "@/components/asset-frame";
@@ -45,7 +45,7 @@ export function ContentStudio() {
                 <tr key={item.record.contentId} className="border-b align-top">
                   <td className="py-3 pr-3"><AssetFrame label={formatLabel(item.record.format)} accent={page.accent} size="thumb" /></td>
                   <td className="py-3 pr-3">{item.planDay}</td>
-                  <td className="py-3 pr-3" style={{ color: page.accent }}>{page.name}</td>
+                  <td className="py-3 pr-3" style={{ color: pageInk(page.accent) }}>{page.name}</td>
                   <td className="py-3 pr-3">
                     <Link href={`/owner/tasks/${item.record.contentId}`} className="font-medium">{item.record.pillar}</Link>
                     <p className="text-muted-foreground">{item.record.contentId}</p>

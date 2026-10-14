@@ -214,6 +214,10 @@ export const PAGE_IDENTITIES: PageIdentity[] = [
   },
 ];
 
+export function pageInk(accent: string): string {
+  return `color-mix(in srgb, ${accent} 32%, #d7e8ff)`;
+}
+
 export function pageByCode(code: PageCode): PageIdentity {
   const page = PAGE_IDENTITIES.find((item) => item.code === code);
   if (!page) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PAGE_IDENTITIES, pageByCode } from "@/domain/pages";
+import { PAGE_IDENTITIES, pageByCode, pageInk } from "@/domain/pages";
 import type { PageCode } from "@/domain/types";
 import { usePreview } from "@/preview/preview-context";
 
@@ -17,8 +17,8 @@ export function PageList({ mode }: { mode: "staff" | "owner" }) {
       {pages.length === 0 ? <p className="border-y py-8 text-sm text-muted-foreground">No Facebook Pages are assigned to you.</p> : null}
       <div className="grid gap-4">
         {pages.map((page) => (
-          <Link key={page.code} href={`/${mode}/pages/${page.code}`} className="rounded-2xl p-5 ring-1 ring-foreground/10" style={{ backgroundColor: page.wash }}>
-            <p className="text-xs font-medium tracking-wide uppercase" style={{ color: page.accent }}>{page.ageRange}</p>
+          <Link key={page.code} href={`/${mode}/pages/${page.code}`} className="rounded-2xl bg-card p-5 ring-1 ring-foreground/10">
+            <p className="text-xs font-medium tracking-wide uppercase" style={{ color: pageInk(page.accent) }}>{page.ageRange}</p>
             <h2 className="mt-1 font-heading text-3xl">{page.name}</h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed">{page.bio}</p>
           </Link>
@@ -41,8 +41,8 @@ export function BrandBible({ code, mode }: { code: string; mode: "staff" | "owne
   return (
     <article className="space-y-6">
       <Link href={`/${mode}/pages`} className="text-sm text-muted-foreground">All Pages</Link>
-      <header className="rounded-2xl p-6 ring-1 ring-foreground/10" style={{ backgroundColor: identity.wash }}>
-        <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: identity.accent }}>{identity.code} · {identity.ageRange}</p>
+      <header className="rounded-2xl bg-card p-6 ring-1 ring-foreground/10">
+        <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: pageInk(identity.accent) }}>{identity.code} · {identity.ageRange}</p>
         <h1 className="mt-2 font-heading text-5xl">{identity.name}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed">{identity.bio}</p>
       </header>

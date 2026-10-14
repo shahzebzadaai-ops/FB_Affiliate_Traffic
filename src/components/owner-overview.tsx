@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { confirmCampaignStart, useCampaign } from "@/campaign/campaign-context";
 import { importReport } from "@/content/catalog";
-import { PAGE_IDENTITIES } from "@/domain/pages";
+import { PAGE_IDENTITIES, pageInk } from "@/domain/pages";
 import { UK_MARKET } from "@/domain/schedule";
 import { integrationStatus } from "@/integrations/status";
 import { isMissedPublication } from "@/preview/queues";
@@ -59,7 +59,7 @@ export function OwnerOverview() {
                 return (
                   <tr key={page.code} className="border-b border-border last:border-b-0">
                     <td className="px-5 py-4 pr-4">
-                      <Link href={`/owner/pages/${page.code}`} className="font-medium" style={{ color: page.accent }}>{page.name}</Link>
+                      <Link href={`/owner/pages/${page.code}`} className="font-medium" style={{ color: pageInk(page.accent) }}>{page.name}</Link>
                     </td>
                     <td className="py-4 pr-4">{posts.length}</td>
                     <td className="py-4 pr-4">{published}</td>
@@ -139,7 +139,7 @@ function LaunchControl() {
       {loadError ? <p className="text-sm text-destructive">{loadError}</p> : null}
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
       {open ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4">
           <div role="dialog" aria-modal="true" aria-labelledby="start-launch-title" className="atos-surface w-full max-w-lg p-6">
             <h2 id="start-launch-title" className="text-3xl font-semibold tracking-tight">Start the 30-day UK launch?</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

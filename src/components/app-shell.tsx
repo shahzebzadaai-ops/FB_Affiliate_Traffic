@@ -62,7 +62,7 @@ export function AppShell({
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[15.5rem_minmax(0,1fr)]">
-      <aside className="sticky top-0 hidden h-screen flex-col bg-background lg:flex">
+      <aside className="sticky top-0 hidden h-screen flex-col bg-sidebar lg:flex">
         <div className="px-5 pt-7">
           <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">
             Affiliate Traffic OS
@@ -84,7 +84,7 @@ export function AppShell({
         </div>
       </aside>
       <div className="flex min-w-0 flex-col">
-        <header className="lg:hidden">
+        <header className="bg-sidebar lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
             <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">Affiliate Traffic OS</Link>
             <Logout
@@ -108,7 +108,7 @@ export function AppShell({
         </p>
         <main className={`mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-8 ${area === "staff" ? "pb-28 lg:pb-10" : "pb-10"}`}>{children}</main>
         {area === "staff" ? (
-          <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 bg-card shadow-[0_-1px_0_rgb(36_28_24/8%)] lg:hidden">
+          <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-border bg-card lg:hidden">
             {STAFF_DAILY.map((link) => (
               <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} compact />
             ))}
@@ -147,8 +147,8 @@ function NavLink({
       aria-current={active ? "page" : undefined}
       className={
         compact
-          ? `px-2 py-3 text-center text-xs ${active ? "font-semibold text-foreground" : "text-muted-foreground"}`
-          : `rounded-lg px-3 py-2 text-sm ${active ? "bg-card font-semibold text-foreground shadow-[0_0_0_1px_rgb(36_28_24/8%)]" : "text-muted-foreground"}`
+          ? `px-2 py-3 text-center text-xs ${active ? "font-semibold text-primary" : "text-muted-foreground"}`
+          : `rounded-lg px-3 py-2 text-sm ${active ? "bg-sidebar-accent font-semibold text-primary" : "text-muted-foreground"}`
       }
     >
       {label}

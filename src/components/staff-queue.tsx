@@ -62,7 +62,7 @@ export function StaffQueue({ queue }: { queue: StaffQueueName }) {
   return (
     <div className="space-y-8">
       <header>
-        <p className="inline-flex rounded-full bg-card px-3 py-1 text-sm font-medium shadow-[0_0_0_1px_rgb(36_28_24/8%)]">{live ? "Campaign live" : "Campaign not started"}</p>
+        <p className="inline-flex rounded-full border border-border bg-card px-3 py-1 text-sm font-medium">{live ? "Campaign live" : "Campaign not started"}</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight">{queue === "today" ? "Your publishing tasks for today" : copy.title}</h1>
         <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
           {greetingForLondonHour()}. You publish finished assets on your assigned Pages. You do not write prompts, scripts or Reels. Ready to publish is {readyCount}.

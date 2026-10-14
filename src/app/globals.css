@@ -49,38 +49,39 @@
 }
 
 :root {
-  --background: #f7f5f0;
-  --foreground: #241c18;
-  --card: #ffffff;
-  --card-foreground: #241c18;
-  --popover: #ffffff;
-  --popover-foreground: #241c18;
-  --primary: #241c18;
-  --primary-foreground: #fffcf8;
-  --secondary: #fffcf8;
-  --secondary-foreground: #241c18;
-  --muted: #efece6;
-  --muted-foreground: #6d645c;
-  --accent: #efece6;
-  --accent-foreground: #241c18;
-  --destructive: #8d3a2f;
-  --border: #e4dfd6;
-  --input: #e4dfd6;
-  --ring: #241c18;
+  --background: #070b14;
+  --foreground: #d5dbe6;
+  --heading: #f4f7fb;
+  --card: #121a2b;
+  --card-foreground: #d5dbe6;
+  --popover: #141c2e;
+  --popover-foreground: #d5dbe6;
+  --primary: #9adfff;
+  --primary-foreground: #071018;
+  --secondary: #1a2436;
+  --secondary-foreground: #e7edf6;
+  --muted: #1a2436;
+  --muted-foreground: #aeb6c6;
+  --accent: #1a2436;
+  --accent-foreground: #9adfff;
+  --destructive: #ffb4ab;
+  --border: rgb(168 196 230 / 20%);
+  --input: rgb(168 196 230 / 32%);
+  --ring: #9adfff;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 1.25rem;
-  --sidebar: #f7f5f0;
-  --sidebar-foreground: #241c18;
-  --sidebar-primary: #241c18;
-  --sidebar-primary-foreground: #fffcf8;
-  --sidebar-accent: #ffffff;
-  --sidebar-accent-foreground: #241c18;
-  --sidebar-border: #e4dfd6;
-  --sidebar-ring: #241c18;
+  --sidebar: #0c1220;
+  --sidebar-foreground: #d5dbe6;
+  --sidebar-primary: #9adfff;
+  --sidebar-primary-foreground: #071018;
+  --sidebar-accent: #162033;
+  --sidebar-accent-foreground: #9adfff;
+  --sidebar-border: rgb(168 196 230 / 18%);
+  --sidebar-ring: #9adfff;
 }
 
 .dark {
@@ -127,6 +128,12 @@
   html {
     @apply font-sans;
   }
+  h1,
+  h2,
+  h3,
+  .font-heading {
+    color: var(--heading);
+  }
 }
 
 .font-heading {
@@ -137,9 +144,7 @@
 .atos-surface {
   border-radius: 1.25rem;
   background: var(--card);
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent),
-    0 18px 40px -28px color-mix(in srgb, var(--foreground) 55%, transparent);
+  box-shadow: 0 0 0 1px rgb(168 196 230 / 18%);
 }
 
 .atos-btn,
@@ -158,18 +163,23 @@
 .atos-btn {
   background: var(--primary);
   color: var(--primary-foreground);
-  box-shadow:
-    inset 0 -6px 12px rgb(255 255 255 / 18%),
-    inset 0 0.25px 2px rgb(255 255 255 / 35%);
+  box-shadow: inset 0 -1px 0 rgb(7 16 24 / 28%);
+}
+
+.atos-btn:hover:not(:disabled) {
+  background: #c9f1ff;
 }
 
 .atos-btn-quiet {
-  background: #fff;
+  background: #1a2436;
   color: var(--foreground);
   font-weight: 500;
-  box-shadow:
-    inset 0 0.25px 0.25px rgb(255 255 255 / 20%),
-    0 0 0 1px rgb(13 12 12 / 10%);
+  box-shadow: 0 0 0 1px rgb(168 196 230 / 24%);
+}
+
+.atos-btn-quiet:hover:not(:disabled) {
+  background: #243044;
+  color: var(--heading);
 }
 
 .atos-btn:disabled,
@@ -181,18 +191,78 @@
 }
 
 .atos-btn:focus-visible,
-.atos-btn-quiet:focus-visible {
-  outline: 2px solid var(--foreground);
+.atos-btn-quiet:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+.atos-field,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  background: #0d1422;
+  color: var(--foreground);
 }
 
 .atos-field {
   min-height: 2.75rem;
   width: 100%;
   border-radius: 4px;
-  border: 1px solid var(--border);
-  background: #fff;
+  border: 1px solid var(--input);
   padding-inline: 0.75rem;
   font-size: 0.875rem;
-  color: var(--foreground);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8e98ab;
+  opacity: 1;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  box-shadow: 0 0 0 1000px #0d1422 inset;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  color: var(--muted-foreground);
+  background: var(--muted);
+}
+
+a:hover:not(.atos-btn):not(.atos-btn-quiet) {
+  color: #d6f6ff;
+}
+
+.galaxy {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.galaxy-band {
+  position: absolute;
+  top: 8%;
+  left: -25%;
+  width: 150%;
+  height: 62%;
+  transform: rotate(-28deg);
+  background:
+    radial-gradient(ellipse 62% 38% at 48% 50%, rgb(86 104 184 / 30%), transparent 70%),
+    radial-gradient(ellipse 40% 18% at 60% 46%, rgb(176 164 214 / 16%), transparent 72%),
+    radial-gradient(ellipse 28% 12% at 38% 58%, rgb(110 168 206 / 14%), transparent 74%);
+}
+
+.galaxy-stars {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }

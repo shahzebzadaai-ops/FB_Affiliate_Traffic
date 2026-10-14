@@ -14,7 +14,7 @@ export function LoginForm() {
       <h1 className="mt-3 font-heading text-5xl tracking-tight">Affiliate Traffic OS</h1>
       <p className="mt-4 text-muted-foreground">Sign in with your account. There is no public registration.</p>
       <form
-        className="mt-8 space-y-4"
+        className="atos-surface mt-8 space-y-4 p-5"
         onSubmit={(event) => {
           event.preventDefault();
           const data = new FormData(event.currentTarget);
@@ -38,7 +38,7 @@ export function LoginForm() {
         <Field label="Email" name="email" type="email" />
         <Field label="Password" name="password" type="password" />
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
-        <button type="submit" disabled={pending} className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground">
+        <button type="submit" disabled={pending} className="atos-btn">
           Sign in
         </button>
       </form>
@@ -59,7 +59,7 @@ export function SetupForm() {
         This screen works only while the database has no users. Choose a password of at least 12 characters. It is stored as a hash, not in Git.
       </p>
       <form
-        className="mt-8 space-y-4"
+        className="atos-surface mt-8 space-y-4 p-5"
         onSubmit={(event) => {
           event.preventDefault();
           const data = new FormData(event.currentTarget);
@@ -88,7 +88,7 @@ export function SetupForm() {
         <Field label="Email" name="email" type="email" defaultValue="affiliateshahzeb@gmail.com" />
         <Field label="Password" name="password" type="password" />
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
-        <button type="submit" disabled={pending} className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground">
+        <button type="submit" disabled={pending} className="atos-btn">
           Create owner account
         </button>
       </form>
@@ -106,7 +106,7 @@ function Field({ label, name, type, defaultValue }: { label: string; name: strin
         type={type}
         defaultValue={defaultValue}
         autoComplete={type === "password" ? "current-password" : "username"}
-        className="mt-1 h-11 w-full rounded-lg border border-border bg-card px-3"
+        className="atos-field mt-1"
       />
     </label>
   );

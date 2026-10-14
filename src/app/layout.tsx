@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { CampaignProvider } from "@/campaign/campaign-context";
+import { GalaxyBackdrop } from "@/components/galaxy-backdrop";
 import { PreviewProvider } from "@/preview/preview-context";
 import "./globals.css";
 
@@ -20,9 +21,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en-GB" className={`${beVietnam.variable} h-full antialiased`}>
       <body className="min-h-full bg-background text-foreground">
-        <CampaignProvider>
-          <PreviewProvider>{children}</PreviewProvider>
-        </CampaignProvider>
+        <GalaxyBackdrop />
+        <div className="relative z-10 min-h-full">
+          <CampaignProvider>
+            <PreviewProvider>{children}</PreviewProvider>
+          </CampaignProvider>
+        </div>
       </body>
     </html>
   );

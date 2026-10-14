@@ -12,9 +12,9 @@ Althoy’s public site is a marketing page: hero, feature cards, steps, testimon
 
 What transfers:
 
-- Type is Be Vietnam Pro. Titles are semibold, about 2.25–2.5rem, tight tracking, ink `#241c18`. Body is 15–16px. Labels are sentence case, not wide-tracked capitals.
-- The canvas is warm paper `#f7f5f0`. Working objects sit on white surfaces with a 1.25rem radius and a soft shadow.
-- The primary button is ink, 4px radius, white type, a slight inset highlight, and at least 44px tall. The quiet button is white with a hairline. There is no blue chrome and no pill-shaped marketing call to action.
+- Type is Be Vietnam Pro. Titles are semibold and near-white `#f4f7fb`. Body text is light grey `#d5dbe6`. Labels stay sentence case.
+- The canvas is deep navy `#070b14`, with a static diagonal Milky Way band and a sparse star field. Cards, tables, forms, menus and dialogs are opaque `#121a2b` or `#0c1220`, so the galaxy does not sit under the words.
+- Links and the active navigation item are pale cyan `#9adfff`. The primary button uses that cyan with dark text. The quiet button is a dark surface with a light hairline. Page names keep their own identity, drawn light enough to read on the navy.
 - Space between sections is larger than space inside a control. Desktop margins stay wide. Phone padding stays at least 16px.
 
 The layout stays an operating system. Shahzeb and Masho keep separate shells. A screen leads with the work, not a slogan.
@@ -29,7 +29,7 @@ The layout stays an operating system. Shahzeb and Masho keep separate shells. A 
 - Opening a task still shows preview, download, copy caption, thumbnail, Page and UK time, Meta Business Suite, confirm scheduling, the Facebook URL, and report or regenerate. Download, copy and thumbnail stay unavailable until a real file or finished caption exists. Regeneration stores a note. It does not call a model. This screen does not post to Facebook.
 - Content Studio generation status stays “Not connected”. Cost stays blank. Storage is the planned path, not a file that exists.
 - Growth Director proposes nothing until Facebook and affiliate evidence exist. Shahzeb approves before a Page, angle or spend change.
-- Almost no motion. No skeleton charts. Focus states stay visible. The signed-in status line is one quiet sentence.
+- The star field drifts and twinkles at 30 frames per second, with fewer stars on a phone. It pauses while the tab is hidden. `prefers-reduced-motion: reduce` leaves the band and a still star field. There is no video, 3D scene, or animated blur. The layers do not receive clicks. No skeleton charts. Focus states stay visible. The signed-in status line is one quiet sentence.
 
 ## Build rule
 

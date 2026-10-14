@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { pageByCode } from "@/domain/pages";
+import { pageByCode, pageInk } from "@/domain/pages";
 import { useCampaign } from "@/campaign/campaign-context";
 import { placedPhrase } from "@/domain/campaign";
 import { statusLabel, usePreview } from "@/preview/preview-context";
@@ -173,7 +173,7 @@ function Desk({
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)]">
         <AssetFrame label={formatLabelText} accent={accent} />
         <div>
-          <p className="text-sm font-medium" style={{ color: accent }}>{pageName}</p>
+          <p className="text-sm font-medium" style={{ color: pageInk(accent) }}>{pageName}</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight">{hook}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{contentId} · {status} · {publishPhrase}</p>
           <ul className="atos-surface mt-8 divide-y divide-border px-5 text-sm">

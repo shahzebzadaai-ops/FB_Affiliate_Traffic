@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Milky Way canvas
+
+The operating screens keep their layout and now sit on a deep navy field. A CSS band and a small canvas star layer provide the Milky Way. tsParticles was not added: the preset would pull in a particle runtime the screen does not need. Stars cap at 30 frames per second, thin out on a phone, pause when the tab is hidden, and stay still when reduced motion is requested. Cards, menus, forms and dialogs stay opaque. Pale cyan marks links, the active item, and the primary button. The campaign clock, shells, and permissions are unchanged.
+
 ## 2026-10-14 — Althoy is the only visual reference
 
 The active visual reference is Althoy alone. Current Pro, Flow Content, Fintech X and awesome-design-md no longer direct colour, type or chrome. The first screens that used them — Newsreader titles, Source Sans, a blue primary and hairline lists — are replaced on the owner overview and the publishing Today and task desk with Althoy’s paper, Be Vietnam Pro, ink buttons and white rounded surfaces. Those screens stay operating screens. The marketing homepage is not copied. Business rules from the earlier design note remain: two shells, honest disconnected states, no fake files, no sample money, and a stopped campaign clock until Shahzeb confirms it.

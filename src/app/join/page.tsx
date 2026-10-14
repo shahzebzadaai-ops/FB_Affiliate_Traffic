@@ -25,7 +25,7 @@ function JoinForm() {
       <h1 className="mt-6 font-heading text-3xl">Set your password</h1>
       <p className="mt-2 text-sm text-muted-foreground">This invitation is for one publishing operator. It does not show anyone else&apos;s account.</p>
       <form
-        className="mt-6 space-y-3"
+        className="atos-surface mt-6 space-y-3 p-5"
         onSubmit={(event) => {
           event.preventDefault();
           const password = String(new FormData(event.currentTarget).get("password") ?? "");
@@ -48,9 +48,9 @@ function JoinForm() {
       >
         <label className="block text-sm">
           Password
-          <input required name="password" type="password" minLength={12} className="mt-1 h-11 w-full border border-border bg-card px-3" />
+          <input required name="password" type="password" minLength={12} className="atos-field mt-1" />
         </label>
-        <button type="submit" disabled={pending || token.length < 20} className="h-11 w-full bg-primary text-sm font-medium text-primary-foreground">
+        <button type="submit" disabled={pending || token.length < 20} className="atos-btn w-full">
           Open my publishing desk
         </button>
       </form>

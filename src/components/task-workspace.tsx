@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { pageByCode } from "@/domain/pages";
+import { pageByCode, pageInk } from "@/domain/pages";
 import { productionGuide } from "@/domain/guide";
 import { PROMPT_PACKS } from "@/domain/prompts";
 import { QUALITY_CHECKS } from "@/domain/quality";
@@ -64,10 +64,10 @@ export function TaskWorkspace({ contentId }: { contentId: string }) {
       <p className="rounded-xl bg-card p-4 text-sm leading-relaxed text-muted-foreground ring-1 ring-foreground/10">
         This brief is for the AI production pipeline and your approval. Publishing operators do not write the prompt, script or video. No model is connected, so nothing here is a finished asset.
       </p>
-      <header className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10" style={{ backgroundColor: page.wash }}>
-        <div className="h-1.5" style={{ backgroundColor: page.accent }} />
+      <header className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10">
+        <div className="h-1.5" style={{ backgroundColor: pageInk(page.accent) }} />
         <div className="space-y-3 p-5 sm:p-6">
-          <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: page.accent }}>
+          <p className="text-xs font-medium tracking-[0.14em] uppercase" style={{ color: pageInk(page.accent) }}>
             {page.name} · {record.contentId}
           </p>
           <h1 className="font-heading text-4xl leading-tight">{formatLabel(record.format)}</h1>
@@ -79,7 +79,7 @@ export function TaskWorkspace({ contentId }: { contentId: string }) {
       </header>
 
       {record.unresolved.length > 0 ? (
-        <section className="rounded-xl border border-amber-700/30 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950">
+        <section className="rounded-xl border border-amber-200/30 bg-[#2a2114] p-4 text-sm leading-relaxed text-[#f3ddb0]">
           <p className="font-medium">Unresolved plan notes</p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
             {record.unresolved.map((reason) => (

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useCampaign } from "@/campaign/campaign-context";
 import { isLiveDate, placedInstant, placedPhrase, planDayIndex } from "@/domain/campaign";
-import { PAGE_IDENTITIES, pageByCode } from "@/domain/pages";
+import { PAGE_IDENTITIES, pageByCode, pageInk } from "@/domain/pages";
 import { londonDateKey } from "@/domain/schedule";
 import { statusLabel, usePreview } from "@/preview/preview-context";
 import { formatLabel } from "@/components/format-label";
@@ -57,7 +57,7 @@ export function CalendarBoard({ mode }: { mode: "staff" | "owner" }) {
                     <li key={record.contentId} className="grid gap-2 px-4 py-3 sm:grid-cols-[9rem_1fr_auto] sm:items-center">
                       <p className="text-sm text-muted-foreground">{placedPhrase(record.publishAt, preview.stateFor(record.contentId).publishAtOverride, campaign.record)}</p>
                       <div>
-                        <Link href={`/${mode}/tasks/${record.contentId}`} className="font-medium hover:underline" style={{ color: page.accent }}>
+                        <Link href={`/${mode}/tasks/${record.contentId}`} className="font-medium hover:underline" style={{ color: pageInk(page.accent) }}>
                           {page.name}
                         </Link>
                         <p className="text-sm text-muted-foreground">{formatLabel(record.format)} · {preview.effectiveHook(record)}</p>

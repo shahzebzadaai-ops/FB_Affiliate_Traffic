@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCampaign } from "@/campaign/campaign-context";
 import { placedPhrase } from "@/domain/campaign";
-import { pageByCode } from "@/domain/pages";
+import { pageByCode, pageInk } from "@/domain/pages";
 import type { ContentRecord } from "@/domain/types";
 import { statusLabel, usePreview } from "@/preview/preview-context";
 import { formatLabel } from "@/components/format-label";
@@ -26,11 +26,10 @@ export function TaskCard({
   return (
     <article
       className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10"
-      style={{ backgroundColor: page.wash }}
     >
-      <div className="h-1.5" style={{ backgroundColor: page.accent }} />
+      <div className="h-1.5" style={{ backgroundColor: pageInk(page.accent) }} />
       <div className="space-y-4 p-5">
-        <div className="flex flex-wrap items-center gap-2 text-xs font-medium tracking-wide uppercase" style={{ color: page.accent }}>
+        <div className="flex flex-wrap items-center gap-2 text-xs font-medium tracking-wide uppercase" style={{ color: pageInk(page.accent) }}>
           <span>{page.name}</span>
           <span aria-hidden="true">·</span>
           <span>{formatLabel(record.format)}</span>

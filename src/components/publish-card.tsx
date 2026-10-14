@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { pageByCode } from "@/domain/pages";
+import { pageByCode, pageInk } from "@/domain/pages";
 import type { ContentRecord } from "@/domain/types";
 import { AssetFrame } from "@/components/asset-frame";
 import { formatLabel } from "@/components/format-label";
@@ -28,7 +28,7 @@ export function PublishCard({
     <article className="atos-surface grid gap-6 p-5 sm:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)] sm:p-6">
       <AssetFrame label={formatLabel(record.format)} accent={page.accent} />
       <div className="flex min-w-0 flex-col">
-        <p className="text-sm font-medium" style={{ color: page.accent }}>{page.name}</p>
+        <p className="text-sm font-medium" style={{ color: pageInk(page.accent) }}>{page.name}</p>
         <h2 className="mt-2 text-2xl font-semibold leading-tight tracking-tight">{record.pillar}</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">“{hook}”</p>
         <p className="mt-4 text-sm leading-relaxed">{record.captionInstructions}</p>
