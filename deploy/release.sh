@@ -18,6 +18,8 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 mkdir -p "$ROOT/releases" "$ROOT/shared" "$ROOT/repo"
+# Callers may start in a directory this user cannot read, and find then exits non-zero.
+cd "$ROOT"
 if [[ "${AFFIGROVE_SKIP_FETCH:-}" == "1" ]]; then
   if [[ ! -d "$ROOT/repo/.git" ]]; then
     echo "AFFIGROVE_SKIP_FETCH=1 needs a checkout already at $ROOT/repo." >&2
