@@ -2,10 +2,11 @@ import { randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { getSql } from "@/db/client";
-import { episodeDurationOk, episodePackage, pilotSchema, PILOT_SYSTEM, pilotUserPrompt, type PilotBody } from "@/domain/stories";
-import { novitaPublicStatus, researchPublicStatus } from "@/domain/intelligence";
+import { coercePilot, episodeDurationOk, episodePackage, pilotSchema, PILOT_SYSTEM, pilotUserPrompt, type PilotBody } from "@/domain/stories";
+import { languagePublicStatus, researchPublicStatus } from "@/domain/intelligence";
 import { mediaRoot } from "@/server/muse";
-import { novitaChat, parseModelJson } from "@/server/novita";
+import { languageChat } from "@/server/language";
+import { parseModelJson } from "@/server/novita";
 import { readControls, storeFailedReport } from "@/server/intelligence";
 
 function jsonbText(sql: ReturnType<typeof getSql>, value: unknown) {
@@ -54,34 +55,49 @@ export async function listSeries() {
   }));
 }
 
+function readPilot(text: string): { story: PilotBody | null; detail: string } {
+  let parsed: unknown;
+  try {
+    parsed = parseModelJson(text);
+  } catch {
+    return { story: null, detail: "The model reply was not JSON." };
+  }
+  const pilot = pilotSchema.safeParse(coercePilot(parsed));
+  if (!pilot.success) {
+    const detail = pilot.error.issues.slice(0, 6).map((issue) => `${issue.path.join(".")}: ${issue.message}`).join("; ");
+    return { story: null, detail: `The model reply did not match the story schema. ${detail}` };
+  }
+  if (pilot.data.episodes.some((episode) => !episodeDurationOk(episode))) {
+    return { story: null, detail: "The model reply did not match the story schema. An episode was outside 30 to 90 seconds." };
+  }
+  return { story: pilot.data, detail: "" };
+}
+
 export async function generatePilot(fetchImpl: typeof fetch = fetch) {
   const controls = await readControls();
   if (controls.intelligence !== "STARTED") {
     return { ok: false as const, status: 409, error: "The AI intelligence engine is paused." };
   }
-  const novita = novitaPublicStatus();
-  if (!novita.configured) {
-    return { ok: false as const, status: 409, error: `Novita is not configured. Missing ${novita.missing.join(", ")}.` };
+  const language = languagePublicStatus();
+  if (!language.configured) {
+    return { ok: false as const, status: 409, error: `No language model is configured. Missing ${language.missing.join(", ")}.` };
   }
   const research = researchPublicStatus();
-  const chat = await novitaChat({ system: PILOT_SYSTEM, user: pilotUserPrompt() }, fetchImpl);
+  const chat = await languageChat({ system: PILOT_SYSTEM, user: pilotUserPrompt() }, fetchImpl);
+  const providerLabel = chat.provider === "novita" ? "Novita" : "FreeLLMAPI";
   if (!chat.ok) {
     await storeFailedReport("romance-pilot", chat.model, chat.error);
     return { ok: false as const, status: 502, error: chat.error };
   }
-  let parsed: unknown;
-  try {
-    parsed = parseModelJson(chat.text);
-  } catch {
-    await storeFailedReport("romance-pilot", chat.model, "The model reply was not JSON.");
-    return { ok: false as const, status: 502, error: "Novita replied, but the reply was not a usable story." };
+  const read = readPilot(chat.text);
+  if (!read.story) {
+    await storeFailedReport("romance-pilot", chat.model, read.detail);
+    const incomplete = read.detail === "The model reply was not JSON."
+      ? `${providerLabel} replied, but the reply was not a usable story.`
+      : `${providerLabel} replied, but the story was incomplete. Nothing was saved as a series.`;
+    return { ok: false as const, status: 502, error: incomplete };
   }
-  const pilot = pilotSchema.safeParse(parsed);
-  const story = pilot.success ? pilot.data : null;
-  if (!story || story.episodes.some((episode) => !episodeDurationOk(episode))) {
-    await storeFailedReport("romance-pilot", chat.model, "The model reply did not match the story schema.");
-    return { ok: false as const, status: 502, error: "Novita replied, but the story was incomplete. Nothing was saved as a series." };
-  }
+  const story = read.story;
   const sql = getSql();
   const reportId = randomUUID();
   const seriesId = randomUUID();
@@ -91,7 +107,7 @@ export async function generatePilot(fetchImpl: typeof fetch = fetch) {
     liveResearch: false,
     researchMessage: research.message,
     usage: chat.usage,
-    source: "novita",
+    source: chat.provider,
   };
   await sql`
     insert into intelligence_reports (id, kind, status, model, live_research, body)

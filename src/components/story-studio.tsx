@@ -17,11 +17,12 @@ type Series = {
   approval: string;
   model: string | null;
   live_research: boolean;
-  bible: { premise?: string; whyTest?: string; assumptions?: string[]; publishing?: string; researchMessage?: string };
+  bible: { premise?: string; whyTest?: string; assumptions?: string[]; publishing?: string; researchMessage?: string; source?: string };
   episodes: Episode[];
 };
 type Desk = {
   series: Series[];
+  language: { configured: boolean; missing: string[]; active: string | null; model: string | null };
   novita: { configured: boolean; missing: string[] };
   research: { message: string };
   controls: { intelligence: string };
@@ -55,7 +56,7 @@ export function StoryStudio() {
   }, []);
 
   const selected = desk?.series.find((item) => item.id === selectedId) ?? desk?.series[0] ?? null;
-  const blocked = !desk?.novita.configured || desk.controls.intelligence !== "STARTED";
+  const blocked = !desk?.language.configured || desk.controls.intelligence !== "STARTED";
 
   async function generate() {
     setBusy(true);
@@ -120,7 +121,7 @@ export function StoryStudio() {
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Original episodic romance</p>
         <h1 className="mt-2 font-heading text-5xl tracking-tight">Story Series Studio</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          A pilot is created only when Novita replies. Live research is separate. Muse stays a manual website, and approval does not publish.
+          A pilot is created only when the configured language model replies. That model does not search the web. Muse stays a manual website, and approval does not publish.
         </p>
       </header>
       {error ? <p className="rounded-xl bg-card p-4 text-sm ring-1 ring-foreground/10">{error}</p> : null}
@@ -129,13 +130,13 @@ export function StoryStudio() {
         <p className="mt-2 text-sm text-muted-foreground">{desk?.editing.message}</p>
         <p className="mt-2 text-sm text-muted-foreground">{desk?.storage.permanent.message}</p>
         <button type="button" className="atos-btn mt-4" disabled={blocked || busy} onClick={() => void generate()}>
-          {busy ? "Asking Novita" : "Generate an original five-episode pilot"}
+          {busy ? "Writing the pilot" : "Generate an original five-episode pilot"}
         </button>
         {blocked ? (
           <p className="mt-3 text-sm text-muted-foreground">
-            {desk?.novita.configured
-              ? "Start the AI intelligence engine before asking Novita."
-              : `Novita is not configured. Missing ${desk?.novita.missing.join(", ") ?? "credentials"}. No story has been invented in its place.`}
+            {desk?.language.configured
+              ? "Start the AI intelligence engine before asking the language model."
+              : `No language model is configured. Missing ${desk?.language.missing.join(", ") ?? "credentials"}. No story has been invented in its place.`}
           </p>
         ) : null}
       </section>
@@ -144,7 +145,7 @@ export function StoryStudio() {
           <header>
             <h2 className="font-heading text-3xl">{selected.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Model {selected.model ?? "not recorded"}. Live research {selected.live_research ? "used" : "not used"}. Approval {selected.approval}. Publishing {selected.bible.publishing ?? "disabled"}.
+              Route {selected.bible.source ?? "not recorded"}. Model {selected.model ?? "not recorded"}. Live research {selected.live_research ? "used" : "not used"}. Approval {selected.approval}. Publishing {selected.bible.publishing ?? "disabled"}.
             </p>
             <p className="mt-3 max-w-2xl text-sm">{selected.bible.premise}</p>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">Model note, not a measured trend: {selected.bible.whyTest}</p>

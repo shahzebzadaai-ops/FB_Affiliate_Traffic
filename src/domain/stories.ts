@@ -68,6 +68,139 @@ export const pilotSchema = z.object({
 export type PilotBody = z.infer<typeof pilotSchema>;
 export type PilotEpisode = PilotBody["episodes"][number];
 
+function textValue(value: unknown, depth = 0): string | null {
+  if (depth > 3) return null;
+  if (typeof value === "string") return value.trim();
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  if (Array.isArray(value)) {
+    const joined = value.map((item) => textValue(item, depth + 1)).filter((item): item is string => Boolean(item)).join(" ");
+    return joined.trim() || null;
+  }
+  if (value && typeof value === "object") {
+    const parts = Object.values(value as Record<string, unknown>).map((item) => textValue(item, depth + 1)).filter((item): item is string => Boolean(item));
+    return parts.join(". ").trim() || null;
+  }
+  return null;
+}
+
+function clampList(value: unknown, minItem: number, maxLen: number): string[] | null {
+  const list = textList(value);
+  if (!list) return null;
+  return list.flatMap((item) => {
+    const pieces = item.split(/,\s+|;\s+/).map((part) => part.trim()).filter((part) => part.length >= minItem);
+    const source = pieces.length > 1 ? pieces : [item];
+    return source.flatMap((part) => {
+      if (part.length < minItem) return [];
+      if (part.length <= maxLen) return [part];
+      return [part.slice(0, maxLen).trim()];
+    });
+  });
+}
+
+function textList(value: unknown): string[] | null {
+  if (typeof value === "string") {
+    return value.split(/\n+|;\s+|(?<=\.)\s+/).map((item) => item.trim()).filter((item) => item.length >= 2);
+  }
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return Object.values(value as Record<string, unknown>).map((item) => textValue(item)).filter((item): item is string => Boolean(item));
+  }
+  if (!Array.isArray(value)) return null;
+  return value.map((item) => textValue(item)).filter((item): item is string => Boolean(item));
+}
+
+function fitShotDurations(scenes: Array<Record<string, unknown>>) {
+  const current = scenes.map((scene) => {
+    const value = scene.durationSeconds;
+    const seconds = typeof value === "number" && Number.isFinite(value) ? Math.round(value) : 8;
+    return Math.min(12, Math.max(2, seconds));
+  });
+  let total = current.reduce((sum, value) => sum + value, 0);
+  let guard = 0;
+  while (total < 30 && current.some((value) => value < 12) && guard < 80) {
+    const index = guard % current.length;
+    if (current[index] < 12) {
+      current[index] += 1;
+      total += 1;
+    }
+    guard += 1;
+  }
+  while (total > 90 && current.some((value) => value > 2) && guard < 200) {
+    const index = guard % current.length;
+    if (current[index] > 2) {
+      current[index] -= 1;
+      total -= 1;
+    }
+    guard += 1;
+  }
+  scenes.forEach((scene, index) => {
+    scene.durationSeconds = current[index];
+  });
+}
+
+function asText(record: Record<string, unknown>, key: string) {
+  const text = textValue(record[key]);
+  if (text) record[key] = text;
+}
+
+export function coercePilot(value: unknown): unknown {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return value;
+  const body = { ...(value as Record<string, unknown>) };
+  for (const key of ["relationships", "visualStyle", "emotionalProgression", "seasonArc", "endingDirection", "whyTest", "audience", "premise", "genre", "seriesTitle"]) {
+    asText(body, key);
+  }
+  if (typeof body.audience === "string" && body.audience.length < 10) {
+    body.audience = `${body.audience}. Adults in the United Kingdom.`;
+  }
+  const themes = clampList(body.themes, 2, 80);
+  if (themes) body.themes = themes.slice(0, 6);
+  const locations = clampList(body.locations, 2, 120);
+  if (locations) body.locations = locations.slice(0, 6);
+  const reveals = clampList(body.reveals, 5, 240);
+  if (reveals) body.reveals = reveals.slice(0, 6);
+  const assumptions = clampList(body.assumptions, 5, 300);
+  if (assumptions) body.assumptions = assumptions.slice(0, 8);
+  const rules = clampList(body.continuityRules, 5, 240);
+  if (rules) body.continuityRules = rules.slice(0, 8);
+  if (Array.isArray(body.characters)) {
+    body.characters = body.characters.map((character) => {
+      if (!character || typeof character !== "object" || Array.isArray(character)) return character;
+      const next = { ...(character as Record<string, unknown>) };
+      for (const key of ["name", "role", "appearance", "personality", "wardrobe"]) asText(next, key);
+      return next;
+    });
+  }
+  if (!Array.isArray(body.episodes)) return body;
+  body.episodes = body.episodes.map((episode) => {
+    if (!episode || typeof episode !== "object" || Array.isArray(episode)) return episode;
+    const next = { ...(episode as Record<string, unknown>) };
+    if (next.previousEpisode == null) next.previousEpisode = "";
+    if (next.nextEpisode == null || (typeof next.nextEpisode === "string" && next.nextEpisode.trim().length < 10)) {
+      const ending = textValue(body.endingDirection) || textValue(body.seasonArc);
+      if (ending) next.nextEpisode = ending.slice(0, 400);
+    }
+    for (const key of ["title", "hook", "summary", "previousEpisode", "voiceover", "dialogue", "closingBeat", "nextEpisode", "caption", "thumbnailPrompt"]) {
+      asText(next, key);
+    }
+    if (!Array.isArray(next.scenes)) return next;
+    next.scenes = next.scenes.map((scene) => {
+      if (!scene || typeof scene !== "object" || Array.isArray(scene)) return scene;
+      const shot = { ...(scene as Record<string, unknown>) };
+      for (const key of ["visualPrompt", "camera", "lighting", "audio", "continuity", "negativePrompt"]) asText(shot, key);
+      const visual = textValue(shot.visualPrompt);
+      if (visual && visual.length < 40) {
+        const extra = [textValue(shot.camera), textValue(shot.lighting), textValue(shot.continuity)].filter((item): item is string => Boolean(item)).join(" ");
+        if (extra) shot.visualPrompt = `${visual} ${extra}`.slice(0, 2000);
+      }
+      if (!textValue(shot.onScreenText) && visual) shot.onScreenText = visual.slice(0, 140);
+      if (!textValue(shot.subtitle) && visual) shot.subtitle = visual.slice(0, 220);
+      return shot;
+    });
+    fitShotDurations(next.scenes as Array<Record<string, unknown>>);
+    return next;
+  });
+  return body;
+}
+
 export function episodeDurationOk(episode: PilotEpisode): boolean {
   const total = episode.scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0);
   return total >= 30 && total <= 90;
@@ -95,6 +228,7 @@ export function pilotUserPrompt(): string {
     "Each shot needs a visual prompt, camera, lighting, on-screen text, subtitle, audio, continuity, and a negative prompt.",
     "Characters must keep the same names, appearance, and wardrobe across episodes.",
     "JSON keys: seriesTitle, genre, audience, premise, themes, characters[{name, role, appearance, personality, wardrobe}], relationships, locations, visualStyle, emotionalProgression, seasonArc, reveals, continuityRules, endingDirection, episodes[{number, title, hook, summary, previousEpisode, voiceover, dialogue, closingBeat, nextEpisode, scenes[{number, durationSeconds, visualPrompt, camera, lighting, onScreenText, subtitle, audio, continuity, negativePrompt}], caption, thumbnailPrompt}], whyTest, assumptions.",
+    "Use JSON strings for every prose field, including relationships, dialogue, emotionalProgression, and nextEpisode. Do not return null. Each visualPrompt must be at least one full sentence.",
   ].join(" ");
 }
 

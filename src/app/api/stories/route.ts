@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { z } from "zod";
-import { novitaPublicStatus, researchPublicStatus, storagePublicStatus, editingPublicStatus } from "@/domain/intelligence";
+import { editingPublicStatus, languagePublicStatus, novitaPublicStatus, researchPublicStatus, storagePublicStatus } from "@/domain/intelligence";
 import { requirePlanner, readControls } from "@/server/intelligence";
 import { generatePilot, listSeries } from "@/server/stories";
 
@@ -17,6 +17,7 @@ export async function GET() {
   const controls = await readControls();
   return json({
     series: await listSeries(),
+    language: languagePublicStatus(),
     novita: novitaPublicStatus(),
     research: researchPublicStatus(),
     storage: storagePublicStatus(),

@@ -33,13 +33,13 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Novita AI",
       status: "not_connected",
       detail:
-        "Primary language-model provider. The server reads NOVITA_API_KEY and NOVITA_MODEL. Neither is configured, so no model is called and no story is invented.",
+        "Preserved OpenAI-compatible adapter. The server uses it when FREELLMAPI_API_KEY is unset and both NOVITA_API_KEY and NOVITA_MODEL are set. The Intelligence desk shows which route is active. Keys stay on the server.",
     },
     {
       id: "live-research",
       name: "Live research",
       status: "not_connected",
-      detail: "Live research is unavailable. No authorised search API is configured. Novita is not treated as a web search.",
+      detail: "Live research is unavailable. No authorised search API is configured. A language model is not treated as a web search.",
     },
     {
       id: "permanent-storage",

@@ -84,7 +84,7 @@ export function IntegrationsView() {
     <div className="space-y-6">
       <header>
         <h1 className="font-heading text-5xl tracking-tight">Systems</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">Novita, live research, and permanent storage are not configured. Muse stays a manual website. Publishing stays off.</p>
+        <p className="mt-2 max-w-2xl text-muted-foreground">Language routing is shown on the Intelligence desk. Live research and permanent storage are not configured. Muse stays a manual website. Publishing stays off.</p>
       </header>
       <MediaWorkerPanel />
       <div className="grid gap-4">

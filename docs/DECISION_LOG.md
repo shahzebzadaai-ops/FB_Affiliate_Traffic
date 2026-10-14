@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — FreeLLMAPI and Groq in development
+
+The development language route is the private FreeLLMAPI router on `127.0.0.1:3001`. AffiGrove calls its OpenAI-compatible `/v1` endpoint with the router's unified key. Groq credentials stay in the router's encrypted store. `FREELLMAPI_MODEL` selects the model and `FREELLMAPI_FALLBACK_MODEL` names the next model on that router. Novita stays in the code and is used when the router is unset, or after the router fails if Novita itself is configured. The router is not deployed to the live OS. Live web research still needs its own search source. A model analysis of pasted text is stored with live research false.
+
 ## 2026-10-14 — Intelligence, stories, and where media is made
 
 The owner set the production architecture. Novita is the language-model layer, through its OpenAI-compatible API, and it does not count as live web research. A separate search adapter is required; until one is configured, research is shown as unavailable. Muse stays a manual website studio. The one billion token figure stays a label. The VPS is for editing and encoding, not for a generative video model and not for the permanent library. The 5 TB store is not confirmed, so the earlier Google Drive assumption is withdrawn until the owner names the service. Money Printer Turbo is not the preferred system. The editor already in the repository is `worker/atos_worker`. Episodic original romance is a priority format. Publishing stays off, and starting an intelligence engine does not publish. Five plan brand names remain candidates until the owner approves final names. No reach, revenue, or offer is invented.

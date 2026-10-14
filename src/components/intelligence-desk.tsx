@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Overview = {
+  language: { active: string | null; configured: boolean; model: string | null; fallbackModel: string | null; missing: string[] };
+  freellmapi: { configured: boolean; missing: string[]; model: string | null; fallbackModel: string | null };
   novita: { configured: boolean; missing: string[]; model: string | null };
   research: { available: boolean; message: string };
   storage: { permanent: { message: string }; staging: { message: string } };
@@ -29,9 +31,19 @@ type Overview = {
   };
 };
 
+type Analysis = {
+  observations: string[];
+  assumptions: string[];
+  storyImplications: string[];
+  evidenceNote: string;
+};
+
 export function IntelligenceDesk() {
   const [overview, setOverview] = useState<Overview | null>(null);
   const [error, setError] = useState("");
+  const [evidence, setEvidence] = useState("");
+  const [analysis, setAnalysis] = useState<Analysis | null>(null);
+  const [busy, setBusy] = useState(false);
 
   async function load() {
     const response = await fetch("/api/intelligence");
@@ -65,18 +77,51 @@ export function IntelligenceDesk() {
     await load();
   }
 
+  async function analyse() {
+    setBusy(true);
+    const response = await fetch("/api/intelligence", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ action: "analyse", evidence }),
+    });
+    const body = (await response.json()) as { error?: string; analysis?: Analysis };
+    setBusy(false);
+    if (!response.ok || !body.analysis) {
+      setError(body.error ?? "The supplied evidence was not analysed.");
+      return;
+    }
+    setError("");
+    setAnalysis(body.analysis);
+    await load();
+  }
+
   return (
     <div className="space-y-10">
       <header>
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Audience and trend intelligence</p>
         <h1 className="mt-2 font-heading text-5xl tracking-tight">Intelligence</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Novita is the reasoning layer. A separate search adapter supplies current sources. Neither one is allowed to invent reach, watch time, or revenue.
+          The language model reasons over text that is supplied to it. A separate search adapter is required for live web research. Neither one is allowed to invent reach, watch time, or revenue.
         </p>
       </header>
       {error ? <p className="rounded-xl bg-card p-4 text-sm ring-1 ring-foreground/10">{error}</p> : null}
       <section className="grid gap-4 md:grid-cols-2">
-        <Card title="Novita" detail={overview?.novita.configured ? `Configured model ${overview.novita.model}` : `Not configured. Missing ${overview?.novita.missing.join(", ") ?? "credentials"}.`} />
+        <Card
+          title="FreeLLMAPI"
+          detail={
+            overview?.freellmapi.configured
+              ? `Private loopback router. Model ${overview.freellmapi.model}. Fallback ${overview.freellmapi.fallbackModel ?? "not set"}.`
+              : `Not configured. Missing ${overview?.freellmapi.missing.join(", ") ?? "credentials"}.`
+          }
+        />
+        <Card
+          title="Novita"
+          detail={
+            overview?.novita.configured
+              ? `Preserved and configured. Model ${overview.novita.model}.`
+              : `Preserved. Not configured. Missing ${overview?.novita.missing.join(", ") ?? "credentials"}.`
+          }
+        />
         <Card title="Live research" detail={overview?.research.message ?? "Loading."} />
         <Card title="Permanent storage" detail={overview?.storage.permanent.message ?? "Loading."} />
         <Card title="Editing" detail={overview?.editing.message ?? "Loading."} />
@@ -90,6 +135,37 @@ export function IntelligenceDesk() {
           <Control label="Video editing worker" state={overview?.controls.video_editing ?? "PAUSED"} onChange={(state) => setControl("video_editing", state)} />
           <p className="text-sm">Publishing: OFF. Campaign {overview?.campaign.status ?? "BUILD"}{overview?.campaign.notStarted ? ", not started" : ""}.</p>
         </div>
+      </section>
+      <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
+        <h2 className="font-heading text-3xl">Supplied evidence</h2>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+          Paste notes or a brief. The model only sees this text. It does not search the web, and the saved record says so.
+        </p>
+        <textarea
+          className="mt-4 min-h-32 w-full rounded-xl bg-background p-3 text-sm ring-1 ring-foreground/10"
+          value={evidence}
+          onChange={(event) => setEvidence(event.target.value)}
+          placeholder="Paste the evidence to analyse."
+        />
+        <button
+          type="button"
+          className="atos-btn mt-3"
+          disabled={busy || overview?.controls.intelligence !== "STARTED" || !overview?.language.configured}
+          onClick={() => void analyse()}
+        >
+          {busy ? "Reading the supplied text" : "Analyse supplied evidence"}
+        </button>
+        {analysis ? (
+          <div className="mt-4 space-y-3 text-sm">
+            <p>{analysis.evidenceNote}</p>
+            <p className="font-medium">Observations</p>
+            <ul className="list-disc pl-5 text-muted-foreground">{analysis.observations.map((item) => <li key={item}>{item}</li>)}</ul>
+            <p className="font-medium">Assumptions</p>
+            <ul className="list-disc pl-5 text-muted-foreground">{analysis.assumptions.map((item) => <li key={item}>{item}</li>)}</ul>
+            <p className="font-medium">Story implications</p>
+            <ul className="list-disc pl-5 text-muted-foreground">{analysis.storyImplications.map((item) => <li key={item}>{item}</li>)}</ul>
+          </div>
+        ) : null}
       </section>
       <section>
         <h2 className="font-heading text-3xl">Opportunities</h2>

@@ -1,6 +1,18 @@
 import { randomUUID } from "node:crypto";
 import { getSql } from "@/db/client";
-import { editingPublicStatus, novitaPublicStatus, researchPublicStatus, storagePublicStatus, type EngineId } from "@/domain/intelligence";
+import {
+  SUPPLIED_EVIDENCE_SYSTEM,
+  editingPublicStatus,
+  freellmapiPublicStatus,
+  languagePublicStatus,
+  novitaPublicStatus,
+  researchPublicStatus,
+  storagePublicStatus,
+  suppliedEvidenceSchema,
+  type EngineId,
+} from "@/domain/intelligence";
+import { languageChat } from "@/server/language";
+import { parseModelJson } from "@/server/novita";
 import { monetisationAdvice, partnerProgressReport, seriesLaunchAdvice } from "@/domain/stories";
 import { can } from "@/domain/permissions";
 import { PAGE_IDENTITIES } from "@/domain/pages";
@@ -60,6 +72,8 @@ export async function intelligenceOverview() {
     limit 8
   `;
   return {
+    language: languagePublicStatus(),
+    freellmapi: freellmapiPublicStatus(),
     novita: novitaPublicStatus(),
     research: researchPublicStatus(),
     storage: storagePublicStatus(),
@@ -90,6 +104,50 @@ export async function intelligenceOverview() {
       created_at: report.created_at instanceof Date ? report.created_at.toISOString() : new Date(report.created_at).toISOString(),
     })),
   };
+}
+
+export async function analyseSuppliedEvidence(evidence: string, fetchImpl: typeof fetch = fetch) {
+  const controls = await readControls();
+  if (controls.intelligence !== "STARTED") {
+    return { ok: false as const, status: 409, error: "The AI intelligence engine is paused." };
+  }
+  const language = languagePublicStatus();
+  if (!language.configured) {
+    return { ok: false as const, status: 409, error: `No language model is configured. Missing ${language.missing.join(", ")}.` };
+  }
+  const chat = await languageChat({ system: SUPPLIED_EVIDENCE_SYSTEM, user: evidence }, fetchImpl);
+  if (!chat.ok) {
+    await storeFailedReport("supplied-evidence", chat.model, chat.error);
+    return { ok: false as const, status: 502, error: chat.error };
+  }
+  let parsed: unknown;
+  try {
+    parsed = parseModelJson(chat.text);
+  } catch {
+    await storeFailedReport("supplied-evidence", chat.model, "The model reply was not JSON.");
+    return { ok: false as const, status: 502, error: "The language model replied, but the analysis was not usable. Nothing was saved." };
+  }
+  const analysis = suppliedEvidenceSchema.safeParse(parsed);
+  if (!analysis.success) {
+    await storeFailedReport("supplied-evidence", chat.model, "The model reply did not match the evidence schema.");
+    return { ok: false as const, status: 502, error: "The language model replied, but the analysis was incomplete. Nothing was saved." };
+  }
+  const sql = getSql();
+  const id = randomUUID();
+  const body = {
+    ...analysis.data,
+    publishing: "disabled",
+    liveResearch: false,
+    webSearchPerformed: false,
+    source: chat.provider,
+    usage: chat.usage,
+    evidenceNote: "The model saw only the supplied text. It did not search the web.",
+  };
+  await sql`
+    insert into intelligence_reports (id, kind, status, model, live_research, body)
+    values (${id}, 'supplied-evidence', 'COMPLETE', ${chat.model}, false, ${jsonbText(sql, body)}::jsonb)
+  `;
+  return { ok: true as const, reportId: id, model: chat.model, provider: chat.provider, analysis: body };
 }
 
 export async function storeFailedReport(kind: string, model: string | null, error: string) {

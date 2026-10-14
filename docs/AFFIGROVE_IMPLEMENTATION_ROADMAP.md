@@ -8,21 +8,22 @@ Status words: completed, in progress, blocked, later. Strategic choices are in `
 - Manual Muse desk: packages from a plan brief, private upload, typed token balance, no Muse API.
 - Corporate site on affigrove.io with search indexing off.
 - Mac media queue and FFmpeg assembler in `worker/atos_worker`.
-- Intelligence foundation in this change: Novita chat client, research-unavailable state, engine controls, Story Series Studio storage, launch and monetisation advice that refuse to invent measurements, and a clip-joining command in the existing assembler.
+- Intelligence foundation: an OpenAI-compatible language client, research-unavailable state, engine controls, Story Series Studio storage, launch and monetisation advice that refuse to invent measurements, and a clip-joining command in the existing assembler.
+- Development language route through the private FreeLLMAPI router. Novita stays in the client for later use. The router is not part of the live OS release.
 
 ## In progress
 
-- Phase 1 acceptance against a live Novita account. The client is written. No key or model id is configured, so no live reply has been received.
-- Story Series Studio screen at `/owner/stories`. It generates a pilot only after Novita answers. It can store an uploaded shot and leave it unassembled.
+- Phase 1 acceptance on the development machine through FreeLLMAPI. Production still has no language-model key, and this route has not been deployed.
+- Story Series Studio screen at `/owner/stories`. It generates a pilot only after the configured language model answers. It can store an uploaded shot and leave it unassembled.
 
 ## Blocked
 
 - Live research. No `RESEARCH_PROVIDER` and no `RESEARCH_API_KEY`. No adapter is pretended for a named provider.
-- Novita generation. `NOVITA_API_KEY` and `NOVITA_MODEL` are absent on the application host and in local development.
+- Production language generation. The live host has neither FreeLLMAPI nor `NOVITA_API_KEY` and `NOVITA_MODEL`. Local development can use the loopback router; that process is not the live OS.
 - Permanent 5 TB storage. The service type is not confirmed. Files are not sent to Drive or any other backend.
 - VPS editing service. The assembler can join clips, and the command was checked locally with FFmpeg. It is not installed as a service on the VPS, and the editing control defaults to paused.
 - External editing repository. None is named in the repository. The in-repo assembler is the selected tool. If a different repository was intended, its URL is still required.
-- Five final brand names. Candidates exist. Live naming research cannot run until search and Novita are configured. The owner has not approved final names.
+- Five final brand names. Candidates exist. Live naming research cannot run until a search source is configured. A language model is not that source. The owner has not approved final names.
 - Meta insights, affiliate networks, and CPA Whale reporting beyond an empty private report. Measured fields stay null.
 - Series launch. No page is active and no watch time is stored, so the advisor stays on researching.
 
@@ -43,4 +44,4 @@ Status words: completed, in progress, blocked, later. Strategic choices are in `
 
 ## Next action
 
-The owner adds `NOVITA_API_KEY` and `NOVITA_MODEL` on the server, starts the intelligence engine, and generates one pilot. Separately, the owner names the 5 TB storage service and, if the editor is not `worker/atos_worker`, supplies that repository URL.
+Keep the router on loopback. Deploying it, or copying its key into the live OS, is a separate decision. Novita can replace the router later by setting `NOVITA_API_KEY` and `NOVITA_MODEL` and unsetting `FREELLMAPI_API_KEY`. Separately, the owner names the 5 TB storage service and, if the editor is not `worker/atos_worker`, supplies that repository URL.
