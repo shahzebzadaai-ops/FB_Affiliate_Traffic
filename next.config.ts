@@ -15,6 +15,19 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async headers() {
+    const shared = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "X-Frame-Options", value: "DENY" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+    ];
+    return [
+      { source: "/site", headers: shared },
+      { source: "/site/:path*", headers: shared },
+      { source: "/api/public/:path*", headers: shared },
+    ];
+  },
 };
 
 export default nextConfig;

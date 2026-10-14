@@ -1,0 +1,540 @@
+.grove {
+  --grove-paper: #f3efe6;
+  --grove-ink: #1a241c;
+  --grove-muted: #4c584f;
+  --grove-green: #1a5c42;
+  --grove-deep: #10281f;
+  --grove-line: #d9d2c5;
+  --grove-card: #fffdf8;
+  color-scheme: light;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: var(--grove-paper);
+  color: var(--grove-ink);
+  font-family: var(--font-grove-sans), "Source Sans 3", "Segoe UI", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+body.grove-open {
+  background: #f3efe6;
+  color: #1a241c;
+}
+
+body.grove-open .galaxy {
+  display: none;
+}
+
+.grove h1,
+.grove h2,
+.grove h3 {
+  color: var(--grove-ink);
+  font-family: var(--font-grove-serif), Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.grove h1 {
+  font-size: clamp(2.7rem, 7vw, 5.4rem);
+  max-width: 12ch;
+}
+
+.grove h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  max-width: 18ch;
+}
+
+.grove h3 {
+  font-size: 1.35rem;
+}
+
+.grove p,
+.grove li,
+.grove dd {
+  color: var(--grove-muted);
+}
+
+.grove strong {
+  color: var(--grove-ink);
+  font-weight: 600;
+}
+
+.grove a {
+  color: var(--grove-green);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.grove a:hover:not(.atos-btn):not(.atos-btn-quiet),
+.grove a:focus-visible:not(.atos-btn):not(.atos-btn-quiet) {
+  color: var(--grove-deep);
+}
+
+.grove-wrap {
+  width: min(72rem, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.grove-skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 6;
+  background: var(--grove-card);
+  color: var(--grove-ink);
+  padding: 0.5rem 0.75rem;
+}
+
+.grove-skip:focus {
+  top: 0.75rem;
+}
+
+.grove-header {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: #f3efe6;
+  border-bottom: 1px solid var(--grove-line);
+}
+
+.grove-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  min-height: 4.5rem;
+  padding-block: 0.75rem;
+}
+
+.grove-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--grove-ink);
+  text-decoration: none;
+}
+
+.grove-brand:hover,
+.grove-brand:focus-visible {
+  color: var(--grove-ink);
+}
+
+.grove-brand strong {
+  display: block;
+  font-family: var(--font-grove-serif), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.grove-brand small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--grove-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.grove-mark {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.grove-menu {
+  min-height: 2.75rem;
+  border: 1px solid var(--grove-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--grove-ink);
+  padding-inline: 1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.grove-nav {
+  display: none;
+  width: 100%;
+  gap: 0.25rem 1.1rem;
+  padding-bottom: 0.75rem;
+}
+
+.grove-nav.is-open {
+  display: grid;
+}
+
+.grove-nav a {
+  color: var(--grove-ink);
+  text-decoration: none;
+  font-weight: 600;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.grove-nav a[aria-current="page"] {
+  color: var(--grove-green);
+  box-shadow: inset 0 -2px 0 var(--grove-green);
+}
+
+.grove-main {
+  padding-block: 2.5rem 4.5rem;
+}
+
+.grove-kicker {
+  margin: 0 0 1rem;
+  color: var(--grove-green);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.grove-lede {
+  max-width: 40rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.grove-hero {
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}
+
+.grove-panel {
+  background: var(--grove-deep);
+  color: #f4f0e7;
+  border-radius: 1.5rem;
+  padding: 1.4rem 1.4rem 0.4rem;
+}
+
+.grove-panel p,
+.grove-panel li,
+.grove-panel h2 {
+  color: #f4f0e7;
+}
+
+.grove-panel ol {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.grove-panel li {
+  border-top: 1px solid rgb(244 240 231 / 22%);
+  padding: 0.95rem 0;
+  font-family: var(--font-grove-serif), Georgia, serif;
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+}
+
+.grove-practices,
+.grove-split {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+
+.grove-card {
+  background: var(--grove-card);
+  border: 1px solid var(--grove-line);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.25rem 1.1rem;
+}
+
+.grove-card span {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: var(--grove-copper, #8d5e3c);
+  font-family: var(--font-grove-serif), Georgia, serif;
+  font-size: 1.4rem;
+}
+
+.grove-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.grove-button,
+.grove-button-quiet {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.4rem 1.15rem;
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.grove-button {
+  background: var(--grove-green);
+  color: #f7f4ec;
+  border: 1px solid var(--grove-green);
+}
+
+.grove-button:hover,
+.grove-button:focus-visible {
+  background: var(--grove-deep);
+  color: #f7f4ec;
+}
+
+.grove-button-quiet {
+  background: transparent;
+  color: var(--grove-ink);
+  border: 1px solid var(--grove-ink);
+}
+
+.grove-button-quiet:hover,
+.grove-button-quiet:focus-visible {
+  background: var(--grove-ink);
+  color: #f7f4ec;
+}
+
+.grove-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.grove a:focus-visible,
+.grove button:focus-visible,
+.grove input:focus-visible,
+.grove textarea:focus-visible,
+.grove select:focus-visible,
+.grove summary:focus-visible {
+  outline: 2px solid var(--grove-green);
+  outline-offset: 3px;
+}
+
+.grove-section {
+  margin-top: 3.25rem;
+}
+
+.grove-section p + p,
+.grove-prose p + p {
+  margin-top: 1rem;
+}
+
+.grove-pending {
+  margin-top: 2rem;
+  background: #efe6d4;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+.grove-pending h2 {
+  font-size: 1.6rem;
+}
+
+.grove-pending ul,
+.grove-prose ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.grove-facts {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 3rem;
+}
+
+.grove-facts div {
+  border-top: 1px solid var(--grove-line);
+  padding-top: 0.8rem;
+}
+
+.grove-facts dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grove-green);
+}
+
+.grove-facts dd {
+  margin: 0.2rem 0 0;
+}
+
+.grove-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 38rem;
+  margin-top: 1.5rem;
+}
+
+.grove-form label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--grove-ink);
+  font-weight: 600;
+}
+
+.grove input:not([type="checkbox"]):not([type="radio"]),
+.grove textarea,
+.grove select {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid #cfc6b8;
+  border-radius: 0.8rem;
+  background: var(--grove-card);
+  color: var(--grove-ink);
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  box-shadow: none;
+}
+
+.grove textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.grove input::placeholder,
+.grove textarea::placeholder {
+  color: #6d786f;
+  opacity: 1;
+}
+
+.grove input:-webkit-autofill {
+  -webkit-text-fill-color: var(--grove-ink);
+  box-shadow: 0 0 0 1000px var(--grove-card) inset;
+}
+
+.grove-consent {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-weight: 400;
+  color: var(--grove-muted);
+}
+
+.grove-consent input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.25rem;
+  accent-color: var(--grove-green);
+}
+
+.grove-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.grove-alert {
+  margin: 0;
+  color: #8c2f2f;
+  font-weight: 600;
+}
+
+.grove-success {
+  max-width: 38rem;
+  background: var(--grove-card);
+  border: 1px solid var(--grove-line);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+.grove-footer {
+  background: var(--grove-deep);
+  color: #e7e1d6;
+  padding-block: 2.5rem 2rem;
+}
+
+.grove-footer p,
+.grove-footer li,
+.grove-footer h2 {
+  color: #e7e1d6;
+}
+
+.grove-footer a {
+  color: #f7f4ec;
+}
+
+.grove-footer a:hover,
+.grove-footer a:focus-visible {
+  color: #ffffff;
+}
+
+.grove-footer-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grove-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.grove-footer small {
+  display: block;
+  margin-top: 1.5rem;
+  color: #c9c1b4;
+}
+
+.grove-drawing {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+
+@media (min-width: 800px) {
+  .grove-wrap {
+    width: min(72rem, calc(100% - 4rem));
+  }
+
+  .grove-hero {
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
+    align-items: end;
+    min-height: 68vh;
+    padding-top: 2rem;
+  }
+
+  .grove-practices {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grove-facts {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .grove-footer-grid {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (min-width: 960px) {
+  .grove-menu {
+    display: none;
+  }
+
+  .grove-nav,
+  .grove-nav.is-open {
+    display: flex;
+    width: auto;
+    align-items: center;
+    padding-bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grove {
+    scroll-behavior: auto;
+  }
+}

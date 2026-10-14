@@ -28,7 +28,7 @@ The comparison website, when built, is one platform with a landing experience pe
 | --- | --- |
 | Owner shell | Approvals, assignments, training completion, finance placeholders, studio, growth. |
 | Operator shell | Today, Ready, Scheduled, Published, Issues, Calendar, My Pages, Training. |
-| Public site | Not built. It must not share the private session or admin routes. |
+| Public site | Local pages under `/site` for AffiGrove Media Group. Visitors do not receive a private session. Corporate hosts refuse `/owner`, `/staff`, and private APIs. See `docs/CORPORATE_SITE.md`. Not deployed. |
 | Meta Business Suite | Operators publish there by hand. This app does not post. Meta may show more to a delegated Page user than this OS does. |
 | Catalog JSON | Seed and owner import screens. Operator API responses replace assignee and reviewer with `assigned` and `owner`. |
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { can } from "@/domain/permissions";
 import { usePreview, ownerArea } from "@/preview/preview-context";
 
 const STAFF_DAILY = [
@@ -58,7 +59,10 @@ export function AppShell({
   if (!preview.ready || !preview.user || !allowed) return <Wordmark />;
 
   const primary = area === "owner" ? OWNER_PRIMARY : STAFF_DAILY;
-  const more = area === "owner" ? OWNER_MORE : STAFF_MORE;
+  const ownerMore = can(preview.user.role, "manage_users")
+    ? [...OWNER_MORE, { href: "/owner/enquiries", label: "Enquiries" }]
+    : OWNER_MORE;
+  const more = area === "owner" ? ownerMore : STAFF_MORE;
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[15.5rem_minmax(0,1fr)]">

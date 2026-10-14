@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — AffiGrove public site, local only
+
+The public company name is AffiGrove Media Group. The intended domains are affigrove.io and www.affigrove.io. The private OS is intended for os.affigrove.io. affigrove.com is not used. The corporate pages live under `/site` so `/`, `/owner`, and `/staff` stay the operating system. The public visual identity is separate from the Milky Way screens. No deployment, DNS change, or campaign start is included. Facts that were not supplied are marked awaiting approval instead of being invented.
+
 ## 2026-10-14 — Milky Way canvas
 
 The operating screens keep their layout and now sit on a deep navy field. A CSS band and a small canvas star layer provide the Milky Way. tsParticles was not added: the preset would pull in a particle runtime the screen does not need. Stars cap at 30 frames per second, thin out on a phone, pause when the tab is hidden, and stay still when reduced motion is requested. Cards, menus, forms and dialogs stay opaque. Pale cyan marks links, the active item, and the primary button. The campaign clock, shells, and permissions are unchanged.

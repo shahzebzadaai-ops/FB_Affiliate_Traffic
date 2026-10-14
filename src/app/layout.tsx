@@ -5,6 +5,7 @@ import { CampaignProvider } from "@/campaign/campaign-context";
 import { GalaxyBackdrop } from "@/components/galaxy-backdrop";
 import { PreviewProvider } from "@/preview/preview-context";
 import "./globals.css";
+import "./grove.css";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
