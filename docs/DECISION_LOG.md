@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Intelligence, stories, and where media is made
+
+The owner set the production architecture. Novita is the language-model layer, through its OpenAI-compatible API, and it does not count as live web research. A separate search adapter is required; until one is configured, research is shown as unavailable. Muse stays a manual website studio. The one billion token figure stays a label. The VPS is for editing and encoding, not for a generative video model and not for the permanent library. The 5 TB store is not confirmed, so the earlier Google Drive assumption is withdrawn until the owner names the service. Money Printer Turbo is not the preferred system. The editor already in the repository is `worker/atos_worker`. Episodic original romance is a priority format. Publishing stays off, and starting an intelligence engine does not publish. Five plan brand names remain candidates until the owner approves final names. No reach, revenue, or offer is invented.
+
 ## 2026-10-14 — Muse stays a manual studio
 
 Muse AI is used through its website. The seller warned that API use can restrict the account, so AffiGrove OS does not call a Muse API, store Muse credentials, or drive the Muse website. The provider type is EXTERNAL_MANUAL. Packages are compiled from the approved plan brief because no writing model is connected. Uploaded files stay in the campaign library. Approval does not start the campaign or publish a post. Token figures are entered by hand. The advertised one billion tokens are a label, not a measured balance. Novita can be added later as a separate API adapter.

@@ -20,10 +20,11 @@ export function ContentStudio() {
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Production</p>
         <h1 className="mt-2 font-heading text-5xl tracking-tight">Content Studio</h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          The next seven days of the plan. Prepare a Muse package from the brief, then upload the file you made on the Muse website. No model is called from here. Fictional stories in the plan are editorial, not testimonials.
+          The next seven days of the plan. Prepare a Muse package from the brief, or open Story Series Studio for an original series. No model is called from this list.
         </p>
-        <p className="mt-3">
+        <p className="mt-3 flex flex-wrap gap-2">
           <Link href="/owner/studio/muse" className="atos-btn">Prepare for Muse AI</Link>
+          <Link href="/owner/stories" className="atos-btn-quiet">Story Series Studio</Link>
         </p>
       </header>
       <div className="overflow-x-auto">

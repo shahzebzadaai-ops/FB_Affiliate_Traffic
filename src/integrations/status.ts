@@ -1,5 +1,5 @@
 export type IntegrationConnection = {
-  id: "google-drive" | "meta" | "affiliate-networks" | "muse-web-studio";
+  id: "google-drive" | "meta" | "affiliate-networks" | "muse-web-studio" | "novita" | "live-research" | "permanent-storage";
   name: string;
   status: "not_connected" | "manual";
   detail: string;
@@ -12,7 +12,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Google Drive",
       status: "not_connected",
       detail:
-        "OAuth is not connected. The database will store Drive folder and file IDs after authentication. Staff will not use Shahzeb's Google password. No file IDs are stored yet.",
+        "Not the confirmed 5 TB store. OAuth is not connected, and this build does not assume the permanent library is Google Drive.",
     },
     {
       id: "meta",
@@ -27,6 +27,26 @@ export function integrationStatus(): IntegrationConnection[] {
       status: "manual",
       detail:
         "Manual website only. Packages are prepared from the plan brief in Content Studio. Finished files are uploaded by hand. No Muse credentials are stored, no API is called, and every capability stays untested until the account confirms it.",
+    },
+    {
+      id: "novita",
+      name: "Novita AI",
+      status: "not_connected",
+      detail:
+        "Primary language-model provider. The server reads NOVITA_API_KEY and NOVITA_MODEL. Neither is configured, so no model is called and no story is invented.",
+    },
+    {
+      id: "live-research",
+      name: "Live research",
+      status: "not_connected",
+      detail: "Live research is unavailable. No authorised search API is configured. Novita is not treated as a web search.",
+    },
+    {
+      id: "permanent-storage",
+      name: "Permanent media storage",
+      status: "not_connected",
+      detail:
+        "The 5 TB destination is not confirmed. Uploads stay on the application host. Nothing is copied to Drive, S3, or a disk that has not been named.",
     },
     {
       id: "affiliate-networks",

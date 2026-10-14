@@ -25,6 +25,8 @@ const OWNER_PRIMARY = [
   { href: "/owner/approvals", label: "Approvals" },
   { href: "/owner/affiliate", label: "Affiliate" },
   { href: "/owner/studio", label: "Content Studio" },
+  { href: "/owner/stories", label: "Stories" },
+  { href: "/owner/intelligence", label: "Intelligence" },
   { href: "/owner/growth", label: "Growth Director" },
   { href: "/owner/pages", label: "Pages" },
 ];

@@ -84,7 +84,7 @@ export function IntegrationsView() {
     <div className="space-y-6">
       <header>
         <h1 className="font-heading text-5xl tracking-tight">Systems</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">The Mac can take a queued proof. Google Drive, Meta and the affiliate networks are designed and not authenticated.</p>
+        <p className="mt-2 max-w-2xl text-muted-foreground">Novita, live research, and permanent storage are not configured. Muse stays a manual website. Publishing stays off.</p>
       </header>
       <MediaWorkerPanel />
       <div className="grid gap-4">
@@ -96,12 +96,16 @@ export function IntegrationsView() {
             {connection.id === "muse-web-studio" ? (
               <p className="mt-3"><Link className="atos-btn" href="/owner/studio/muse">Prepare for Muse AI</Link></p>
             ) : null}
+            {connection.id === "novita" ? (
+              <p className="mt-3"><Link className="atos-btn" href="/owner/intelligence">Open Intelligence</Link></p>
+            ) : null}
           </article>
         ))}
       </div>
       <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-        <h2 className="font-heading text-2xl">Planned Drive folders</h2>
-        <p className="mt-2 text-sm text-muted-foreground">AffiGrove OS / UK / Page name / year-month / content ID /</p>
+        <h2 className="font-heading text-2xl">Intended library layout</h2>
+        <p className="mt-2 text-sm text-muted-foreground">The folder names are a target. The storage service behind them is not connected.</p>
+        <p className="mt-2 text-sm">AffiGrove / Brands / Brand name / Series / Season-01 / Episode-001 /</p>
         <p className="mt-2 text-sm">{PLANNED_DRIVE_FOLDERS.join(" · ")}</p>
       </section>
     </div>

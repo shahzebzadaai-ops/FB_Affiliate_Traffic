@@ -13,6 +13,7 @@
 - Secure multi-operator foundation: `PUBLISHING_OPERATOR`, invitation links, `social_pages`, `page_assignments`, schedule confirmation separate from publication, and server-side isolation. Operator payloads omit other operators and the historical catalog assignee. See `docs/ARCHITECTURE.md`.
 - Media queue: owner-issued worker credentials, durable production jobs, leases, heartbeats, and approval that copies an https URL onto a task without scheduling it. The Mac worker source and install guide are in `worker/` and `docs/MEDIA_WORKER.md`. No Reel has been rendered.
 - Muse desk: Prepare for Muse AI compiles a package from the plan brief, stores an uploaded file, and records a typed token balance. It does not call Muse and it does not publish.
+- Intelligence desk and Story Series Studio. Novita is called only when a key and model id are set and the intelligence engine is started. Live research, permanent storage, and the VPS editing service are reported as unavailable. A contract test can store a pilot. That test is not a live Novita call.
 
 ## Tested
 
@@ -30,6 +31,7 @@
 - 14 October 2026: `npm test` (33 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the local AffiGrove site. The public pages render at `/site`. A contact message required consent, was stored, appeared in the owner inbox, and the review row was removed. Unauthenticated finance and enquiry reads returned 401. A cross-origin form post returned 403. The campaign stayed in build mode. The sign-in screen stayed the private OS.
 - 14 October 2026: `npm test` (27 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the media queue. Python `unittest` for the assembler passed. A Linux FFmpeg technical check produced a 1080×1920 H.264 file in 0.738 seconds, peak child RSS about 373 MiB, temporary files about 59 KiB, and no external API call. It is not a Page asset and not a Mac measurement. The Systems screen queued UK-SGIUK-001 with no file, and the owner overview showed the ready buffer at 0 of 20. The campaign stayed in build mode. The demo job and session were removed.
 - 14 October 2026: `npm test` (38 passed), `npm run lint` and `npm run typecheck` after the Muse desk. A production-mode walk of UK-BGUK-001 prepared three reel concepts and six image prompts, uploaded one image, approved it, and recorded a typed token balance. No model was called. The campaign stayed in build mode and the post stayed unpublished. All eight Muse capabilities stayed untested.
+- 14 October 2026: `npm test` (43 passed), `npm run lint` and `npm run typecheck` after the intelligence desk. A contract test stored a five-episode pilot against a local mock and did not call Novita. Python assembler tests joined two clips into a 1080×1920 file. Live research stayed unavailable. The campaign stayed in build mode.
 
 ## Incomplete
 

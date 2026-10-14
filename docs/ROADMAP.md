@@ -1,5 +1,9 @@
 # Roadmap
 
+The current strategic source of truth is `docs/AFFIGROVE_STRATEGIC_DECISIONS.md`. The phase list is `docs/AFFIGROVE_IMPLEMENTATION_ROADMAP.md`.
+
+
+
 The current tested delivery is the secure multi-operator foundation. Later phases are not built. Complexity describes the subsystems involved, not a calendar estimate.
 
 An earlier lettering put Mandala editing, a public site, and affiliate ingestion in a different order. This list replaces it. Mandala tables already exist from the first database migration. They are not the next build.

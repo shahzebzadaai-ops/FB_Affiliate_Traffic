@@ -122,6 +122,45 @@ def assemble_command(
     ]
 
 
+def assemble_clips_command(clips: list[Path], srt_path: Path, output: Path) -> list[str]:
+    """Join uploaded shots into one 9:16 file. Caption text stays in the subtitle file."""
+    if not clips:
+        raise ValueError("At least one clip is required.")
+    inputs: list[str] = []
+    filter_parts: list[str] = []
+    for index, clip in enumerate(clips):
+        inputs.extend(["-i", str(clip)])
+        filter_parts.append(
+            f"[{index}:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=30[v{index}]"
+        )
+    concat_inputs = "".join(f"[v{index}]" for index in range(len(clips)))
+    filter_parts.append(f"{concat_inputs}concat=n={len(clips)}:v=1:a=0[vc]")
+    filter_parts.append(f"[vc]subtitles='{escape_filter_path(srt_path)}'[vout]")
+    inputs.extend(["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=48000"])
+    return [
+        "ffmpeg",
+        "-y",
+        *inputs,
+        "-filter_complex",
+        ";".join(filter_parts),
+        "-map",
+        "[vout]",
+        "-map",
+        f"{len(clips)}:a",
+        "-shortest",
+        *encoder_args(),
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "160k",
+        "-movflags",
+        "+faststart",
+        str(output),
+    ]
+
+
 def run_ffmpeg(argv: list[str]) -> None:
     if not argv or argv[0] != "ffmpeg":
         raise ValueError("Only ffmpeg may be started from the assembler.")
