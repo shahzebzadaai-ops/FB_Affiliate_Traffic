@@ -1,6 +1,6 @@
 # Mac media worker
 
-This process polls Affiliate Traffic OS and assembles a vertical MP4 with the system `ffmpeg`. It does not open a port.
+This process polls AffiGrove OS and assembles a vertical MP4 with the system `ffmpeg`. It does not open a port.
 
 Install, security, the benchmark, and the owner approval checkpoint are in `docs/MEDIA_WORKER.md`.
 

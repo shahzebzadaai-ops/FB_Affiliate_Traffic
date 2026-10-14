@@ -7,7 +7,7 @@ import { canEnterOwner } from "@/server/task-commands";
 
 export default function SetupPage() {
   return (
-    <Suspense fallback={<p className="grid min-h-screen place-items-center font-heading text-3xl">Affiliate Traffic OS</p>}>
+    <Suspense fallback={<p className="grid min-h-screen place-items-center font-heading text-3xl">AffiGrove OS</p>}>
       <SetupGate />
     </Suspense>
   );

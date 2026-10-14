@@ -1,4 +1,4 @@
-# Affiliate Traffic OS — Master Product and Business Requirements
+# AffiGrove OS — Master Product and Business Requirements
 **Decision snapshot:** 2026-10-14  
 **Purpose:** Stable source of truth for Cursor development, team onboarding, and future change control.  
 **Status convention:** CONFIRMED = explicitly decided by founder; CURRENTLY KNOWN = asserted/observed in conversations but unverified in repository; PLANNED = not yet confirmed built; PROPOSED = design recommendation requiring owner review.
@@ -13,7 +13,7 @@
 7. A master owner-controlled **START / PAUSE** publishing switch is mandatory. Default must be **OFF** until the owner explicitly activates. Research, planning, draft creation, and QA can run while OFF, but no live publishing, scheduled posting, or paid budget changes should run. No publishing-day countdown should start before activation.
 
 ## 1. Business identity, economics, and growth model
-- **CONFIRMED:** Business/platform name: **Affiliate Traffic OS**. An internal AI content production subsystem is called **Money Printer Turbo**. Recommend an independent **Operator OS** module within the same product.
+- **CONFIRMED:** Business/platform name: **AffiGrove OS**. An internal AI content production subsystem is called **Money Printer Turbo**. Recommend an independent **Operator OS** module within the same product.
 - **CONFIRMED:** Initial target market is the United Kingdom, with a focus on Facebook 30+ audience/media brands, original story-driven Reels, editorial content, an owned comparison/guide site, and legitimate approved dating affiliate PPS/CPA offers. Other niches/geographies require research and explicit approval.
 - **CONFIRMED:** Aspirational 2030 target is **$1,000,000 per month in affiliate revenue** (not guaranteed; track approved revenue vs net profit separately). Build the business backward from conversions and contribution margins, not follower counts.
 - **CONFIRMED:** Organic-first discovery, then Meta Ads reinvestment into content **already proven to generate real, approved organic affiliate sales**. Proposed rule: up to **30% of each Page's approved and collected organic affiliate revenue** can be made available for that Page's *test advertising budget* after operating-cost/reserve checks and owner approval. Example: Page earns $100 organically => potential $30 ad budget; $70 remains before expenses. The percentage is a control, not a blind automatic spend. Track organic vs paid attribution and incremental paid profit separately.
@@ -29,7 +29,7 @@
 ## 2. Known environment and integration status (do not overstate)
 | Element | Current status known from conversation | What Cursor must verify |
 |---|---|---|
-| Local app | **CURRENTLY KNOWN:** An Affiliate Traffic OS app was opened at `127.0.0.1:3004`; founder reported earlier UI did not match chosen reference. | Repository, launch command, exact app routes, visual diff, working modules |
+| Local app | **CURRENTLY KNOWN:** An AffiGrove OS app was opened at `127.0.0.1:3004`; founder reported earlier UI did not match chosen reference. | Repository, launch command, exact app routes, visual diff, working modules |
 | Hosting | **PLANNED:** Founder intends to purchase and prepare a **KVM2 VPS**. | Whether purchased, OS/distro, access, capacity, firewall, HTTPS, backups |
 | AI provider | **CONFIRMED CHOICE:** **Novita AI**; founder states account created. | API key *configured securely*? accessible model endpoints? funded credits? testing? |
 | Money Printer Turbo | **PLANNED TARGET:** Holo.ai-like end-to-end video-production workflow. | Which code/jobs, if any, actually exist |
@@ -59,7 +59,7 @@ Before Page creation or assignment, system must research and present evidence, n
 - **Do not start publishing** from automatic content generation; production and publishing are separate gates.
 
 ## 5. Operator OS: the principal newly finalized workflow
-**Core principle:** Operators perform nearly all operational planning in Affiliate Traffic OS; they access Facebook only to execute actions not supported by authorized APIs. The OS supplies exact instructions and copy-ready fields/assets rather than expecting staff to research or invent them.
+**Core principle:** Operators perform nearly all operational planning in AffiGrove OS; they access Facebook only to execute actions not supported by authorized APIs. The OS supplies exact instructions and copy-ready fields/assets rather than expecting staff to research or invent them.
 
 ### 5.1 Identity, Page assignments and duties
 - An operator account has individual authenticated login, role and permissions. Assign 5 starting Pages as capacity permits and raise toward 10 after competence/owner approval. All assignments are explicit and traceable.

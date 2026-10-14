@@ -70,8 +70,12 @@ export function GalaxyBackdrop() {
       }
     }
 
+    function onPublicSite() {
+      return document.body.classList.contains("grove-open");
+    }
+
     function loop(time: number) {
-      if (!alive || document.hidden || motion.matches) return;
+      if (!alive || document.hidden || motion.matches || onPublicSite()) return;
       frame = window.requestAnimationFrame(loop);
       if (time - last < FRAME_MS) return;
       last = time;
@@ -80,7 +84,7 @@ export function GalaxyBackdrop() {
 
     function start() {
       window.cancelAnimationFrame(frame);
-      if (!motion.matches && !document.hidden) frame = window.requestAnimationFrame(loop);
+      if (!motion.matches && !document.hidden && !onPublicSite()) frame = window.requestAnimationFrame(loop);
     }
 
     function onResize() {
@@ -92,6 +96,7 @@ export function GalaxyBackdrop() {
       start();
     }
 
+    const classObserver = new MutationObserver(start);
     resize();
     draw(0);
     start();
@@ -99,10 +104,12 @@ export function GalaxyBackdrop() {
     document.addEventListener("visibilitychange", start);
     motion.addEventListener("change", onMotion);
     mobile.addEventListener("change", onResize);
+    classObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       alive = false;
       window.cancelAnimationFrame(frame);
+      classObserver.disconnect();
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", start);
       motion.removeEventListener("change", onMotion);

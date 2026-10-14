@@ -63,7 +63,7 @@ function yearMonth(iso: string): string {
 }
 
 function drivePath(pageName: string, contentId: string, publishAt: string): string {
-  return `Affiliate Traffic OS/UK/${pageName}/${yearMonth(publishAt)}/${contentId}/`;
+  return `AffiGrove OS/UK/${pageName}/${yearMonth(publishAt)}/${contentId}/`;
 }
 
 function voiceFor(page: PageIdentity): string {

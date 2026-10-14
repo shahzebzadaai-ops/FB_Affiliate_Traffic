@@ -1,5 +1,37 @@
 # Decision log
 
+## 2026-10-14 — Provider selection and staged stories
+
+`LANGUAGE_PROVIDER` chooses the language route. Empty or `freellmapi` is the free route. `novita` is the only setting that calls Novita. A missing FreeLLMAPI key does not fall through to a paid request. Story generation is split into a concept, a story bible, a season outline, and one episode script at a time. `finish_reason` of `length` or `max_tokens` is a cut-off reply. Cut-off, invalid, and continuity failures are retried once on the same model, then sent to `FREELLMAPI_FALLBACK_MODEL` when that model is set. A reply is not padded, split, or copied into a missing field. A short rate-limit wait is honoured up to 12 seconds, once. A longer wait moves to the fallback model. Nothing is saved unless every stage validates. Live research is still unavailable. The router deployment steps are written and not applied.
+
+## 2026-10-14 — FreeLLMAPI and Groq in development
+
+The development language route is the private FreeLLMAPI router on `127.0.0.1:3001`. AffiGrove calls its OpenAI-compatible `/v1` endpoint with the router's unified key. Groq credentials stay in the router's encrypted store. `FREELLMAPI_MODEL` selects the model and `FREELLMAPI_FALLBACK_MODEL` names the next model on that router. Novita stays in the code. The provider-selection entry above is the rule for when it may be called. The router is not deployed to the live OS. Live web research still needs its own search source. A model analysis of pasted text is stored with live research false.
+
+## 2026-10-14 — Intelligence, stories, and where media is made
+
+The owner set the production architecture. Novita is the language-model layer, through its OpenAI-compatible API, and it does not count as live web research. A separate search adapter is required; until one is configured, research is shown as unavailable. Muse stays a manual website studio. The one billion token figure stays a label. The VPS is for editing and encoding, not for a generative video model and not for the permanent library. The 5 TB store is not confirmed, so the earlier Google Drive assumption is withdrawn until the owner names the service. Money Printer Turbo is not the preferred system. The editor already in the repository is `worker/atos_worker`. Episodic original romance is a priority format. Publishing stays off, and starting an intelligence engine does not publish. Five plan brand names remain candidates until the owner approves final names. No reach, revenue, or offer is invented.
+
+## 2026-10-14 — Muse stays a manual studio
+
+Muse AI is used through its website. The seller warned that API use can restrict the account, so AffiGrove OS does not call a Muse API, store Muse credentials, or drive the Muse website. The provider type is EXTERNAL_MANUAL. Packages are compiled from the approved plan brief because no writing model is connected. Uploaded files stay in the campaign library. Approval does not start the campaign or publish a post. Token figures are entered by hand. The advertised one billion tokens are a label, not a measured balance. Novita can be added later as a separate API adapter.
+
+## 2026-10-14 — The internal system is named AffiGrove OS
+
+The user-facing name of the private operating system is AffiGrove OS. AffiGrove Media Group remains the parent company. The host stays os.affigrove.io. Internal code, database tables, environment variables, and API routes keep their existing names. The planned Drive folder prefix shown to staff is `AffiGrove OS/UK/...`. Publishing stays off.
+
+## 2026-10-14 — Corporate site is public, search indexing stays off
+
+Shahzeb approved removing the temporary review password from affigrove.io and www.affigrove.io. The private OS at os.affigrove.io is unchanged. Search indexing stays off because the company number, registered office, public email, phone, postal address, governing law, hosting-vendor wording, and message retention period are still unapproved. Those facts are not invented.
+
+## 2026-10-14 — Deployment approved on the AffiGrove KVM2
+
+Shahzeb approved deployment of the existing corporate site and private OS to the Hostinger KVM2 at 153.92.208.28. `www.affigrove.io` redirects to the apex. The repeatable release and rollback path is `deploy/HOSTINGER.md`. The campaign is not started. The corporate site stays behind the review password and `noindex` until a separate launch approval.
+
+## 2026-10-14 — AffiGrove public site, local only
+
+The public company name is AffiGrove Media Group. The intended domains are affigrove.io and www.affigrove.io. The private OS is intended for os.affigrove.io. affigrove.com is not used. The corporate pages live under `/site` so `/`, `/owner`, and `/staff` stay the operating system. The public visual identity is separate from the Milky Way screens. No deployment, DNS change, or campaign start is included. Facts that were not supplied are marked awaiting approval instead of being invented.
+
 ## 2026-10-14 — Milky Way canvas
 
 The operating screens keep their layout and now sit on a deep navy field. A CSS band and a small canvas star layer provide the Milky Way. tsParticles was not added: the preset would pull in a particle runtime the screen does not need. Stars cap at 30 frames per second, thin out on a phone, pause when the tab is hidden, and stay still when reduced motion is requested. Cards, menus, forms and dialogs stay opaque. Pale cyan marks links, the active item, and the primary button. The campaign clock, shells, and permissions are unchanged.

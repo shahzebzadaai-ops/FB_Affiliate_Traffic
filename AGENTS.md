@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Affiliate Traffic OS
+# AffiGrove OS
 
-Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/ARCHITECTURE.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md`, `docs/ROADMAP.md` and `DESIGN.md`.
+Before a major change, read `docs/AFFIGROVE_STRATEGIC_DECISIONS.md`, `docs/AFFIGROVE_IMPLEMENTATION_ROADMAP.md`, `docs/PRODUCT_MASTER.md`, `docs/ARCHITECTURE.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md`, `docs/ROADMAP.md` and `DESIGN.md`.
 
 The product is a private operating system. Do not turn it into a marketing landing page, and do not copy Framer templates or add Framer as a dependency. Shahzeb's shell is the owner control centre. The operator shell is the publishing desk. Unconnected reach, clicks, commission and AI cost stay blank. Do not draw a fake Reel and call it finished.
 

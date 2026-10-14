@@ -1,6 +1,6 @@
 # Architecture
 
-Affiliate Traffic OS is one Next.js application and one PostgreSQL database. It is the private operating system for a UK dating affiliate publisher. It is not a dating app, a public scheduler, or a separate product per Facebook Page.
+AffiGrove OS is one Next.js application and one PostgreSQL database. It is the private operating system for a UK dating affiliate publisher. It is not a dating app, a public scheduler, or a separate product per Facebook Page.
 
 This document is the long-term map. It does not authorize building every module. The current delivery is the secure multi-operator foundation. Later modules stay unconnected until Shahzeb approves the provider, the spend, and the credentials.
 
@@ -20,7 +20,9 @@ The comparison website, when built, is one platform with a landing experience pe
 - Invitations. The owner creates a seven-day link. The operator sets their own password. No email service sends it. The raw token is shown once and only its SHA-256 hash is stored.
 - Five `social_pages` rows and the existing brand bibles. Live visibility is `page_assignments`, not the historical catalog assignee.
 - 180 content rows and persisted task state. Confirming a schedule and recording a public URL are separate events. A schedule confirmation does not invent a permalink. Publication requires that confirmation plus an `http` or `https` URL.
-- Operator queues use the existing publishing desk. Download, caption copy, and thumbnail stay unavailable because no file store is connected.
+- Operator queues use the existing publishing desk. Download, caption copy, and thumbnail stay unavailable on that desk because Drive is not connected.
+- Muse desk at `/owner/studio/muse`. Packages are compiled from the plan brief. The owner generates on the Muse website and uploads the finished file into a private library. The provider is EXTERNAL_MANUAL. No Muse API and no credentials. Approval does not publish.
+- Intelligence at `/owner/intelligence` and Story Series Studio at `/owner/stories`. The language client is OpenAI-compatible. `LANGUAGE_PROVIDER` selects FreeLLMAPI or Novita. The default is the private FreeLLMAPI router. Novita does not run unless it is selected. Live research, permanent storage, and a VPS editing service are separate and currently unavailable. Engine start does not publish.
 
 ## Boundaries
 
@@ -28,7 +30,7 @@ The comparison website, when built, is one platform with a landing experience pe
 | --- | --- |
 | Owner shell | Approvals, assignments, training completion, finance placeholders, studio, growth. |
 | Operator shell | Today, Ready, Scheduled, Published, Issues, Calendar, My Pages, Training. |
-| Public site | Not built. It must not share the private session or admin routes. |
+| Public site | Local pages under `/site` for AffiGrove Media Group. Visitors do not receive a private session. Corporate hosts refuse `/owner`, `/staff`, and private APIs. See `docs/CORPORATE_SITE.md`. Not deployed. |
 | Meta Business Suite | Operators publish there by hand. This app does not post. Meta may show more to a delegated Page user than this OS does. |
 | Catalog JSON | Seed and owner import screens. Operator API responses replace assignee and reviewer with `assigned` and `owner`. |
 
@@ -36,7 +38,7 @@ Authorization checks the session, the role capability, and the current Page assi
 
 ## Data that exists
 
-`drizzle/0001_foundation.sql` and `drizzle/0002_operators.sql`.
+`drizzle/0001_foundation.sql` through `drizzle/0006_intelligence.sql`.
 
 Identity: `users`, `sessions`, `login_attempts`, `invitations`, `page_assignments`.
 

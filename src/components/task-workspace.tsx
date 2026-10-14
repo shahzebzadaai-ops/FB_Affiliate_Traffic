@@ -12,6 +12,7 @@ import { formatLondon, londonDateTimeToUtc } from "@/domain/schedule";
 import { WORKFLOWS } from "@/domain/workflows";
 import { recordById } from "@/content/catalog";
 import { statusLabel, usePreview } from "@/preview/preview-context";
+import { can } from "@/domain/permissions";
 import { formatLabel } from "@/components/format-label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -103,6 +104,11 @@ export function TaskWorkspace({ contentId }: { contentId: string }) {
           <section className="rounded-xl bg-card p-4 ring-1 ring-foreground/10">
             <h2 className="font-heading text-2xl">Copy a prompt</h2>
             <p className="mt-1 text-sm text-muted-foreground">External ChatGPT and image tools. Nothing is sent to an AI API from this preview.</p>
+            {preview.user && can(preview.user.role, "manage_plan") ? (
+              <p className="mt-4">
+                <Link className="atos-btn" href={`/owner/studio/muse?content=${record.contentId}`}>Prepare for Muse AI</Link>
+              </p>
+            ) : null}
             <div className="mt-4 flex flex-wrap gap-2">
               {PROMPT_PACKS.map((pack) => (
                 <button

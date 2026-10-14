@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { can } from "@/domain/permissions";
 import { usePreview, ownerArea } from "@/preview/preview-context";
 
 const STAFF_DAILY = [
@@ -24,6 +25,8 @@ const OWNER_PRIMARY = [
   { href: "/owner/approvals", label: "Approvals" },
   { href: "/owner/affiliate", label: "Affiliate" },
   { href: "/owner/studio", label: "Content Studio" },
+  { href: "/owner/stories", label: "Stories" },
+  { href: "/owner/intelligence", label: "Intelligence" },
   { href: "/owner/growth", label: "Growth Director" },
   { href: "/owner/pages", label: "Pages" },
 ];
@@ -58,14 +61,17 @@ export function AppShell({
   if (!preview.ready || !preview.user || !allowed) return <Wordmark />;
 
   const primary = area === "owner" ? OWNER_PRIMARY : STAFF_DAILY;
-  const more = area === "owner" ? OWNER_MORE : STAFF_MORE;
+  const ownerMore = can(preview.user.role, "manage_users")
+    ? [...OWNER_MORE, { href: "/owner/enquiries", label: "Enquiries" }]
+    : OWNER_MORE;
+  const more = area === "owner" ? ownerMore : STAFF_MORE;
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[15.5rem_minmax(0,1fr)]">
       <aside className="sticky top-0 hidden h-screen flex-col bg-sidebar lg:flex">
         <div className="px-5 pt-7">
           <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">
-            Affiliate Traffic OS
+            AffiGrove OS
           </Link>
           <p className="mt-1 text-sm text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
         </div>
@@ -86,7 +92,7 @@ export function AppShell({
       <div className="flex min-w-0 flex-col">
         <header className="bg-sidebar lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
-            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">Affiliate Traffic OS</Link>
+            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">AffiGrove OS</Link>
             <Logout
               className="mt-0"
               onClick={() => {
@@ -167,7 +173,7 @@ function Logout({ onClick, className = "mt-3" }: { onClick: () => void; classNam
 function Wordmark() {
   return (
     <main className="grid min-h-screen place-items-center px-6">
-      <p className="font-heading text-3xl tracking-tight">Affiliate Traffic OS</p>
+      <p className="font-heading text-3xl tracking-tight">AffiGrove OS</p>
     </main>
   );
 }

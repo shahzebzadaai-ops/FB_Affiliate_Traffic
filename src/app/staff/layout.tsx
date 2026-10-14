@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/server/current-user";
 
 export default function StaffLayout({ children }: { children: ReactNode }) {
   return (
-    <Suspense fallback={<p className="p-8 font-heading text-3xl">Affiliate Traffic OS</p>}>
+    <Suspense fallback={<p className="p-8 font-heading text-3xl">AffiGrove OS</p>}>
       <StaffGate>{children}</StaffGate>
     </Suspense>
   );

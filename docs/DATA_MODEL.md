@@ -22,4 +22,8 @@ The UK market uses Europe/London. A time before the last Sunday in October is Br
 
 Later visits, clicks, and postbacks should point at the same content id, for example `UK-BGUK-001`. Those tables are not created yet.
 
+`drizzle/0005_muse_studio.sql` adds the manual creative desk: `creative_providers`, `provider_capabilities`, `creative_packages`, `creative_assets`, `provider_balances`, and `provider_usage_events`. Muse is the seed row `muse-web-studio`, type `EXTERNAL_MANUAL`, with eight capabilities left `UNTESTED`. The advertised one billion tokens are not inserted as a balance. Finished files are written under `AFFIGROVE_MEDIA_DIR` or `data/media-library`. The table stores the relative path, not a public URL, and no Muse password.
+
+`drizzle/0006_intelligence.sql` adds `operating_controls`, `intelligence_reports`, `story_series`, `story_episodes`, and `story_clips`. Publishing is constrained to `OFF`. Story rows store the model id and whether live research was used. Clip rows store a relative path and a byte size, not the video itself. No Novita key is written into these tables.
+
 The local development database is not backed up off this machine.

@@ -1,6 +1,6 @@
 # Design
 
-Affiliate Traffic OS is a private operating system. The only visual reference is [Althoy](https://www.framer.com/marketplace/templates/althoy/) ([live preview](https://aithoy.framer.website/)). Use it for typography, colour, spacing, surfaces, buttons and hierarchy. Do not recreate its marketing homepage. Do not copy its code, assets, illustrations, prices, testimonials, feature grids or Framer sections. Do not add Framer as a dependency.
+AffiGrove OS is a private operating system. The only visual reference is [Althoy](https://www.framer.com/marketplace/templates/althoy/) ([live preview](https://aithoy.framer.website/)). Use it for typography, colour, spacing, surfaces, buttons and hierarchy. Do not recreate its marketing homepage. Do not copy its code, assets, illustrations, prices, testimonials, feature grids or Framer sections. Do not add Framer as a dependency.
 
 ## Earlier references
 
@@ -36,3 +36,7 @@ The layout stays an operating system. Shahzeb and Masho keep separate shells. A 
 Preserve authentication, permissions, the campaign clock, task commands and the 180-post catalog. A visual change does not connect Meta, Drive, a model or an affiliate network, and it does not start the 30-day clock.
 
 The first Althoy slice is Shahzeb’s overview and Masho’s Today queue and task desk. Other routes inherit the type and colour and have not had their own layout pass.
+
+## Public site
+
+The AffiGrove Media Group website at `/site` is a separate identity: Fraunces, Source Sans 3, paper, and grove green. It is not an Althoy homepage and it does not use the Milky Way canvas. The operating-system rules in this file still apply to `/`, `/owner`, and `/staff`. See `docs/CORPORATE_SITE.md`. The owner shell gains one item, Enquiries, for people who can manage staff. That inbox is private.

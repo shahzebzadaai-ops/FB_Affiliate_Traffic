@@ -1,9 +1,9 @@
 ---
-description: Affiliate Traffic OS durable founder decisions and implementation discipline
+description: AffiGrove OS durable founder decisions and implementation discipline
 alwaysApply: true
 ---
-# Affiliate Traffic OS project rule
-- Always read `AFFILIATE_TRAFFIC_OS_MASTER_SPEC.md` before proposing architecture or editing Affiliate Traffic OS features.
+# AffiGrove OS project rule
+- Always read `AFFILIATE_TRAFFIC_OS_MASTER_SPEC.md` before proposing architecture or editing AffiGrove OS features.
 - Distinguish founder-confirmed strategy from repository-verified shipped functionality. Do not claim unverified features are implemented.
 - Follow only the **one** founder-selected affiliate-network reference design. If missing, request it before redesigning.
 - Keep the owner master START/PAUSE switch default OFF and enforce server-side before any publishing or ad execution.

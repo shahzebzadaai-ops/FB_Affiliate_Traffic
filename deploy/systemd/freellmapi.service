@@ -1,0 +1,18 @@
+[Unit]
+Description=AffiGrove FreeLLMAPI router
+After=network.target
+
+[Service]
+Type=simple
+User=freellmapi
+Group=freellmapi
+WorkingDirectory=/opt/freellmapi
+EnvironmentFile=/etc/freellmapi/router.env
+ExecStart=/usr/bin/node server/dist/index.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

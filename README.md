@@ -1,4 +1,4 @@
-# Affiliate Traffic OS
+# AffiGrove OS
 
 Internal operating system for an organic-first UK dating affiliate publisher.
 

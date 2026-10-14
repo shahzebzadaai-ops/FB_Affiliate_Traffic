@@ -8,10 +8,12 @@
 - Shahzeb company preview, Masho daily tasks, production workspace, checklists, calendar, approvals, training and empty finance / integration screens.
 - Masho's screen is a publishing queue with Today, Ready, Scheduled, Published and Issues. Ready stays empty until a real file URL is stored. The task screen can open Meta Business Suite and can save a live URL. It does not post to Facebook. Flagging stores a note and does not call a model.
 - Shahzeb's overview lists attention items and a five-Page table. Affiliate intelligence, Content Studio and Growth Director are owner screens. Unconnected money, reach and AI cost stay blank. See `DESIGN.md` and `docs/UI_ARCHITECTURE.md`.
-- Copyable prompts remain on the owner brief only. No AI API calls.
+- Copyable prompts remain on the owner brief. Prepare for Muse AI compiles a package from the plan brief and stores a file the owner uploads. No Muse API is called.
 - Tests for import, UK clock change, permissions, submission evidence, self-approval and winner-sample refusal.
 - Secure multi-operator foundation: `PUBLISHING_OPERATOR`, invitation links, `social_pages`, `page_assignments`, schedule confirmation separate from publication, and server-side isolation. Operator payloads omit other operators and the historical catalog assignee. See `docs/ARCHITECTURE.md`.
 - Media queue: owner-issued worker credentials, durable production jobs, leases, heartbeats, and approval that copies an https URL onto a task without scheduling it. The Mac worker source and install guide are in `worker/` and `docs/MEDIA_WORKER.md`. No Reel has been rendered.
+- Muse desk: Prepare for Muse AI compiles a package from the plan brief, stores an uploaded file, and records a typed token balance. It does not call Muse and it does not publish.
+- Intelligence desk and Story Series Studio. Novita is called only when a key and model id are set and the intelligence engine is started. Live research, permanent storage, and the VPS editing service are reported as unavailable. A contract test can store a pilot. That test is not a live Novita call.
 
 ## Tested
 
@@ -26,13 +28,17 @@
 - 13 October 2026: `npm test` (20 passed), `npm run lint` and `npm run typecheck` after the publishing-desk correction. Masho's local session showed ready-to-publish at 0, an empty file slot, a Meta Business Suite instruction, a persisted regeneration flag, and a blocked finance route. The campaign stayed in build mode. The temporary page-operator login used for that check was removed.
 - 13 October 2026: `npm test` (25 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the role shells. Browser check covered the owner overview, affiliate intelligence, Content Studio, Growth Director, Masho's today queue, the empty ready list, and UK-SGIUK-001. A 390px capture showed Masho's bottom bar. The campaign stayed in build mode. Temporary review logins were removed.
 - 13 October 2026: `npm test` (26 passed), `npm run lint`, `npm run typecheck` and `npm run build` after operator isolation. Three operator identities are covered in `tests/isolation.test.ts`.
+- 14 October 2026: `npm test` (33 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the local AffiGrove site. The public pages render at `/site`. A contact message required consent, was stored, appeared in the owner inbox, and the review row was removed. Unauthenticated finance and enquiry reads returned 401. A cross-origin form post returned 403. The campaign stayed in build mode. The sign-in screen stayed the private OS.
 - 14 October 2026: `npm test` (27 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the media queue. Python `unittest` for the assembler passed. A Linux FFmpeg technical check produced a 1080×1920 H.264 file in 0.738 seconds, peak child RSS about 373 MiB, temporary files about 59 KiB, and no external API call. It is not a Page asset and not a Mac measurement. The Systems screen queued UK-SGIUK-001 with no file, and the owner overview showed the ready buffer at 0 of 20. The campaign stayed in build mode. The demo job and session were removed.
+- 14 October 2026: `npm test` (38 passed), `npm run lint` and `npm run typecheck` after the Muse desk. A production-mode walk of UK-BGUK-001 prepared three reel concepts and six image prompts, uploaded one image, approved it, and recorded a typed token balance. No model was called. The campaign stayed in build mode and the post stayed unpublished. All eight Muse capabilities stayed untested.
+- 14 October 2026: `npm test` (43 passed), `npm run lint` and `npm run typecheck` after the intelligence desk. A contract test stored a five-episode pilot against a local mock and did not call Novita. Python assembler tests joined two clips into a 1080×1920 file. Live research stayed unavailable. The campaign stayed in build mode.
 
 ## Incomplete
 
 - Google Drive, Novita, Kokoro, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked. The Still Got It proof has not been generated on the Mac. A Linux FFmpeg check, when recorded, is not that Reel and not a throughput number.
 - launchd is a template only. It is not installed.
-- No public website, no live publishing, no performance history, no revenue.
+- The AffiGrove public website is a local preview at `/site`. It is not deployed. Search indexing is off. Company number, office, public email, phone, and governing law are still awaiting approval. See `docs/CORPORATE_SITE.md`.
+- No live publishing, no performance history, no revenue.
 - 76 content notes still need Shahzeb's decision.
 - Invitation email delivery and password recovery mail are not built. The owner copies the join link.
 - Owner-only JavaScript still contains the historical assignee id because the import screen reads the plan file. Operator routes do not.

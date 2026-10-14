@@ -147,6 +147,22 @@ export const mandalaPillars = pgTable("mandala_pillars", {
   title: text("title").notNull(),
 });
 
+export const publicEnquiries = pgTable("public_enquiries", {
+  id: uuid("id").primaryKey(),
+  kind: text("kind").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  topic: text("topic").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+});
+
+export const publicEnquiryAttempts = pgTable("public_enquiry_attempts", {
+  id: integer("id").primaryKey(),
+  ipHash: text("ip_hash").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+});
+
 export const mandalaActions = pgTable("mandala_actions", {
   id: text("id").primaryKey(),
   pillarId: text("pillar_id").notNull(),

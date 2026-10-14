@@ -1,6 +1,6 @@
 # Product master
 
-Affiliate Traffic OS runs the company. It does not run a dating product.
+AffiGrove OS runs the company. It does not run a dating product.
 
 Business flow:
 

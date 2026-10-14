@@ -1,7 +1,7 @@
 export type IntegrationConnection = {
-  id: "google-drive" | "meta" | "affiliate-networks";
+  id: "google-drive" | "meta" | "affiliate-networks" | "muse-web-studio" | "novita" | "live-research" | "permanent-storage";
   name: string;
-  status: "not_connected";
+  status: "not_connected" | "manual";
   detail: string;
 };
 
@@ -12,7 +12,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Google Drive",
       status: "not_connected",
       detail:
-        "OAuth is not connected. The database will store Drive folder and file IDs after authentication. Staff will not use Shahzeb's Google password. No file IDs are stored yet.",
+        "Not the confirmed 5 TB store. OAuth is not connected, and this build does not assume the permanent library is Google Drive.",
     },
     {
       id: "meta",
@@ -20,6 +20,33 @@ export function integrationStatus(): IntegrationConnection[] {
       status: "not_connected",
       detail:
         "There is no Page token and no publishing permission. Schedule posts manually in Meta Business Suite. This app does not claim automated Facebook scheduling. Performance is entered by hand at 24 hours, 72 hours and 7 days. Organic and paid reach stay separate.",
+    },
+    {
+      id: "muse-web-studio",
+      name: "Muse AI — Web Studio",
+      status: "manual",
+      detail:
+        "Manual website only. Packages are prepared from the plan brief in Content Studio. Finished files are uploaded by hand. No Muse credentials are stored, no API is called, and every capability stays untested until the account confirms it.",
+    },
+    {
+      id: "novita",
+      name: "Novita AI",
+      status: "not_connected",
+      detail:
+        "Preserved OpenAI-compatible adapter. It runs only when LANGUAGE_PROVIDER is novita and both NOVITA_API_KEY and NOVITA_MODEL are set. A missing FreeLLMAPI key does not select it. Keys stay on the server.",
+    },
+    {
+      id: "live-research",
+      name: "Live research",
+      status: "not_connected",
+      detail: "Live research is unavailable. No authorised search API is configured. A language model is not treated as a web search.",
+    },
+    {
+      id: "permanent-storage",
+      name: "Permanent media storage",
+      status: "not_connected",
+      detail:
+        "The 5 TB destination is not confirmed. Uploads stay on the application host. Nothing is copied to Drive, S3, or a disk that has not been named.",
     },
     {
       id: "affiliate-networks",

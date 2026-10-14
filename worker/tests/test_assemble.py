@@ -4,7 +4,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from atos_worker.assemble import TECHNICAL_CAPTION, assemble_command, encoder_args, write_srt
+from atos_worker.assemble import (
+    TECHNICAL_CAPTION,
+    assemble_clips_command,
+    assemble_command,
+    encoder_args,
+    run_ffmpeg,
+    write_srt,
+)
 from atos_worker.bench import technical_check
 from atos_worker.tts import synthesize
 from atos_worker.validate import validate_mp4
@@ -44,6 +51,38 @@ class AssembleTests(unittest.TestCase):
             with self.assertRaises(RuntimeError) as caught:
                 synthesize("A short British line for the test.", "bf_emma", Path(raw) / "voice.wav")
         self.assertIn("not installed", str(caught.exception))
+
+    def test_uploaded_clips_join_to_a_vertical_file(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            folder = Path(raw)
+            clips = []
+            for index, color in enumerate(("0x1b2838", "0x243447")):
+                clip = folder / f"shot-{index}.mp4"
+                run_ffmpeg(
+                    [
+                        "ffmpeg",
+                        "-y",
+                        "-f",
+                        "lavfi",
+                        "-i",
+                        f"color=c={color}:s=1080x1920:d=1",
+                        "-frames:v",
+                        "30",
+                        str(clip),
+                    ]
+                )
+                clips.append(clip)
+            captions = folder / "captions.ass"
+            label = "Original series. Episode 1. Not published."
+            write_srt(captions, [label], 2)
+            output = folder / "joined.mp4"
+            argv = assemble_clips_command(clips, captions, output)
+            self.assertEqual(argv[0], "ffmpeg")
+            self.assertNotIn(label, "\n".join(argv))
+            run_ffmpeg(argv)
+            info = validate_mp4(output, "technical")
+            self.assertEqual(info["width"], 1080)
+            self.assertEqual(info["height"], 1920)
 
     def test_technical_check_is_1080x1920_and_not_a_page_asset(self) -> None:
         with tempfile.TemporaryDirectory() as raw:

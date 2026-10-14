@@ -5,6 +5,7 @@ import { CampaignProvider } from "@/campaign/campaign-context";
 import { GalaxyBackdrop } from "@/components/galaxy-backdrop";
 import { PreviewProvider } from "@/preview/preview-context";
 import "./globals.css";
+import "./grove.css";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -13,8 +14,8 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Affiliate Traffic OS",
-  description: "Internal operating system for UK affiliate publishing.",
+  title: "AffiGrove OS",
+  description: "AffiGrove OS is the internal operating system for UK affiliate publishing.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
