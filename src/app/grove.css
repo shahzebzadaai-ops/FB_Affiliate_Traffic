@@ -1,12 +1,12 @@
 .grove {
-  --grove-paper: #f3efe6;
-  --grove-ink: #1a241c;
-  --grove-muted: #4c584f;
-  --grove-green: #1a5c42;
-  --grove-deep: #10281f;
-  --grove-line: #d9d2c5;
-  --grove-card: #fffdf8;
-  color-scheme: light;
+  --grove-paper: #000000;
+  --grove-ink: #ffffff;
+  --grove-muted: #9ca3af;
+  --grove-green: #e5e7eb;
+  --grove-deep: #000000;
+  --grove-line: rgb(255 255 255 / 0.1);
+  --grove-card: #1c1c1e;
+  color-scheme: dark;
   position: relative;
   z-index: 1;
   min-height: 100vh;
@@ -18,8 +18,8 @@
 }
 
 body.grove-open {
-  background: #f3efe6;
-  color: #1a241c;
+  background: #000000;
+  color: #ffffff;
 }
 
 body.grove-open .galaxy {
@@ -95,7 +95,7 @@ body.grove-open .galaxy {
   position: sticky;
   top: 0;
   z-index: 4;
-  background: #f3efe6;
+  background: #000000;
   border-bottom: 1px solid var(--grove-line);
 }
 
@@ -253,7 +253,7 @@ body.grove-open .galaxy {
 .grove-card span {
   display: block;
   margin-bottom: 0.8rem;
-  color: var(--grove-copper, #8d5e3c);
+  color: #9ca3af;
   font-family: var(--font-grove-serif), Georgia, serif;
   font-size: 1.4rem;
 }
@@ -281,27 +281,27 @@ body.grove-open .galaxy {
 }
 
 .grove-button {
-  background: var(--grove-green);
-  color: #f7f4ec;
-  border: 1px solid var(--grove-green);
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
 }
 
 .grove-button:hover,
 .grove-button:focus-visible {
-  background: var(--grove-deep);
-  color: #f7f4ec;
+  background: #e7e7e7;
+  color: #000000;
 }
 
 .grove-button-quiet {
-  background: transparent;
-  color: var(--grove-ink);
-  border: 1px solid var(--grove-ink);
+  background: #1f1f22;
+  color: #ffffff;
+  border: 1px solid rgb(255 255 255 / 0.1);
 }
 
 .grove-button-quiet:hover,
 .grove-button-quiet:focus-visible {
-  background: var(--grove-ink);
-  color: #f7f4ec;
+  background: #2a2a2d;
+  color: #ffffff;
 }
 
 .grove-button:disabled {
@@ -315,7 +315,7 @@ body.grove-open .galaxy {
 .grove textarea:focus-visible,
 .grove select:focus-visible,
 .grove summary:focus-visible {
-  outline: 2px solid var(--grove-green);
+  outline: 2px solid #ffffff;
   outline-offset: 3px;
 }
 
@@ -330,7 +330,8 @@ body.grove-open .galaxy {
 
 .grove-pending {
   margin-top: 2rem;
-  background: #efe6d4;
+  background: #1c1c1e;
+  border: 1px solid rgb(255 255 255 / 0.08);
   border-radius: 1.25rem;
   padding: 1.25rem;
 }
@@ -387,9 +388,9 @@ body.grove-open .galaxy {
 .grove select {
   width: 100%;
   min-height: 2.75rem;
-  border: 1px solid #cfc6b8;
+  border: 1px solid rgb(255 255 255 / 0.12);
   border-radius: 0.8rem;
-  background: var(--grove-card);
+  background: #111111;
   color: var(--grove-ink);
   padding: 0.65rem 0.8rem;
   font: inherit;
@@ -403,7 +404,7 @@ body.grove-open .galaxy {
 
 .grove input::placeholder,
 .grove textarea::placeholder {
-  color: #6d786f;
+  color: #6b7280;
   opacity: 1;
 }
 
@@ -450,8 +451,9 @@ body.grove-open .galaxy {
 }
 
 .grove-footer {
-  background: var(--grove-deep);
-  color: #e7e1d6;
+  background: #000000;
+  color: #e5e7eb;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
   padding-block: 2.5rem 2rem;
 }
 
@@ -484,7 +486,7 @@ body.grove-open .galaxy {
 .grove-footer small {
   display: block;
   margin-top: 1.5rem;
-  color: #c9c1b4;
+  color: #6b7280;
 }
 
 .grove-drawing {

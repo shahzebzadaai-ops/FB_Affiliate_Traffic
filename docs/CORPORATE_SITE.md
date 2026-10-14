@@ -15,7 +15,7 @@ OS routes are unchanged: `/`, `/owner`, `/staff`, `/join`, `/setup`, and `/api`.
 
 ## Pages
 
-Home, About, What we do, Approach, Careers, Contact, Privacy, and Terms. Copy states only the company name, the intended domains, and the four public practices: audience research, original content, technology, and performance marketing. It does not state revenue, staff numbers, offices, clients, salaries, or the private operating system.
+Home, About, What we do, Approach, Careers, Contact, Privacy, and Terms. The homepage is a single cinematic page. Interior pages state the company name, the intended domains, and the public practices: storytelling, audience understanding, original work, and partnerships. The site does not state revenue, staff numbers, offices, clients, salaries, or private operations.
 
 ## Enquiries
 
@@ -31,7 +31,7 @@ Search indexing is off (`robots: noindex`). Do not add a sitemap or remove `noin
 
 ## Visual identity
 
-The public site uses Fraunces and Source Sans 3, paper `#f3efe6`, ink `#1a241c`, and grove green `#1a5c42`. AffiGrove OS keeps Be Vietnam Pro, the navy field, and the Milky Way canvas. The two identities are separate on purpose.
+The public homepage uses a black field (`#000000`), white type, Fraunces italic for selected words, and Source Sans 3. Background films live in `public/media/` and are the reference clips supplied for this page, stored locally. The stroke mark in the header is provisional until an approved logo file is supplied. Interior pages use the same dark tokens. AffiGrove OS keeps Be Vietnam Pro, the navy field, and the Milky Way canvas. The two identities are separate on purpose. Search indexing stays off until the unapproved company facts are supplied, even though the homepage metadata is ready for a later release.
 
 ## Deployment
 

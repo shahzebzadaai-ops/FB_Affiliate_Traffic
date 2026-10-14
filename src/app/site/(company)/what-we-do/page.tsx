@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "What We Do",
   description:
-    "AffiGrove Media Group works in audience research, original content, publishing technology, and performance marketing.",
+    "AffiGrove Media Group creates digital media experiences centred on storytelling, audience relevance and thoughtful partnerships.",
 };
 
 export default function WhatWeDoPage() {
@@ -13,7 +13,7 @@ export default function WhatWeDoPage() {
       <p className="grove-kicker">What we do</p>
       <h1>Four kinds of work.</h1>
       <p className="grove-lede">
-        The company is building a publishing and affiliate marketing business. Each part below is public. The internal method stays private.
+        AffiGrove creates digital media experiences and develops connections between audiences and relevant commercial partners. The internal method stays private.
       </p>
       <section className="grove-section">
         <h2>Audience research</h2>
@@ -34,9 +34,9 @@ export default function WhatWeDoPage() {
         </p>
       </section>
       <section className="grove-section">
-        <h2>Performance marketing</h2>
+        <h2>Partnerships</h2>
         <p>
-          Affiliate partnerships, and paid distribution when a budget is approved, are part of the business. A person approves spend. This site does not quote results that have not been collected, and it does not name partners that have not been approved for publication.
+          We welcome conversations about media collaborations and commercial opportunities that fit the audience and the editorial direction. A person approves those relationships. This site does not quote results that have not been collected, and it does not name partners that have not been approved for publication.
         </p>
         <p>
           Read <Link href="/site/approach">our approach</Link> for how those decisions are held.

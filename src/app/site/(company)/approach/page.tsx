@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Our Approach",
   description:
-    "AffiGrove researches before it scales a publication, reviews original work, and keeps distribution and spend under human approval.",
+    "AffiGrove studies an audience before it treats a publication as ready, reviews original work, and keeps a person accountable for what is published.",
 };
 
 const STEPS = [
@@ -31,7 +31,7 @@ export default function ApproachPage() {
       <p className="grove-kicker">Our approach</p>
       <h1>Slow where it matters.</h1>
       <p className="grove-lede">
-        AffiGrove’s public standard is simple: research the audience, make original work, measure what was collected, and keep a person accountable for publishing and spend.
+        AffiGrove’s public standard is simple: understand the audience, make original work, describe only what was collected, and keep a person accountable for what is published.
       </p>
       <div className="grove-practices">
         {STEPS.map((step, index) => (

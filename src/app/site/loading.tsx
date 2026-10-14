@@ -1,3 +1,9 @@
 export default function SiteLoading() {
-  return <p className="grove-kicker">Loading</p>;
+  return (
+    <div className="cine">
+      <p className="cine-marquee-label" style={{ paddingTop: "8rem" }}>
+        Loading
+      </p>
+    </div>
+  );
 }

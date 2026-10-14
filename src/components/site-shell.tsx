@@ -4,6 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
+export function PublicBody() {
+  useEffect(() => {
+    document.body.classList.add("grove-open");
+    return () => document.body.classList.remove("grove-open");
+  }, []);
+  return null;
+}
+
 const LINKS = [
   { href: "/site", label: "Home" },
   { href: "/site/about", label: "About" },
@@ -30,11 +38,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [openPath, setOpenPath] = useState<string | null>(null);
   const open = openPath === pathname;
-
-  useEffect(() => {
-    document.body.classList.add("grove-open");
-    return () => document.body.classList.remove("grove-open");
-  }, []);
 
   return (
     <div className="grove">
@@ -75,7 +78,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="grove-wrap grove-footer-grid">
           <div>
             <h2>AffiGrove Media Group</h2>
-            <p>A digital media publishing and affiliate marketing company in formation.</p>
+            <p>Thoughtful media. Meaningful connections.</p>
           </div>
           <nav aria-label="Legal and contact">
             <Link href="/site/contact">Contact</Link>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "AffiGrove Media Group is the public name of a digital publishing and affiliate marketing company. Registration and contact details are still awaiting approval.",
+    "AffiGrove Media Group is an independent digital media company. Registration and contact details are still awaiting approval.",
 };
 
 const PENDING = [
@@ -23,15 +23,15 @@ export default function AboutPage() {
       <p className="grove-kicker">About us</p>
       <h1>The company, as far as it can be stated.</h1>
       <p className="grove-lede">
-        AffiGrove Media Group is the public name of a company being built around digital media publishing and affiliate marketing.
+        AffiGrove Media Group is an independent digital media company focused on engaging content, audience experiences and thoughtful commercial partnerships.
       </p>
       <section className="grove-section">
         <h2>Purpose</h2>
         <p>
-          The company exists to research audiences, publish original content, apply technology to that work, and run performance marketing with a person responsible for the decisions.
+          The company exists to create engaging digital media, understand audiences, and develop partnerships that are relevant and considered. A person remains responsible for what is published.
         </p>
         <p>
-          The intended public addresses are affigrove.io and www.affigrove.io. A separate private system is used by authorised staff. It is not part of this website, and this website does not describe it.
+          The intended public addresses are affigrove.io and www.affigrove.io. Work that is not ready for the public stays off this website.
         </p>
       </section>
       <section className="grove-section">
