@@ -4,9 +4,17 @@ Do not deploy to the PlayerPulser server. Do not configure affigrove.com. Do not
 
 ## What is true today
 
-`affigrove.io` and `www.affigrove.io` answer from Hostinger DNS parking at `2.57.91.91`. The page says “Parked Domain name on Hostinger DNS system”. Nameservers are `aurora.dns-parking.com` and `nebula.dns-parking.com`. Port 22 on that address is closed. `os.affigrove.io` has no DNS record. That address is not the KVM2.
+The AffiGrove KVM2 is Ubuntu 24.04 at `153.92.208.28`. SSH key `affigrove-kvm-deploy` logs in as root. DNS is:
 
-The application code is ready. The VPS is not reachable from this environment until the steps below are done.
+| Name | Record |
+| --- | --- |
+| `affigrove.io` | A `153.92.208.28` |
+| `www.affigrove.io` | CNAME `affigrove.io` |
+| `os.affigrove.io` | A `153.92.208.28` |
+
+Do not use the PlayerPulser Hostinger account or `187.53.130.227`. Do not configure affigrove.com.
+
+The GitHub repository is private. `deploy/release.sh` fetches it with a read-only deploy key. Until that key exists, copy this checkout to `/var/www/affigrove/repo` and run the release with `AFFIGROVE_SKIP_FETCH=1`. Do not copy this environment's GitHub credentials onto the VPS.
 
 ## 1. Finish the VPS in hPanel
 
@@ -48,6 +56,13 @@ Create a read-only GitHub deploy key for `shahzebzadaai-ops/fb_affiliate_traffic
 
 ```bash
 sudo -u affigrove bash /var/www/affigrove/repo/deploy/release.sh
+sudo bash /var/www/affigrove/current/deploy/install-proxy.sh
+```
+
+Without a deploy key, from a copy of this branch already checked out at `/var/www/affigrove/repo`:
+
+```bash
+sudo -u affigrove env AFFIGROVE_SKIP_FETCH=1 bash /var/www/affigrove/repo/deploy/release.sh
 sudo bash /var/www/affigrove/current/deploy/install-proxy.sh
 ```
 

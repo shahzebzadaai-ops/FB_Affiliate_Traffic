@@ -1,8 +1,8 @@
 # Decision log
 
-## 2026-10-14 — Deployment approved, VPS not reachable
+## 2026-10-14 — Deployment approved on the AffiGrove KVM2
 
-Shahzeb approved deployment of the existing corporate site and private OS to the Hostinger KVM2. The domain was still on Hostinger DNS parking, so no SSH, DNS edit, certificate, or database command was run. `www.affigrove.io` now redirects to the apex in `src/proxy.ts`. The repeatable release and rollback path is `deploy/HOSTINGER.md`. The campaign is not started.
+Shahzeb approved deployment of the existing corporate site and private OS to the Hostinger KVM2 at 153.92.208.28. `www.affigrove.io` redirects to the apex. The repeatable release and rollback path is `deploy/HOSTINGER.md`. The campaign is not started. The corporate site stays behind the review password and `noindex` until a separate launch approval.
 
 ## 2026-10-14 — AffiGrove public site, local only
 

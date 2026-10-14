@@ -18,13 +18,22 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 mkdir -p "$ROOT/releases" "$ROOT/shared" "$ROOT/repo"
-if [[ ! -d "$ROOT/repo/.git" ]]; then
-  git clone --branch "$BRANCH" "$REPO" "$ROOT/repo"
+if [[ "${AFFIGROVE_SKIP_FETCH:-}" == "1" ]]; then
+  if [[ ! -d "$ROOT/repo/.git" ]]; then
+    echo "AFFIGROVE_SKIP_FETCH=1 needs a checkout already at $ROOT/repo." >&2
+    exit 1
+  fi
+  git -C "$ROOT/repo" checkout "$BRANCH"
+  SHA="$(git -C "$ROOT/repo" rev-parse HEAD)"
+else
+  if [[ ! -d "$ROOT/repo/.git" ]]; then
+    git clone --branch "$BRANCH" "$REPO" "$ROOT/repo"
+  fi
+  git -C "$ROOT/repo" fetch origin "$BRANCH"
+  git -C "$ROOT/repo" checkout "$BRANCH"
+  git -C "$ROOT/repo" reset --hard "origin/$BRANCH"
+  SHA="$(git -C "$ROOT/repo" rev-parse HEAD)"
 fi
-git -C "$ROOT/repo" fetch origin "$BRANCH"
-git -C "$ROOT/repo" checkout "$BRANCH"
-git -C "$ROOT/repo" reset --hard "origin/$BRANCH"
-SHA="$(git -C "$ROOT/repo" rev-parse HEAD)"
 RELEASE="$ROOT/releases/$SHA"
 PREVIOUS=""
 if [[ -L "$ROOT/current" ]]; then

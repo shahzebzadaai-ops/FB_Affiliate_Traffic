@@ -22,10 +22,14 @@ if ! id affigrove >/dev/null 2>&1; then
   adduser --disabled-password --gecos "" affigrove
 fi
 install -d -o affigrove -g affigrove /var/www/affigrove /var/backups/affigrove /var/www/certbot
-install -d -m 750 /etc/affigrove
+# 751 lets the app user and nginx traverse the directory. Secret files stay mode 640.
+install -d -o root -g affigrove -m 751 /etc/affigrove
+chmod 751 /etc/affigrove
+chown root:affigrove /etc/affigrove
 
 if [[ ! -f /etc/affigrove/app.env ]]; then
-  DB_PASSWORD="$(openssl rand -base64 24)"
+  # Hex avoids '+', '/', and '=' so the password is safe inside a Postgres URL.
+  DB_PASSWORD="$(openssl rand -hex 24)"
   sudo -u postgres psql -v ON_ERROR_STOP=1 <<SQL
 DO \$\$
 BEGIN
@@ -48,7 +52,7 @@ EOF
 fi
 
 if [[ ! -f /etc/affigrove/review.htpasswd ]]; then
-  REVIEW_PASSWORD="$(openssl rand -base64 18)"
+  REVIEW_PASSWORD="$(openssl rand -hex 16)"
   htpasswd -bc /etc/affigrove/review.htpasswd reviewer "$REVIEW_PASSWORD"
   umask 077
   printf 'reviewer %s\n' "$REVIEW_PASSWORD" > /etc/affigrove/review-password.txt
@@ -64,8 +68,22 @@ install -m 644 "$SCRIPT_DIR/systemd/affigrove.service" /etc/systemd/system/affig
 systemctl daemon-reload
 systemctl enable affigrove
 
-echo 'affigrove ALL=(root) NOPASSWD: /bin/systemctl restart affigrove, /bin/systemctl status affigrove' > /etc/sudoers.d/affigrove
+# sudo resolves systemctl through secure_path. On Ubuntu that is /usr/bin/systemctl,
+# which is not the same sudoers rule as /bin/systemctl even when /bin is a symlink.
+cat > /etc/sudoers.d/affigrove <<'EOF'
+affigrove ALL=(root) NOPASSWD: /usr/bin/systemctl restart affigrove, /usr/bin/systemctl status affigrove, /bin/systemctl restart affigrove, /bin/systemctl status affigrove
+EOF
 chmod 440 /etc/sudoers.d/affigrove
+visudo -cf /etc/sudoers.d/affigrove
+
+# Key-only SSH. 00- sorts before cloud-init's 50- file, and OpenSSH keeps the first value.
+cat > /etc/ssh/sshd_config.d/00-affigrove-auth.conf <<'EOF'
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin prohibit-password
+EOF
+sshd -t
+systemctl reload ssh
 
 ufw allow OpenSSH
 ufw allow 80/tcp
