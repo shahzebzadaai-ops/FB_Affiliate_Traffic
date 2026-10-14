@@ -33,7 +33,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Novita AI",
       status: "not_connected",
       detail:
-        "Preserved OpenAI-compatible adapter. The server uses it when FREELLMAPI_API_KEY is unset and both NOVITA_API_KEY and NOVITA_MODEL are set. The Intelligence desk shows which route is active. Keys stay on the server.",
+        "Preserved OpenAI-compatible adapter. It runs only when LANGUAGE_PROVIDER is novita and both NOVITA_API_KEY and NOVITA_MODEL are set. A missing FreeLLMAPI key does not select it. Keys stay on the server.",
     },
     {
       id: "live-research",

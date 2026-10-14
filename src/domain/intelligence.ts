@@ -54,36 +54,49 @@ export function freellmapiBaseUrl(env: Record<string, string | undefined> = proc
   }
 }
 
+export type LanguageProviderId = "freellmapi" | "novita";
+
+export function selectedLanguageProvider(env: Record<string, string | undefined> = process.env): LanguageProviderId | "invalid" {
+  const raw = (env.LANGUAGE_PROVIDER ?? "").trim().toLowerCase();
+  if (!raw || raw === "freellmapi") return "freellmapi";
+  if (raw === "novita") return "novita";
+  return "invalid";
+}
+
 export function languagePublicStatus(env: Record<string, string | undefined> = process.env) {
+  const selected = selectedLanguageProvider(env);
   const router = freellmapiPublicStatus(env);
   const novita = novitaPublicStatus(env);
-  if (router.configured) {
+  if (selected === "invalid") {
     return {
-      active: "freellmapi" as const,
-      configured: true,
-      model: router.model,
-      fallbackModel: router.fallbackModel,
-      missing: [] as string[],
+      active: null,
+      provider: null,
+      configured: false,
+      model: null,
+      fallbackModel: null,
+      missing: ["LANGUAGE_PROVIDER"],
       novitaConfigured: novita.configured,
     };
   }
-  if (novita.configured) {
+  if (selected === "freellmapi") {
     return {
-      active: "novita" as const,
-      configured: true,
-      model: novita.model,
-      fallbackModel: null,
-      missing: [] as string[],
-      novitaConfigured: true,
+      active: router.configured ? ("freellmapi" as const) : null,
+      provider: "freellmapi" as const,
+      configured: router.configured,
+      model: router.model,
+      fallbackModel: router.fallbackModel,
+      missing: router.missing,
+      novitaConfigured: novita.configured,
     };
   }
   return {
-    active: null,
-    configured: false,
-    model: null,
+    active: novita.configured ? ("novita" as const) : null,
+    provider: "novita" as const,
+    configured: novita.configured,
+    model: novita.model,
     fallbackModel: null,
-    missing: [...router.missing, ...novita.missing],
-    novitaConfigured: false,
+    missing: novita.missing,
+    novitaConfigured: novita.configured,
   };
 }
 

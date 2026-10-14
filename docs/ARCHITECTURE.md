@@ -22,7 +22,7 @@ The comparison website, when built, is one platform with a landing experience pe
 - 180 content rows and persisted task state. Confirming a schedule and recording a public URL are separate events. A schedule confirmation does not invent a permalink. Publication requires that confirmation plus an `http` or `https` URL.
 - Operator queues use the existing publishing desk. Download, caption copy, and thumbnail stay unavailable on that desk because Drive is not connected.
 - Muse desk at `/owner/studio/muse`. Packages are compiled from the plan brief. The owner generates on the Muse website and uploads the finished file into a private library. The provider is EXTERNAL_MANUAL. No Muse API and no credentials. Approval does not publish.
-- Intelligence at `/owner/intelligence` and Story Series Studio at `/owner/stories`. The language client is OpenAI-compatible. Development prefers the private FreeLLMAPI router, and Novita remains the preserved alternative. Live research, permanent storage, and a VPS editing service are separate and currently unavailable. Engine start does not publish.
+- Intelligence at `/owner/intelligence` and Story Series Studio at `/owner/stories`. The language client is OpenAI-compatible. `LANGUAGE_PROVIDER` selects FreeLLMAPI or Novita. The default is the private FreeLLMAPI router. Novita does not run unless it is selected. Live research, permanent storage, and a VPS editing service are separate and currently unavailable. Engine start does not publish.
 
 ## Boundaries
 

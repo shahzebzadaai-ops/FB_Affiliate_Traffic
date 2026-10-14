@@ -7,16 +7,68 @@ import { migrateDatabase, resetDatabase, seedDatabase } from "@/db/setup";
 import { getSql } from "@/db/client";
 import { freellmapiPublicStatus, languagePublicStatus, novitaPublicStatus, researchPublicStatus } from "@/domain/intelligence";
 import { analyseSuppliedEvidence } from "@/server/intelligence";
-import { coercePilot, episodePackage, monetisationAdvice, pilotSchema, seriesLaunchAdvice, type PilotBody } from "@/domain/stories";
+import { characterMentioned, coerceNumericStrings, episodePackage, joinStringArrays, monetisationAdvice, pilotSchema, seriesLaunchAdvice, type PilotBody } from "@/domain/stories";
 import { setEngine } from "@/server/intelligence";
 import { approveSeries, generatePilot, saveStoryClip } from "@/server/stories";
 
 const databaseUrl = process.env.DATABASE_URL ?? "";
 let server: Server;
 let baseUrl = "";
+type PlannedReply = { status?: number; finishReason?: string | null; content?: unknown; headers?: Record<string, string> };
+
 let requests = 0;
 let reply: unknown = { broken: true };
 let failRemaining = 0;
+let planned: PlannedReply[] = [];
+let forcedFinish: string | null = null;
+let failModelPrefix = "";
+let seenAuth: string[] = [];
+
+function stagePayload(body: string, fixture: PilotBody): unknown {
+  if (body.includes("STAGE: concept")) {
+    return {
+      seriesTitle: fixture.seriesTitle,
+      genre: fixture.genre,
+      audience: fixture.audience,
+      premise: fixture.premise,
+      themes: fixture.themes,
+      whyTest: fixture.whyTest,
+      assumptions: fixture.assumptions,
+    };
+  }
+  if (body.includes("STAGE: story-bible")) {
+    return {
+      characters: fixture.characters,
+      relationships: fixture.relationships,
+      locations: fixture.locations,
+      visualStyle: fixture.visualStyle,
+      emotionalProgression: fixture.emotionalProgression,
+      continuityRules: fixture.continuityRules,
+    };
+  }
+  if (body.includes("STAGE: season-outline")) {
+    return {
+      seasonArc: fixture.seasonArc,
+      reveals: fixture.reveals,
+      endingDirection: fixture.endingDirection,
+      episodes: fixture.episodes.map((episode) => ({
+        number: episode.number,
+        title: episode.title,
+        hook: episode.hook,
+        summary: episode.summary,
+        previousEpisode: episode.previousEpisode,
+        closingBeat: episode.closingBeat,
+        nextEpisode: episode.nextEpisode,
+      })),
+    };
+  }
+  if (body.includes("STAGE: episode-script")) {
+    const match = body.match(/EPISODE: (\d)/);
+    const number = Number(match?.[1] ?? "1");
+    return fixture.episodes.find((episode) => episode.number === number) ?? { broken: true };
+  }
+  return { broken: true };
+}
 
 function pilotFixture(): PilotBody {
   const scene = (number: number) => ({
@@ -35,10 +87,10 @@ function pilotFixture(): PilotBody {
     number,
     title,
     hook: "A familiar face appears where she did not expect anyone.",
-    summary: "An original meeting in a British coastal town becomes harder to explain.",
+    summary: "Mara Quinn and Owen Blake meet again in a British coastal town, and the meeting becomes harder to explain.",
     previousEpisode: number === 1 ? "" : "The previous episode ended on the unanswered question.",
-    voiceover: "She had rehearsed a quiet evening, and the evening refused to stay quiet.",
-    dialogue: "I was not looking for you.",
+    voiceover: "Mara Quinn had rehearsed a quiet evening, and Owen Blake was already on the platform.",
+    dialogue: "Mara Quinn: I was not looking for you, Owen Blake.",
     closingBeat: "He answers a question she did not ask.",
     nextEpisode: "The next episode has to explain what he was holding.",
     scenes: [scene(1), scene(2), scene(3), scene(4)],
@@ -76,6 +128,7 @@ function pilotFixture(): PilotBody {
 }
 
 beforeAll(async () => {
+  delete process.env.LANGUAGE_PROVIDER;
   delete process.env.FREELLMAPI_API_KEY;
   delete process.env.FREELLMAPI_MODEL;
   delete process.env.FREELLMAPI_FALLBACK_MODEL;
@@ -91,16 +144,38 @@ beforeAll(async () => {
     req.on("end", () => {
       const body = Buffer.concat(chunks).toString("utf8");
       (server as Server & { lastBody?: string; lastAuth?: string | null }).lastBody = body;
-      (server as Server & { lastAuth?: string | null }).lastAuth = req.headers.authorization ?? null;
+      const authorization = req.headers.authorization ?? "";
+      seenAuth.push(authorization);
+      (server as Server & { lastAuth?: string | null }).lastAuth = authorization || null;
       res.setHeader("content-type", "application/json");
+      const modelMatch = body.match(/"model":"([^"]+)"/);
+      if (failModelPrefix && modelMatch?.[1]?.startsWith(failModelPrefix)) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: { message: "temporary" } }));
+        return;
+      }
+      const next = planned.shift();
+      if (next) {
+        res.statusCode = next.status ?? 200;
+        for (const [key, value] of Object.entries(next.headers ?? {})) res.setHeader(key, value);
+        const finish = next.finishReason === undefined ? (forcedFinish ?? "stop") : next.finishReason;
+        const content = typeof next.content === "string" ? next.content : JSON.stringify(next.content ?? {});
+        res.end(JSON.stringify({
+          choices: [{ message: { content }, finish_reason: finish }],
+          usage: { prompt_tokens: 11, completion_tokens: 22 },
+        }));
+        return;
+      }
       if (failRemaining > 0) {
         failRemaining -= 1;
         res.statusCode = 503;
         res.end(JSON.stringify({ error: { message: "temporary" } }));
         return;
       }
+      const produced = typeof reply === "function" ? (reply as (text: string) => unknown)(body) : reply;
+      const content = typeof produced === "string" ? produced : JSON.stringify(produced);
       res.end(JSON.stringify({
-        choices: [{ message: { content: JSON.stringify(reply) } }],
+        choices: [{ message: { content }, finish_reason: forcedFinish ?? "stop" }],
         usage: { prompt_tokens: 11, completion_tokens: 22 },
       }));
     });
@@ -119,6 +194,7 @@ afterAll(async () => {
   delete process.env.FREELLMAPI_MODEL;
   delete process.env.FREELLMAPI_FALLBACK_MODEL;
   delete process.env.FREELLMAPI_BASE_URL;
+  delete process.env.LANGUAGE_PROVIDER;
   await new Promise<void>((resolve) => server.close(() => resolve()));
 });
 
@@ -145,8 +221,18 @@ describe("intelligence status", () => {
       NOVITA_MODEL: "novita-model",
     });
     expect(both.active).toBe("freellmapi");
+    expect(both.provider).toBe("freellmapi");
     expect(both.fallbackModel).toBe("openai/gpt-oss-20b");
-    expect(languagePublicStatus({ NOVITA_API_KEY: "novita", NOVITA_MODEL: "novita-model" }).active).toBe("novita");
+    const novitaOnly = languagePublicStatus({ NOVITA_API_KEY: "novita", NOVITA_MODEL: "novita-model" });
+    expect(novitaOnly.active).toBeNull();
+    expect(novitaOnly.provider).toBe("freellmapi");
+    expect(novitaOnly.configured).toBe(false);
+    expect(languagePublicStatus({ NOVITA_API_KEY: "novita", NOVITA_MODEL: "novita-model", LANGUAGE_PROVIDER: "novita" }).active).toBe("novita");
+    expect(languagePublicStatus({
+      LANGUAGE_PROVIDER: "freellmapi",
+      NOVITA_API_KEY: "novita",
+      NOVITA_MODEL: "novita-model",
+    }).configured).toBe(false);
   });
 
   it("does not recommend a launch or a dating offer without measurements", () => {
@@ -158,10 +244,39 @@ describe("intelligence status", () => {
   });
 });
 
+function useStagedFixture() {
+  reply = (body: string) => stagePayload(body, pilotFixture());
+}
+
+function resetRoute() {
+  requests = 0;
+  failRemaining = 0;
+  planned = [];
+  forcedFinish = null;
+  failModelPrefix = "";
+  seenAuth = [];
+  delete process.env.LANGUAGE_PROVIDER;
+  delete process.env.NOVITA_API_KEY;
+  delete process.env.NOVITA_MODEL;
+  delete process.env.NOVITA_BASE_URL;
+  delete process.env.FREELLMAPI_API_KEY;
+  delete process.env.FREELLMAPI_MODEL;
+  delete process.env.FREELLMAPI_FALLBACK_MODEL;
+  delete process.env.FREELLMAPI_BASE_URL;
+}
+
+function useRouter() {
+  process.env.FREELLMAPI_API_KEY = "router-test-key";
+  process.env.FREELLMAPI_MODEL = "openai/gpt-oss-120b";
+  process.env.FREELLMAPI_FALLBACK_MODEL = "openai/gpt-oss-20b";
+  process.env.FREELLMAPI_BASE_URL = `${baseUrl}/v1`;
+}
+
 describe("romance pilot", () => {
-  it("refuses to invent a series when Novita is not configured", async () => {
-    delete process.env.NOVITA_API_KEY;
-    delete process.env.NOVITA_MODEL;
+  it("refuses to invent a series when the selected provider is not configured", async () => {
+    resetRoute();
+    process.env.NOVITA_API_KEY = "test-key-not-real";
+    process.env.NOVITA_MODEL = "test/mock-model";
     let called = 0;
     const paused = await generatePilot(async () => {
       called += 1;
@@ -177,30 +292,45 @@ describe("romance pilot", () => {
     expect(missing.ok).toBe(false);
     if (missing.ok) return;
     expect(missing.status).toBe(409);
-    expect(missing.error).toContain("NOVITA_API_KEY");
     expect(missing.error).toContain("FREELLMAPI_API_KEY");
+    expect(missing.error).not.toContain("NOVITA_API_KEY");
+    expect(called).toBe(0);
+    process.env.LANGUAGE_PROVIDER = "novita";
+    delete process.env.NOVITA_API_KEY;
+    delete process.env.NOVITA_MODEL;
+    const novitaMissing = await generatePilot(async () => {
+      called += 1;
+      return new Response("no");
+    });
+    expect(novitaMissing.ok).toBe(false);
+    if (novitaMissing.ok) return;
+    expect(novitaMissing.error).toContain("NOVITA_API_KEY");
     expect(called).toBe(0);
     const publishing = await setEngine("publishing", "STARTED");
     expect(publishing.ok).toBe(false);
   });
 
   it("stores a contract-test pilot and does not publish it", async () => {
-    reply = pilotFixture();
-    expect(pilotSchema.safeParse(reply).success).toBe(true);
+    resetRoute();
+    useStagedFixture();
+    expect(pilotSchema.safeParse(pilotFixture()).success).toBe(true);
     const sample = episodePackage(pilotFixture(), pilotFixture().episodes[0]);
     expect(sample.prompts).toHaveLength(4);
     expect(sample.publishing).toBe("disabled");
+    process.env.LANGUAGE_PROVIDER = "novita";
     process.env.NOVITA_API_KEY = "test-key-not-real";
     process.env.NOVITA_MODEL = "test/mock-model";
     process.env.NOVITA_BASE_URL = baseUrl;
-    requests = 0;
     const created = await generatePilot();
     expect(created.ok).toBe(true);
     if (!created.ok) return;
     const probe = server as Server & { lastAuth?: string | null; lastBody?: string };
-    expect(requests).toBe(1);
+    expect(requests).toBe(8);
     expect(probe.lastAuth).toBe("Bearer test-key-not-real");
     expect(probe.lastBody).toContain("test/mock-model");
+    expect(probe.lastBody).toContain("STAGE: episode-script");
+    expect(probe.lastBody).toContain("\"max_tokens\":2000");
+    expect(probe.lastBody).not.toContain("reasoning_effort");
     expect(probe.lastBody).not.toContain("test-key-not-real");
     const sql = getSql();
     const [series] = await sql<{ live_research: boolean; model: string; bible: string }[]>`
@@ -242,22 +372,18 @@ describe("romance pilot", () => {
   });
 
   it("uses the FreeLLMAPI fallback model and still marks live research unused", async () => {
-    reply = pilotFixture();
-    delete process.env.NOVITA_API_KEY;
-    delete process.env.NOVITA_MODEL;
-    process.env.FREELLMAPI_API_KEY = "router-test-key";
-    process.env.FREELLMAPI_MODEL = "openai/gpt-oss-120b";
-    process.env.FREELLMAPI_FALLBACK_MODEL = "openai/gpt-oss-20b";
-    process.env.FREELLMAPI_BASE_URL = `${baseUrl}/v1`;
-    failRemaining = 1;
-    requests = 0;
+    resetRoute();
+    useStagedFixture();
+    useRouter();
+    failModelPrefix = "openai/gpt-oss-120b";
     const created = await generatePilot();
     expect(created.ok).toBe(true);
     if (!created.ok) return;
-    expect(requests).toBe(2);
+    expect(requests).toBe(16);
     const probe = server as Server & { lastBody?: string; lastAuth?: string | null };
     expect(probe.lastAuth).toBe("Bearer router-test-key");
     expect(probe.lastBody).toContain("openai/gpt-oss-20b");
+    expect(probe.lastBody).toContain("\"reasoning_effort\":\"low\"");
     expect(probe.lastBody).not.toContain("router-test-key");
     const sql = getSql();
     const [series] = await sql<{ live_research: boolean; model: string; source: string }[]>`
@@ -273,17 +399,15 @@ describe("romance pilot", () => {
   });
 
   it("stores supplied-evidence analysis without claiming a web search", async () => {
+    resetRoute();
     reply = {
       observations: ["The note says the cafe is in Camden."],
       assumptions: ["No viewing figures were supplied."],
       storyImplications: ["A ten-episode romance could stay inside that cafe."],
     };
-    failRemaining = 0;
-    delete process.env.NOVITA_API_KEY;
-    process.env.FREELLMAPI_API_KEY = "router-test-key";
+    useRouter();
     process.env.FREELLMAPI_MODEL = "openai/gpt-oss-20b";
     delete process.env.FREELLMAPI_FALLBACK_MODEL;
-    process.env.FREELLMAPI_BASE_URL = `${baseUrl}/v1`;
     await setEngine("intelligence", "PAUSED");
     const paused = await analyseSuppliedEvidence("A handwritten note about a Camden cafe and two regulars.");
     expect(paused.ok).toBe(false);
@@ -300,40 +424,153 @@ describe("romance pilot", () => {
     expect(report).toMatchObject({ live_research: false, kind: "supplied-evidence" });
   });
 
-  it("stores a muse package when the model uses the wrong list shapes", async () => {
-    const fixture = pilotFixture();
-    reply = {
-      ...fixture,
-      relationships: ["They knew each other years ago and have not agreed what that meant."],
+  it("keeps model words and refuses to invent the rest of a story", async () => {
+    const joined = joinStringArrays({
+      relationships: ["They knew each other years ago.", "They have not agreed what that meant."],
+      audience: "Adults",
+      themes: "Trust, Secrets",
       locations: [{ name: "A coastal station in northern England" }],
-      continuityRules: "Mara's scarf stays cream. Owen does not grow a beard between episodes.",
-      episodes: fixture.episodes.map((episode, index) => ({
-        ...episode,
-        previousEpisode: index === 0 ? null : episode.previousEpisode,
-        scenes: episode.scenes.map((scene, sceneIndex) => ({
-          ...scene,
-          onScreenText: sceneIndex === 0 ? scene.onScreenText : "",
-          subtitle: sceneIndex === 0 ? scene.subtitle : "",
-        })),
-      })),
+    }) as { relationships: string; audience: string; themes: string; locations: unknown[] };
+    expect(joined.relationships).toBe("They knew each other years ago. They have not agreed what that meant.");
+    expect(characterMentioned("Ellie waits for Finch.", 'Eleanor "Ellie" Finch')).toBe(true);
+    expect(characterMentioned("A woman waits at the station.", 'Eleanor "Ellie" Finch')).toBe(false);
+    expect(joined.audience).toBe("Adults");
+    expect(joined.themes).toBe("Trust, Secrets");
+    expect(joined.locations).toEqual([{ name: "A coastal station in northern England" }]);
+    expect(coerceNumericStrings({ number: "1", scenes: [{ durationSeconds: "8", number: "eight" }] })).toEqual({
+      number: 1,
+      scenes: [{ durationSeconds: 8, number: "eight" }],
+    });
+    resetRoute();
+    useRouter();
+    reply = (body: string) => {
+      const payload = stagePayload(body, pilotFixture());
+      if (body.includes("STAGE: story-bible") && payload && typeof payload === "object") {
+        return {
+          ...(payload as Record<string, unknown>),
+          locations: [{ name: "A coastal station in northern England" }],
+          continuityRules: "Mara's scarf stays cream. Owen does not grow a beard between episodes.",
+        };
+      }
+      return payload;
     };
-    expect(pilotSchema.safeParse(reply).success).toBe(false);
-    expect(pilotSchema.safeParse(coercePilot(reply)).success).toBe(true);
-    delete process.env.FREELLMAPI_API_KEY;
+    const sql = getSql();
+    const [before] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    const created = await generatePilot();
+    expect(created.ok).toBe(false);
+    if (created.ok) return;
+    expect(created.error).toContain("story-bible");
+    expect(created.error).not.toContain("Adults in the United Kingdom.");
+    const [after] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    expect(after.n).toBe(before.n);
+  });
+
+  it("retries a cut-off reply and does not save the fragment", async () => {
+    resetRoute();
+    useRouter();
     delete process.env.FREELLMAPI_FALLBACK_MODEL;
-    process.env.NOVITA_API_KEY = "test-key-not-real";
-    process.env.NOVITA_MODEL = "test/mock-model";
-    process.env.NOVITA_BASE_URL = baseUrl;
-    failRemaining = 0;
+    planned = [{ status: 200, finishReason: "length", content: "{\"seriesTitle\":\"Cut off" }];
+    useStagedFixture();
     const created = await generatePilot();
     expect(created.ok).toBe(true);
     if (!created.ok) return;
+    expect(requests).toBe(9);
     const sql = getSql();
-    const [episode] = await sql<{ prompts: number; publishing: string }[]>`
-      select jsonb_array_length(muse_package->'prompts')::int as prompts, muse_package->>'publishing' as publishing
-      from story_episodes where series_id = ${created.seriesId} and episode_number = 1
+    const [series] = await sql<{ title: string; bible: string; concept: string }[]>`
+      select title, bible::text as bible, bible->'finishReasons'->>'concept' as concept
+      from story_series where id = ${created.seriesId}
     `;
-    expect(episode.prompts).toBe(4);
-    expect(episode.publishing).toBe("disabled");
+    expect(series.title).toBe("The Last Train Home");
+    expect(series.bible).not.toContain("Cut off");
+    expect(series.concept).toBe("stop");
+  });
+
+  it("does not save a story when every reply is truncated", async () => {
+    resetRoute();
+    useRouter();
+    delete process.env.FREELLMAPI_FALLBACK_MODEL;
+    forcedFinish = "length";
+    useStagedFixture();
+    const sql = getSql();
+    const [before] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    const created = await generatePilot();
+    expect(created.ok).toBe(false);
+    expect(requests).toBe(2);
+    const [after] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    expect(after.n).toBe(before.n);
+  });
+
+  it("retries an episode that drops its characters", async () => {
+    resetRoute();
+    useRouter();
+    delete process.env.FREELLMAPI_FALLBACK_MODEL;
+    let bare = 0;
+    reply = (body: string) => {
+      const payload = stagePayload(body, pilotFixture());
+      if (!body.includes("STAGE: episode-script") || !body.includes("EPISODE: 1") || !payload || typeof payload !== "object") return payload;
+      bare += 1;
+      if (bare > 1) return payload;
+      const episode = payload as PilotBody["episodes"][number];
+      return {
+        ...episode,
+        summary: "An original meeting in a British coastal town becomes harder to explain.",
+        voiceover: "She had rehearsed a quiet evening, and the evening refused to stay quiet.",
+        dialogue: "I was not looking for you.",
+        hook: "A familiar face appears where she did not expect anyone.",
+      };
+    };
+    const created = await generatePilot();
+    expect(created.ok).toBe(true);
+    if (!created.ok) return;
+    expect(requests).toBe(9);
+    expect(bare).toBe(2);
+  });
+
+  it("retries a short rate-limit cooldown and skips a long one", async () => {
+    resetRoute();
+    useRouter();
+    planned = [{ status: 429, headers: { "retry-after": "0" } }];
+    useStagedFixture();
+    const cooled = await generatePilot();
+    expect(cooled.ok).toBe(true);
+    if (!cooled.ok) return;
+    expect(requests).toBe(9);
+    const sql = getSql();
+    const [cooledSeries] = await sql<{ model: string }[]>`select model from story_series where id = ${cooled.seriesId}`;
+    expect(cooledSeries.model).toBe("openai/gpt-oss-120b");
+
+    resetRoute();
+    useRouter();
+    planned = [{ status: 429, headers: { "retry-after": "30" } }];
+    useStagedFixture();
+    const started = Date.now();
+    const skipped = await generatePilot();
+    expect(Date.now() - started).toBeLessThan(10_000);
+    expect(skipped.ok).toBe(true);
+    if (!skipped.ok) return;
+    expect(requests).toBe(9);
+    const [skippedSeries] = await sql<{ model: string }[]>`select model from story_series where id = ${skipped.seriesId}`;
+    expect(skippedSeries.model).toBe("openai/gpt-oss-20b, openai/gpt-oss-120b");
+  });
+
+  it("does not call Novita when the router fails", async () => {
+    resetRoute();
+    useRouter();
+    process.env.NOVITA_API_KEY = "test-key-not-real";
+    process.env.NOVITA_MODEL = "test/mock-model";
+    process.env.NOVITA_BASE_URL = baseUrl;
+    failModelPrefix = "openai/gpt-oss-";
+    useStagedFixture();
+    const sql = getSql();
+    const [before] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    const created = await generatePilot();
+    expect(created.ok).toBe(false);
+    if (created.ok) return;
+    expect(created.error).toContain("status 503");
+    expect(requests).toBe(2);
+    expect(seenAuth.every((value) => value === "Bearer router-test-key")).toBe(true);
+    expect(seenAuth).not.toContain("Bearer test-key-not-real");
+    const [after] = await sql<{ n: number }[]>`select count(*)::int as n from story_series`;
+    expect(after.n).toBe(before.n);
   });
 });

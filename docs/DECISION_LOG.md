@@ -1,8 +1,12 @@
 # Decision log
 
+## 2026-10-14 — Provider selection and staged stories
+
+`LANGUAGE_PROVIDER` chooses the language route. Empty or `freellmapi` is the free route. `novita` is the only setting that calls Novita. A missing FreeLLMAPI key does not fall through to a paid request. Story generation is split into a concept, a story bible, a season outline, and one episode script at a time. `finish_reason` of `length` or `max_tokens` is a cut-off reply. Cut-off, invalid, and continuity failures are retried once on the same model, then sent to `FREELLMAPI_FALLBACK_MODEL` when that model is set. A reply is not padded, split, or copied into a missing field. A short rate-limit wait is honoured up to 12 seconds, once. A longer wait moves to the fallback model. Nothing is saved unless every stage validates. Live research is still unavailable. The router deployment steps are written and not applied.
+
 ## 2026-10-14 — FreeLLMAPI and Groq in development
 
-The development language route is the private FreeLLMAPI router on `127.0.0.1:3001`. AffiGrove calls its OpenAI-compatible `/v1` endpoint with the router's unified key. Groq credentials stay in the router's encrypted store. `FREELLMAPI_MODEL` selects the model and `FREELLMAPI_FALLBACK_MODEL` names the next model on that router. Novita stays in the code and is used when the router is unset, or after the router fails if Novita itself is configured. The router is not deployed to the live OS. Live web research still needs its own search source. A model analysis of pasted text is stored with live research false.
+The development language route is the private FreeLLMAPI router on `127.0.0.1:3001`. AffiGrove calls its OpenAI-compatible `/v1` endpoint with the router's unified key. Groq credentials stay in the router's encrypted store. `FREELLMAPI_MODEL` selects the model and `FREELLMAPI_FALLBACK_MODEL` names the next model on that router. Novita stays in the code. The provider-selection entry above is the rule for when it may be called. The router is not deployed to the live OS. Live web research still needs its own search source. A model analysis of pasted text is stored with live research false.
 
 ## 2026-10-14 — Intelligence, stories, and where media is made
 

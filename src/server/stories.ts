@@ -2,11 +2,10 @@ import { randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { getSql } from "@/db/client";
-import { coercePilot, episodeDurationOk, episodePackage, pilotSchema, PILOT_SYSTEM, pilotUserPrompt, type PilotBody } from "@/domain/stories";
+import { episodePackage, type PilotBody } from "@/domain/stories";
 import { languagePublicStatus, researchPublicStatus } from "@/domain/intelligence";
 import { mediaRoot } from "@/server/muse";
-import { languageChat } from "@/server/language";
-import { parseModelJson } from "@/server/novita";
+import { runPilot } from "@/server/pilot-run";
 import { readControls, storeFailedReport } from "@/server/intelligence";
 
 function jsonbText(sql: ReturnType<typeof getSql>, value: unknown) {
@@ -55,24 +54,6 @@ export async function listSeries() {
   }));
 }
 
-function readPilot(text: string): { story: PilotBody | null; detail: string } {
-  let parsed: unknown;
-  try {
-    parsed = parseModelJson(text);
-  } catch {
-    return { story: null, detail: "The model reply was not JSON." };
-  }
-  const pilot = pilotSchema.safeParse(coercePilot(parsed));
-  if (!pilot.success) {
-    const detail = pilot.error.issues.slice(0, 6).map((issue) => `${issue.path.join(".")}: ${issue.message}`).join("; ");
-    return { story: null, detail: `The model reply did not match the story schema. ${detail}` };
-  }
-  if (pilot.data.episodes.some((episode) => !episodeDurationOk(episode))) {
-    return { story: null, detail: "The model reply did not match the story schema. An episode was outside 30 to 90 seconds." };
-  }
-  return { story: pilot.data, detail: "" };
-}
-
 export async function generatePilot(fetchImpl: typeof fetch = fetch) {
   const controls = await readControls();
   if (controls.intelligence !== "STARTED") {
@@ -83,21 +64,18 @@ export async function generatePilot(fetchImpl: typeof fetch = fetch) {
     return { ok: false as const, status: 409, error: `No language model is configured. Missing ${language.missing.join(", ")}.` };
   }
   const research = researchPublicStatus();
-  const chat = await languageChat({ system: PILOT_SYSTEM, user: pilotUserPrompt() }, fetchImpl);
-  const providerLabel = chat.provider === "novita" ? "Novita" : "FreeLLMAPI";
-  if (!chat.ok) {
-    await storeFailedReport("romance-pilot", chat.model, chat.error);
-    return { ok: false as const, status: 502, error: chat.error };
+  const pilot = await runPilot(fetchImpl);
+  if (!pilot.ok) {
+    await storeFailedReport("romance-pilot", pilot.model, `${pilot.stage}: ${pilot.error}`);
+    const providerLabel = language.provider === "novita" ? "Novita" : "FreeLLMAPI";
+    const transport = pilot.error.includes("could not be reached") || pilot.error.includes("without a usable reply");
+    return {
+      ok: false as const,
+      status: 502,
+      error: transport ? pilot.error : `${providerLabel} replied, but the ${pilot.stage} was incomplete. Nothing was saved as a series.`,
+    };
   }
-  const read = readPilot(chat.text);
-  if (!read.story) {
-    await storeFailedReport("romance-pilot", chat.model, read.detail);
-    const incomplete = read.detail === "The model reply was not JSON."
-      ? `${providerLabel} replied, but the reply was not a usable story.`
-      : `${providerLabel} replied, but the story was incomplete. Nothing was saved as a series.`;
-    return { ok: false as const, status: 502, error: incomplete };
-  }
-  const story = read.story;
+  const story = pilot.story;
   const sql = getSql();
   const reportId = randomUUID();
   const seriesId = randomUUID();
@@ -106,16 +84,18 @@ export async function generatePilot(fetchImpl: typeof fetch = fetch) {
     publishing: "disabled",
     liveResearch: false,
     researchMessage: research.message,
-    usage: chat.usage,
-    source: chat.provider,
+    usage: pilot.usage,
+    source: pilot.provider,
+    modelsByStage: pilot.modelsByStage,
+    finishReasons: pilot.finishReasons,
   };
   await sql`
     insert into intelligence_reports (id, kind, status, model, live_research, body)
-    values (${reportId}, 'romance-pilot', 'COMPLETE', ${chat.model}, false, ${jsonbText(sql, body)}::jsonb)
+    values (${reportId}, 'romance-pilot', 'COMPLETE', ${pilot.model}, false, ${jsonbText(sql, body)}::jsonb)
   `;
   await sql`
     insert into story_series (id, report_id, title, model, live_research, bible)
-    values (${seriesId}, ${reportId}, ${story.seriesTitle}, ${chat.model}, false, ${jsonbText(sql, body)}::jsonb)
+    values (${seriesId}, ${reportId}, ${story.seriesTitle}, ${pilot.model}, false, ${jsonbText(sql, body)}::jsonb)
   `;
   for (const episode of story.episodes) {
     const pack = episodePackage(story, episode);

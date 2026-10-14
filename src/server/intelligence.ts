@@ -115,10 +115,20 @@ export async function analyseSuppliedEvidence(evidence: string, fetchImpl: typeo
   if (!language.configured) {
     return { ok: false as const, status: 409, error: `No language model is configured. Missing ${language.missing.join(", ")}.` };
   }
-  const chat = await languageChat({ system: SUPPLIED_EVIDENCE_SYSTEM, user: evidence }, fetchImpl);
+  let chat = await languageChat({ system: SUPPLIED_EVIDENCE_SYSTEM, user: evidence }, fetchImpl);
+  if (chat.ok && chat.truncated) {
+    chat = await languageChat({
+      system: SUPPLIED_EVIDENCE_SYSTEM,
+      user: `${evidence}\n\nThe previous reply was cut off. Reply with the complete JSON object only.`,
+    }, fetchImpl);
+  }
   if (!chat.ok) {
     await storeFailedReport("supplied-evidence", chat.model, chat.error);
     return { ok: false as const, status: 502, error: chat.error };
+  }
+  if (chat.truncated) {
+    await storeFailedReport("supplied-evidence", chat.model, "The model reply was cut off.");
+    return { ok: false as const, status: 502, error: "The language model reply was cut off. Nothing was saved." };
   }
   let parsed: unknown;
   try {

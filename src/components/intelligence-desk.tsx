@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Overview = {
-  language: { active: string | null; configured: boolean; model: string | null; fallbackModel: string | null; missing: string[] };
+  language: { active: string | null; provider: string | null; configured: boolean; model: string | null; fallbackModel: string | null; missing: string[] };
   freellmapi: { configured: boolean; missing: string[]; model: string | null; fallbackModel: string | null };
   novita: { configured: boolean; missing: string[]; model: string | null };
   research: { available: boolean; message: string };
@@ -109,17 +109,21 @@ export function IntelligenceDesk() {
         <Card
           title="FreeLLMAPI"
           detail={
-            overview?.freellmapi.configured
-              ? `Private loopback router. Model ${overview.freellmapi.model}. Fallback ${overview.freellmapi.fallbackModel ?? "not set"}.`
-              : `Not configured. Missing ${overview?.freellmapi.missing.join(", ") ?? "credentials"}.`
+            overview?.language.provider === "freellmapi"
+              ? overview.freellmapi.configured
+                ? `Selected route. Private loopback router. Model ${overview.freellmapi.model}. Fallback ${overview.freellmapi.fallbackModel ?? "not set"}.`
+                : `Selected route. Missing ${overview.freellmapi.missing.join(", ")}.`
+              : "Not the selected route."
           }
         />
         <Card
           title="Novita"
           detail={
-            overview?.novita.configured
-              ? `Preserved and configured. Model ${overview.novita.model}.`
-              : `Preserved. Not configured. Missing ${overview?.novita.missing.join(", ") ?? "credentials"}.`
+            overview?.language.provider === "novita"
+              ? overview.novita.configured
+                ? `Selected route. Model ${overview.novita.model}.`
+                : `Selected route. Missing ${overview.novita.missing.join(", ")}.`
+              : "Optional future provider. A missing FreeLLMAPI key does not call Novita."
           }
         />
         <Card title="Live research" detail={overview?.research.message ?? "Loading."} />

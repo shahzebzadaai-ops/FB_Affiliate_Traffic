@@ -90,3 +90,7 @@ Daily dumps are written by `deploy/backup.sh` to `/var/backups/affigrove/` and d
 ```cron
 15 3 * * * /var/www/affigrove/current/deploy/backup.sh
 ```
+
+## FreeLLMAPI router
+
+The router is not part of `bootstrap.sh` or `release.sh`. Its unit, health check, and rollback are in `deploy/FREELLMAPI.md`. Do not install it, and do not open port 3001, until the owner approves that deployment.

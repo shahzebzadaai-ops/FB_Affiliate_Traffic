@@ -14,7 +14,7 @@ The five names already in the plan — Back in the Game UK, After Hours Singles 
 
 ## Provider roles
 
-The language layer is an OpenAI-compatible chat client. In development it calls the private FreeLLMAPI router at `http://127.0.0.1:3001/v1` when `FREELLMAPI_API_KEY` and `FREELLMAPI_MODEL` are set. `FREELLMAPI_FALLBACK_MODEL` names a second model on that same router. The router holds provider credentials, encrypted, and AffiGrove stores only the router's unified key. Groq is the free provider configured in the local router. Novita remains implemented. It is used when FreeLLMAPI is unset, and it is the next attempt when the router fails and `NOVITA_API_KEY` plus `NOVITA_MODEL` are set. A model is not assumed to know today's web.
+The language layer is an OpenAI-compatible chat client. `LANGUAGE_PROVIDER` selects the route. Empty or `freellmapi` calls the private FreeLLMAPI router at `http://127.0.0.1:3001/v1` when `FREELLMAPI_API_KEY` and `FREELLMAPI_MODEL` are set. `FREELLMAPI_FALLBACK_MODEL` names a second model on that same router. The router holds provider credentials, encrypted, and AffiGrove stores only the router's unified key. Groq is the free provider configured in the local router. Novita remains implemented and is optional. It runs only when `LANGUAGE_PROVIDER=novita`. A missing or failing FreeLLMAPI key does not start a Novita request. A model is not assumed to know today's web.
 
 Live research is a separate adapter. It is responsible for current sources. The language model may analyse text that was supplied to it, and that record is marked as not a web search. If no authorised search API is configured, the product says live research is unavailable. Engagement numbers are not estimated and then described as facts.
 

@@ -44,4 +44,4 @@ Status words: completed, in progress, blocked, later. Strategic choices are in `
 
 ## Next action
 
-Keep the router on loopback. Deploying it, or copying its key into the live OS, is a separate decision. Novita can replace the router later by setting `NOVITA_API_KEY` and `NOVITA_MODEL` and unsetting `FREELLMAPI_API_KEY`. Separately, the owner names the 5 TB storage service and, if the editor is not `worker/atos_worker`, supplies that repository URL.
+Keep the router on loopback. Deploying it, or copying its unified key into the live OS, waits for the owner's approval. The prepared steps are in `deploy/FREELLMAPI.md`. Novita stays optional and runs only when `LANGUAGE_PROVIDER=novita`. Separately, the owner names the 5 TB storage service and, if the editor is not `worker/atos_worker`, supplies that repository URL.

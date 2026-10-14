@@ -4,12 +4,21 @@ import { openAiCompatibleChat, type ChatResult } from "@/server/openai-chat";
 export type { ChatResult };
 
 export async function novitaChat(
-  input: { system: string; user: string },
+  input: { system: string; user: string; maxTokens?: number },
   fetchImpl: typeof fetch = fetch,
 ): Promise<ChatResult> {
   const status = novitaPublicStatus();
   if (!status.configured || !status.model) {
-    return { ok: false, error: `Novita is not configured. Missing ${status.missing.join(", ")}.`, model: status.model };
+    return {
+      ok: false,
+      error: `Novita is not configured. Missing ${status.missing.join(", ")}.`,
+      model: status.model,
+      usage: null,
+      finishReason: null,
+      truncated: false,
+      status: null,
+      retryAfterMs: null,
+    };
   }
   const apiKey = process.env.NOVITA_API_KEY?.trim() ?? "";
   return openAiCompatibleChat(
@@ -20,6 +29,7 @@ export async function novitaChat(
       system: input.system,
       user: input.user,
       providerName: "Novita",
+      maxTokens: input.maxTokens ?? 1024,
     },
     fetchImpl,
   );

@@ -68,137 +68,124 @@ export const pilotSchema = z.object({
 export type PilotBody = z.infer<typeof pilotSchema>;
 export type PilotEpisode = PilotBody["episodes"][number];
 
-function textValue(value: unknown, depth = 0): string | null {
-  if (depth > 3) return null;
-  if (typeof value === "string") return value.trim();
-  if (typeof value === "number" && Number.isFinite(value)) return String(value);
-  if (Array.isArray(value)) {
-    const joined = value.map((item) => textValue(item, depth + 1)).filter((item): item is string => Boolean(item)).join(" ");
-    return joined.trim() || null;
+export const conceptSchema = pilotSchema.pick({
+  seriesTitle: true,
+  genre: true,
+  audience: true,
+  premise: true,
+  themes: true,
+  whyTest: true,
+  assumptions: true,
+});
+
+export const bibleSchema = pilotSchema.pick({
+  characters: true,
+  relationships: true,
+  locations: true,
+  visualStyle: true,
+  emotionalProgression: true,
+  continuityRules: true,
+});
+
+const outlineEpisodeSchema = episodeSchema.pick({
+  number: true,
+  title: true,
+  hook: true,
+  summary: true,
+  previousEpisode: true,
+  closingBeat: true,
+  nextEpisode: true,
+});
+
+export const outlineSchema = z.object({
+  seasonArc: pilotSchema.shape.seasonArc,
+  reveals: pilotSchema.shape.reveals,
+  endingDirection: pilotSchema.shape.endingDirection,
+  episodes: z.array(outlineEpisodeSchema).length(5),
+});
+
+export const episodeScriptSchema = episodeSchema;
+
+export type StoryConcept = z.infer<typeof conceptSchema>;
+export type StoryBible = z.infer<typeof bibleSchema>;
+export type SeasonOutline = z.infer<typeof outlineSchema>;
+
+const PROSE_KEYS = new Set([
+  "seriesTitle", "genre", "audience", "premise", "whyTest", "relationships", "visualStyle",
+  "emotionalProgression", "seasonArc", "endingDirection", "name", "role", "appearance",
+  "personality", "wardrobe", "title", "hook", "summary", "previousEpisode", "voiceover",
+  "dialogue", "closingBeat", "nextEpisode", "caption", "thumbnailPrompt", "visualPrompt",
+  "camera", "lighting", "onScreenText", "subtitle", "audio", "continuity", "negativePrompt",
+]);
+
+const NUMERIC_KEYS = new Set(["number", "durationSeconds"]);
+
+export function coerceNumericStrings(value: unknown): unknown {
+  if (!value || typeof value !== "object") return value;
+  if (Array.isArray(value)) return value.map((item) => coerceNumericStrings(item));
+  const next: Record<string, unknown> = {};
+  for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+    if (NUMERIC_KEYS.has(key) && typeof item === "string" && /^-?\d+$/.test(item.trim())) next[key] = Number(item.trim());
+    else next[key] = coerceNumericStrings(item);
   }
-  if (value && typeof value === "object") {
-    const parts = Object.values(value as Record<string, unknown>).map((item) => textValue(item, depth + 1)).filter((item): item is string => Boolean(item));
-    return parts.join(". ").trim() || null;
+  return next;
+}
+
+export function joinStringArrays(value: unknown): unknown {
+  if (!value || typeof value !== "object") return value;
+  if (Array.isArray(value)) return value.map((item) => joinStringArrays(item));
+  const next: Record<string, unknown> = {};
+  for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+    if (PROSE_KEYS.has(key) && Array.isArray(item) && item.every((entry) => typeof entry === "string")) {
+      next[key] = item.map((entry) => entry.trim()).filter((entry) => entry.length > 0).join(" ");
+    } else {
+      next[key] = joinStringArrays(item);
+    }
   }
+  return next;
+}
+
+export function bibleContinuity(bible: StoryBible): string | null {
+  const names = bible.characters.map((character) => character.name.trim().toLowerCase());
+  if (new Set(names).size !== names.length) return "Character names must be unique.";
   return null;
 }
 
-function clampList(value: unknown, minItem: number, maxLen: number): string[] | null {
-  const list = textList(value);
-  if (!list) return null;
-  return list.flatMap((item) => {
-    const pieces = item.split(/,\s+|;\s+/).map((part) => part.trim()).filter((part) => part.length >= minItem);
-    const source = pieces.length > 1 ? pieces : [item];
-    return source.flatMap((part) => {
-      if (part.length < minItem) return [];
-      if (part.length <= maxLen) return [part];
-      return [part.slice(0, maxLen).trim()];
-    });
-  });
+export function outlineContinuity(outline: SeasonOutline): string | null {
+  const numbers = outline.episodes.map((episode) => episode.number).slice().sort((left, right) => left - right);
+  if (numbers.join(",") !== "1,2,3,4,5") return "The season outline must contain episodes numbered 1, 2, 3, 4 and 5 once each.";
+  return null;
 }
 
-function textList(value: unknown): string[] | null {
-  if (typeof value === "string") {
-    return value.split(/\n+|;\s+|(?<=\.)\s+/).map((item) => item.trim()).filter((item) => item.length >= 2);
-  }
-  if (value && typeof value === "object" && !Array.isArray(value)) {
-    return Object.values(value as Record<string, unknown>).map((item) => textValue(item)).filter((item): item is string => Boolean(item));
-  }
-  if (!Array.isArray(value)) return null;
-  return value.map((item) => textValue(item)).filter((item): item is string => Boolean(item));
+export function episodeText(episode: PilotEpisode): string {
+  return [
+    episode.title,
+    episode.hook,
+    episode.summary,
+    episode.voiceover,
+    episode.dialogue,
+    ...episode.scenes.map((scene) => scene.visualPrompt),
+  ].join(" ");
 }
 
-function fitShotDurations(scenes: Array<Record<string, unknown>>) {
-  const current = scenes.map((scene) => {
-    const value = scene.durationSeconds;
-    const seconds = typeof value === "number" && Number.isFinite(value) ? Math.round(value) : 8;
-    return Math.min(12, Math.max(2, seconds));
-  });
-  let total = current.reduce((sum, value) => sum + value, 0);
-  let guard = 0;
-  while (total < 30 && current.some((value) => value < 12) && guard < 80) {
-    const index = guard % current.length;
-    if (current[index] < 12) {
-      current[index] += 1;
-      total += 1;
-    }
-    guard += 1;
-  }
-  while (total > 90 && current.some((value) => value > 2) && guard < 200) {
-    const index = guard % current.length;
-    if (current[index] > 2) {
-      current[index] -= 1;
-      total -= 1;
-    }
-    guard += 1;
-  }
-  scenes.forEach((scene, index) => {
-    scene.durationSeconds = current[index];
-  });
+export function characterMentioned(text: string, name: string): boolean {
+  const blob = text.toLowerCase();
+  const tokens = name.toLowerCase().replace(/["“”']/g, " ").split(/[^a-z]+/).filter((token) => token.length >= 3);
+  const distinctive = tokens.filter((token) => token.length >= 4);
+  const usable = distinctive.length > 0 ? distinctive : tokens;
+  return usable.some((token) => blob.includes(token));
 }
 
-function asText(record: Record<string, unknown>, key: string) {
-  const text = textValue(record[key]);
-  if (text) record[key] = text;
-}
-
-export function coercePilot(value: unknown): unknown {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return value;
-  const body = { ...(value as Record<string, unknown>) };
-  for (const key of ["relationships", "visualStyle", "emotionalProgression", "seasonArc", "endingDirection", "whyTest", "audience", "premise", "genre", "seriesTitle"]) {
-    asText(body, key);
+export function episodeContinuity(episode: PilotEpisode, bible: StoryBible, expectedNumber: number): string | null {
+  if (episode.number !== expectedNumber) return `The episode number must be ${expectedNumber}.`;
+  const total = episode.scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0);
+  if (total < 30 || total > 90) return `Episode ${expectedNumber} totals ${total} seconds. The shot durations you wrote must add up to between 30 and 90.`;
+  const names = bible.characters.map((character) => character.name.trim()).filter((name) => name.length > 0);
+  const blob = episodeText(episode);
+  if (!names.some((name) => characterMentioned(blob, name))) {
+    return `Episode ${expectedNumber} must include at least one character name from the story bible: ${names.join(", ")}.`;
   }
-  if (typeof body.audience === "string" && body.audience.length < 10) {
-    body.audience = `${body.audience}. Adults in the United Kingdom.`;
-  }
-  const themes = clampList(body.themes, 2, 80);
-  if (themes) body.themes = themes.slice(0, 6);
-  const locations = clampList(body.locations, 2, 120);
-  if (locations) body.locations = locations.slice(0, 6);
-  const reveals = clampList(body.reveals, 5, 240);
-  if (reveals) body.reveals = reveals.slice(0, 6);
-  const assumptions = clampList(body.assumptions, 5, 300);
-  if (assumptions) body.assumptions = assumptions.slice(0, 8);
-  const rules = clampList(body.continuityRules, 5, 240);
-  if (rules) body.continuityRules = rules.slice(0, 8);
-  if (Array.isArray(body.characters)) {
-    body.characters = body.characters.map((character) => {
-      if (!character || typeof character !== "object" || Array.isArray(character)) return character;
-      const next = { ...(character as Record<string, unknown>) };
-      for (const key of ["name", "role", "appearance", "personality", "wardrobe"]) asText(next, key);
-      return next;
-    });
-  }
-  if (!Array.isArray(body.episodes)) return body;
-  body.episodes = body.episodes.map((episode) => {
-    if (!episode || typeof episode !== "object" || Array.isArray(episode)) return episode;
-    const next = { ...(episode as Record<string, unknown>) };
-    if (next.previousEpisode == null) next.previousEpisode = "";
-    if (next.nextEpisode == null || (typeof next.nextEpisode === "string" && next.nextEpisode.trim().length < 10)) {
-      const ending = textValue(body.endingDirection) || textValue(body.seasonArc);
-      if (ending) next.nextEpisode = ending.slice(0, 400);
-    }
-    for (const key of ["title", "hook", "summary", "previousEpisode", "voiceover", "dialogue", "closingBeat", "nextEpisode", "caption", "thumbnailPrompt"]) {
-      asText(next, key);
-    }
-    if (!Array.isArray(next.scenes)) return next;
-    next.scenes = next.scenes.map((scene) => {
-      if (!scene || typeof scene !== "object" || Array.isArray(scene)) return scene;
-      const shot = { ...(scene as Record<string, unknown>) };
-      for (const key of ["visualPrompt", "camera", "lighting", "audio", "continuity", "negativePrompt"]) asText(shot, key);
-      const visual = textValue(shot.visualPrompt);
-      if (visual && visual.length < 40) {
-        const extra = [textValue(shot.camera), textValue(shot.lighting), textValue(shot.continuity)].filter((item): item is string => Boolean(item)).join(" ");
-        if (extra) shot.visualPrompt = `${visual} ${extra}`.slice(0, 2000);
-      }
-      if (!textValue(shot.onScreenText) && visual) shot.onScreenText = visual.slice(0, 140);
-      if (!textValue(shot.subtitle) && visual) shot.subtitle = visual.slice(0, 220);
-      return shot;
-    });
-    fitShotDurations(next.scenes as Array<Record<string, unknown>>);
-    return next;
-  });
-  return body;
+  return null;
 }
 
 export function episodeDurationOk(episode: PilotEpisode): boolean {
@@ -209,27 +196,79 @@ export function episodeDurationOk(episode: PilotEpisode): boolean {
 export const PILOT_SYSTEM = [
   "You write original short-form romance fiction for a United Kingdom audience.",
   "Reply with one JSON object and no markdown.",
+  "Use JSON strings for every prose field. Do not return null or an empty string.",
   "Do not copy a published novel, film, series, or protected plot.",
   "Do not invent search interest, views, watch time, shares, or revenue.",
   "Do not claim a fictional character is a real person on a dating service.",
   "Do not add an affiliate call to action.",
   "Write in British English. Set the story in the United Kingdom.",
-  "Each episode is a vertical reel made of separate shots, not one continuous generation.",
-  "Keep each shot between 2 and 12 seconds, and the episode between 30 and 90 seconds.",
   "The story must be original. Publishing is disabled.",
+  "No live web results are attached. Do not present assumptions as current trend data.",
+  "Do not assign the series to a Facebook page. Brand names are not approved.",
 ].join(" ");
 
-export function pilotUserPrompt(): string {
+export function conceptUserPrompt(): string {
   return [
-    "Create a five-episode original romance micro-drama pilot.",
-    "No live web results are attached. Say what you are assuming, and do not present it as current trend data.",
-    "Do not assign the series to a Facebook page. Brand names are not approved.",
-    "Include a story bible and five episodes. Each episode needs a hook, voiceover, dialogue, a closing beat that belongs to the plot, a next-episode reference, and 3 to 8 shots.",
-    "Each shot needs a visual prompt, camera, lighting, on-screen text, subtitle, audio, continuity, and a negative prompt.",
-    "Characters must keep the same names, appearance, and wardrobe across episodes.",
-    "JSON keys: seriesTitle, genre, audience, premise, themes, characters[{name, role, appearance, personality, wardrobe}], relationships, locations, visualStyle, emotionalProgression, seasonArc, reveals, continuityRules, endingDirection, episodes[{number, title, hook, summary, previousEpisode, voiceover, dialogue, closingBeat, nextEpisode, scenes[{number, durationSeconds, visualPrompt, camera, lighting, onScreenText, subtitle, audio, continuity, negativePrompt}], caption, thumbnailPrompt}], whyTest, assumptions.",
-    "Use JSON strings for every prose field, including relationships, dialogue, emotionalProgression, and nextEpisode. Do not return null. Each visualPrompt must be at least one full sentence.",
-  ].join(" ");
+    "STAGE: concept",
+    "Write only the series concept for a five-episode original romance micro-drama.",
+    "Keep every string short enough to finish inside this reply.",
+    "JSON keys: seriesTitle, genre, audience, premise, themes, whyTest, assumptions.",
+    "themes is an array of 2 to 4 short strings, each under 40 characters.",
+    "assumptions is an array of short strings. Say that no live search results were supplied.",
+    "audience is one sentence about adults in the United Kingdom.",
+  ].join("\n");
+}
+
+export function bibleUserPrompt(concept: StoryConcept): string {
+  return [
+    "STAGE: story-bible",
+    `Series: ${concept.seriesTitle}`,
+    `Premise: ${concept.premise}`,
+    "Write only the story bible. Keep names, appearance, and wardrobe stable enough to repeat later.",
+    "JSON keys: characters, relationships, locations, visualStyle, emotionalProgression, continuityRules.",
+    "characters is an array of 2 objects with name, role, appearance, personality, wardrobe.",
+    "locations is an array of short place names. continuityRules is an array of 2 to 4 short strings.",
+    "relationships, visualStyle, and emotionalProgression are strings.",
+  ].join("\n");
+}
+
+export function outlineUserPrompt(concept: StoryConcept, bible: StoryBible): string {
+  return [
+    "STAGE: season-outline",
+    `Series: ${concept.seriesTitle}`,
+    `Premise: ${concept.premise}`,
+    `Characters: ${bible.characters.map((character) => character.name).join(", ")}`,
+    "Write only the season shape and five episode outlines. Do not write shot lists.",
+    "JSON keys: seasonArc, reveals, endingDirection, episodes.",
+    "episodes is an array of exactly 5 objects with number, title, hook, summary, previousEpisode, closingBeat, nextEpisode.",
+    "number must be 1, 2, 3, 4 and 5. previousEpisode is an empty string for episode 1.",
+    "Each summary, hook, closingBeat, and nextEpisode is one complete sentence of at least 20 characters.",
+    "Episode 5 still needs a nextEpisode sentence about what would open the following story. Do not write None.",
+    "reveals is an array of 2 sentences. Each sentence is at least 20 characters.",
+    "Use the character names in the summaries.",
+  ].join("\n");
+}
+
+export function episodeUserPrompt(concept: StoryConcept, bible: StoryBible, outline: SeasonOutline, number: number): string {
+  const beat = outline.episodes.find((episode) => episode.number === number);
+  return [
+    "STAGE: episode-script",
+    `EPISODE: ${number}`,
+    `Series: ${concept.seriesTitle}`,
+    `Premise: ${concept.premise}`,
+    `Characters: ${bible.characters.map((character) => `${character.name} (${character.role}). Appearance: ${character.appearance}. Wardrobe: ${character.wardrobe}.`).join(" ")}`,
+    `Visual style: ${bible.visualStyle}`,
+    `Locations: ${bible.locations.join("; ")}`,
+    `Outline for this episode only: ${JSON.stringify(beat ?? { number })}`,
+    "Write only this episode as one JSON object. Each episode is a vertical reel made of separate shots.",
+    "JSON keys: number, title, hook, summary, previousEpisode, voiceover, dialogue, closingBeat, nextEpisode, scenes, caption, thumbnailPrompt.",
+    `number must be ${number}.`,
+    "scenes is an array of 4 objects with number, durationSeconds, visualPrompt, camera, lighting, onScreenText, subtitle, audio, continuity, negativePrompt.",
+    "onScreenText and subtitle must each contain words. Do not leave either one empty.",
+    "durationSeconds is an integer from 2 to 12 that you choose. The four durations must add up to between 30 and 90.",
+    "Each visualPrompt is one full sentence of at least 40 characters. Mention at least one character name from the bible in the episode text.",
+    "previousEpisode is an empty string only for episode 1. nextEpisode is one complete sentence of at least 20 characters, including episode 5.",
+  ].join("\n");
 }
 
 export function scenePrompt(pilot: PilotBody, episode: PilotEpisode, scene: PilotEpisode["scenes"][number]): string {
