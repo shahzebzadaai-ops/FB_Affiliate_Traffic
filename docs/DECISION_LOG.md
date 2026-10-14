@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Deployment approved, VPS not reachable
+
+Shahzeb approved deployment of the existing corporate site and private OS to the Hostinger KVM2. The domain was still on Hostinger DNS parking, so no SSH, DNS edit, certificate, or database command was run. `www.affigrove.io` now redirects to the apex in `src/proxy.ts`. The repeatable release and rollback path is `deploy/HOSTINGER.md`. The campaign is not started.
+
 ## 2026-10-14 — AffiGrove public site, local only
 
 The public company name is AffiGrove Media Group. The intended domains are affigrove.io and www.affigrove.io. The private OS is intended for os.affigrove.io. affigrove.com is not used. The corporate pages live under `/site` so `/`, `/owner`, and `/staff` stay the operating system. The public visual identity is separate from the Milky Way screens. No deployment, DNS change, or campaign start is included. Facts that were not supplied are marked awaiting approval instead of being invented.

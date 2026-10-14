@@ -11,14 +11,21 @@ describe("public host policy", () => {
 
   it("serves the corporate site on affigrove.io and www only", () => {
     expect(decideHost("affigrove.io", "/")).toEqual({ type: "rewrite", pathname: "/site" });
-    expect(decideHost("www.affigrove.io", "/about")).toEqual({ type: "rewrite", pathname: "/site/about" });
+    expect(decideHost("www.affigrove.io", "/about")).toEqual({ type: "redirect", pathname: "/about", host: "affigrove.io" });
+    expect(decideHost("www.affigrove.io", "/")).toEqual({ type: "redirect", pathname: "/", host: "affigrove.io" });
+    expect(decideHost("www.affigrove.io", "/site/contact")).toEqual({ type: "redirect", pathname: "/contact", host: "affigrove.io" });
     expect(decideHost("affigrove.io", "/site/contact")).toEqual({ type: "redirect", pathname: "/contact" });
-    expect(decideHost("www.affigrove.io", "/api/public/enquiries")).toEqual({ type: "next" });
+    expect(decideHost("www.affigrove.io", "/api/public/enquiries")).toEqual({
+      type: "redirect",
+      pathname: "/api/public/enquiries",
+      host: "affigrove.io",
+    });
   });
 
   it("hides private routes on the public hosts and ignores the unpurchased domain", () => {
     expect(decideHost("affigrove.io", "/owner")).toEqual({ type: "not-found" });
     expect(decideHost("www.affigrove.io", "/staff/tasks/UK-SGIUK-001")).toEqual({ type: "not-found" });
+    expect(decideHost("www.affigrove.io", "/owner")).toEqual({ type: "not-found" });
     expect(decideHost("affigrove.io", "/api/finance")).toEqual({ type: "not-found" });
     expect(decideHost("os.affigrove.io", "/site")).toEqual({ type: "not-found" });
     expect(decideHost("affigrove.com", "/")).toEqual({ type: "not-found" });

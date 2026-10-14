@@ -1,6 +1,6 @@
 # AffiGrove corporate site
 
-Local preview only. Do not deploy, change DNS, or point affigrove.io at this machine.
+Local preview: `http://127.0.0.1:3000/site`. Production routing is prepared in `deploy/` and is not live. `www.affigrove.io` redirects to `https://affigrove.io`. The corporate host stays noindex, and the Nginx review password is created only on the server.
 
 ## Where it lives
 

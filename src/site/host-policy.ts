@@ -18,7 +18,7 @@ const PRETTY_TO_SITE: Record<string, string> = {
 export type HostDecision =
   | { type: "next" }
   | { type: "rewrite"; pathname: string }
-  | { type: "redirect"; pathname: string }
+  | { type: "redirect"; pathname: string; host?: string }
   | { type: "not-found" };
 
 export function hostnameOf(hostHeader: string | null): string {
@@ -36,10 +36,21 @@ function isPrivate(pathname: string): boolean {
   return PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 
+function publicPath(pathname: string): string {
+  if (pathname === "/site") return "/";
+  if (pathname.startsWith("/site/")) return pathname.slice("/site".length) || "/";
+  return pathname;
+}
+
 export function decideHost(hostHeader: string | null, pathname: string): HostDecision {
   const host = hostnameOf(hostHeader);
   if (UNPURCHASED_HOSTS.has(host)) return { type: "not-found" };
   if (OS_HOSTS.has(host) && (pathname === "/site" || pathname.startsWith("/site/"))) return { type: "not-found" };
+  if (host === "www.affigrove.io") {
+    const visible = publicPath(pathname);
+    if (isPrivate(visible)) return { type: "not-found" };
+    return { type: "redirect", pathname: visible, host: "affigrove.io" };
+  }
   if (!CORPORATE_HOSTS.has(host)) return { type: "next" };
   if (pathname === "/site") return { type: "redirect", pathname: "/" };
   if (pathname.startsWith("/site/")) return { type: "redirect", pathname: pathname.slice("/site".length) };

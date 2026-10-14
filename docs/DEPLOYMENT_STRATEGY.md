@@ -1,10 +1,10 @@
 # Deployment strategy
 
-APPROVED: do not deploy this app to the PlayerPulser VPS. Do not change Nginx, DNS or `os.azvoraglobal.io`. Do not deploy to the Hostinger KVM2 until Shahzeb approves a launch of the finished local site.
+APPROVED: do not deploy this app to the PlayerPulser VPS. Do not change Nginx, DNS or `os.azvoraglobal.io`. On 14 October 2026 Shahzeb approved safe deployment of the existing applications to the Hostinger KVM2. That work is blocked until the VPS has an IP and SSH. The procedure is `deploy/HOSTINGER.md`.
 
 The existing VPS at 187.53.130.227 runs PlayerPulser. Affiliate Traffic OS is not deployed there. Do not use that machine for AffiGrove.
 
-Shahzeb has purchased a Hostinger KVM2 and the domain affigrove.io. affigrove.com is not purchased and must not be added as a site. The purchased server is not provisioned from this repository. No DNS change, certificate request, firewall change, or process install is authorised yet.
+Shahzeb has purchased a Hostinger KVM2 and the domain affigrove.io. affigrove.com is not purchased and must not be added as a site. On 14 October 2026 the domain still used Hostinger DNS parking at 2.57.91.91, SSH on that address was closed, and os.affigrove.io had no record. No server command has been run.
 
 When a launch is approved, the intended shape is one machine with two hostnames: `affigrove.io` and `www.affigrove.io` for the public site, and `os.affigrove.io` for the private OS. HTTPS, a reverse proxy, a private database with backups, secrets outside the frontend, and a rollback path come before either hostname is opened. The Facebook publishing switch stays off. `src/proxy.ts` already encodes the host split for those names and does nothing on localhost.
 

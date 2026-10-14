@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "import:plan": "node --experimental-strip-types scripts/import-plan.ts",
-    "db:setup": "node --experimental-strip-types scripts/db-setup.ts"
+    "db:setup": "node --experimental-strip-types scripts/db-setup.ts",
+    "db:production": "node --experimental-strip-types scripts/db-production.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

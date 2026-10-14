@@ -1,0 +1,18 @@
+[Unit]
+Description=AffiGrove Next.js application
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=affigrove
+Group=affigrove
+WorkingDirectory=/var/www/affigrove/current
+EnvironmentFile=/etc/affigrove/app.env
+ExecStart=/usr/bin/npm run start -- --hostname 127.0.0.1 --port 3100
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
