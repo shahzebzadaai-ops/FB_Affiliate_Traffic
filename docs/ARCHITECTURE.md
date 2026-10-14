@@ -20,7 +20,8 @@ The comparison website, when built, is one platform with a landing experience pe
 - Invitations. The owner creates a seven-day link. The operator sets their own password. No email service sends it. The raw token is shown once and only its SHA-256 hash is stored.
 - Five `social_pages` rows and the existing brand bibles. Live visibility is `page_assignments`, not the historical catalog assignee.
 - 180 content rows and persisted task state. Confirming a schedule and recording a public URL are separate events. A schedule confirmation does not invent a permalink. Publication requires that confirmation plus an `http` or `https` URL.
-- Operator queues use the existing publishing desk. Download, caption copy, and thumbnail stay unavailable because no file store is connected.
+- Operator queues use the existing publishing desk. Download, caption copy, and thumbnail stay unavailable on that desk because Drive is not connected.
+- Muse desk at `/owner/studio/muse`. Packages are compiled from the plan brief. The owner generates on the Muse website and uploads the finished file into a private library. The provider is EXTERNAL_MANUAL. No Muse API and no credentials. Approval does not publish.
 
 ## Boundaries
 
@@ -36,7 +37,7 @@ Authorization checks the session, the role capability, and the current Page assi
 
 ## Data that exists
 
-`drizzle/0001_foundation.sql` and `drizzle/0002_operators.sql`.
+`drizzle/0001_foundation.sql` through `drizzle/0005_muse_studio.sql`.
 
 Identity: `users`, `sessions`, `login_attempts`, `invitations`, `page_assignments`.
 

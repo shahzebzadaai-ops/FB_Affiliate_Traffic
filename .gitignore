@@ -36,6 +36,9 @@ yarn-error.log*
 # local campaign launch record — not the 180-post plan
 /data/local/
 
+# private uploaded Muse files — not public URLs
+/data/media-library/
+
 # vercel
 .vercel
 

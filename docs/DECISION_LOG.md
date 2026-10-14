@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Muse stays a manual studio
+
+Muse AI is used through its website. The seller warned that API use can restrict the account, so AffiGrove OS does not call a Muse API, store Muse credentials, or drive the Muse website. The provider type is EXTERNAL_MANUAL. Packages are compiled from the approved plan brief because no writing model is connected. Uploaded files stay in the campaign library. Approval does not start the campaign or publish a post. Token figures are entered by hand. The advertised one billion tokens are a label, not a measured balance. Novita can be added later as a separate API adapter.
+
 ## 2026-10-14 — The internal system is named AffiGrove OS
 
 The user-facing name of the private operating system is AffiGrove OS. AffiGrove Media Group remains the parent company. The host stays os.affigrove.io. Internal code, database tables, environment variables, and API routes keep their existing names. The planned Drive folder prefix shown to staff is `AffiGrove OS/UK/...`. Publishing stays off.

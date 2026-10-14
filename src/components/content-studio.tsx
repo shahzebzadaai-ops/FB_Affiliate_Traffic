@@ -20,7 +20,10 @@ export function ContentStudio() {
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Production</p>
         <h1 className="mt-2 font-heading text-5xl tracking-tight">Content Studio</h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          The next seven days of the plan. A Mac can be queued from Systems, but no model is connected, so nothing here has a generation cost or a master file. Fictional stories in the plan are editorial, not testimonials.
+          The next seven days of the plan. Prepare a Muse package from the brief, then upload the file you made on the Muse website. No model is called from here. Fictional stories in the plan are editorial, not testimonials.
+        </p>
+        <p className="mt-3">
+          <Link href="/owner/studio/muse" className="atos-btn">Prepare for Muse AI</Link>
         </p>
       </header>
       <div className="overflow-x-auto">
@@ -50,7 +53,9 @@ export function ContentStudio() {
                     <Link href={`/owner/tasks/${item.record.contentId}`} className="font-medium">{item.record.pillar}</Link>
                     <p className="text-muted-foreground">{item.record.contentId}</p>
                   </td>
-                  <td className="py-3 pr-3 text-muted-foreground">Not connected</td>
+                  <td className="py-3 pr-3">
+                    <Link href={`/owner/studio/muse?content=${item.record.contentId}`}>Prepare for Muse AI</Link>
+                  </td>
                   <td className="py-3 pr-3 text-muted-foreground">Not connected</td>
                   <td className="py-3 pr-3">{flagged ? `Flagged: ${flagged}` : "No file to review"}</td>
                   <td className="max-w-56 py-3 text-muted-foreground">{item.record.driveFolderPath}</td>

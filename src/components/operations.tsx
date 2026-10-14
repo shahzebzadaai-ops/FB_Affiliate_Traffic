@@ -90,9 +90,12 @@ export function IntegrationsView() {
       <div className="grid gap-4">
         {connections.map((connection) => (
           <article key={connection.id} className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
-            <p className="text-xs font-medium tracking-wide text-primary uppercase">Not connected</p>
+            <p className="text-xs font-medium tracking-wide text-primary uppercase">{connection.status === "manual" ? "Manual studio" : "Not connected"}</p>
             <h2 className="mt-1 font-heading text-3xl">{connection.name}</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{connection.detail}</p>
+            {connection.id === "muse-web-studio" ? (
+              <p className="mt-3"><Link className="atos-btn" href="/owner/studio/muse">Prepare for Muse AI</Link></p>
+            ) : null}
           </article>
         ))}
       </div>

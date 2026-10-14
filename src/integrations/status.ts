@@ -1,7 +1,7 @@
 export type IntegrationConnection = {
-  id: "google-drive" | "meta" | "affiliate-networks";
+  id: "google-drive" | "meta" | "affiliate-networks" | "muse-web-studio";
   name: string;
-  status: "not_connected";
+  status: "not_connected" | "manual";
   detail: string;
 };
 
@@ -20,6 +20,13 @@ export function integrationStatus(): IntegrationConnection[] {
       status: "not_connected",
       detail:
         "There is no Page token and no publishing permission. Schedule posts manually in Meta Business Suite. This app does not claim automated Facebook scheduling. Performance is entered by hand at 24 hours, 72 hours and 7 days. Organic and paid reach stay separate.",
+    },
+    {
+      id: "muse-web-studio",
+      name: "Muse AI — Web Studio",
+      status: "manual",
+      detail:
+        "Manual website only. Packages are prepared from the plan brief in Content Studio. Finished files are uploaded by hand. No Muse credentials are stored, no API is called, and every capability stays untested until the account confirms it.",
     },
     {
       id: "affiliate-networks",

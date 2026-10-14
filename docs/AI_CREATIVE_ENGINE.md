@@ -1,6 +1,8 @@
 # AI creative engine
 
-IMPLEMENTED now: the owner Content Studio lists the next seven plan days, and the owner brief still holds copyable prompts. No model is called. Generation cost stays "Not connected" because nothing is generated here. The studio screen is specified in `docs/UI_ARCHITECTURE.md`.
+IMPLEMENTED now: the owner Content Studio lists the next seven plan days, and the owner brief still holds copyable prompts. Prepare for Muse AI compiles a production package from the approved plan brief. No writing model is called. Muse AI — Web Studio is an EXTERNAL_MANUAL provider: the owner copies a prompt into the Muse website, downloads the file, and uploads it. Token balances are typed by hand. Approval stores the file and does not publish. Generation cost stays "Not connected" until a balance is entered. The studio screen is specified in `docs/UI_ARCHITECTURE.md`.
+
+Novita and other API providers stay unconnected. They would use a separate adapter. Muse is not that adapter.
 
 NOT YET: pluggable providers, attempt counts, or automatic tasks from a suggestion.
 

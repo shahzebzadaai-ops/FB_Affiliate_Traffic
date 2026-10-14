@@ -25,7 +25,7 @@ const INITIAL_TASK = {
 export async function migrateDatabase(databaseUrl: string) {
   const sql = postgres(databaseUrl, { max: 1 });
   try {
-    for (const id of ["0001_foundation", "0002_operators", "0003_media_worker", "0004_public_enquiries"]) {
+    for (const id of ["0001_foundation", "0002_operators", "0003_media_worker", "0004_public_enquiries", "0005_muse_studio"]) {
       const migration = readFileSync(path.join(process.cwd(), "drizzle", `${id}.sql`), "utf8");
       await sql.unsafe(migration);
       await sql`insert into schema_migrations (id) values (${id}) on conflict do nothing`;
@@ -128,6 +128,10 @@ export async function resetDatabase(databaseUrl: string) {
   try {
     await sql`
       truncate table
+        provider_usage_events,
+        provider_balances,
+        creative_assets,
+        creative_packages,
         production_jobs,
         media_workers,
         invitations,
