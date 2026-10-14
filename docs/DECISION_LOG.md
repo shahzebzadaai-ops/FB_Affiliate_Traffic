@@ -1,5 +1,13 @@
 # Decision log
 
+## 2026-10-14 — Mac media worker, not another computer
+
+The render machine is the owner's MacBook Pro (M3 Pro, 18 GB). No second VPS and no purchased GPU. Affiliate Traffic OS keeps the queue in PostgreSQL. The Mac polls over outbound HTTPS. A later GPU worker can use the same poll API. Operators do not see a file until the owner approves an https URL.
+
+MoneyPrinterTurbo (MIT, Harry, 2024) is not vendored. Its stock sources and bundled music are not a commercial clearance for these Pages. ComfyUI (GPL-3.0) is not vendored or imported. It is the wrong weight for 18 GB unified memory beside speech and an encode. Kokoro MLX 0.1.2 (MIT, Soroush Yousefpour) is the British voice to install later on the Mac, Python 3.10–3.12, mlx >= 0.31.1. It is not installed in this tree. Confirm the Kokoro-82M weight licence before `from_pretrained` downloads it. FFmpeg stays a system binary. The assembler passes an argument list and writes captions to an ASS file.
+
+The PDF duration for UK-SGIUK-001 is 20–35 seconds. The proof profile is 30–40 seconds. Both stay visible. The proof is not automatically the calendar file. Music mode is none until a licensed file is attached. Drive upload is not connected. A Linux encode is a technical check, not a Mac benchmark and not a Page asset.
+
 ## 2026-10-13 — Secure multi-operator foundation
 
 PERMANENT. Publishing operators share the role `PUBLISHING_OPERATOR`. Masho, and any later operator, has the same permissions. There is no staff-manager role. Authorization uses the signed-in account and `page_assignments`. It does not use the names in `src/domain/people.ts`.

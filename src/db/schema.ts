@@ -1,4 +1,5 @@
 import { boolean, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import type { ProductionSpec, ProductionResult } from "@/domain/media-job";
 import type { TaskState } from "@/preview/task-state";
 import type { ContentRecord } from "@/domain/types";
 
@@ -100,6 +101,34 @@ export const invitations = pgTable("invitations", {
   acceptedAt: timestamp("accepted_at", { withTimezone: true }),
   createdBy: uuid("created_by").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+});
+
+export const mediaWorkers = pgTable("media_workers", {
+  id: uuid("id").primaryKey(),
+  name: text("name").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  createdBy: uuid("created_by").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  lastHeartbeatAt: timestamp("last_heartbeat_at", { withTimezone: true }),
+  hostLabel: text("host_label"),
+  maxConcurrent: integer("max_concurrent").notNull(),
+});
+
+export const productionJobs = pgTable("production_jobs", {
+  id: uuid("id").primaryKey(),
+  contentId: text("content_id").notNull(),
+  idempotencyKey: text("idempotency_key").notNull(),
+  status: text("status").notNull(),
+  spec: jsonb("spec").$type<ProductionSpec>().notNull(),
+  workerId: uuid("worker_id"),
+  leaseExpiresAt: timestamp("lease_expires_at", { withTimezone: true }),
+  attempt: integer("attempt").notNull(),
+  result: jsonb("result").$type<ProductionResult | null>(),
+  error: text("error"),
+  createdBy: uuid("created_by").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
 });
 
 export const mandalaGoals = pgTable("mandala_goals", {

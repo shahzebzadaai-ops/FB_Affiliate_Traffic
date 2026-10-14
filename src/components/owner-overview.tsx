@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { confirmCampaignStart, useCampaign } from "@/campaign/campaign-context";
 import { importReport } from "@/content/catalog";
@@ -30,7 +30,7 @@ export function OwnerOverview() {
         <h2 className="font-heading text-3xl tracking-tight">Needs attention</h2>
         <ul className="mt-4 divide-y border-y">
           <Attention href="/owner/import" label="Plan" detail={`${importReport.unresolved.length} unresolved content notes`} />
-          <Attention href="/owner/studio" label="AI production" detail="Not connected. No generation has run, so there is no failure log." />
+          <MediaWorkerAttention />
           <Attention href="/owner/approvals" label="Approvals" detail={waiting === 0 ? "Nothing is waiting" : `${waiting} waiting for review`} />
           <Attention href="/owner/calendar" label="Missed" detail={live ? `${missed} posts past their UK time and still unpublished` : "None. The campaign clock has not started."} />
           <Attention href="/owner/integrations" label="Integrations" detail={disconnected.map((item) => item.name).join(" · ") + " — not connected"} />
@@ -83,6 +83,31 @@ export function OwnerOverview() {
       </p>
     </div>
   );
+}
+
+function MediaWorkerAttention() {
+  const [detail, setDetail] = useState("No Mac heartbeat yet. Queue a proof Reel from Systems. Nothing has been rendered.");
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void fetch("/api/media-jobs")
+        .then((response) => (response.ok ? response.json() : null))
+        .then((body: { buffer?: { ready: number; due: number; sufficient: boolean }; heartbeat?: { online: boolean; lastHeartbeatAt: string | null }; approvedCount?: number } | null) => {
+          if (!body?.buffer || !body.heartbeat) return;
+          const seen = body.heartbeat.lastHeartbeatAt
+            ? `Last heartbeat ${new Date(body.heartbeat.lastHeartbeatAt).toLocaleString("en-GB", { timeZone: "Europe/London" })} UK.`
+            : "No Mac heartbeat yet.";
+          const presence = body.heartbeat.online ? `Worker online. ${seen}` : seen;
+          const buffer = body.buffer.sufficient
+            ? ` Ready buffer ${body.buffer.ready} of ${body.buffer.due}.`
+            : ` Ready-content buffer is short: ${body.buffer.ready} of ${body.buffer.due}.`;
+          const files = body.approvedCount ? ` ${body.approvedCount} approved file${body.approvedCount === 1 ? "" : "s"}.` : " Nothing has been rendered.";
+          setDetail(`${presence}${buffer}${files}`);
+        })
+        .catch(() => undefined);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+  return <Attention href="/owner/integrations" label="Media worker" detail={detail} />;
 }
 
 function Attention({ href, label, detail }: { href: string; label: string; detail: string }) {

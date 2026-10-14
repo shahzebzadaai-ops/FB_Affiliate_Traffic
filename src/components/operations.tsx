@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { MediaWorkerPanel } from "@/components/media-worker-panel";
 import { importReport } from "@/content/catalog";
 import { integrationStatus, PLANNED_DRIVE_FOLDERS } from "@/integrations/status";
 import { statusLabel, usePreview } from "@/preview/preview-context";
@@ -82,9 +83,10 @@ export function IntegrationsView() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-heading text-5xl tracking-tight">Future systems</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">These connections are designed and not authenticated. The preview does not claim they are live.</p>
+        <h1 className="font-heading text-5xl tracking-tight">Systems</h1>
+        <p className="mt-2 max-w-2xl text-muted-foreground">The Mac can take a queued proof. Google Drive, Meta and the affiliate networks are designed and not authenticated.</p>
       </header>
+      <MediaWorkerPanel />
       <div className="grid gap-4">
         {connections.map((connection) => (
           <article key={connection.id} className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">

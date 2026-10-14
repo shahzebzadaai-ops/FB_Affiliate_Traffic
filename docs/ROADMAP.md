@@ -14,15 +14,17 @@ Acceptance: `tests/foundation.test.ts` and `tests/isolation.test.ts`.
 
 ## B — AI content factory
 
-Scope: a provider interface, the first verified Novita models if Shahzeb approves the spend, FFmpeg assembly, quality checks, Drive file ids, cost caps, and a rolling seven-day queue that can mark a task ready only when a real file URL exists.
+IN REVIEW, queue only. `production_jobs` stores one spec built on the server. A Mac worker polls with a bearer token, holds a ten-minute lease, and heartbeats. One render slot is global. An expired lease can be claimed again. Completion without an https URL does not put the task in the operator ready queue. Owner approval writes the URL and leaves the task status unchanged.
 
-Dependencies: an approved provider, a spend limit, and Google OAuth for the business Drive account. Do not share that password.
+Not in this slice: Kokoro installed, original scene images, Drive upload, Novita, a spend limit, launchd installed, or a measured Mac Reel. The Still Got It proof has not been rendered.
 
-Complexity: job retries, asset versions, and staff-scoped file delivery.
+Dependencies still open: owner approval to install Kokoro MLX, a licensed-music decision, acceptance of the 30–40 second proof against the PDF's 20–35 seconds, and Google OAuth for the business Drive account. Do not share that password.
 
-Owner action: choose the provider, set the limit, and approve the first week of assets.
+Complexity: job retries, asset versions, and staff-scoped file delivery. A replacement GPU worker uses the same poll API.
 
-Acceptance: a task without a stored file cannot be downloaded. A regeneration flag does not call a model by itself. Operators still cannot see finance or each other.
+Owner action: the checkpoint in `docs/MEDIA_WORKER.md`. Do not batch the other four Pages before the Still Got It proof is accepted on the Mac.
+
+Acceptance: a task without a stored https file cannot be downloaded. A regeneration flag does not call a model by itself. Operators still cannot see finance or each other.
 
 ## C — Trend discovery
 

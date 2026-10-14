@@ -11,6 +11,7 @@
 - Copyable prompts remain on the owner brief only. No AI API calls.
 - Tests for import, UK clock change, permissions, submission evidence, self-approval and winner-sample refusal.
 - Secure multi-operator foundation: `PUBLISHING_OPERATOR`, invitation links, `social_pages`, `page_assignments`, schedule confirmation separate from publication, and server-side isolation. Operator payloads omit other operators and the historical catalog assignee. See `docs/ARCHITECTURE.md`.
+- Media queue: owner-issued worker credentials, durable production jobs, leases, heartbeats, and approval that copies an https URL onto a task without scheduling it. The Mac worker source and install guide are in `worker/` and `docs/MEDIA_WORKER.md`. No Reel has been rendered.
 
 ## Tested
 
@@ -25,10 +26,12 @@
 - 13 October 2026: `npm test` (20 passed), `npm run lint` and `npm run typecheck` after the publishing-desk correction. Masho's local session showed ready-to-publish at 0, an empty file slot, a Meta Business Suite instruction, a persisted regeneration flag, and a blocked finance route. The campaign stayed in build mode. The temporary page-operator login used for that check was removed.
 - 13 October 2026: `npm test` (25 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the role shells. Browser check covered the owner overview, affiliate intelligence, Content Studio, Growth Director, Masho's today queue, the empty ready list, and UK-SGIUK-001. A 390px capture showed Masho's bottom bar. The campaign stayed in build mode. Temporary review logins were removed.
 - 13 October 2026: `npm test` (26 passed), `npm run lint`, `npm run typecheck` and `npm run build` after operator isolation. Three operator identities are covered in `tests/isolation.test.ts`.
+- 14 October 2026: `npm test` (27 passed), `npm run lint`, `npm run typecheck` and `npm run build` after the media queue. Python `unittest` for the assembler passed. A Linux FFmpeg technical check produced a 1080×1920 H.264 file in 0.738 seconds, peak child RSS about 373 MiB, temporary files about 59 KiB, and no external API call. It is not a Page asset and not a Mac measurement. The Systems screen queued UK-SGIUK-001 with no file, and the owner overview showed the ready buffer at 0 of 20. The campaign stayed in build mode. The demo job and session were removed.
 
 ## Incomplete
 
-- Google Drive, Novita, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked.
+- Google Drive, Novita, Kokoro, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked. The Still Got It proof has not been generated on the Mac. A Linux FFmpeg check, when recorded, is not that Reel and not a throughput number.
+- launchd is a template only. It is not installed.
 - No public website, no live publishing, no performance history, no revenue.
 - 76 content notes still need Shahzeb's decision.
 - Invitation email delivery and password recovery mail are not built. The owner copies the join link.
@@ -51,7 +54,8 @@
 - Choose a public domain. Do not assume a previous name.
 - Confirm employment rules before any unpaid training period.
 - Approve a provider and a spend limit before any AI call.
+- Approve Kokoro on the Mac, the 30–40 second proof against the PDF's 20–35 seconds, a licensed-music choice, and Drive OAuth before any Reel is treated as a calendar asset.
 
 ## Next step
 
-Do not connect a model, Drive or Meta unless Shahzeb asks. The next product slice is the AI content factory: one approved provider, a cost cap, and a real file on a ready-to-publish task.
+Do not connect a model, Drive or Meta unless Shahzeb asks. Do not install the worker on the Mac from this cloud session. The owner checkpoint is `docs/MEDIA_WORKER.md`.

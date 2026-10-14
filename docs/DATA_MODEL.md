@@ -1,6 +1,6 @@
 # Data model
 
-PostgreSQL and Drizzle are the development system of record. `npm run db:setup` applies `drizzle/0001_foundation.sql` and `drizzle/0002_operators.sql`, then seeds the catalog. It does not delete users. Do not put media binaries or secrets in these tables.
+PostgreSQL and Drizzle are the development system of record. `npm run db:setup` applies `drizzle/0001_foundation.sql`, `drizzle/0002_operators.sql`, and `drizzle/0003_media_worker.sql`, then seeds the catalog. It does not delete users. Do not put media binaries or secrets in these tables. `media_workers` stores a token hash, not the token. `production_jobs` stores the server-built spec and, later, a result. Neither table stores a Reel.
 
 Identity: `users`, `sessions`, `login_attempts`, `invitations`, `page_assignments`.
 

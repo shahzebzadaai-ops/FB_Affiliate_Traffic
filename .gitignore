@@ -42,3 +42,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media worker locals
+__pycache__/
+*.py[cod]
+worker/**/.token
+worker/out/
+worker/bench/

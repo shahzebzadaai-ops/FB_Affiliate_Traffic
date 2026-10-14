@@ -18,7 +18,9 @@ This is an internal operating system for an organic-first UK dating affiliate pu
 
 Publishing operators publish finished assets. They do not write prompts, scripts, images or Reels. They cannot see each other. Do not hardcode a person's name into an authorization check. Do not label a mock file as AI output.
 
-The secure multi-operator foundation is in place: local PostgreSQL, owner setup, invitation links, Page assignments, and server-side isolation. Google Drive, Meta, Novita, and affiliate networks are not connected. Do not invent commissions, followers, or engagement. The database on this machine is development-only. Do not treat it as production hosting.
+The secure multi-operator foundation is in place: local PostgreSQL, owner setup, invitation links, Page assignments, and server-side isolation. A media queue and Mac worker interface are in review. Google Drive, Meta, Novita, Kokoro, and affiliate networks are not connected. Do not invent commissions, followers, engagement, render time, or a finished Reel. The database on this machine is development-only. Do not treat it as production hosting.
+
+Do not merge or deploy this branch without Shahzeb's approval. Do not install launchd, buy hardware, or start batch production from a cloud session. The Mac proof is a local session. Read `docs/MEDIA_WORKER.md` before changing the worker.
 
 Update `docs/BUILD_STATUS.md` when a milestone changes what is done, tested, incomplete, risky, or next.
 

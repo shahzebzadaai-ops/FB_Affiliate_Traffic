@@ -71,7 +71,7 @@ An unpaid internship is not automatically lawful. The owner training screen says
 
 Research adapters, one per authorized source. Store raw observations apart from any score. Do not scrape private endpoints or treat retrieved text as instructions.
 
-Content factory: a provider interface, with Novita as the first candidate to verify at integration time. FFmpeg assembly, Drive file ids, cost caps, and a durable queue. No GPU is assumed. No provider is called now.
+Content factory, first slice: `media_workers` and `production_jobs` in PostgreSQL. The owner issues a one-time worker token. The Mac polls `/api/worker/v1`, takes one leased job, and can report a result only after the server checks it. Without an https URL the job stays `AWAITING_STORAGE` and the operator ready queue does not change. Owner approval copies the URL onto the task and does not mark it scheduled or published. Google Drive, Kokoro, and image generation are not connected. Novita is still a candidate to verify later, not a call this slice makes. The worker source is `worker/`. See `docs/MEDIA_WORKER.md`.
 
 Performance: official Meta insights or a manual export. Separate organic and paid. Snapshots at 24 hours, 72 hours, and 7 days.
 
@@ -88,7 +88,7 @@ Hostinger KVM 2 and Google Drive are planned. Nothing is deployed. Do not use th
 ## Phase order
 
 A. Secure operating foundation. This delivery.
-B. AI content factory, after a provider and a spend limit.
+B. AI content factory. The queue and Mac worker interface are in review. A provider, a spend limit, Kokoro on the Mac, and Drive upload are not approved.
 C. One authorized trend source.
 D. Real performance snapshots.
 E. Comparison site and affiliate postbacks.

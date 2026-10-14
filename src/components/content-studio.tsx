@@ -20,7 +20,7 @@ export function ContentStudio() {
         <p className="text-[11px] tracking-[0.18em] text-primary uppercase">Production</p>
         <h1 className="mt-2 font-heading text-5xl tracking-tight">Content Studio</h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          The next seven days of the plan. No model is connected, so nothing here has a generation cost or a master file. Fictional stories in the plan are editorial, not testimonials.
+          The next seven days of the plan. A Mac can be queued from Systems, but no model is connected, so nothing here has a generation cost or a master file. Fictional stories in the plan are editorial, not testimonials.
         </p>
       </header>
       <div className="overflow-x-auto">
