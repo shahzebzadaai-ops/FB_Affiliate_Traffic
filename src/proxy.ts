@@ -14,6 +14,10 @@ export function proxy(request: NextRequest) {
     url.port = "";
     return NextResponse.redirect(url, 308);
   }
+  // Nginx terminates TLS. Next then proxies an absolute rewrite to its own
+  // origin, and it rewrites 127.0.0.1 to localhost, so the origins do not
+  // match. The application process speaks HTTP. An https self-proxy fails.
+  url.protocol = "http:";
   return NextResponse.rewrite(url);
 }
 
