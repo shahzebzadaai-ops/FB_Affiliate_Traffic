@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { decideHost } from "@/site/host-policy";
+import { decideHost, publicRedirect } from "@/site/host-policy";
 
 describe("public host policy", () => {
   it("leaves local and the private host on the operating system", () => {
@@ -15,6 +15,8 @@ describe("public host policy", () => {
     expect(decideHost("www.affigrove.io", "/")).toEqual({ type: "redirect", pathname: "/", host: "affigrove.io" });
     expect(decideHost("www.affigrove.io", "/site/contact")).toEqual({ type: "redirect", pathname: "/contact", host: "affigrove.io" });
     expect(decideHost("affigrove.io", "/site/contact")).toEqual({ type: "redirect", pathname: "/contact" });
+    expect(publicRedirect("affigrove.io", "/contact")).toBe("https://affigrove.io/contact");
+    expect(publicRedirect("www.affigrove.io", "/", "affigrove.io")).toBe("https://affigrove.io/");
     expect(decideHost("www.affigrove.io", "/api/public/enquiries")).toEqual({
       type: "redirect",
       pathname: "/api/public/enquiries",

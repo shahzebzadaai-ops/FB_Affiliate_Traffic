@@ -21,6 +21,12 @@ export type HostDecision =
   | { type: "redirect"; pathname: string; host?: string }
   | { type: "not-found" };
 
+/** Public redirect target. The app is reached through Nginx, so the internal URL host is not the public host. */
+export function publicRedirect(hostHeader: string | null, pathname: string, host?: string): string {
+  const name = host || hostnameOf(hostHeader);
+  return `https://${name}${pathname.startsWith("/") ? pathname : `/${pathname}`}`;
+}
+
 export function hostnameOf(hostHeader: string | null): string {
   if (!hostHeader) return "";
   const host = hostHeader.trim().toLowerCase();
