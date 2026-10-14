@@ -1,6 +1,6 @@
 # AffiGrove corporate site
 
-Local preview: `http://127.0.0.1:3000/site`. Production routing is prepared in `deploy/` and is not live. `www.affigrove.io` redirects to `https://affigrove.io`. The corporate host stays noindex, and the Nginx review password is created only on the server.
+Local preview: `http://127.0.0.1:3000/site`. Production is `https://affigrove.io`, and `www.affigrove.io` redirects there. The corporate host has no review password. It stays `noindex` until the facts under “Not approved for publication” are supplied.
 
 ## Where it lives
 
@@ -27,7 +27,7 @@ Contact and careers forms post to `POST /api/public/enquiries`. A message is sto
 
 Registered company number, registered office, VAT, public email, public phone, postal address, director names, governing law, open roles, internship terms, work location, hosting vendor wording, and a message retention period.
 
-Search indexing is off (`robots: noindex`) until a launch is approved.
+Search indexing is off (`robots: noindex`). Do not add a sitemap or remove `noindex` until the unapproved company and privacy facts are supplied.
 
 ## Visual identity
 

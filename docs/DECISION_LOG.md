@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Corporate site is public, search indexing stays off
+
+Shahzeb approved removing the temporary review password from affigrove.io and www.affigrove.io. The private OS at os.affigrove.io is unchanged. Search indexing stays off because the company number, registered office, public email, phone, postal address, governing law, hosting-vendor wording, and message retention period are still unapproved. Those facts are not invented.
+
 ## 2026-10-14 — Deployment approved on the AffiGrove KVM2
 
 Shahzeb approved deployment of the existing corporate site and private OS to the Hostinger KVM2 at 153.92.208.28. `www.affigrove.io` redirects to the apex. The repeatable release and rollback path is `deploy/HOSTINGER.md`. The campaign is not started. The corporate site stays behind the review password and `noindex` until a separate launch approval.

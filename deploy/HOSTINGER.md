@@ -66,7 +66,7 @@ sudo -u affigrove env AFFIGROVE_SKIP_FETCH=1 bash /var/www/affigrove/repo/deploy
 sudo bash /var/www/affigrove/current/deploy/install-proxy.sh
 ```
 
-`www.affigrove.io` redirects to `https://affigrove.io`. `os.affigrove.io` is the private sign-in and has no review password. Corporate pages stay `noindex` and behind the review password until launch approval. Remove the two `auth_basic` lines in `deploy/nginx/affigrove.conf` only when that approval is given.
+`www.affigrove.io` redirects to `https://affigrove.io`. `os.affigrove.io` is the private sign-in. The corporate host has no review password. Pages stay `noindex` until the company number, registered office, public contact details, governing law, and privacy hosting statement are approved. Do not add `auth_basic` back.
 
 ## 4. Later releases and rollback
 
