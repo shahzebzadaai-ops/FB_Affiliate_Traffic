@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — Althoy is the only visual reference
+
+The active visual reference is Althoy alone. Current Pro, Flow Content, Fintech X and awesome-design-md no longer direct colour, type or chrome. The first screens that used them — Newsreader titles, Source Sans, a blue primary and hairline lists — are replaced on the owner overview and the publishing Today and task desk with Althoy’s paper, Be Vietnam Pro, ink buttons and white rounded surfaces. Those screens stay operating screens. The marketing homepage is not copied. Business rules from the earlier design note remain: two shells, honest disconnected states, no fake files, no sample money, and a stopped campaign clock until Shahzeb confirms it.
+
 ## 2026-10-14 — Mac media worker, not another computer
 
 The render machine is the owner's MacBook Pro (M3 Pro, 18 GB). No second VPS and no purchased GPU. Affiliate Traffic OS keeps the queue in PostgreSQL. The Mac polls over outbound HTTPS. A later GPU worker can use the same poll API. Operators do not see a file until the owner approves an https URL.

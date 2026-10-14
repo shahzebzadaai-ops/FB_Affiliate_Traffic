@@ -25,11 +25,11 @@ export function PublishCard({
 }) {
   const page = pageByCode(record.pageCode);
   return (
-    <article className="grid gap-6 bg-card p-4 ring-1 ring-foreground/10 sm:grid-cols-[minmax(9rem,14rem)_minmax(0,1fr)] sm:p-5">
+    <article className="atos-surface grid gap-6 p-5 sm:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)] sm:p-6">
       <AssetFrame label={formatLabel(record.format)} accent={page.accent} />
       <div className="flex min-w-0 flex-col">
-        <p className="text-[11px] tracking-[0.16em] uppercase" style={{ color: page.accent }}>{page.name}</p>
-        <h2 className="mt-2 font-heading text-3xl leading-tight tracking-tight">{record.pillar}</h2>
+        <p className="text-sm font-medium" style={{ color: page.accent }}>{page.name}</p>
+        <h2 className="mt-2 text-2xl font-semibold leading-tight tracking-tight">{record.pillar}</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">“{hook}”</p>
         <p className="mt-4 text-sm leading-relaxed">{record.captionInstructions}</p>
         <p className="mt-1 text-xs text-muted-foreground">Plan instruction. Not a finished caption.</p>
@@ -43,7 +43,7 @@ export function PublishCard({
             <dd>{ready ? status : `${status} · waiting for a file`}</dd>
           </div>
         </dl>
-        <Link href={href} className="mt-5 inline-flex h-11 items-center justify-center self-start bg-primary px-4 text-sm font-medium text-primary-foreground">
+        <Link href={href} className="atos-btn mt-5 self-start">
           {action}
         </Link>
       </div>

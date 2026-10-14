@@ -1,6 +1,6 @@
 # UI architecture
 
-The preview is a private operating system with two shells. Visual rules live in the root `DESIGN.md`. This file is the map of screens and components.
+The preview is a private operating system with two shells. Visual rules live in the root `DESIGN.md`. Althoy is the only visual reference. The first layout pass is `/owner`, `/staff` and `/staff/tasks/[contentId]`. This file is the map of screens and components.
 
 ## Shell
 

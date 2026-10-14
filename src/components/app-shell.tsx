@@ -61,19 +61,19 @@ export function AppShell({
   const more = area === "owner" ? OWNER_MORE : STAFF_MORE;
 
   return (
-    <div className="min-h-screen lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
-      <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-[oklch(0.965_0.006_95)] lg:flex">
-        <div className="px-5 pt-6">
-          <Link href={area === "owner" ? "/owner" : "/staff"} className="font-heading text-2xl tracking-tight">
+    <div className="min-h-screen lg:grid lg:grid-cols-[15.5rem_minmax(0,1fr)]">
+      <aside className="sticky top-0 hidden h-screen flex-col bg-background lg:flex">
+        <div className="px-5 pt-7">
+          <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">
             Affiliate Traffic OS
           </Link>
-          <p className="mt-1 text-xs text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
         </div>
         <nav className="mt-8 flex flex-1 flex-col gap-6 overflow-y-auto px-3">
           <NavGroup links={primary} pathname={pathname} />
           <NavGroup links={more} pathname={pathname} />
         </nav>
-        <div className="border-t border-border px-5 py-4">
+        <div className="px-5 py-5">
           <p className="text-xs leading-relaxed text-muted-foreground">Signed in as {preview.user.name}. AI, Meta, Drive and networks are not connected.</p>
           <Logout onClick={() => {
             void preview.logout().then(() => {
@@ -84,9 +84,9 @@ export function AppShell({
         </div>
       </aside>
       <div className="flex min-w-0 flex-col">
-        <header className="border-b border-border lg:hidden">
+        <header className="lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
-            <Link href={area === "owner" ? "/owner" : "/staff"} className="font-heading text-xl tracking-tight">Affiliate Traffic OS</Link>
+            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">Affiliate Traffic OS</Link>
             <Logout
               className="mt-0"
               onClick={() => {
@@ -103,12 +103,12 @@ export function AppShell({
             ))}
           </div>
         </header>
-        <p className="border-b border-border px-4 py-2 text-xs text-muted-foreground sm:px-8">
+        <p className="mx-auto w-full max-w-6xl px-4 pt-4 text-sm leading-relaxed text-muted-foreground sm:px-8 lg:pt-6">
           AI production, Facebook, Drive and affiliate networks are not connected. Scheduling is manual in Meta Business Suite.
         </p>
-        <main className={`mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-8 ${area === "staff" ? "pb-28 lg:pb-10" : ""}`}>{children}</main>
+        <main className={`mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-8 ${area === "staff" ? "pb-28 lg:pb-10" : "pb-10"}`}>{children}</main>
         {area === "staff" ? (
-          <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-border bg-card lg:hidden">
+          <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 bg-card shadow-[0_-1px_0_rgb(36_28_24/8%)] lg:hidden">
             {STAFF_DAILY.map((link) => (
               <NavLink key={link.href} href={link.href} label={link.label} pathname={pathname} compact />
             ))}
@@ -147,8 +147,8 @@ function NavLink({
       aria-current={active ? "page" : undefined}
       className={
         compact
-          ? `px-2 py-3 text-center text-[11px] tracking-wide ${active ? "text-primary" : "text-muted-foreground"}`
-          : `border-l-2 px-3 py-2 text-sm ${active ? "border-primary text-foreground" : "border-transparent text-muted-foreground"}`
+          ? `px-2 py-3 text-center text-xs ${active ? "font-semibold text-foreground" : "text-muted-foreground"}`
+          : `rounded-lg px-3 py-2 text-sm ${active ? "bg-card font-semibold text-foreground shadow-[0_0_0_1px_rgb(36_28_24/8%)]" : "text-muted-foreground"}`
       }
     >
       {label}

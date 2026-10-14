@@ -1,93 +1,38 @@
 # Design
 
-Affiliate Traffic OS is a private operating system. These references are for typography, spacing, hierarchy, layout, media frames, navigation and finish. They are not pages to recreate. Do not copy their code, assets, illustrations or marketing sections. Do not add Framer as a dependency.
+Affiliate Traffic OS is a private operating system. The only visual reference is [Althoy](https://www.framer.com/marketplace/templates/althoy/) ([live preview](https://aithoy.framer.website/)). Use it for typography, colour, spacing, surfaces, buttons and hierarchy. Do not recreate its marketing homepage. Do not copy its code, assets, illustrations, prices, testimonials, feature grids or Framer sections. Do not add Framer as a dependency.
 
-## References
+## Earlier references
 
-Studied, not copied:
+The previous design note also named Current Pro, Flow Content, Fintech X and VoltAgent awesome-design-md. Those shaped the first shells: serif titles, a blue action colour, hairline lists and a ledger-like table. They are retired as visual references. Product rules that came with them stay in force and are listed below. They are not a reason to mix those templates back into the screens.
 
-- [Althoy](https://www.framer.com/marketplace/templates/althoy/) — owner control centre. Calm affiliate-product surfaces, strong editorial hierarchy, content before decoration.
-- [Current Pro](https://www.framer.com/marketplace/templates/current-pro/) — publishing operator. A media workflow: preview, caption, schedule, status, one primary action.
-- [Flow Content](https://flowcontent.framer.website/) — pipeline rhythm and how a queue should read as work, not as a brochure.
-- [Fintech X](https://www.framer.com/marketplace/templates/fintechx/) — tables, figures and restraint. Money is a ledger, not a chart wallpaper.
-- [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) — write the system down so later screens stay in the same language.
+## Althoy, adapted for operations
 
-Refused from those templates: landing heroes, pricing, testimonials, logo clouds, bento marketing grids, purple gradients, decorative dashboards and fake product shots.
+Althoy’s public site is a marketing page: hero, feature cards, steps, testimonials and pricing. This product keeps none of those sections.
 
-## Direction
+What transfers:
 
-Premium, minimal, readable, and specific to this company. Light neutral paper, ink text, a restrained blue for the action and the active nav item. Serif titles (Newsreader) and a plain sans for UI (Source Sans 3). Wide margins. Hairline rules. Tables for comparable numbers. A large frame when the object is a Reel or image.
+- Type is Be Vietnam Pro. Titles are semibold, about 2.25–2.5rem, tight tracking, ink `#241c18`. Body is 15–16px. Labels are sentence case, not wide-tracked capitals.
+- The canvas is warm paper `#f7f5f0`. Working objects sit on white surfaces with a 1.25rem radius and a soft shadow.
+- The primary button is ink, 4px radius, white type, a slight inset highlight, and at least 44px tall. The quiet button is white with a hairline. There is no blue chrome and no pill-shaped marketing call to action.
+- Space between sections is larger than space inside a control. Desktop margins stay wide. Phone padding stays at least 16px.
 
-Not a colourful SaaS dashboard. Not a stack of metric cards. Not charts with nothing behind them. Not a control that pretends to publish, generate or spend.
+The layout stays an operating system. Shahzeb and Masho keep separate shells. A screen leads with the work, not a slogan.
 
-## Colour
+## Product rules that stay
 
-Paper `--background` is a warm neutral. Cards are a step lighter. Ink is a blue-black, not pure black. The accent is the existing primary blue. Page identity is a 3px rule in that Page's accent, plus the Page name. Do not flood a card with the Page wash.
-
-Status is a word. Do not invent a traffic-light system for work that has not happened.
-
-Unconnected measures render as "Not connected". They are not sample pounds, sample reach or sample conversions. A labelled sample figure is allowed only when a screen is explicitly a prototype and the figure cannot be read as the ledger. This product does not use that escape for commission, clicks, reach or AI cost.
-
-## Type and space
-
-- Page title: serif, about 3rem, tight tracking.
-- Section label: 11px, wide tracking, uppercase, muted.
-- Body: 15–16px, relaxed line height, measure kept near 65 characters where it is prose.
-- Tables: 14px, vertical padding, a bottom rule, no zebra stripes.
-- Space between sections is larger than space inside a control. Desktop padding is generous. Phone padding stays at least 16px, and Masho's primary actions stay 44px tall.
-
-## Shells
-
-Two sidebars. They are not the same menu.
-
-Shahzeb, desktop first:
-
-- Overview
-- Approvals
-- Affiliate
-- Content Studio
-- Growth Director
-- Pages
-- Then the less frequent tools: Calendar, Mandala, Staff, Systems, Import, Training
-
-The overview leads with work that needs him: unresolved plan notes, AI production not running, approvals, missed publications, and integrations that are not connected. Business intelligence is a table of the five UK Pages. Financial columns stay empty until a network is connected. Finance is not in Masho's sidebar and the server still refuses his finance requests.
-
-Masho, usable on a phone:
-
-- Today
-- Ready
-- Scheduled
-- Published
-- Issues
-
-Those five stay in a bottom bar on small screens so he does not hunt. Calendar, Pages and Training sit in the sidebar on desktop and in the overflow row on a phone.
-
-A publishing card shows the Page, a large preview frame, the topic, the caption situation, the UK time, readiness, and one primary action. The frame says "No master file" until a real image or MP4 is stored. It is not a stock photo.
-
-Opening a task shows, on one screen:
-
-1. Preview
-2. Download asset (unavailable without a file)
-3. Copy final caption (unavailable until a finished caption exists)
-4. Download thumbnail (unavailable without a file)
-5. Page and UK time
-6. Open Meta Business Suite
-7. Confirm publication by saving the live URL after he scheduled it himself
-8. Facebook post URL
-9. Report an issue or ask for regeneration
-
-Regeneration stores a note. It does not call a model.
-
-## Content Studio and Growth Director
-
-The studio is the owner's view of the rolling seven-day plan: Page, topic, generation status, a preview slot, cost, quality and the planned Drive path. Generation status stays "Not connected". Cost stays blank. Storage is the planned path, not a file that exists.
-
-The Growth Director explains that it will propose experiments from real Facebook and affiliate evidence, and that Shahzeb approves before a Page, angle or spend change. With no evidence, it recommends nothing. It does not invent a weekly insight.
-
-## Motion and chrome
-
-Almost none. No hover tricks that look interactive when they are not. No skeleton charts. Focus states stay visible. The signed-in status line is one quiet sentence, not a coloured banner.
+- Two shells. Shahzeb: Overview, Approvals, Affiliate, Content Studio, Growth Director, Pages, then Calendar, Mandala, Operators, Systems, Import, Training. Masho: Today, Ready, Scheduled, Published, Issues, with Calendar, My Pages and Training secondary. On a phone, Masho’s five queues stay in a bottom bar.
+- Status is a word. Unconnected measures render as “Not connected”. They are not sample pounds, sample reach, sample conversions or sample AI cost.
+- Page identity is the Page name plus a 3px rule in that Page’s accent. Do not flood a card with the Page wash.
+- Comparable numbers stay in a table. A Reel or image gets a large frame. The frame says “No master file” until a real image or MP4 is stored.
+- A publishing card shows the Page, the frame, the topic, the caption situation, the UK time, readiness, and one primary action.
+- Opening a task still shows preview, download, copy caption, thumbnail, Page and UK time, Meta Business Suite, confirm scheduling, the Facebook URL, and report or regenerate. Download, copy and thumbnail stay unavailable until a real file or finished caption exists. Regeneration stores a note. It does not call a model. This screen does not post to Facebook.
+- Content Studio generation status stays “Not connected”. Cost stays blank. Storage is the planned path, not a file that exists.
+- Growth Director proposes nothing until Facebook and affiliate evidence exist. Shahzeb approves before a Page, angle or spend change.
+- Almost no motion. No skeleton charts. Focus states stay visible. The signed-in status line is one quiet sentence.
 
 ## Build rule
 
-Preserve authentication, permissions, the campaign clock, task commands and the 180-post catalog. A visual change does not connect Meta, Drive, a model or an affiliate network.
+Preserve authentication, permissions, the campaign clock, task commands and the 180-post catalog. A visual change does not connect Meta, Drive, a model or an affiliate network, and it does not start the 30-day clock.
+
+The first Althoy slice is Shahzeb’s overview and Masho’s Today queue and task desk. Other routes inherit the type and colour and have not had their own layout pass.

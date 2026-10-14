@@ -75,7 +75,7 @@ function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (va
     <div className="mt-4 grid gap-3 sm:grid-cols-2">
       <label className="text-xs text-muted-foreground">
         Checkpoint
-        <select className="mt-1 h-9 w-full border border-border bg-card px-2 text-sm text-foreground" value={checkpoint} onChange={(event) => setCheckpoint(event.target.value as MetricEntry["checkpoint"])}>
+        <select className="atos-field mt-1" value={checkpoint} onChange={(event) => setCheckpoint(event.target.value as MetricEntry["checkpoint"])}>
           <option value="24h">24 hours</option>
           <option value="72h">72 hours</option>
           <option value="7d">7 days</option>
@@ -89,7 +89,7 @@ function MetricsForm({ contentId, onNotice }: { contentId: string; onNotice: (va
       <NumberField label="Website visits" value={visits} onChange={setVisits} />
       <button
         type="button"
-        className="h-11 bg-muted px-4 text-sm sm:col-span-2"
+        className="atos-btn-quiet sm:col-span-2"
         onClick={() => {
           const entry: MetricEntry = {
             checkpoint,
@@ -117,7 +117,7 @@ function NumberField({ label, value, onChange }: { label: string; value: string;
   return (
     <label className="block text-xs text-muted-foreground">
       {label}
-      <input className="mt-1 h-9 w-full border border-border bg-card px-2 text-sm text-foreground" inputMode="numeric" value={value} onChange={(event) => onChange(event.target.value)} />
+      <input className="atos-field mt-1" inputMode="numeric" value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
 }
@@ -169,64 +169,66 @@ function Desk({
   const [url, setUrl] = useState(facebookUrl);
   return (
     <div className="space-y-8">
-      <Link href="/staff" className="text-sm text-muted-foreground hover:text-foreground">Back</Link>
-      <div className="grid items-start gap-10 lg:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)]">
+      <Link href="/staff" className="text-sm font-medium text-muted-foreground">Back</Link>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)]">
         <AssetFrame label={formatLabelText} accent={accent} />
         <div>
-          <p className="text-[11px] tracking-[0.16em] uppercase" style={{ color: accent }}>{pageName}</p>
-          <h1 className="mt-2 font-heading text-4xl tracking-tight">{hook}</h1>
+          <p className="text-sm font-medium" style={{ color: accent }}>{pageName}</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight">{hook}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{contentId} · {status} · {publishPhrase}</p>
-          <ul className="mt-8 divide-y border-y text-sm">
-            <li className="flex items-center justify-between gap-4 py-3">
+          <ul className="atos-surface mt-8 divide-y divide-border px-5 text-sm">
+            <li className="flex flex-wrap items-center justify-between gap-3 py-3">
               <span>Download asset</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
+              <button type="button" disabled className="atos-btn-quiet">Unavailable</button>
             </li>
-            <li className="flex items-center justify-between gap-4 py-3">
+            <li className="flex flex-wrap items-center justify-between gap-3 py-3">
               <span>Copy final caption</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">No finished caption</button>
+              <button type="button" disabled className="atos-btn-quiet">No finished caption</button>
             </li>
-            <li className="flex items-center justify-between gap-4 py-3">
+            <li className="flex flex-wrap items-center justify-between gap-3 py-3">
               <span>Download thumbnail</span>
-              <button type="button" disabled className="h-10 px-3 text-muted-foreground">Unavailable</button>
+              <button type="button" disabled className="atos-btn-quiet">Unavailable</button>
             </li>
-            <li className="flex items-center justify-between gap-4 py-3">
+            <li className="flex flex-wrap items-center justify-between gap-3 py-3">
               <span>Open Meta Business Suite</span>
-              <a href="https://business.facebook.com/" target="_blank" rel="noreferrer" className="inline-flex h-10 items-center px-3 text-primary">Open</a>
+              <a href="https://business.facebook.com/" target="_blank" rel="noreferrer" className="atos-btn-quiet">Open</a>
             </li>
           </ul>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{caption}</p>
-          <p className="mt-1 text-xs text-muted-foreground">Plan instruction. Not a finished caption. Schedule the real file yourself. This screen does not post to Facebook.</p>
+          <div className="atos-surface mt-4 px-5 py-4">
+            <p className="text-sm leading-relaxed">{caption}</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Plan instruction. Not a finished caption. Schedule the real file yourself. This screen does not post to Facebook.</p>
+          </div>
           <div className="mt-6 flex flex-wrap gap-2">
-            <button type="button" className="h-11 bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={onSchedule}>
+            <button type="button" className="atos-btn" onClick={onSchedule}>
               Confirm scheduled
             </button>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">Use this after you schedule it in Meta Business Suite. A public link is not required yet.</p>
           {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
-          <label className="mt-6 block text-sm">
+          <label className="mt-6 block text-sm font-medium">
             Facebook post URL
-            <input className="mt-1 h-11 w-full border border-border bg-card px-3" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
+            <input className="atos-field mt-1" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://www.facebook.com/..." />
           </label>
-          <button type="button" className="mt-3 h-11 bg-primary px-4 text-sm font-medium text-primary-foreground" onClick={() => onPublish(url)}>
+          <button type="button" className="atos-btn mt-3" onClick={() => onPublish(url)}>
             Confirm published
           </button>
-          <div className="mt-8">
-            <h2 className="font-heading text-2xl">Report an issue</h2>
+          <div className="atos-surface mt-8 px-5 py-5">
+            <h2 className="text-2xl font-semibold tracking-tight">Report an issue</h2>
             <p className="mt-2 text-sm text-muted-foreground">Say what blocked publishing. Asking for a new file does not start an AI job.</p>
             {flagged ? <p className="mt-3 text-sm">Flagged: {flagged}</p> : null}
-            <textarea className="mt-3 min-h-24 w-full border border-border bg-card p-3 text-sm" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What blocked publishing?" />
+            <textarea className="atos-field mt-3 min-h-24 py-3" value={note} onChange={(event) => setNote(event.target.value)} placeholder="What blocked publishing?" />
             <div className="mt-3 flex flex-wrap gap-2">
-              <button type="button" className="h-11 bg-muted px-4 text-sm" onClick={() => onIssue(note)}>
+              <button type="button" className="atos-btn-quiet" onClick={() => onIssue(note)}>
                 Report problem
               </button>
-              <button type="button" className="h-11 bg-muted px-4 text-sm" onClick={() => onFlag(note)}>
+              <button type="button" className="atos-btn-quiet" onClick={() => onFlag(note)}>
                 Request regeneration
               </button>
             </div>
             {notice ? <p className="mt-3 text-sm">{notice}</p> : null}
           </div>
-          <div className="mt-8 border-t pt-6">
-            <h2 className="font-heading text-2xl">Performance</h2>
+          <div className="atos-surface mt-4 px-5 py-5">
+            <h2 className="text-2xl font-semibold tracking-tight">Performance</h2>
             <p className="mt-2 text-sm text-muted-foreground">Record Page numbers you can see. Affiliate commission is not on this screen.</p>
             <MetricsForm contentId={contentId} onNotice={onNotice} />
           </div>

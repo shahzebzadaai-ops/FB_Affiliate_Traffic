@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Newsreader, Source_Sans_3 } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import { CampaignProvider } from "@/campaign/campaign-context";
 import { PreviewProvider } from "@/preview/preview-context";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
-  variable: "--font-source",
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-newsreader",
+  weight: ["400", "500", "600"],
+  variable: "--font-be-vietnam",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-GB" className={`${sourceSans.variable} ${newsreader.variable} h-full antialiased`}>
+    <html lang="en-GB" className={`${beVietnam.variable} h-full antialiased`}>
       <body className="min-h-full bg-background text-foreground">
         <CampaignProvider>
           <PreviewProvider>{children}</PreviewProvider>
