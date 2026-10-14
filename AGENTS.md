@@ -8,7 +8,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Affiliate Traffic OS
+# AffiGrove OS
 
 Before a major change, read `docs/PRODUCT_MASTER.md`, `docs/ARCHITECTURE.md`, `docs/DECISION_LOG.md`, `docs/BUILD_STATUS.md`, `docs/ROADMAP.md` and `DESIGN.md`.
 

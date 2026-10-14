@@ -120,7 +120,7 @@ describe("permissions and workflow", () => {
         disclosure: true,
       },
       submissionNote: "Script, scenes and thumbnail are ready for review.",
-      assetReference: "Affiliate Traffic OS/UK/Still Got It UK/2026-10/UK-SGIUK-001/",
+      assetReference: "AffiGrove OS/UK/Still Got It UK/2026-10/UK-SGIUK-001/",
     };
     const submitted = submitTask(ready, "REEL", "masho", "2026-10-12T16:00:00.000Z");
     expect(submitted.ok).toBe(true);

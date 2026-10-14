@@ -69,7 +69,7 @@ export function AppShell({
       <aside className="sticky top-0 hidden h-screen flex-col bg-sidebar lg:flex">
         <div className="px-5 pt-7">
           <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">
-            Affiliate Traffic OS
+            AffiGrove OS
           </Link>
           <p className="mt-1 text-sm text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
         </div>
@@ -90,7 +90,7 @@ export function AppShell({
       <div className="flex min-w-0 flex-col">
         <header className="bg-sidebar lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
-            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">Affiliate Traffic OS</Link>
+            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">AffiGrove OS</Link>
             <Logout
               className="mt-0"
               onClick={() => {
@@ -171,7 +171,7 @@ function Logout({ onClick, className = "mt-3" }: { onClick: () => void; classNam
 function Wordmark() {
   return (
     <main className="grid min-h-screen place-items-center px-6">
-      <p className="font-heading text-3xl tracking-tight">Affiliate Traffic OS</p>
+      <p className="font-heading text-3xl tracking-tight">AffiGrove OS</p>
     </main>
   );
 }

@@ -1,6 +1,6 @@
 # Design
 
-Affiliate Traffic OS is a private operating system. The only visual reference is [Althoy](https://www.framer.com/marketplace/templates/althoy/) ([live preview](https://aithoy.framer.website/)). Use it for typography, colour, spacing, surfaces, buttons and hierarchy. Do not recreate its marketing homepage. Do not copy its code, assets, illustrations, prices, testimonials, feature grids or Framer sections. Do not add Framer as a dependency.
+AffiGrove OS is a private operating system. The only visual reference is [Althoy](https://www.framer.com/marketplace/templates/althoy/) ([live preview](https://aithoy.framer.website/)). Use it for typography, colour, spacing, surfaces, buttons and hierarchy. Do not recreate its marketing homepage. Do not copy its code, assets, illustrations, prices, testimonials, feature grids or Framer sections. Do not add Framer as a dependency.
 
 ## Earlier references
 

@@ -4,7 +4,7 @@ Local preview: `http://127.0.0.1:3000/site`. Production is `https://affigrove.io
 
 ## Where it lives
 
-The public pages are a route group beside Affiliate Traffic OS, not a replacement for it.
+The public pages are a route group beside AffiGrove OS, not a replacement for it.
 
 | Audience | Local URL | Later host |
 | --- | --- | --- |
@@ -31,7 +31,7 @@ Search indexing is off (`robots: noindex`). Do not add a sitemap or remove `noin
 
 ## Visual identity
 
-The public site uses Fraunces and Source Sans 3, paper `#f3efe6`, ink `#1a241c`, and grove green `#1a5c42`. Affiliate Traffic OS keeps Be Vietnam Pro, the navy field, and the Milky Way canvas. The two identities are separate on purpose.
+The public site uses Fraunces and Source Sans 3, paper `#f3efe6`, ink `#1a241c`, and grove green `#1a5c42`. AffiGrove OS keeps Be Vietnam Pro, the navy field, and the Milky Way canvas. The two identities are separate on purpose.
 
 ## Deployment
 

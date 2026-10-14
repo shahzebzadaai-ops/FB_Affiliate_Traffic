@@ -36,7 +36,7 @@ export default function NotFound() {
   return (
     <main className="mx-auto max-w-lg px-6 py-16">
       <h1 className="font-heading text-4xl">Page not found</h1>
-      <p className="mt-4 text-muted-foreground">That address is not in Affiliate Traffic OS.</p>
+      <p className="mt-4 text-muted-foreground">That address is not in AffiGrove OS.</p>
       <Link className="atos-btn mt-6" href="/">
         Back to sign in
       </Link>

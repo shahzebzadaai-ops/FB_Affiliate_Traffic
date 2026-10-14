@@ -11,7 +11,7 @@ export function LoginForm() {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col justify-center px-5 py-16">
       <p className="text-xs font-medium tracking-[0.16em] text-primary uppercase">Internal operating system</p>
-      <h1 className="mt-3 font-heading text-5xl tracking-tight">Affiliate Traffic OS</h1>
+      <h1 className="mt-3 font-heading text-5xl tracking-tight">AffiGrove OS</h1>
       <p className="mt-4 text-muted-foreground">Sign in with your account. There is no public registration.</p>
       <form
         className="atos-surface mt-8 space-y-4 p-5"

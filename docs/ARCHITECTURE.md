@@ -1,6 +1,6 @@
 # Architecture
 
-Affiliate Traffic OS is one Next.js application and one PostgreSQL database. It is the private operating system for a UK dating affiliate publisher. It is not a dating app, a public scheduler, or a separate product per Facebook Page.
+AffiGrove OS is one Next.js application and one PostgreSQL database. It is the private operating system for a UK dating affiliate publisher. It is not a dating app, a public scheduler, or a separate product per Facebook Page.
 
 This document is the long-term map. It does not authorize building every module. The current delivery is the secure multi-operator foundation. Later modules stay unconnected until Shahzeb approves the provider, the spend, and the credentials.
 

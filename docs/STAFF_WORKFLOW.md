@@ -12,7 +12,7 @@ Shahzeb invites each operator with a one-time link, assigns Pages, and can move 
 
 Google Drive folders are planned, not connected:
 
-`Affiliate Traffic OS/UK/{Page name}/{YYYY-MM}/{content ID}/`
+`AffiGrove OS/UK/{Page name}/{YYYY-MM}/{content ID}/`
 
 Inside that folder: Brief, Scripts, Images, Audio, Working-Videos, Final-Videos, Thumbnails, Captions.
 

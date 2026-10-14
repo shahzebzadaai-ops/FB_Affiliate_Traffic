@@ -2,7 +2,7 @@
 
 APPROVED: do not deploy this app to the PlayerPulser VPS. Do not change Nginx, DNS or `os.azvoraglobal.io`. On 14 October 2026 Shahzeb approved safe deployment of the existing applications to the Hostinger KVM2 at 153.92.208.28. The procedure is `deploy/HOSTINGER.md`.
 
-The existing VPS at 187.53.130.227 runs PlayerPulser. Affiliate Traffic OS is not deployed there. Do not use that machine for AffiGrove.
+The existing VPS at 187.53.130.227 runs PlayerPulser. AffiGrove OS is not deployed there. Do not use that machine for AffiGrove.
 
 Shahzeb has purchased a Hostinger KVM2 and the domain affigrove.io. affigrove.com is not purchased and must not be added as a site. The KVM2 is Ubuntu 24.04 at 153.92.208.28. DNS for affigrove.io, www.affigrove.io, and os.affigrove.io points at that address. The PlayerPulser server and Hostinger account stay untouched.
 

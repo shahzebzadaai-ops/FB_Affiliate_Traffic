@@ -98,7 +98,7 @@ export function IntegrationsView() {
       </div>
       <section className="rounded-xl bg-card p-5 ring-1 ring-foreground/10">
         <h2 className="font-heading text-2xl">Planned Drive folders</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Affiliate Traffic OS / UK / Page name / year-month / content ID /</p>
+        <p className="mt-2 text-sm text-muted-foreground">AffiGrove OS / UK / Page name / year-month / content ID /</p>
         <p className="mt-2 text-sm">{PLANNED_DRIVE_FOLDERS.join(" · ")}</p>
       </section>
     </div>

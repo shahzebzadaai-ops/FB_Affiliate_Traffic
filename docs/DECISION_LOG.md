@@ -1,5 +1,9 @@
 # Decision log
 
+## 2026-10-14 — The internal system is named AffiGrove OS
+
+The user-facing name of the private operating system is AffiGrove OS. AffiGrove Media Group remains the parent company. The host stays os.affigrove.io. Internal code, database tables, environment variables, and API routes keep their existing names. The planned Drive folder prefix shown to staff is `AffiGrove OS/UK/...`. Publishing stays off.
+
 ## 2026-10-14 — Corporate site is public, search indexing stays off
 
 Shahzeb approved removing the temporary review password from affigrove.io and www.affigrove.io. The private OS at os.affigrove.io is unchanged. Search indexing stays off because the company number, registered office, public email, phone, postal address, governing law, hosting-vendor wording, and message retention period are still unapproved. Those facts are not invented.

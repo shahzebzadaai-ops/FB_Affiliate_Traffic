@@ -14,8 +14,8 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Affiliate Traffic OS",
-  description: "Internal operating system for UK affiliate publishing.",
+  title: "AffiGrove OS",
+  description: "AffiGrove OS is the internal operating system for UK affiliate publishing.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
