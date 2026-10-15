@@ -12,7 +12,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Google Drive",
       status: "not_connected",
       detail:
-        "Not the confirmed 5 TB store. OAuth is not connected, and this build does not assume the permanent library is Google Drive.",
+        "Named as the initial 5 TB library. OAuth is not connected. This build does not upload, move, or delete library files.",
     },
     {
       id: "meta",
@@ -46,7 +46,7 @@ export function integrationStatus(): IntegrationConnection[] {
       name: "Permanent media storage",
       status: "not_connected",
       detail:
-        "The 5 TB destination is not confirmed. Uploads stay on the application host. Nothing is copied to Drive, S3, or a disk that has not been named.",
+        "The initial library is the named 5 TB Google Drive. The connector is not built. Uploads stay on the application host. A later object store keeps the same library records. No automatic deletion is active.",
     },
     {
       id: "affiliate-networks",

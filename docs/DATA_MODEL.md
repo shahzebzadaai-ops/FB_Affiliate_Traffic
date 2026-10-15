@@ -26,4 +26,6 @@ Later visits, clicks, and postbacks should point at the same content id, for exa
 
 `drizzle/0006_intelligence.sql` adds `operating_controls`, `intelligence_reports`, `story_series`, `story_episodes`, and `story_clips`. Publishing is constrained to `OFF`. Story rows store the model id and whether live research was used. Clip rows store a relative path and a byte size, not the video itself. No Novita key is written into these tables.
 
+Media retention tables are specified in `docs/MEDIA_RETENTION.md` and are not migrated. `creative_assets` and `story_clips` remain the current file rows. Their approval and job statuses are not reused as deletion states. Do not add the retention SQL to `drizzle/` until that phase is accepted, because a production release applies every file in the migrate list.
+
 The local development database is not backed up off this machine.

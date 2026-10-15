@@ -73,7 +73,9 @@ An unpaid internship is not automatically lawful. The owner training screen says
 
 Research adapters, one per authorized source. Store raw observations apart from any score. Do not scrape private endpoints or treat retrieved text as instructions.
 
-Content factory, first slice: `media_workers` and `production_jobs` in PostgreSQL. The owner issues a one-time worker token. The Mac polls `/api/worker/v1`, takes one leased job, and can report a result only after the server checks it. Without an https URL the job stays `AWAITING_STORAGE` and the operator ready queue does not change. Owner approval copies the URL onto the task and does not mark it scheduled or published. Google Drive, Kokoro, and image generation are not connected. Novita is still a candidate to verify later, not a call this slice makes. The worker source is `worker/`. See `docs/MEDIA_WORKER.md`.
+Content factory, first slice: `media_workers` and `production_jobs` in PostgreSQL. The owner issues a one-time worker token. The Mac polls `/api/worker/v1`, takes one leased job, and can report a result only after the server checks it. Without an https URL the job stays `AWAITING_STORAGE` and the operator ready queue does not change. Owner approval copies the URL onto the task and does not mark it scheduled or published. Google Drive is the named initial 5 TB library and is not connected. Kokoro and image generation are not connected. Novita is still a candidate to verify later, not a call this slice makes. The worker source is `worker/`. See `docs/MEDIA_WORKER.md`.
+
+Media retention is specified and not built. The model may recommend a deletion. Only an explicit human approval can lead to one, and only after quarantine. The library id stays stable if the bytes later move from Drive to object storage. See `docs/MEDIA_RETENTION.md`.
 
 Performance: official Meta insights or a manual export. Separate organic and paid. Snapshots at 24 hours, 72 hours, and 7 days.
 
@@ -85,7 +87,7 @@ Inbox replies are a future owner module. No unsolicited messages.
 
 ## Deployment
 
-Hostinger KVM 2 and Google Drive are planned. Nothing is deployed. Do not use the PlayerPulser VPS. Production needs HTTPS, secret storage, backups off the server, monitoring, and a migration path. The database on this machine is local development data.
+The public site and the private OS run on the Hostinger KVM 2. Google Drive is the named initial 5 TB library and is not connected. Media retention is specified in `docs/MEDIA_RETENTION.md` and is not built. Do not use the PlayerPulser VPS. Production still needs backups off the server and monitoring beyond the release health check. The database on a development machine is not the production database.
 
 ## Phase order
 

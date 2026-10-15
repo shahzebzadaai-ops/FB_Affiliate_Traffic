@@ -22,7 +22,9 @@ Muse AI is the manual video and image studio. One account is advertised with 1,0
 
 The VPS edits and encodes. It is not the place for a heavy generative video model, and it is not the long-term library.
 
-Permanent storage is a separate 5 TB destination. Its type is not confirmed. This architecture does not assume Google Drive, S3, a mounted disk, or a NAS. The earlier note that Google Drive was the 5 TB store is withdrawn until the owner names the service. Uploads stay on the application host until that service exists.
+The initial permanent library is a 5 TB Google Drive. The owner named that service on 15 October 2026. The earlier withdrawal, which stood until the service was named, is superseded for this initial library. The connector is not built, OAuth is not connected, and current uploads stay on the application host. The library records are the durable identity. A later move to object storage changes the storage location and does not rebuild the library. Drive is not assumed to be the last backend.
+
+Media retention is a permanent control. The intelligence engine may recommend deletion. It must not permanently delete a file. Only the owner, or a user id the owner has explicitly authorised, may approve permanent deletion. Shahzeb's account is that authorised approver once the owner maps the user id. A display name is not the mapping. Silence is not approval. The system executes only an approved deletion, after a quarantine period, and it does not remove a live social post when an archived production file is deleted. Temporary render files may be removed only after the permanent copy is verified, and never when that temporary file is the last verified copy. The full rule, data model, and phases are in `docs/MEDIA_RETENTION.md`. No deletion is active.
 
 ## Story production
 

@@ -1,6 +1,6 @@
 # Roadmap
 
-The current strategic source of truth is `docs/AFFIGROVE_STRATEGIC_DECISIONS.md`. The phase list is `docs/AFFIGROVE_IMPLEMENTATION_ROADMAP.md`.
+The current strategic source of truth is `docs/AFFIGROVE_STRATEGIC_DECISIONS.md`. The phase list is `docs/AFFIGROVE_IMPLEMENTATION_ROADMAP.md`. Media retention, and the initial 5 TB Google Drive library, are specified in `docs/MEDIA_RETENTION.md`. That plan is not implemented and does not delete files.
 
 
 

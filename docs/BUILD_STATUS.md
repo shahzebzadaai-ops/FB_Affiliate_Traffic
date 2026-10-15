@@ -35,15 +35,15 @@
 
 ## Incomplete
 
-- Google Drive, Novita, Kokoro, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked. The Still Got It proof has not been generated on the Mac. A Linux FFmpeg check, when recorded, is not that Reel and not a throughput number.
+- Google Drive is the named initial 5 TB library. OAuth is not connected, and no deletion job runs. The retention plan is `docs/MEDIA_RETENTION.md`. Novita, Kokoro, Meta and affiliate networks are not connected. Downloads stay unavailable. No file link is faked. The Still Got It proof has not been generated on the Mac. A Linux FFmpeg check, when recorded, is not that Reel and not a throughput number.
 - launchd is a template only. It is not installed.
-- The AffiGrove public website is a local preview at `/site`. It is not deployed. Search indexing is off. Company number, office, public email, phone, and governing law are still awaiting approval. See `docs/CORPORATE_SITE.md`.
+- The public site is live at affigrove.io and the private OS is live at os.affigrove.io. Search indexing stays off. Company number, office, public email, phone, and governing law are still awaiting approval. See `docs/CORPORATE_SITE.md`.
 - No live publishing, no performance history, no revenue.
 - 76 content notes still need Shahzeb's decision.
 - Invitation email delivery and password recovery mail are not built. The owner copies the join link.
 - Owner-only JavaScript still contains the historical assignee id because the import screen reads the plan file. Operator routes do not.
 - Pause, resume, and Mandala editing are not the next milestone. The tables exist and stay not started.
-- Production hosting, backups, and monitoring are not set up.
+- The Hostinger release path is in use. Copies of the database off that machine, and monitoring beyond the release health check, are still open. This retention decision does not deploy and does not delete files.
 
 ## Risks
 

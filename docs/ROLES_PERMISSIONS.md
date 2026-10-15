@@ -12,6 +12,8 @@ A publishing operator who opens an owner URL is redirected. Finance, staff, Mand
 
 Nobody can approve their own work. The assignee compared at approval time is the content row in the database, not a value sent by the browser.
 
+Permanent media deletion uses a separate capability, `approve_permanent_media_deletion`. It is not assigned yet. Operators, editors, analysts, and worker tokens must not receive it. The owner can hold it. Shahzeb's login receives it only when the owner inserts that user id into the approver list. The name in `src/domain/people.ts` is not that list. AI recommendations are not approvals. The workflow is in `docs/MEDIA_RETENTION.md`.
+
 Page access for an operator is the current `page_assignments` rows. The catalog field `assignee_id` is historical and is not an authorization check.
 
 Named future roles remain in the matrix and are not assigned by the invitation screen: Admin, Content Manager, Designer, Video Editor, Affiliate Manager, Analyst.

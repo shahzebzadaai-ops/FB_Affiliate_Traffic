@@ -1,6 +1,6 @@
 # Mac media worker
 
-The render computer for this slice remains the owner's MacBook Pro, M3 Pro, 18 GB unified memory. Hostinger KVM 2 stays the online application and database. On 14 October 2026 the owner moved preferred editing of Muse clips to the VPS and withdrew the assumption that the 5 TB library is Google Drive. That later decision is in `docs/AFFIGROVE_STRATEGIC_DECISIONS.md`. This Mac checkpoint is unchanged until the owner accepts it. The clip-joining command added to `assemble.py` is the same FFmpeg assembler, not a new editor.
+The render computer for this slice remains the owner's MacBook Pro, M3 Pro, 18 GB unified memory. Hostinger KVM 2 stays the online application and database. On 14 October 2026 the owner moved preferred editing of Muse clips to the VPS and, at that time, withdrew the assumption that the 5 TB library is Google Drive. On 15 October 2026 the owner named Google Drive as the initial 5 TB library and required retention controls before any permanent delete. Those decisions are in `docs/AFFIGROVE_STRATEGIC_DECISIONS.md` and `docs/MEDIA_RETENTION.md`. This Mac checkpoint is unchanged until the owner accepts it. The clip-joining command added to `assemble.py` is the same FFmpeg assembler, not a new editor.
 
 Cursor Cloud can build the queue and the worker source. It cannot install software on the Mac, and it cannot honestly report a Mac render.
 

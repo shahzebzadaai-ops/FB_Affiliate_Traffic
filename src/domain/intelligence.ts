@@ -135,11 +135,12 @@ export function storagePublicStatus() {
       configured: false,
       kind: null,
       message:
-        "Permanent storage is not connected. The 5 TB destination has not been confirmed, so nothing is copied there.",
+        "The initial library is a 5 TB Google Drive. The connector is not built, so nothing is copied there. No automatic deletion is active.",
     },
     staging: {
       kind: "application-host",
-      message: "Uploaded files stay in the private media directory on the application host until a permanent store is confirmed.",
+      message:
+        "Uploaded files stay in the private media directory on the application host. Retention may recommend a deletion later. It does not delete one.",
     },
     layout: [
       "AffiGrove/Brands/BrandName/Series/SeriesName/Season-01/Episode-001/Originals",

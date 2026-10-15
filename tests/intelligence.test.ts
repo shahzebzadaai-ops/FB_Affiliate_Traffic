@@ -5,7 +5,7 @@ import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { migrateDatabase, resetDatabase, seedDatabase } from "@/db/setup";
 import { getSql } from "@/db/client";
-import { freellmapiPublicStatus, languagePublicStatus, novitaPublicStatus, researchPublicStatus } from "@/domain/intelligence";
+import { freellmapiPublicStatus, languagePublicStatus, novitaPublicStatus, researchPublicStatus, storagePublicStatus } from "@/domain/intelligence";
 import { analyseSuppliedEvidence } from "@/server/intelligence";
 import { characterMentioned, coerceNumericStrings, episodePackage, joinStringArrays, monetisationAdvice, pilotSchema, seriesLaunchAdvice, type PilotBody } from "@/domain/stories";
 import { setEngine } from "@/server/intelligence";
@@ -200,6 +200,9 @@ afterAll(async () => {
 
 describe("intelligence status", () => {
   it("does not treat a missing search API as a live result", () => {
+    expect(storagePublicStatus().permanent.configured).toBe(false);
+    expect(storagePublicStatus().permanent.message).toContain("5 TB Google Drive");
+    expect(storagePublicStatus().permanent.message).toContain("No automatic deletion");
     expect(researchPublicStatus({}).available).toBe(false);
     expect(researchPublicStatus({}).message).toContain("Live research is unavailable");
     expect(researchPublicStatus({ RESEARCH_PROVIDER: "example", RESEARCH_API_KEY: "secret" }).message).toContain("no adapter");
