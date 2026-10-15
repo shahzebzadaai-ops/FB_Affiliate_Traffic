@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { BrandLockup } from "@/components/brand-lockup";
 
 export default function JoinPage() {
   return (
-    <Suspense fallback={<main className="grid min-h-screen place-items-center"><p className="font-heading text-3xl">AffiGrove OS</p></main>}>
+    <Suspense fallback={<main className="grid min-h-screen place-items-center"><BrandLockup kind="os" className="h-10 w-auto" /></main>}>
       <JoinForm />
     </Suspense>
   );
@@ -21,7 +22,7 @@ function JoinForm() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6">
-      <p className="font-heading text-4xl tracking-tight">AffiGrove OS</p>
+      <BrandLockup kind="os" className="h-10 w-auto" />
       <h1 className="mt-6 font-heading text-3xl">Set your password</h1>
       <p className="mt-2 text-sm text-muted-foreground">This invitation is for one publishing operator. It does not show anyone else&apos;s account.</p>
       <form

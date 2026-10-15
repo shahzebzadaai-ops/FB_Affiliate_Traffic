@@ -1,12 +1,13 @@
 import { Suspense, type ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
+import { BrandLockup } from "@/components/brand-lockup";
 import { getCurrentUser } from "@/server/current-user";
 import { canEnterOwner } from "@/server/task-commands";
 
 export default function OwnerLayout({ children }: { children: ReactNode }) {
   return (
-    <Suspense fallback={<p className="p-8 font-heading text-3xl">AffiGrove OS</p>}>
+    <Suspense fallback={<div className="p-8"><BrandLockup kind="os" className="h-8 w-auto" /></div>}>
       <OwnerGate>{children}</OwnerGate>
     </Suspense>
   );

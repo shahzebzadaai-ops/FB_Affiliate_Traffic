@@ -1,11 +1,11 @@
 .grove {
-  --grove-paper: #000000;
-  --grove-ink: #ffffff;
-  --grove-muted: #9ca3af;
-  --grove-green: #e5e7eb;
-  --grove-deep: #000000;
-  --grove-line: rgb(255 255 255 / 0.1);
-  --grove-card: #1c1c1e;
+  --grove-paper: #111b16;
+  --grove-ink: #f3efe6;
+  --grove-muted: #bbc9bc;
+  --grove-green: #bdd5bf;
+  --grove-deep: #d3e5d3;
+  --grove-line: #3d5042;
+  --grove-card: #1d2b23;
   color-scheme: dark;
   position: relative;
   z-index: 1;
@@ -18,8 +18,8 @@
 }
 
 body.grove-open {
-  background: #000000;
-  color: #ffffff;
+  background: #111b16;
+  color: #f3efe6;
 }
 
 body.grove-open .galaxy {
@@ -95,7 +95,7 @@ body.grove-open .galaxy {
   position: sticky;
   top: 0;
   z-index: 4;
-  background: #000000;
+  background: #111b16;
   border-bottom: 1px solid var(--grove-line);
 }
 
@@ -120,6 +120,11 @@ body.grove-open .galaxy {
 .grove-brand:hover,
 .grove-brand:focus-visible {
   color: var(--grove-ink);
+}
+
+.grove-brand img {
+  height: 2rem;
+  width: auto;
 }
 
 .grove-brand strong {
@@ -210,8 +215,8 @@ body.grove-open .galaxy {
 }
 
 .grove-panel {
-  background: var(--grove-deep);
-  color: #f4f0e7;
+  background: #1a5c42;
+  color: #f3efe6;
   border-radius: 1.5rem;
   padding: 1.4rem 1.4rem 0.4rem;
 }
@@ -219,7 +224,7 @@ body.grove-open .galaxy {
 .grove-panel p,
 .grove-panel li,
 .grove-panel h2 {
-  color: #f4f0e7;
+  color: #f3efe6;
 }
 
 .grove-panel ol {
@@ -229,7 +234,7 @@ body.grove-open .galaxy {
 }
 
 .grove-panel li {
-  border-top: 1px solid rgb(244 240 231 / 22%);
+  border-top: 1px solid #3d5042;
   padding: 0.95rem 0;
   font-family: var(--font-grove-serif), Georgia, serif;
   font-size: 1.45rem;
@@ -253,7 +258,7 @@ body.grove-open .galaxy {
 .grove-card span {
   display: block;
   margin-bottom: 0.8rem;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-family: var(--font-grove-serif), Georgia, serif;
   font-size: 1.4rem;
 }
@@ -281,27 +286,28 @@ body.grove-open .galaxy {
 }
 
 .grove-button {
-  background: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
+  background: #bdd5bf;
+  color: #111b16;
+  border: 1px solid #bdd5bf;
 }
 
 .grove-button:hover,
 .grove-button:focus-visible {
-  background: #e7e7e7;
-  color: #000000;
+  background: #d3e5d3;
+  color: #111b16;
 }
 
 .grove-button-quiet {
-  background: #1f1f22;
-  color: #ffffff;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  background: #1d2b23;
+  color: #f3efe6;
+  border: 1px solid #7d9583;
 }
 
 .grove-button-quiet:hover,
 .grove-button-quiet:focus-visible {
-  background: #2a2a2d;
-  color: #ffffff;
+  background: #1d2b23;
+  color: #f3efe6;
+  border-color: #bdd5bf;
 }
 
 .grove-button:disabled {
@@ -315,7 +321,7 @@ body.grove-open .galaxy {
 .grove textarea:focus-visible,
 .grove select:focus-visible,
 .grove summary:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid #bdd5bf;
   outline-offset: 3px;
 }
 
@@ -330,8 +336,8 @@ body.grove-open .galaxy {
 
 .grove-pending {
   margin-top: 2rem;
-  background: #1c1c1e;
-  border: 1px solid rgb(255 255 255 / 0.08);
+  background: #1d2b23;
+  border: 1px solid #3d5042;
   border-radius: 1.25rem;
   padding: 1.25rem;
 }
@@ -388,9 +394,9 @@ body.grove-open .galaxy {
 .grove select {
   width: 100%;
   min-height: 2.75rem;
-  border: 1px solid rgb(255 255 255 / 0.12);
+  border: 1px solid #7d9583;
   border-radius: 0.8rem;
-  background: #111111;
+  background: #111b16;
   color: var(--grove-ink);
   padding: 0.65rem 0.8rem;
   font: inherit;
@@ -404,7 +410,7 @@ body.grove-open .galaxy {
 
 .grove input::placeholder,
 .grove textarea::placeholder {
-  color: #6b7280;
+  color: #bbc9bc;
   opacity: 1;
 }
 
@@ -438,7 +444,7 @@ body.grove-open .galaxy {
 
 .grove-alert {
   margin: 0;
-  color: #8c2f2f;
+  color: #f0b4b0;
   font-weight: 600;
 }
 
@@ -451,25 +457,25 @@ body.grove-open .galaxy {
 }
 
 .grove-footer {
-  background: #000000;
-  color: #e5e7eb;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  background: #111b16;
+  color: #bbc9bc;
+  border-top: 1px solid #3d5042;
   padding-block: 2.5rem 2rem;
 }
 
 .grove-footer p,
 .grove-footer li,
 .grove-footer h2 {
-  color: #e7e1d6;
+  color: #f3efe6;
 }
 
 .grove-footer a {
-  color: #f7f4ec;
+  color: #f3efe6;
 }
 
 .grove-footer a:hover,
 .grove-footer a:focus-visible {
-  color: #ffffff;
+  color: #d3e5d3;
 }
 
 .grove-footer-grid {
@@ -486,7 +492,7 @@ body.grove-open .galaxy {
 .grove-footer small {
   display: block;
   margin-top: 1.5rem;
-  color: #6b7280;
+  color: #bbc9bc;
 }
 
 .grove-drawing {

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
+import { BrandLockup } from "@/components/brand-lockup";
 import { BackgroundVideo } from "@/components/public/background-video";
 import { FadeIn } from "@/components/public/fade-in";
 
@@ -42,15 +43,6 @@ const QUESTIONS = [
     a: "Use the contact options below to reach AffiGrove Media Group with partnership, business or general enquiries.",
   },
 ];
-
-/** Provisional geometric mark. Replace this file’s mark with the approved logo when it is supplied. */
-function Mark() {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M6 26V14M16 26V6M26 26V16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function StoryIcon() {
   return (
@@ -128,8 +120,7 @@ export function CinematicHome() {
       <header className={scrolled ? "cine-nav is-scrolled" : "cine-nav"}>
         <div className="cine-nav-inner">
           <a className="cine-brand" href="#about">
-            <Mark />
-            AffiGrove
+            <BrandLockup kind="affigrove" />
           </a>
           <nav className="cine-links" aria-label="Primary">
             {NAV.map((item) => (
@@ -342,8 +333,7 @@ export function CinematicHome() {
         <div className="cine-cols">
           <div>
             <a className="cine-brand" href="#about">
-              <Mark />
-              AffiGrove
+              <BrandLockup kind="affigrove" />
             </a>
             <p>Thoughtful media. Meaningful connections.</p>
           </div>

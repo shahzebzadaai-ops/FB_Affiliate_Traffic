@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { BrandLockup } from "@/components/brand-lockup";
 import { can } from "@/domain/permissions";
 import { usePreview, ownerArea } from "@/preview/preview-context";
 
@@ -70,8 +71,8 @@ export function AppShell({
     <div className="min-h-screen lg:grid lg:grid-cols-[15.5rem_minmax(0,1fr)]">
       <aside className="sticky top-0 hidden h-screen flex-col bg-sidebar lg:flex">
         <div className="px-5 pt-7">
-          <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">
-            AffiGrove OS
+          <Link href={area === "owner" ? "/owner" : "/staff"} className="inline-flex">
+            <BrandLockup kind="os" className="h-7 w-auto" />
           </Link>
           <p className="mt-1 text-sm text-muted-foreground">{area === "owner" ? "Owner" : "Publishing"}</p>
         </div>
@@ -92,7 +93,9 @@ export function AppShell({
       <div className="flex min-w-0 flex-col">
         <header className="bg-sidebar lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
-            <Link href={area === "owner" ? "/owner" : "/staff"} className="text-lg font-semibold tracking-tight">AffiGrove OS</Link>
+            <Link href={area === "owner" ? "/owner" : "/staff"} className="inline-flex">
+              <BrandLockup kind="os" className="h-7 w-auto" />
+            </Link>
             <Logout
               className="mt-0"
               onClick={() => {
@@ -173,7 +176,7 @@ function Logout({ onClick, className = "mt-3" }: { onClick: () => void; classNam
 function Wordmark() {
   return (
     <main className="grid min-h-screen place-items-center px-6">
-      <p className="font-heading text-3xl tracking-tight">AffiGrove OS</p>
+      <BrandLockup kind="os" className="h-10 w-auto" />
     </main>
   );
 }

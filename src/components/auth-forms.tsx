@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BrandLockup } from "@/components/brand-lockup";
 
 export function LoginForm() {
   const router = useRouter();
@@ -11,7 +12,9 @@ export function LoginForm() {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col justify-center px-5 py-16">
       <p className="text-xs font-medium tracking-[0.16em] text-primary uppercase">Internal operating system</p>
-      <h1 className="mt-3 font-heading text-5xl tracking-tight">AffiGrove OS</h1>
+      <h1 className="mt-3">
+        <BrandLockup kind="os" className="h-12 w-auto max-w-full" />
+      </h1>
       <p className="mt-4 text-muted-foreground">Sign in with your account. There is no public registration.</p>
       <form
         className="atos-surface mt-8 space-y-4 p-5"
@@ -53,7 +56,8 @@ export function SetupForm() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col justify-center px-5 py-16">
-      <p className="text-xs font-medium tracking-[0.16em] text-primary uppercase">One-time owner setup</p>
+      <BrandLockup kind="os" className="h-10 w-auto" />
+      <p className="mt-6 text-xs font-medium tracking-[0.16em] text-primary uppercase">One-time owner setup</p>
       <h1 className="mt-3 font-heading text-5xl tracking-tight">Create Shahzeb&apos;s account</h1>
       <p className="mt-4 text-muted-foreground">
         This screen works only while the database has no users. Choose a password of at least 12 characters. It is stored as a hash, not in Git.

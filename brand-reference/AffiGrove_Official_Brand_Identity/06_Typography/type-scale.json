@@ -1,0 +1,122 @@
+{
+  "display-xl": {
+    "fontFamily": "Fraunces",
+    "desktopPx": 88,
+    "mobilePx": 48,
+    "weight": 500,
+    "lineHeight": 1.06,
+    "trackingEm": -0.025
+  },
+  "display-l": {
+    "fontFamily": "Fraunces",
+    "desktopPx": 72,
+    "mobilePx": 42,
+    "weight": 500,
+    "lineHeight": 1.1,
+    "trackingEm": -0.025
+  },
+  "h1": {
+    "fontFamily": "Fraunces",
+    "desktopPx": 64,
+    "mobilePx": 38,
+    "weight": 500,
+    "lineHeight": 1.12,
+    "trackingEm": -0.02
+  },
+  "h2": {
+    "fontFamily": "Fraunces",
+    "desktopPx": 48,
+    "mobilePx": 32,
+    "weight": 500,
+    "lineHeight": 1.18,
+    "trackingEm": -0.015
+  },
+  "h3": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 32,
+    "mobilePx": 26,
+    "weight": 600,
+    "lineHeight": 1.25,
+    "trackingEm": -0.01
+  },
+  "h4": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 24,
+    "mobilePx": 22,
+    "weight": 600,
+    "lineHeight": 1.3,
+    "trackingEm": 0
+  },
+  "body-large": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 24,
+    "mobilePx": 20,
+    "weight": 400,
+    "lineHeight": 1.5,
+    "trackingEm": 0
+  },
+  "body": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 18,
+    "mobilePx": 18,
+    "weight": 400,
+    "lineHeight": 1.55,
+    "trackingEm": 0
+  },
+  "body-small": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 16,
+    "mobilePx": 16,
+    "weight": 400,
+    "lineHeight": 1.5,
+    "trackingEm": 0
+  },
+  "caption": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 14,
+    "mobilePx": 14,
+    "weight": 400,
+    "lineHeight": 1.4,
+    "trackingEm": 0
+  },
+  "navigation": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 16,
+    "mobilePx": 16,
+    "weight": 600,
+    "lineHeight": 1.25,
+    "trackingEm": 0
+  },
+  "button": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 16,
+    "mobilePx": 16,
+    "weight": 600,
+    "lineHeight": 1.25,
+    "trackingEm": 0
+  },
+  "label": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 14,
+    "mobilePx": 14,
+    "weight": 600,
+    "lineHeight": 1.35,
+    "trackingEm": 0.04
+  },
+  "data": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 16,
+    "mobilePx": 16,
+    "weight": 400,
+    "lineHeight": 1.4,
+    "trackingEm": 0
+  },
+  "dashboard-heading": {
+    "fontFamily": "Source Sans 3",
+    "desktopPx": 28,
+    "mobilePx": 24,
+    "weight": 600,
+    "lineHeight": 1.25,
+    "trackingEm": -0.01
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "foreground": "ink",
+    "background": "paper",
+    "ratio": 13.94,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "ink",
+    "background": "white",
+    "ratio": 15.99,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "muted",
+    "background": "paper",
+    "ratio": 5.76,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "green",
+    "background": "paper",
+    "ratio": 6.9,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "white",
+    "background": "green",
+    "ratio": 7.91,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "white",
+    "background": "hover",
+    "ratio": 10.52,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "white",
+    "background": "pressed",
+    "ratio": 13.53,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "ink",
+    "background": "mist",
+    "ratio": 13.17,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "control",
+    "background": "white",
+    "ratio": 4.13,
+    "minimum": 3,
+    "passes": true
+  },
+  {
+    "foreground": "control",
+    "background": "paper",
+    "ratio": 3.6,
+    "minimum": 3,
+    "passes": true
+  },
+  {
+    "foreground": "sage",
+    "background": "night",
+    "ratio": 11.27,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "dark-text",
+    "background": "surface",
+    "ratio": 12.87,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "dark-muted",
+    "background": "surface",
+    "ratio": 8.57,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "night",
+    "background": "sage",
+    "ratio": 11.27,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "night",
+    "background": "dark-hover",
+    "ratio": 13.35,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "dark-control",
+    "background": "surface",
+    "ratio": 4.57,
+    "minimum": 3,
+    "passes": true
+  },
+  {
+    "foreground": "success",
+    "background": "success-bg",
+    "ratio": 6.21,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "warning",
+    "background": "warning-bg",
+    "ratio": 5.99,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "error",
+    "background": "error-bg",
+    "ratio": 5.67,
+    "minimum": 4.5,
+    "passes": true
+  },
+  {
+    "foreground": "info",
+    "background": "info-bg",
+    "ratio": 6.44,
+    "minimum": 4.5,
+    "passes": true
+  }
+]

@@ -1,0 +1,30 @@
+/* SAP 72 from SAP/theming-base-content, Apache-2.0.
+   Unmodified files: 72-Regular.woff2, 72-Semibold.woff2, 72-Bold.woff2.
+   Source: https://github.com/SAP/theming-base-content/tree/master/content/Base/baseLib/baseTheme/fonts
+   Licence: /fonts/72/LICENSE.txt
+   There is no 500 weight in that distribution. Requests for 500 resolve to Regular.
+   600 uses Semibold. 700 uses Bold. */
+
+@font-face {
+  font-family: "72";
+  src: url("/fonts/72/72-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("/fonts/72/72-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("/fonts/72/72-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

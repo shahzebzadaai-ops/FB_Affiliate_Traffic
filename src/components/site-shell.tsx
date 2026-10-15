@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
+import { BrandLockup } from "@/components/brand-lockup";
 
 export function PublicBody() {
   useEffect(() => {
@@ -26,14 +27,6 @@ function current(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function GroveMark() {
-  return (
-    <svg className="grove-mark" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M6 26V14M16 26V6M26 26V16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [openPath, setOpenPath] = useState<string | null>(null);
@@ -47,11 +40,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <header className="grove-header">
         <div className="grove-wrap grove-header-inner">
           <Link href="/site" className="grove-brand">
-            <GroveMark />
-            <span>
-              <strong>AffiGrove</strong>
-              <small>Media Group</small>
-            </span>
+            <BrandLockup kind="affigrove" />
           </Link>
           <button
             type="button"

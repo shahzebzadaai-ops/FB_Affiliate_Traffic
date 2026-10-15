@@ -12,9 +12,9 @@ Althoy’s public site is a marketing page: hero, feature cards, steps, testimon
 
 What transfers:
 
-- Type is Be Vietnam Pro. Titles are semibold and near-white `#f4f7fb`. Body text is light grey `#d5dbe6`. Labels stay sentence case.
-- The canvas is deep navy `#070b14`, with a static diagonal Milky Way band and a sparse star field. Cards, tables, forms, menus and dialogs are opaque `#121a2b` or `#0c1220`, so the galaxy does not sit under the words.
-- Links and the active navigation item are pale cyan `#9adfff`. The primary button uses that cyan with dark text. The quiet button is a dark surface with a light hairline. Page names keep their own identity, drawn light enough to read on the navy.
+- Type in AffiGrove OS is SAP 72, self-hosted from the Apache-2.0 files in `public/fonts/72`. Titles stay semibold. Body text is `#F3EFE6`. Secondary text is `#BBC9BC`. The corporate site keeps Fraunces and Source Sans 3.
+- The canvas behind the existing galaxy and stars is `#111B16`. The galaxy’s band, star count, motion and position stay as they are. Cards, tables, forms, menus and dialogs are opaque `#1D2B23`, so the galaxy does not sit under the words.
+- Sage `#BDD5BF` is the action and link colour, with `#111B16` on sage buttons. Decorative borders are `#3D5042`. Essential control borders are `#7D9583`. Grove Green `#1A5C42` is for brand panels. Page names keep their own identity, drawn light enough to read on the night field.
 - Space between sections is larger than space inside a control. Desktop margins stay wide. Phone padding stays at least 16px.
 
 The layout stays an operating system. Shahzeb and Masho keep separate shells. A screen leads with the work, not a slogan.

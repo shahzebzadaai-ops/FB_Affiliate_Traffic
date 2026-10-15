@@ -19,8 +19,8 @@ html.cine-motion .cine-reveal.is-in {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  background: #000;
-  color: #fff;
+  background: #111b16;
+  color: #f3efe6;
   font-family: var(--font-grove-sans), "Source Sans 3", "Segoe UI", sans-serif;
   line-height: 1.5;
 }
@@ -36,8 +36,8 @@ html.cine-motion .cine-reveal.is-in {
   left: 1rem;
   top: -4rem;
   z-index: 80;
-  background: #fff;
-  color: #000;
+  background: #bdd5bf;
+  color: #111b16;
   padding: 0.5rem 0.75rem;
   border-radius: 999px;
 }
@@ -56,7 +56,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-nav.is-scrolled {
-  background: rgb(0 0 0 / 0.8);
+  background: rgb(17 27 22 / 0.8);
   backdrop-filter: blur(12px);
 }
 
@@ -75,17 +75,13 @@ html.cine-motion .cine-reveal.is-in {
 .cine-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  color: #fff;
+  color: #f3efe6;
   text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
 }
 
-.cine-brand svg {
-  width: 1.65rem;
-  height: 1.65rem;
+.cine-brand img {
+  height: 1.75rem;
+  width: auto;
 }
 
 .cine-links {
@@ -95,7 +91,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-links a {
-  color: #d1d5db;
+  color: #bbc9bc;
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
@@ -103,7 +99,7 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-links a:hover,
 .cine-links a:focus-visible {
-  color: #fff;
+  color: #f3efe6;
 }
 
 .cine-cta,
@@ -122,9 +118,9 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-cta,
 .cine-btn-dark {
-  background: #1f1f22;
-  color: #fff;
-  border: 1px solid rgb(255 255 255 / 0.05);
+  background: #1d2b23;
+  color: #f3efe6;
+  border: 1px solid #3d5042;
   padding: 0.625rem 1.25rem;
 }
 
@@ -132,21 +128,22 @@ html.cine-motion .cine-reveal.is-in {
 .cine-cta:focus-visible,
 .cine-btn-dark:hover,
 .cine-btn-dark:focus-visible {
-  background: #2a2a2d;
-  color: #fff;
+  background: #1d2b23;
+  color: #f3efe6;
+  border-color: #7d9583;
 }
 
 .cine-btn {
-  background: #fff;
-  color: #000;
-  border: 1px solid #fff;
+  background: #bdd5bf;
+  color: #111b16;
+  border: 1px solid #bdd5bf;
   padding: 0.8rem 1.35rem;
 }
 
 .cine-btn:hover,
 .cine-btn:focus-visible {
-  background: #e7e7e7;
-  color: #000;
+  background: #d3e5d3;
+  color: #111b16;
 }
 
 .cine-menu-btn {
@@ -155,10 +152,10 @@ html.cine-motion .cine-reveal.is-in {
   height: 2.75rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #7d9583;
   border-radius: 999px;
-  background: #1f1f22;
-  color: #fff;
+  background: #1d2b23;
+  color: #f3efe6;
 }
 
 .cine-burger,
@@ -167,7 +164,7 @@ html.cine-motion .cine-reveal.is-in {
   display: block;
   width: 1rem;
   height: 1.5px;
-  background: #fff;
+  background: #f3efe6;
   position: relative;
   transition: transform 250ms ease, opacity 250ms ease;
 }
@@ -206,14 +203,14 @@ html.cine-motion .cine-reveal.is-in {
   grid-template-rows: 0fr;
   overflow: hidden;
   transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  background: rgb(0 0 0 / 0.92);
+  background: rgb(17 27 22 / 0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid transparent;
 }
 
 .cine-drop.is-open {
   grid-template-rows: 1fr;
-  border-bottom-color: rgb(255 255 255 / 0.08);
+  border-bottom-color: #3d5042;
 }
 
 .cine-drop-inner {
@@ -228,11 +225,11 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-drop a {
-  color: #fff;
+  color: #f3efe6;
   text-decoration: none;
   font-size: 1rem;
   padding: 0.85rem 0;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  border-top: 1px solid #3d5042;
 }
 
 .cine-hero {
@@ -264,7 +261,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-shade {
-  background: linear-gradient(to bottom, rgb(0 0 0 / 0.3), transparent, #000);
+  background: linear-gradient(to bottom, rgb(17 27 22 / 0.3), transparent, #111b16);
 }
 
 .cine-hero-copy,
@@ -280,10 +277,10 @@ html.cine-motion .cine-reveal.is-in {
   display: inline-flex;
   align-items: center;
   margin: 0 0 1.5rem;
-  border: 1px solid rgb(255 255 255 / 0.14);
+  border: 1px solid #3d5042;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.06);
-  color: #e5e7eb;
+  background: rgb(29 43 35 / 0.72);
+  color: #bbc9bc;
   padding: 0.4rem 0.85rem;
   font-size: 0.75rem;
   font-weight: 500;
@@ -294,7 +291,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine h1,
 .cine h2,
 .cine h3 {
-  color: #fff;
+  color: #f3efe6;
   font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 1.05;
@@ -314,7 +311,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-sub {
   max-width: 42rem;
   margin: 1.5rem 0 0;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -334,7 +331,7 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-marquee-label {
   margin: 0 0 1.75rem;
-  color: #6b7280;
+  color: #bbc9bc;
   text-align: center;
   font-size: 0.8rem;
   font-weight: 500;
@@ -365,7 +362,7 @@ html.cine-motion .cine-reveal.is-in {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  color: #e5e7eb;
+  color: #bbc9bc;
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -375,7 +372,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-word svg {
   width: 1.35rem;
   height: 1.35rem;
-  color: #9ca3af;
+  color: #bbc9bc;
 }
 
 @keyframes cine-marquee {
@@ -409,7 +406,7 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-kicker {
   margin: 0 0 1rem;
-  color: #d1d5db;
+  color: #bbc9bc;
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -427,7 +424,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-feature .cine-copy > p,
 .cine-muted {
   margin: 1.25rem 0 0;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -440,9 +437,9 @@ html.cine-motion .cine-reveal.is-in {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #3d5042;
   border-radius: 1.5rem;
-  background: #111;
+  background: #1d2b23;
 }
 
 .cine-stage .cine-video {
@@ -452,7 +449,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-stage-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.05) 45%, rgb(0 0 0 / 0.25));
+  background: linear-gradient(to top, rgb(17 27 22 / 0.55), rgb(17 27 22 / 0.05) 45%, rgb(17 27 22 / 0.25));
 }
 
 .cine-float {
@@ -460,12 +457,12 @@ html.cine-motion .cine-reveal.is-in {
   right: 8%;
   bottom: 11%;
   left: 8%;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #3d5042;
   border-radius: 1rem;
-  background: rgb(28 28 30 / 0.9);
+  background: rgb(29 43 35 / 0.9);
   padding: 1rem;
   backdrop-filter: blur(24px);
-  box-shadow: 0 24px 50px rgb(0 0 0 / 0.35);
+  box-shadow: 0 24px 50px rgb(17 27 22 / 0.35);
 }
 
 .cine-chips {
@@ -477,10 +474,10 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-chips span,
 .cine-mini {
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #3d5042;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.04);
-  color: #d1d5db;
+  background: rgb(29 43 35 / 0.72);
+  color: #bbc9bc;
   padding: 0.25rem 0.6rem;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
@@ -495,7 +492,7 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-float p {
   margin: 0.35rem 0 0;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 0.875rem;
 }
 
@@ -504,12 +501,12 @@ html.cine-motion .cine-reveal.is-in {
   top: 16%;
   left: 8%;
   right: 8%;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #3d5042;
   border-radius: 1.25rem;
-  background: rgb(28 28 30 / 0.88);
+  background: rgb(29 43 35 / 0.88);
   padding: 1.1rem 1.1rem 1rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 24px 50px rgb(0 0 0 / 0.35);
+  box-shadow: 0 24px 50px rgb(17 27 22 / 0.35);
 }
 
 .cine-story-top {
@@ -532,14 +529,14 @@ html.cine-motion .cine-reveal.is-in {
   display: block;
   width: 0.28rem;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.72);
+  background: rgb(243 239 230 / 0.72);
 }
 
 .cine-controls {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 0.75rem;
 }
 
@@ -548,7 +545,7 @@ html.cine-motion .cine-reveal.is-in {
   width: 1.8rem;
   height: 1.8rem;
   place-items: center;
-  border: 1px solid rgb(255 255 255 / 0.16);
+  border: 1px solid #7d9583;
   border-radius: 999px;
 }
 
@@ -559,14 +556,14 @@ html.cine-motion .cine-reveal.is-in {
   margin-left: 2px;
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
-  border-left: 6px solid #fff;
+  border-left: 6px solid #f3efe6;
 }
 
 .cine-line {
   flex: 1;
   height: 2px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.12);
+  background: rgb(243 239 230 / 0.28);
   position: relative;
 }
 
@@ -577,7 +574,7 @@ html.cine-motion .cine-reveal.is-in {
   width: 28%;
   height: 100%;
   border-radius: inherit;
-  background: #fff;
+  background: #f3efe6;
 }
 
 .cine-faq {
@@ -600,7 +597,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-accordion {
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid #3d5042;
   border-radius: 0.75rem;
   background: transparent;
 }
@@ -613,7 +610,7 @@ html.cine-motion .cine-reveal.is-in {
   gap: 1rem;
   border: 0;
   background: transparent;
-  color: #fff;
+  color: #f3efe6;
   padding: 1.5rem;
   text-align: left;
   font: inherit;
@@ -623,7 +620,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-item + .cine-item {
-  border-top: 1px solid rgb(255 255 255 / 0.1);
+  border-top: 1px solid #3d5042;
 }
 
 .cine-plus {
@@ -638,7 +635,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-plus::after {
   content: "";
   position: absolute;
-  background: #fff;
+  background: #f3efe6;
 }
 
 .cine-plus::before {
@@ -678,7 +675,7 @@ html.cine-motion .cine-reveal.is-in {
 .cine-a p {
   margin: 0;
   padding: 0 1.5rem 1.5rem;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -687,7 +684,7 @@ html.cine-motion .cine-reveal.is-in {
   position: relative;
   z-index: 0;
   overflow: hidden;
-  border-top: 1px solid rgb(255 255 255 / 0.05);
+  border-top: 1px solid #3d5042;
   padding: 8rem 1.5rem 2.5rem;
 }
 
@@ -696,7 +693,7 @@ html.cine-motion .cine-reveal.is-in {
 }
 
 .cine-footer .cine-shade {
-  background: linear-gradient(to bottom, #000, rgb(0 0 0 / 0.6), #000);
+  background: linear-gradient(to bottom, #111b16, rgb(17 27 22 / 0.6), #111b16);
 }
 
 .cine-footer-copy h2 {
@@ -726,13 +723,13 @@ html.cine-motion .cine-reveal.is-in {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: #bbc9bc;
 }
 
 .cine-cols p,
 .cine-cols a {
   margin: 0.75rem 0 0;
-  color: #9ca3af;
+  color: #bbc9bc;
   font-size: 0.925rem;
   text-decoration: none;
 }
@@ -749,7 +746,7 @@ html.cine-motion .cine-reveal.is-in {
 
 .cine-cols a:hover,
 .cine-cols a:focus-visible {
-  color: #fff;
+  color: #f3efe6;
 }
 
 .cine-legal {
@@ -761,15 +758,15 @@ html.cine-motion .cine-reveal.is-in {
   justify-content: space-between;
   max-width: 80rem;
   margin: 3rem auto 0;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  border-top: 1px solid #3d5042;
   padding-top: 1.25rem;
-  color: #6b7280;
+  color: #bbc9bc;
   font-size: 0.8rem;
 }
 
 .cine a:focus-visible,
 .cine button:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid #bdd5bf;
   outline-offset: 3px;
 }
 

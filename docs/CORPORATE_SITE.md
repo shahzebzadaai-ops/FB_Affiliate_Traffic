@@ -31,7 +31,7 @@ Search indexing is off (`robots: noindex`). Do not add a sitemap or remove `noin
 
 ## Visual identity
 
-The public homepage uses a black field (`#000000`), white type, Fraunces italic for selected words, and Source Sans 3. Background films live in `public/media/` and are the reference clips supplied for this page, stored locally. The stroke mark in the header is provisional until an approved logo file is supplied. Interior pages use the same dark tokens. AffiGrove OS keeps Be Vietnam Pro, the navy field, and the Milky Way canvas. The two identities are separate on purpose. Search indexing stays off until the unapproved company facts are supplied, even though the homepage metadata is ready for a later release.
+The public homepage uses the night field `#111B16`, paper type `#F3EFE6`, Fraunces italic for selected words, and Source Sans 3. Background films live in `public/media/`. The header uses the supplied horizontal AffiGrove logo. Interior pages use the same dark tokens. AffiGrove OS uses SAP 72, the same night field behind the existing galaxy, and the supplied AffiGrove OS logo. Search indexing stays off until the unapproved company facts are supplied.
 
 ## Deployment
 
