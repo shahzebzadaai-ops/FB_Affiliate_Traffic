@@ -14,6 +14,7 @@
 - Media queue: owner-issued worker credentials, durable production jobs, leases, heartbeats, and approval that copies an https URL onto a task without scheduling it. The Mac worker source and install guide are in `worker/` and `docs/MEDIA_WORKER.md`. No Reel has been rendered.
 - Muse desk: Prepare for Muse AI compiles a package from the plan brief, stores an uploaded file, and records a typed token balance. It does not call Muse and it does not publish.
 - Intelligence desk and Story Series Studio. Novita is called only when a key and model id are set and the intelligence engine is started. Live research, permanent storage, and the VPS editing service are reported as unavailable. A contract test can store a pilot. That test is not a live Novita call.
+- Research to Muse, for Back in the Game UK only. The owner saves https sources and notes, then the configured language model ranks topics and writes one 20–35 second Muse package after approval. Publishing stays disabled. The package is stored on `research_packages` and is not inserted into the 180-post plan. Migration `0007_research_packages.sql` is additive and is not applied to production by this change.
 
 ## Tested
 

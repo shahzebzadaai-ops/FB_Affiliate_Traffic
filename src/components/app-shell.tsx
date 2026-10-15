@@ -28,6 +28,7 @@ const OWNER_PRIMARY = [
   { href: "/owner/studio", label: "Content Studio" },
   { href: "/owner/stories", label: "Stories" },
   { href: "/owner/intelligence", label: "Intelligence" },
+  { href: "/owner/research", label: "Research" },
   { href: "/owner/growth", label: "Growth Director" },
   { href: "/owner/pages", label: "Pages" },
 ];

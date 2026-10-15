@@ -103,6 +103,9 @@ export function IntelligenceDesk() {
         <p className="mt-3 max-w-2xl text-muted-foreground">
           The language model reasons over text that is supplied to it. A separate search adapter is required for live web research. Neither one is allowed to invent reach, watch time, or revenue.
         </p>
+        <p className="mt-4">
+          <Link href="/owner/research" className="atos-btn">Open research to Muse</Link>
+        </p>
       </header>
       {error ? <p className="rounded-xl bg-card p-4 text-sm ring-1 ring-foreground/10">{error}</p> : null}
       <section className="grid gap-4 md:grid-cols-2">
